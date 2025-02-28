@@ -1,11 +1,10 @@
-import threading
-from trackers.MouseTracker import MouseTracker
-from trackers.TobiiTracker import TobiiTracker
+from trackers.fabricate_tracker import create_tracker
 from trackers.TrackersEnum import TrackersEnum
 import visualize_gaze as vg
+import threading
 import time
+import sys
 
-CHOSEN_TRACKER: TrackersEnum = TrackersEnum.DUMMY
 LIFETIME: int = 5000
 
 
@@ -21,20 +20,26 @@ def stop_tracking(window, event: threading.Event):
     window.destroy()
 
 
-def create_tracker(tracker_type: TrackersEnum):
-    match tracker_type:
-        case TrackersEnum.DUMMY:
-            return MouseTracker()
-        case TrackersEnum.TOBII:
-            return TobiiTracker()
+def parse_arguments() -> str | None:
+    args = sys.argv[1:]  # we don't care about 0th argument here (program path)
+    allowed_values = TrackersEnum.__members__.keys()
+
+    match len(args):
+        case 0:
+            return None
+        case 1 if args[0] in allowed_values:
+            return args[0]
+        case _:
+            print(f"Allowed arguments: {', '.join(allowed_values)}")
+            exit(1)
 
 
 def main():
     window = vg.draw_visualizer()
     stop_event = threading.Event()
 
-    args = (create_tracker(CHOSEN_TRACKER), window, stop_event)
-    track_thread = threading.Thread(target=track, args=(args), daemon=True)
+    tracking_args = (create_tracker(parse_arguments()), window, stop_event)
+    track_thread = threading.Thread(target=track, args=(tracking_args), daemon=True)
     track_thread.start()
 
     window.after(LIFETIME, lambda: stop_tracking(window, stop_event))
