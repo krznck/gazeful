@@ -4,25 +4,25 @@ import atexit
 
 
 class TobiiTracker:
-    TOBII_LEFT = 'left_gaze_point_on_display_area'  # constant
-    TOBII_RIGHT = 'right_gaze_point_on_display_area'  # ditto
+    TOBII_LEFT = 'left_gaze_point_on_display_area'
+    TOBII_RIGHT = 'right_gaze_point_on_display_area'
 
     def __init__(self):
-        self.left_eye = None
-        self.right_eye = None
+        self.left_eye = None, None
+        self.right_eye = None, None
         self.real_tracker = None
         self.__begin()
         atexit.register(self.__disable)
 
     def __begin(self):
-        trackers = tr.find_all_eyetrackers()
+        trackers = tr.find_all_eyetrackers()  # type: ignore
         # TODO: change to an exception
         if not trackers:
             print("Did not find any Tobii trackers connected to the computer.")
             exit(1)
         self.real_tracker = trackers[0]
         self.real_tracker.subscribe_to(
-            tr.EYETRACKER_GAZE_DATA,
+            tr.EYETRACKER_GAZE_DATA,  # type: ignore
             self.__gaze_callback,
             as_dictionary=True)
 
@@ -31,14 +31,20 @@ class TobiiTracker:
         self.right_eye = gaze_data[TobiiTracker.TOBII_RIGHT]
 
     def __disable(self):
-        self.real_tracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA)
+        self.real_tracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA)  # type: ignore
 
     def sample(self):
         left_x, left_y = self.left_eye
         right_x, right_y = self.right_eye
 
+        # eyes are initialized to None, but if the tracker was connected,
+        # that data should be overridden always
+        assert left_x is not None and right_x is not None
+        assert left_y is not None and right_y is not None
+
+        # Tobii marks closed eyes as NaNs
         left_open = not np.isnan(left_x) and not np.isnan(left_y)
-        right_open = not np.isnan(right_x) and not np.isnan(right_y)
+        right_open = not np.isnan(right_x) and not np.isnan(right_x)
 
         if (left_open and right_open):
             return (((left_x + right_x) / 2), (left_y + right_y) / 2)
