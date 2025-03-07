@@ -37,16 +37,13 @@ class TobiiTracker:
         left_x, left_y = self.left_eye
         right_x, right_y = self.right_eye
 
-        # eyes are initialized to None, but if the tracker was connected,
-        # that data should be overridden always
-        assert left_x is not None and right_x is not None
-        assert left_y is not None and right_y is not None
-
         # Tobii marks closed eyes as NaNs
-        left_open = not np.isnan(left_x) and not np.isnan(left_y)
-        right_open = not np.isnan(right_x) and not np.isnan(right_x)
+        left_open = left_x is not None and not np.isnan(left_x) and left_y is not None and not np.isnan(left_y)
+        right_open = right_x is not None and not np.isnan(right_x) and right_y is not None and not np.isnan(right_y)
 
         if (left_open and right_open):
+            assert left_x is not None and right_x is not None
+            assert left_y is not None and right_y is not None
             return (((left_x + right_x) / 2), (left_y + right_y) / 2)
         elif left_open:
             return left_x, left_y

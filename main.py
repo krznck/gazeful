@@ -1,23 +1,18 @@
 from trackers.fabricate_tracker import create_tracker
 from trackers.TrackersEnum import TrackersEnum
-import visualize_gaze as vg
-import threading
-import time
+from visuals.GazeVisualizer import GazeVisualizer
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtCore import QTimer
 import sys
 
-LIFETIME: int = 5000
 
-
-def track(tracker, window, event: threading.Event):
-    time.sleep(1)
-    while not event.is_set():
+def track(tracker, window: GazeVisualizer):
+    last_x, last_y = 0, 0
+    while True:
         x, y = tracker.sample()
-        vg.update_position(x, y, window)
-
-
-def stop_tracking(window, event: threading.Event):
-    event.set()
-    window.destroy()
+        if (x, y) != (last_x, last_y):
+            last_x, last_y = x, y
+            window.set_position(x, y)
 
 
 def parse_arguments() -> str | None:
@@ -35,15 +30,18 @@ def parse_arguments() -> str | None:
 
 
 def main():
-    window = vg.draw_visualizer()
-    stop_event = threading.Event()
+    app = QApplication([])
+    window = GazeVisualizer()
 
-    tracking_args = (create_tracker(parse_arguments()), window, stop_event)
-    track_thread = threading.Thread(target=track, args=(tracking_args), daemon=True)
-    track_thread.start()
+    tracker = create_tracker(parse_arguments())
+    window.show()
 
-    window.after(LIFETIME, lambda: stop_tracking(window, stop_event))
-    window.mainloop()
+    timer = QTimer()
+    timer.timeout.connect(lambda: track(tracker, window))
+    timer.start(1000)
+
+    sys.exit(app.exec())
 
 
-main()
+if __name__ == "__main__":
+    main()
