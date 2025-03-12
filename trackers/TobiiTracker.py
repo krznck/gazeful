@@ -4,11 +4,12 @@ import tobii_research as tr
 import numpy as np
 import atexit
 
+
 class TobiiTracker(QThread):
     TOBII_LEFT = 'left_gaze_point_on_display_area'
     TOBII_RIGHT = 'right_gaze_point_on_display_area'
 
-    gaze_sampled = pyqtSignal(float, float)
+    gaze_sampled = pyqtSignal(object, object)  # in our case, should be a tuple of floats or Nones
     visualizer: GazeVisualizer
     real_tracker = None
 
@@ -44,14 +45,8 @@ class TobiiTracker(QThread):
         left_x, left_y = gaze_data[TobiiTracker.TOBII_LEFT]
         right_x, right_y = gaze_data[TobiiTracker.TOBII_RIGHT]
 
-        # TODO: extract to clean this method up
-        # Tobii marks closed eyes as NaNs
-        left_open = (not np.isnan(left_x)
-                     and
-                     not np.isnan(left_y))
-        right_open = (not np.isnan(right_x)
-                      and
-                      not np.isnan(right_y))
+        left_open = coordinates_valid(left_x, left_y)
+        right_open = coordinates_valid(right_x, right_y)
 
         if (left_open and right_open):
             self.gaze_sampled.emit(((left_x + right_x) / 2), (left_y + right_y) / 2)
@@ -60,27 +55,12 @@ class TobiiTracker(QThread):
         elif right_open:
             self.gaze_sampled.emit(right_x, right_y)
         else:
-            return  # TODO: Implement hiding visualizer
-            # return None, None
+            # return  # TODO: Implement hiding visualizer
+            self.gaze_sampled.emit(None, None)
 
     def __disable(self):
         self.real_tracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA)  # type: ignore
 
-    # def sample(self):
-    #     left_x, left_y = self.left_eye
-    #     right_x, right_y = self.right_eye
 
-    #     # Tobii marks closed eyes as NaNs
-    #     left_open = left_x is not None and not np.isnan(left_x) and left_y is not None and not np.isnan(left_y)
-    #     right_open = right_x is not None and not np.isnan(right_x) and right_y is not None and not np.isnan(right_y)
-
-    #     if (left_open and right_open):
-    #         assert left_x is not None and right_x is not None
-    #         assert left_y is not None and right_y is not None
-    #         return (((left_x + right_x) / 2), (left_y + right_y) / 2)
-    #     elif left_open:
-    #         return left_x, left_y
-    #     elif right_open:
-    #         return right_x, right_y
-    #     else:
-    #         return None, None
+def coordinates_valid(cord1: float, cord2: float) -> bool:
+    return not np.isnan(cord1) and not np.isnan(cord2)
