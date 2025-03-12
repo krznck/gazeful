@@ -2,17 +2,7 @@ from trackers.fabricate_tracker import create_tracker
 from trackers.TrackersEnum import TrackersEnum
 from visuals.GazeVisualizer import GazeVisualizer
 from PyQt6.QtWidgets import QApplication
-from PyQt6.QtCore import QTimer
 import sys
-
-
-def track(tracker, window: GazeVisualizer):
-    last_x, last_y = 0, 0
-    while True:
-        x, y = tracker.sample()
-        if (x, y) != (last_x, last_y):
-            last_x, last_y = x, y
-            window.set_position(x, y)
 
 
 def parse_arguments() -> str | None:
@@ -32,13 +22,9 @@ def parse_arguments() -> str | None:
 def main():
     app = QApplication([])
     window = GazeVisualizer()
-
     tracker = create_tracker(parse_arguments())
-    window.show()
-
-    timer = QTimer()
-    timer.timeout.connect(lambda: track(tracker, window))
-    timer.start(1000)
+    tracker.set_visualizer(window)
+    tracker.start()
 
     sys.exit(app.exec())
 

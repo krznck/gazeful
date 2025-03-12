@@ -12,7 +12,6 @@ _MARGIN = 0.1
 class GazeVisualizer(QWidget):
     def __init__(self):
         super().__init__()
-        self.hide()
         self.setWindowTitle(_TITLE)
         self.setGeometry(0, 0, _WIDTH, _HEIGHT)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
@@ -20,6 +19,7 @@ class GazeVisualizer(QWidget):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint |
                             Qt.WindowType.WindowStaysOnTopHint |
                             Qt.WindowType.Tool)
+        self.hide()
 
     def paintEvent(self, a0):
         painter = QPainter(self)
@@ -52,6 +52,7 @@ class GazeVisualizer(QWidget):
         y_pos = int(y * screen_height - _HEIGHT / 2)
 
         self.setGeometry(x_pos, y_pos, _HEIGHT, _WIDTH)
+        self.show()
 
 
 def get_screen_size() -> tuple[int, int]:
