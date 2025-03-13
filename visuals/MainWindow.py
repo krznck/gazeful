@@ -1,11 +1,18 @@
 from PyQt6.QtWidgets import QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QComboBox, QMessageBox
+from PyQt6.QtCore import Qt
 from trackers.TrackerNotConnectedError import TrackerNotConnectedError
+from visuals.customized_widgets.CustomPushButton import CustomPushButton
+from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from trackers.fabricate_tracker import create_tracker
 from visuals.GazeVisualizer import GazeVisualizer
 from trackers.TrackersEnum import TrackersEnum
 from trackers.Tracker import Tracker
 
 _TITLE = "nnetp"
+_CONNECTION_BUTTON_CONNECTED_TEXT: str = "Connected"
+_CONNECTION_BUTTON_DISCONNECTED_TEXT: str = "Disconnected"
+_VISUALIZER_BUTTON_ON_TEXT: str = "Gaze visualizer: On"
+_VISUALIZER_BUTTON_OFF_TEXT: str = "Gaze visualizer: Off"
 
 
 class MainWindow(QWidget):
@@ -16,30 +23,34 @@ class MainWindow(QWidget):
 
     def __init__(self) -> None:
         super().__init__()
+
+        self.eyetracker = None
         self.setWindowTitle(_TITLE)
 
         window_vbox = QVBoxLayout()
 
         tracker_hbox = QHBoxLayout()
 
-        self.trackers_combo_box = QComboBox()
+        self.trackers_combo_box = CustomComboBox()
         for tracker in TrackersEnum:
             self.trackers_combo_box.addItem(tracker.name.lower().capitalize())  # TOBII -> Tobii
         self.trackers_combo_box.currentIndexChanged.connect(self.on_combo_box_index_changed)
         tracker_hbox.addWidget(self.trackers_combo_box)
 
-        self.connect_button = QPushButton("Not connected")
+        self.connect_button = CustomPushButton(_CONNECTION_BUTTON_DISCONNECTED_TEXT)
+        self.connect_button.setMinimumWidth(100)  # we want it to stay the same size regardless of text
         self.connect_button.setCheckable(True)
         self.connect_button.clicked.connect(self.on_connection_button_clicked)
         tracker_hbox.addWidget(self.connect_button)
 
         window_vbox.addLayout(tracker_hbox)
 
-        self.visualizer_toggle = QPushButton("Gaze visualizer: Off")
+        self.visualizer_toggle = CustomPushButton(_VISUALIZER_BUTTON_OFF_TEXT)
         self.visualizer_toggle.setCheckable(True)
         self.visualizer_toggle.clicked.connect(self.on_visualizer_toggle_clicked)
         self.visualizer_toggle.setDisabled(True)
         window_vbox.addWidget(self.visualizer_toggle)
+        window_vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         self.setLayout(window_vbox)
 
@@ -51,7 +62,7 @@ class MainWindow(QWidget):
                 self.toggleConnectionButton(on=True)
             except TrackerNotConnectedError as e:
                 self.toggleConnectionButton(on=False)
-                QMessageBox.warning(self, "Connection problem", str(e))
+                QMessageBox.warning(self, _CONNECTION_BUTTON_DISCONNECTED_TEXT, str(e))
         else:
             self.toggleVisualizerButton(on=False)
             self.toggleConnectionButton(on=False)
@@ -71,11 +82,11 @@ class MainWindow(QWidget):
 
     def toggleConnectionButton(self, on: bool):
         if on:
-            self.connect_button.setText("Connected")
+            self.connect_button.setText(_CONNECTION_BUTTON_CONNECTED_TEXT)
             self.connect_button.setChecked(True)
             self.visualizer_toggle.setEnabled(True)
         else:
-            self.connect_button.setText("Not connected")
+            self.connect_button.setText(_CONNECTION_BUTTON_DISCONNECTED_TEXT)
             self.connect_button.setChecked(False)
             self.visualizer_toggle.setDisabled(True)
 
@@ -86,9 +97,9 @@ class MainWindow(QWidget):
             self.eyetracker.set_visualizer(GazeVisualizer())
             self.eyetracker.start()
             self.visualizer_toggle.setChecked(True)
-            self.visualizer_toggle.setText("Gaze visualizer: On")
+            self.visualizer_toggle.setText(_VISUALIZER_BUTTON_ON_TEXT)
         else:
             self.eyetracker.set_visualizer(None)
             self.eyetracker.quit()
             self.visualizer_toggle.setChecked(False)
-            self.visualizer_toggle.setText("Gaze visualizer: Off")
+            self.visualizer_toggle.setText(_VISUALIZER_BUTTON_OFF_TEXT)
