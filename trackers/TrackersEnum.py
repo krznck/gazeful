@@ -2,5 +2,5 @@ from enum import Enum
 
 
 class TrackersEnum(Enum):
-    DUMMY = 1
-    TOBII = 2
+    DUMMY = 0
+    TOBII = 1

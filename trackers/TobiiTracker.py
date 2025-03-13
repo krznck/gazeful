@@ -1,36 +1,26 @@
+from trackers.TrackerNotConnectedError import TrackerNotConnectedError
 from visuals.GazeVisualizer import GazeVisualizer
-from PyQt6.QtCore import QThread, pyqtSignal
+from trackers.Tracker import Tracker
 import tobii_research as tr
 import numpy as np
 import atexit
 
 
-class TobiiTracker(QThread):
+class TobiiTracker(Tracker):
     TOBII_LEFT = 'left_gaze_point_on_display_area'
     TOBII_RIGHT = 'right_gaze_point_on_display_area'
 
-    gaze_sampled = pyqtSignal(object, object)  # in our case, should be a tuple of floats or Nones
-    visualizer: GazeVisualizer
     real_tracker = None
 
     def __init__(self, visualizer: GazeVisualizer | None = None) -> None:
-        super().__init__()
+        super().__init__(visualizer)
         self.__begin()
         atexit.register(self.__disable)
 
-        if (visualizer is not None):
-            self.set_visualizer(visualizer)
-
-    def set_visualizer(self, visualizer: GazeVisualizer) -> None:
-        self.visualizer = visualizer
-        self.gaze_sampled.connect(visualizer.set_position)
-
     def __begin(self):
         trackers = tr.find_all_eyetrackers()  # type: ignore
-        # TODO: change to an exception
         if not trackers:
-            print("Did not find any Tobii trackers connected to the computer.")
-            exit(1)
+            raise TrackerNotConnectedError("The Tobii SDK could not find any tracker.")
 
         self.real_tracker = trackers[0]
         self.real_tracker.subscribe_to(
@@ -49,14 +39,13 @@ class TobiiTracker(QThread):
         right_open = coordinates_valid(right_x, right_y)
 
         if (left_open and right_open):
-            self.gaze_sampled.emit(((left_x + right_x) / 2), (left_y + right_y) / 2)
+            self.eyes_position_changed.emit(((left_x + right_x) / 2), (left_y + right_y) / 2)
         elif left_open:
-            self.gaze_sampled.emit(left_x, left_y)
+            self.eyes_position_changed.emit(left_x, left_y)
         elif right_open:
-            self.gaze_sampled.emit(right_x, right_y)
+            self.eyes_position_changed.emit(right_x, right_y)
         else:
-            # return  # TODO: Implement hiding visualizer
-            self.gaze_sampled.emit(None, None)
+            self.eyes_position_changed.emit(None, None)
 
     def __disable(self):
         self.real_tracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA)  # type: ignore

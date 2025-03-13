@@ -1,11 +1,12 @@
 from trackers.MouseTracker import MouseTracker
 from trackers.TobiiTracker import TobiiTracker
 from trackers.TrackersEnum import TrackersEnum
+from trackers.Tracker import Tracker
 
 DEFAULT: TrackersEnum = TrackersEnum.DUMMY
 
 
-def create_tracker(tracker_type: TrackersEnum | str | None) -> MouseTracker | TobiiTracker:
+def create_tracker(tracker_type: TrackersEnum | str | None) -> Tracker:
     if tracker_type is None:
         tracker_type = DEFAULT
 
