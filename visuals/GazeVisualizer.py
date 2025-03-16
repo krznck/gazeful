@@ -75,6 +75,7 @@ class GazeVisualizer(QWidget):
         self.animation.setStartValue(self.geometry())
         self.animation.setEndValue(QRect(x_pos, y_pos, _HEIGHT, _WIDTH))
         self.animation.start()
+        # self.setGeometry(x_pos, y_pos, _HEIGHT, _WIDTH)
         self.show()
 
 
