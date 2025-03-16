@@ -23,6 +23,7 @@ class GazeVisualizer(QWidget):
     previous_cords: tuple[float, float] | None
     entrance_animation: QPropertyAnimation
     exit_animation: QPropertyAnimation | None = None
+    previous_cords: tuple[float, float] | None = None
 
     def __init__(self):
         super().__init__()
@@ -35,13 +36,11 @@ class GazeVisualizer(QWidget):
 
         self.movement_animation = QPropertyAnimation(self, b"geometry")
         self.movement_animation.setDuration(_DEFAULT_MOVEMENT_ANIMATION_DURATION)
-        self.previous_cords = None
 
         effect = QGraphicsOpacityEffect(self)
         self.setGraphicsEffect(effect)
 
         self.entrance_animation = QPropertyAnimation(effect, b"opacity")
-
         self.entrance_animation.setDuration(_DEFAULT_FADE_ANIMATION_DURATION)
         self.entrance_animation.setStartValue(0)
         self.entrance_animation.setEndValue(1)
@@ -83,6 +82,8 @@ class GazeVisualizer(QWidget):
         painter.drawEllipse(x, y, width, height)
 
     def set_position(self, x: float | None, y: float | None):
+        was_hiding = self.isHidden()
+
         if (x is None and y is None):
             self.hide()
             return
@@ -100,11 +101,13 @@ class GazeVisualizer(QWidget):
             # since a real mouse is always fixated on a specific point
         self.previous_cords = x, y
 
-        self.movement_animation.stop()
-        self.movement_animation.setStartValue(self.geometry())
-        self.movement_animation.setEndValue(QRect(x_pos, y_pos, _HEIGHT, _WIDTH))
-        self.movement_animation.start()
-        # self.setGeometry(x_pos, y_pos, _HEIGHT, _WIDTH)
+        if not was_hiding:
+            self.movement_animation.stop()
+            self.movement_animation.setStartValue(self.geometry())
+            self.movement_animation.setEndValue(QRect(x_pos, y_pos, _HEIGHT, _WIDTH))
+            self.movement_animation.start()
+        else:
+            self.setGeometry(x_pos, y_pos, _HEIGHT, _WIDTH)
         self.show()
 
 
