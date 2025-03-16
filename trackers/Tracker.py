@@ -12,6 +12,10 @@ class Tracker(QThread):
             self.set_visualizer(visualizer)
 
     def set_visualizer(self, visualizer: GazeVisualizer | None) -> None:
+        if not visualizer and self.visualizer:
+            self.visualizer.animation.stop()
+            self.visualizer.deleteLater()
+
         self.visualizer = visualizer
 
         if visualizer:
