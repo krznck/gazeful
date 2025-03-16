@@ -1,6 +1,6 @@
 from PyQt6.QtGui import QPainter, QPen, QColor, QGuiApplication
-from PyQt6.QtCore import Qt, QPropertyAnimation, QRect
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtCore import Qt, QPropertyAnimation, QRect, QEasingCurve
+from PyQt6.QtWidgets import QWidget, QGraphicsOpacityEffect
 from math import sqrt
 
 _TITLE = "Gaze Visualizer Window"
@@ -14,12 +14,15 @@ _WINDOW_FLAGS = (
     | Qt.WindowType.WindowStaysOnTopHint
     | Qt.WindowType.FramelessWindowHint
     )
-_DEFAULT_ANIMATION_DURATION = 50
+_DEFAULT_FADE_ANIMATION_DURATION = 150
+_DEFAULT_MOVEMENT_ANIMATION_DURATION = 50
 
 
 class GazeVisualizer(QWidget):
-    animation: QPropertyAnimation
+    movement_animation: QPropertyAnimation
     previous_cords: tuple[float, float] | None
+    entrance_animation: QPropertyAnimation
+    exit_animation: QPropertyAnimation | None = None
 
     def __init__(self):
         super().__init__()
@@ -30,9 +33,35 @@ class GazeVisualizer(QWidget):
         self.setWindowFlags(_WINDOW_FLAGS)
         self.hide()
 
-        self.animation = QPropertyAnimation(self, b"geometry")
-        self.animation.setDuration(_DEFAULT_ANIMATION_DURATION)
+        self.movement_animation = QPropertyAnimation(self, b"geometry")
+        self.movement_animation.setDuration(_DEFAULT_MOVEMENT_ANIMATION_DURATION)
         self.previous_cords = None
+
+        effect = QGraphicsOpacityEffect(self)
+        self.setGraphicsEffect(effect)
+
+        self.entrance_animation = QPropertyAnimation(effect, b"opacity")
+
+        self.entrance_animation.setDuration(_DEFAULT_FADE_ANIMATION_DURATION)
+        self.entrance_animation.setStartValue(0)
+        self.entrance_animation.setEndValue(1)
+        self.entrance_animation.setEasingCurve(QEasingCurve.Type.InOutQuad)
+
+        self.exit_animation = QPropertyAnimation(effect, b"opacity")
+        self.exit_animation.setDuration(_DEFAULT_FADE_ANIMATION_DURATION)
+        self.exit_animation.setStartValue(1)
+        self.exit_animation.setEndValue(0)
+        self.exit_animation.finished.connect(super().hide)  # hide for realsies after finishing
+
+    def showEvent(self, a0) -> None:
+        self.entrance_animation.start()
+        super().showEvent(a0)
+
+    def hide(self) -> None:
+        if not self.exit_animation:
+            super().hide()
+            return
+        self.exit_animation.start()
 
     def paintEvent(self, a0):
         painter = QPainter(self)
@@ -71,10 +100,10 @@ class GazeVisualizer(QWidget):
             # since a real mouse is always fixated on a specific point
         self.previous_cords = x, y
 
-        self.animation.stop()
-        self.animation.setStartValue(self.geometry())
-        self.animation.setEndValue(QRect(x_pos, y_pos, _HEIGHT, _WIDTH))
-        self.animation.start()
+        self.movement_animation.stop()
+        self.movement_animation.setStartValue(self.geometry())
+        self.movement_animation.setEndValue(QRect(x_pos, y_pos, _HEIGHT, _WIDTH))
+        self.movement_animation.start()
         # self.setGeometry(x_pos, y_pos, _HEIGHT, _WIDTH)
         self.show()
 
