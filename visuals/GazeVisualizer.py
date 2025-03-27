@@ -91,8 +91,9 @@ class GazeVisualizer(QWidget):
         assert x is not None and y is not None
 
         screen_width, screen_height = get_screen_size()
-        x_pos = int(x * screen_width - _WIDTH / 2)
-        y_pos = int(y * screen_height - _HEIGHT / 2)
+        scaling = get_scaling()
+        x_pos = int(x * screen_width / scaling - _WIDTH / 2)
+        y_pos = int(y * screen_height / scaling - _HEIGHT / 2)
 
         if self.previous_cords:
             pass  # TODO: Change animation depending on saccade; will need to use the real tracker for this
@@ -118,6 +119,14 @@ def get_screen_size() -> tuple[int, int]:
 
     screen_geo = screen.geometry()
     return screen_geo.width(), screen_geo.height()
+
+
+def get_scaling() -> float:
+    screen = QGuiApplication.primaryScreen()
+    if screen is None:
+        raise RuntimeError("No primary screen detected.")
+
+    return screen.devicePixelRatio()
 
 
 def get_cord_difference(cords1: tuple[float, float], cords2: tuple[float, float]):
