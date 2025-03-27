@@ -4,10 +4,11 @@ from PyQt6.QtCore import QThread, pyqtSignal
 
 class Tracker(QThread):
     eyes_position_changed = pyqtSignal(object, object)
-    visualizer: GazeVisualizer | None
+    visualizer: GazeVisualizer | None = None
 
     def __init__(self, visualizer: GazeVisualizer | None = None) -> None:
         super().__init__()
+
         if visualizer:
             self.set_visualizer(visualizer)
 
