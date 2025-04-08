@@ -1,5 +1,8 @@
+import time
+
 from pynput import mouse
 
+import screens
 from trackers.Tracker import Tracker
 from visuals.GazeVisualizer import GazeVisualizer
 
@@ -7,6 +10,8 @@ from visuals.GazeVisualizer import GazeVisualizer
 class MouseTracker(Tracker):
     left_held: bool = False
     right_held: bool = False
+    last_update_time: float = 0.0
+    simulated_frequency: int = 60  # hertz
 
     def __init__(self, visualizer: GazeVisualizer | None = None) -> None:
         super().__init__(visualizer)
@@ -31,6 +36,9 @@ class MouseTracker(Tracker):
         if self.visualizer is None:
             return
 
+        if not self.__can_update():
+            return
+
         if self.__are_eyes_closed():
             self.eyes_position_changed.emit(None, None)
             return
@@ -41,27 +49,31 @@ class MouseTracker(Tracker):
         # Hence, where for a real tracker the bound screen is only used to inidcate
         # which screen we should be visualizing on, the dummy tracker uses it to
         # know what we are pretending to be tracking in the first place
-        screen = self.visualizer.bound_screen
-        geometry = screen.geometry()
-        scaling = screen.devicePixelRatio()
 
-        screen_x = geometry.x()
-        screen_y = geometry.y()
-        screen_width = geometry.width() * scaling
-        screen_height = geometry.height() * scaling
+        # scr == screen, if it wasn't obvious
+        scr_x, scr_y, scr_width, scr_height = screens.get_scaled_geometry(
+            self.visualizer.bound_screen
+        )
 
         # when you're not looking within the constraints of the eyetracking region,
         # that would be analogous to the eyetracker thinking your eyes are closed
-        if not (
-            screen_x <= x <= screen_x + screen_width
-            and screen_y <= y <= screen_y + screen_height
-        ):
+        if not (scr_x <= x <= scr_x + scr_width and scr_y <= y <= scr_y + scr_height):
             self.eyes_position_changed.emit(None, None)
             return
 
-        relative_x = x - screen_x
-        relative_y = y - screen_y
-        norm_x = relative_x / screen_width
-        norm_y = relative_y / screen_height
+        relative_x = x - scr_x
+        relative_y = y - scr_y
+        norm_x = relative_x / scr_width
+        norm_y = relative_y / scr_height
 
         self.eyes_position_changed.emit(norm_x, norm_y)
+
+    def __can_update(self) -> bool:
+        """Simulates frequency of a real eyetracker by declaring that an update is not
+        allowed unless enough time has passed."""
+        now = time.time()
+        if now - self.last_update_time < (1.0 / self.simulated_frequency):
+            return False
+
+        self.last_update_time = now
+        return True

@@ -46,6 +46,18 @@ def get_screen_size(screen: QScreen) -> tuple[int, int]:
     return screen_geo.width(), screen_geo.height()
 
 
+def get_scaled_geometry(screen: QScreen) -> tuple[int, int, float, float]:
+    """Returns the geometry of the screen, adjusted for its window scaling."""
+    geometry = screen.geometry()
+    scaling = screen.devicePixelRatio()
+
+    x = geometry.x()
+    y = geometry.y()
+    width = geometry.width() * scaling
+    height = geometry.height() * scaling
+    return x, y, width, height
+
+
 class InvalidScreenBinding(Exception):
     """Raised when attempting to bind to a screen that cannot be found."""
 

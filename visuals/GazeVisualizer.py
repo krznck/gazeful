@@ -98,6 +98,7 @@ class GazeVisualizer(QWidget):
 
         painter.drawEllipse(x, y, width, height)
 
+    # TODO: add detecting saccades and having the animation behave differently with that
     def set_position(self, x: float | None, y: float | None):
         was_hiding = self.isHidden()
 
