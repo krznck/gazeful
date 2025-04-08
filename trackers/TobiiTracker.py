@@ -7,8 +7,8 @@ import atexit
 
 
 class TobiiTracker(Tracker):
-    TOBII_LEFT = 'left_gaze_point_on_display_area'
-    TOBII_RIGHT = 'right_gaze_point_on_display_area'
+    TOBII_LEFT = "left_gaze_point_on_display_area"
+    TOBII_RIGHT = "right_gaze_point_on_display_area"
 
     real_tracker = None
 
@@ -26,10 +26,11 @@ class TobiiTracker(Tracker):
         self.real_tracker.subscribe_to(
             tr.EYETRACKER_GAZE_DATA,  # type: ignore
             self.__gaze_callback,
-            as_dictionary=True)
+            as_dictionary=True,
+        )
 
     def __gaze_callback(self, gaze_data) -> None:
-        if (self.visualizer is None):
+        if self.visualizer is None:
             return  # no need to do anything
 
         left_x, left_y = gaze_data[TobiiTracker.TOBII_LEFT]
@@ -38,8 +39,10 @@ class TobiiTracker(Tracker):
         left_open = coordinates_valid(left_x, left_y)
         right_open = coordinates_valid(right_x, right_y)
 
-        if (left_open and right_open):
-            self.eyes_position_changed.emit(((left_x + right_x) / 2), (left_y + right_y) / 2)
+        if left_open and right_open:
+            self.eyes_position_changed.emit(
+                ((left_x + right_x) / 2), (left_y + right_y) / 2
+            )
         elif left_open:
             self.eyes_position_changed.emit(left_x, left_y)
         elif right_open:

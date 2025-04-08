@@ -3,7 +3,7 @@ from PyQt6.QtCore import QThread, pyqtSignal
 
 
 class Tracker(QThread):
-    eyes_position_changed = pyqtSignal(object, object)
+    eyes_position_changed: pyqtSignal = pyqtSignal(object, object)
     visualizer: GazeVisualizer | None = None
 
     def __init__(self, visualizer: GazeVisualizer | None = None) -> None:

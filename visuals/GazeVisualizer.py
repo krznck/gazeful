@@ -1,5 +1,5 @@
-from PyQt6.QtGui import QPainter, QPen, QColor, QGuiApplication
 from PyQt6.QtCore import Qt, QPropertyAnimation, QRect, QEasingCurve
+from PyQt6.QtGui import QPainter, QPen, QColor, QScreen, QShowEvent
 from PyQt6.QtWidgets import QWidget, QGraphicsOpacityEffect
 from math import sqrt
 
@@ -13,20 +13,23 @@ _WINDOW_FLAGS = (
     Qt.WindowType.Tool
     | Qt.WindowType.WindowStaysOnTopHint
     | Qt.WindowType.FramelessWindowHint
-    )
+)
 _DEFAULT_FADE_ANIMATION_DURATION = 150
-_DEFAULT_MOVEMENT_ANIMATION_DURATION = 50
+_DEFAULT_MOVEMENT_ANIMATION_DURATION = 100
 
 
 class GazeVisualizer(QWidget):
     movement_animation: QPropertyAnimation
-    previous_cords: tuple[float, float] | None
     entrance_animation: QPropertyAnimation
-    exit_animation: QPropertyAnimation | None = None
+    exit_animation: QPropertyAnimation
     previous_cords: tuple[float, float] | None = None
+    bound_screen: QScreen
 
-    def __init__(self):
+    def __init__(self, screen: QScreen):
         super().__init__()
+
+        self.bound_screen = screen
+
         self.setWindowTitle(_TITLE)
         self.setGeometry(0, 0, _WIDTH, _HEIGHT)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
@@ -50,19 +53,24 @@ class GazeVisualizer(QWidget):
         self.exit_animation.setDuration(_DEFAULT_FADE_ANIMATION_DURATION)
         self.exit_animation.setStartValue(1)
         self.exit_animation.setEndValue(0)
-        self.exit_animation.finished.connect(super().hide)  # hide for realsies after finishing
 
-    def showEvent(self, a0) -> None:
+        self.exit_animation.finished.connect(
+            super().hide
+        )  # hide for realsies after finishing
+
+    def showEvent(self, a0: QShowEvent | None) -> None:
         self.entrance_animation.start()
         super().showEvent(a0)
 
     def hide(self) -> None:
-        if not self.exit_animation:
+        if not hasattr(self, "exit_animation") or self.exit_animation is None:
             super().hide()
             return
         self.exit_animation.start()
 
-    def paintEvent(self, a0):
+    def paintEvent(self, a0) -> None:
+        _ = a0  # required by method override, unused
+
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 
@@ -84,22 +92,23 @@ class GazeVisualizer(QWidget):
     def set_position(self, x: float | None, y: float | None):
         was_hiding = self.isHidden()
 
-        if (x is None and y is None):
+        if x is None and y is None:
             self.hide()
             return
 
         assert x is not None and y is not None
 
-        screen_width, screen_height = get_screen_size()
-        scaling = get_scaling()
-        x_pos = int(x * screen_width / scaling - _WIDTH / 2)
-        y_pos = int(y * screen_height / scaling - _HEIGHT / 2)
+        screen = self.bound_screen
+        geometry = screen.geometry()
 
-        if self.previous_cords:
-            pass  # TODO: Change animation depending on saccade; will need to use the real tracker for this
-            # print(get_cord_difference(self.previous_cords, (x, y)))
-            # Also, not really sure how to implement a saccade on a dummy mouse,
-            # since a real mouse is always fixated on a specific point
+        screen_x = geometry.x()
+        screen_y = geometry.y()
+        screen_width = geometry.width()
+        screen_height = geometry.height()
+
+        x_pos = int(screen_x + x * screen_width - _WIDTH / 2)
+        y_pos = int(screen_y + y * screen_height - _HEIGHT / 2)
+
         self.previous_cords = x, y
 
         if not was_hiding:
@@ -112,22 +121,5 @@ class GazeVisualizer(QWidget):
         self.show()
 
 
-def get_screen_size() -> tuple[int, int]:
-    screen = QGuiApplication.primaryScreen()
-    if screen is None:
-        raise RuntimeError("No primary screen detected.")
-
-    screen_geo = screen.geometry()
-    return screen_geo.width(), screen_geo.height()
-
-
-def get_scaling() -> float:
-    screen = QGuiApplication.primaryScreen()
-    if screen is None:
-        raise RuntimeError("No primary screen detected.")
-
-    return screen.devicePixelRatio()
-
-
 def get_cord_difference(cords1: tuple[float, float], cords2: tuple[float, float]):
-    return sqrt((cords1[0] - cords2[0])**2 + (cords1[1] - cords2[1])**2)
+    return sqrt((cords1[0] - cords2[0]) ** 2 + (cords1[1] - cords2[1]) ** 2)
