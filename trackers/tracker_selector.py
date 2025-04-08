@@ -1,7 +1,13 @@
 from trackers.MouseTracker import MouseTracker
 from trackers.TobiiTracker import TobiiTracker
-from trackers.TrackersEnum import TrackersEnum
 from trackers.Tracker import Tracker
+from enum import Enum
+
+
+class TrackersEnum(Enum):
+    DUMMY = 0
+    TOBII = 1
+
 
 DEFAULT: TrackersEnum = TrackersEnum.DUMMY
 

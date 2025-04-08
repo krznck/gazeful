@@ -2,6 +2,12 @@ from visuals.GazeVisualizer import GazeVisualizer
 from PyQt6.QtCore import QThread, pyqtSignal
 
 
+class TrackerNotConnectedError(Exception):
+    """Raised when the physical tracker device is not connected to the computer."""
+
+    pass
+
+
 class Tracker(QThread):
     eyes_position_changed: pyqtSignal = pyqtSignal(object, object)
     visualizer: GazeVisualizer | None = None

@@ -7,12 +7,13 @@ from PyQt6.QtWidgets import (
     QMessageBox,
 )
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
-from trackers.TrackerNotConnectedError import TrackerNotConnectedError
 from visuals.customized_widgets.CustomComboBox import CustomComboBox
-from trackers.fabricate_tracker import create_tracker
+from trackers.tracker_selector import (
+    create_tracker,
+    TrackersEnum,
+)
 from visuals.GazeVisualizer import GazeVisualizer
-from trackers.TrackersEnum import TrackersEnum
-from trackers.Tracker import Tracker
+from trackers.Tracker import Tracker, TrackerNotConnectedError
 from PyQt6.QtGui import QScreen
 from PyQt6.QtCore import Qt
 import screens

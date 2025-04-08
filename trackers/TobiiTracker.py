@@ -1,6 +1,5 @@
-from trackers.TrackerNotConnectedError import TrackerNotConnectedError
 from visuals.GazeVisualizer import GazeVisualizer
-from trackers.Tracker import Tracker
+from trackers.Tracker import Tracker, TrackerNotConnectedError
 import tobii_research as tr
 import numpy as np
 import atexit
