@@ -1,4 +1,5 @@
-from PyQt6.QtGui import QGuiApplication, QScreen
+from PyQt6.QtGui import QGuiApplication
+from PyQt6.QtGui import QScreen
 
 
 def get_screen_names() -> list[str]:

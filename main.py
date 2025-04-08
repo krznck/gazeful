@@ -1,6 +1,8 @@
-from visuals.MainWindow import MainWindow
-from PyQt6.QtWidgets import QApplication
 import sys
+
+from PyQt6.QtWidgets import QApplication
+
+from visuals.MainWindow import MainWindow
 
 
 def main():

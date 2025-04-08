@@ -1,7 +1,8 @@
+from enum import Enum
+
 from trackers.MouseTracker import MouseTracker
 from trackers.TobiiTracker import TobiiTracker
 from trackers.Tracker import Tracker
-from enum import Enum
 
 
 class TrackersEnum(Enum):

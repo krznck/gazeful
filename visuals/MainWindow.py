@@ -1,22 +1,20 @@
-from PyQt6.QtWidgets import (
-    QWidget,
-    QPushButton,
-    QVBoxLayout,
-    QHBoxLayout,
-    QComboBox,
-    QMessageBox,
-)
-from visuals.customized_widgets.CustomPushButton import CustomPushButton
-from visuals.customized_widgets.CustomComboBox import CustomComboBox
-from trackers.tracker_selector import (
-    create_tracker,
-    TrackersEnum,
-)
-from visuals.GazeVisualizer import GazeVisualizer
-from trackers.Tracker import Tracker, TrackerNotConnectedError
-from PyQt6.QtGui import QScreen
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QScreen
+from PyQt6.QtWidgets import QComboBox
+from PyQt6.QtWidgets import QHBoxLayout
+from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QPushButton
+from PyQt6.QtWidgets import QVBoxLayout
+from PyQt6.QtWidgets import QWidget
+
 import screens
+from trackers.Tracker import Tracker
+from trackers.Tracker import TrackerNotConnectedError
+from trackers.tracker_selector import create_tracker
+from trackers.tracker_selector import TrackersEnum
+from visuals.customized_widgets.CustomComboBox import CustomComboBox
+from visuals.customized_widgets.CustomPushButton import CustomPushButton
+from visuals.GazeVisualizer import GazeVisualizer
 
 _TITLE = "nnetp"
 _CONNECTION_BUTTON_CONNECTED_TEXT: str = "Connected"

@@ -1,5 +1,7 @@
+from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtCore import QThread
+
 from visuals.GazeVisualizer import GazeVisualizer
-from PyQt6.QtCore import QThread, pyqtSignal
 
 
 class TrackerNotConnectedError(Exception):

@@ -1,7 +1,16 @@
-from PyQt6.QtCore import Qt, QPropertyAnimation, QRect, QEasingCurve
-from PyQt6.QtGui import QPainter, QPen, QColor, QScreen, QShowEvent
-from PyQt6.QtWidgets import QWidget, QGraphicsOpacityEffect
 from math import sqrt
+
+from PyQt6.QtCore import QEasingCurve
+from PyQt6.QtCore import QPropertyAnimation
+from PyQt6.QtCore import QRect
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QColor
+from PyQt6.QtGui import QPainter
+from PyQt6.QtGui import QPen
+from PyQt6.QtGui import QScreen
+from PyQt6.QtGui import QShowEvent
+from PyQt6.QtWidgets import QGraphicsOpacityEffect
+from PyQt6.QtWidgets import QWidget
 
 _TITLE = "Gaze Visualizer Window"
 _WIDTH = _HEIGHT = 100
