@@ -7,7 +7,7 @@ import tobii_research as tr
 from trackers.GazePoint import GazePoint
 from trackers.Tracker import Tracker
 from trackers.Tracker import TrackerNotConnectedError
-from visuals.GazeVisualizer import GazeVisualizer
+from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 
 class TobiiTracker(Tracker):

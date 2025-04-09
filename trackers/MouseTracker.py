@@ -5,7 +5,7 @@ from pynput import mouse
 import screens
 from trackers.GazePoint import GazePoint
 from trackers.Tracker import Tracker
-from visuals.GazeVisualizer import GazeVisualizer
+from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 
 class MouseTracker(Tracker):

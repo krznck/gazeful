@@ -1,8 +1,5 @@
-from PyQt6.QtCore import QEasingCurve
 from PyQt6.QtCore import QPropertyAnimation
 from PyQt6.QtCore import QRect
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QPainter
 from PyQt6.QtGui import QPen
 from PyQt6.QtGui import QScreen
@@ -11,26 +8,8 @@ from PyQt6.QtWidgets import QGraphicsOpacityEffect
 from PyQt6.QtWidgets import QWidget
 
 from trackers.GazePoint import GazePoint
-from visuals.VelocityCalculator import VelocityCalculator
-
-_TITLE = "Gaze Visualizer Window"
-_WIDTH = _HEIGHT = 100
-_OPACITY = 153  # out of 255
-_RED = QColor(255, 0, 0, _OPACITY)
-_THICKNESS = 3
-_MARGIN = 0.1
-_WINDOW_FLAGS = (
-    Qt.WindowType.Tool
-    | Qt.WindowType.WindowStaysOnTopHint
-    | Qt.WindowType.FramelessWindowHint
-)
-
-# NOTE: all these are in milliseconds
-_DEFAULT_FADE_ANIMATION_DURATION = 150
-_MIN_MOVEMENT_ANIMATION_DURATION = 50
-_MAX_MOVEMENT_ANIMATION_DURATION = 800
-
-_MOVEMENT_ANIMATION_DURATION_FALLOFF = 50
+from visuals.visualizer import constants
+from visuals.visualizer.VelocityCalculator import VelocityCalculator
 
 
 class GazeVisualizer(QWidget):
@@ -48,11 +27,11 @@ class GazeVisualizer(QWidget):
 
         self.bound_screen = screen
 
-        self.setWindowTitle(_TITLE)
-        self.setGeometry(0, 0, _WIDTH, _HEIGHT)
-        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        self.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents)
-        self.setWindowFlags(_WINDOW_FLAGS)
+        self.setWindowTitle(constants.TITLE)
+        self.setGeometry(0, 0, constants.WIDTH, constants.HEIGHT)
+        for attribute in constants.WIDGET_ATTRIBUTES:
+            self.setAttribute(attribute)
+        self.setWindowFlags(constants.WINDOW_FLAGS)
         self.hide()
 
         self.movement_animation = QPropertyAnimation(self, b"geometry")
@@ -61,13 +40,15 @@ class GazeVisualizer(QWidget):
         self.setGraphicsEffect(effect)
 
         self.entrance_animation = QPropertyAnimation(effect, b"opacity")
-        self.entrance_animation.setDuration(_DEFAULT_FADE_ANIMATION_DURATION)
+        self.entrance_animation.setDuration(constants.DEFAULT_FADE_ANIMATION_DURATION)
         self.entrance_animation.setStartValue(0)
         self.entrance_animation.setEndValue(1)
-        self.entrance_animation.setEasingCurve(QEasingCurve.Type.InOutQuad)
+        self.entrance_animation.setEasingCurve(
+            constants.ENTRANCE_ANIMATION_EASING_CURVE
+        )
 
         self.exit_animation = QPropertyAnimation(effect, b"opacity")
-        self.exit_animation.setDuration(_DEFAULT_FADE_ANIMATION_DURATION)
+        self.exit_animation.setDuration(constants.DEFAULT_FADE_ANIMATION_DURATION)
         self.exit_animation.setStartValue(1)
         self.exit_animation.setEndValue(0)
 
@@ -89,20 +70,20 @@ class GazeVisualizer(QWidget):
         _ = a0  # required by method override, unused
 
         painter = QPainter(self)
-        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        painter.setRenderHint(constants.RING_RENDER_HINT)
 
         pen = QPen()
-        pen.setStyle(Qt.PenStyle.SolidLine)
-        pen.setColor(_RED)
-        pen.setWidth(_THICKNESS)
+        pen.setStyle(constants.RING_STYLE)
+        pen.setColor(constants.RING_COLOR)
+        pen.setWidth(constants.RING_THICKNESS)
 
         painter.setPen(pen)
 
-        margin = _MARGIN
-        width = int(_WIDTH * (1 - margin))
-        height = int(_HEIGHT * (1 - margin))
-        x = int((_WIDTH - width) / 2)
-        y = int((_HEIGHT - height) / 2)
+        margin = constants.RING_MARGIN
+        width = int(constants.WIDTH * (1 - margin))
+        height = int(constants.HEIGHT * (1 - margin))
+        x = int((constants.WIDTH - width) / 2)
+        y = int((constants.HEIGHT - height) / 2)
 
         painter.drawEllipse(x, y, width, height)
 
@@ -127,8 +108,8 @@ class GazeVisualizer(QWidget):
         screen_width = geometry.width()
         screen_height = geometry.height()
 
-        x_pos = int(screen_x + x * screen_width - _WIDTH / 2)
-        y_pos = int(screen_y + y * screen_height - _HEIGHT / 2)
+        x_pos = int(screen_x + x * screen_width - constants.WIDTH / 2)
+        y_pos = int(screen_y + y * screen_height - constants.HEIGHT / 2)
 
         self.previous_cords = x, y
 
@@ -138,17 +119,19 @@ class GazeVisualizer(QWidget):
                 get_animation_duration(self.velocity_calc.velocity)
             )
             self.movement_animation.setStartValue(self.geometry())
-            self.movement_animation.setEndValue(QRect(x_pos, y_pos, _HEIGHT, _WIDTH))
+            self.movement_animation.setEndValue(
+                QRect(x_pos, y_pos, constants.HEIGHT, constants.WIDTH)
+            )
             self.movement_animation.start()
         else:
-            self.setGeometry(x_pos, y_pos, _HEIGHT, _WIDTH)
+            self.setGeometry(x_pos, y_pos, constants.HEIGHT, constants.WIDTH)
         self.show()
 
 
 def get_animation_duration(velocity: float) -> int:
-    min_duration = _MIN_MOVEMENT_ANIMATION_DURATION
-    max_duration = _MAX_MOVEMENT_ANIMATION_DURATION
-    falloff = _MOVEMENT_ANIMATION_DURATION_FALLOFF
+    min_duration = constants.MIN_MOVEMENT_ANIMATION_DURATION
+    max_duration = constants.MAX_MOVEMENT_ANIMATION_DURATION
+    falloff = constants.MOVEMENT_ANIMATION_DURATION_FALLOFF
 
     duration = int(
         min_duration + (max_duration - min_duration) / (1 + (velocity * falloff))
