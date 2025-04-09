@@ -37,7 +37,7 @@ class TobiiTracker(Tracker):
         if self.visualizer is None:
             return  # no need to do anything
 
-        gaze = GazePoint(timestamp=time.time())
+        gaze = GazePoint(timestamp=time.monotonic())
 
         left_x, left_y = gaze_data[TobiiTracker.TOBII_LEFT]
         right_x, right_y = gaze_data[TobiiTracker.TOBII_RIGHT]
@@ -47,7 +47,7 @@ class TobiiTracker(Tracker):
 
         if left_open and right_open:
             gaze.x = (left_x + right_x) / 2
-            gaze.y = (left_x + right_y) / 2
+            gaze.y = (left_y + right_y) / 2
         elif left_open:
             gaze.x, gaze.y = left_x, left_y
         elif right_open:

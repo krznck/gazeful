@@ -104,7 +104,6 @@ class GazeVisualizer(QWidget):
 
         painter.drawEllipse(x, y, width, height)
 
-    # TODO: add detecting saccades and having the animation behave differently with that
     def set_position(self, gaze: GazePoint):
         self.velocity_calc.update(gaze)
 
@@ -112,7 +111,7 @@ class GazeVisualizer(QWidget):
 
         x, y = gaze.x, gaze.y
 
-        if x is None and y is None:
+        if gaze.are_eyes_closed():
             self.hide()
             return
 
@@ -139,7 +138,3 @@ class GazeVisualizer(QWidget):
         else:
             self.setGeometry(x_pos, y_pos, _HEIGHT, _WIDTH)
         self.show()
-
-
-def get_cord_difference(cords1: tuple[float, float], cords2: tuple[float, float]):
-    return sqrt((cords1[0] - cords2[0]) ** 2 + (cords1[1] - cords2[1]) ** 2)

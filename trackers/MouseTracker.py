@@ -40,7 +40,7 @@ class MouseTracker(Tracker):
         if self.visualizer is None:
             return
 
-        gaze = GazePoint(timestamp=time.time())
+        gaze = GazePoint(timestamp=time.monotonic())
 
         if not self.__can_update(gaze.timestamp):
             return

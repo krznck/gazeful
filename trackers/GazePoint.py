@@ -9,3 +9,9 @@ class GazePoint:
     x: float | None = None
     y: float | None = None
     timestamp: float = 0.0
+
+    def are_eyes_closed(self):
+        return self.x is None or self.y is None
+
+    def are_eyes_open(self):
+        return not self.are_eyes_closed()
