@@ -53,7 +53,7 @@ class MainWindow(QWidget):
             # TOBII -> Tobii
             self.trackers_combo_box.addItem(tracker.name.lower().capitalize())
 
-        _ = self.trackers_combo_box.currentIndexChanged.connect(
+        self.trackers_combo_box.currentIndexChanged.connect(
             self.on_trackers_combo_box_index_changed
         )
         tracker_hbox.addWidget(self.trackers_combo_box)

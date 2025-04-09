@@ -35,6 +35,9 @@ class GazeVisualizer(QWidget):
         self.hide()
 
         self.movement_animation = QPropertyAnimation(self, b"geometry")
+        self.movement_animation.setEasingCurve(
+            constants.MOVEMENT_ANIMATION_EASING_CURVE
+        )
 
         effect = QGraphicsOpacityEffect(self)
         self.setGraphicsEffect(effect)
