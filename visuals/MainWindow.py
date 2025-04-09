@@ -14,7 +14,7 @@ from trackers.tracker_selector import create_tracker
 from trackers.tracker_selector import TrackersEnum
 from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
-from visuals.GazeVisualizer import GazeVisualizer
+from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 _TITLE = "nnetp"
 _CONNECTION_BUTTON_CONNECTED_TEXT: str = "Connected"
@@ -53,7 +53,7 @@ class MainWindow(QWidget):
             # TOBII -> Tobii
             self.trackers_combo_box.addItem(tracker.name.lower().capitalize())
 
-        _ = self.trackers_combo_box.currentIndexChanged.connect(
+        self.trackers_combo_box.currentIndexChanged.connect(
             self.on_trackers_combo_box_index_changed
         )
         tracker_hbox.addWidget(self.trackers_combo_box)
