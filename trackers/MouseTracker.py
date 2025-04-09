@@ -3,6 +3,7 @@ import time
 from pynput import mouse
 
 import screens
+from trackers.GazePoint import GazePoint
 from trackers.Tracker import Tracker
 from visuals.GazeVisualizer import GazeVisualizer
 
@@ -39,11 +40,13 @@ class MouseTracker(Tracker):
         if self.visualizer is None:
             return
 
-        if not self.__can_update():
+        gaze = GazePoint(timestamp=time.time())
+
+        if not self.__can_update(gaze.timestamp):
             return
 
         if self.__are_eyes_closed():
-            self.eyes_position_changed.emit(None, None)
+            self.eyes_position_changed.emit(gaze)
             return
 
         # NOTE: little trick here - a real eyetracker has a specific
@@ -61,22 +64,21 @@ class MouseTracker(Tracker):
         # when you're not looking within the constraints of the eyetracking region,
         # that would be analogous to the eyetracker thinking your eyes are closed
         if not (scr_x <= x <= scr_x + scr_width and scr_y <= y <= scr_y + scr_height):
-            self.eyes_position_changed.emit(None, None)
+            self.eyes_position_changed.emit(gaze)
             return
 
         relative_x = x - scr_x
         relative_y = y - scr_y
-        norm_x = relative_x / scr_width
-        norm_y = relative_y / scr_height
+        gaze.x = relative_x / scr_width
+        gaze.y = relative_y / scr_height
 
-        self.eyes_position_changed.emit(norm_x, norm_y)
+        self.eyes_position_changed.emit(gaze)
 
-    def __can_update(self) -> bool:
+    def __can_update(self, time: float) -> bool:
         """Simulates frequency of a real eyetracker by declaring that an update is not
         allowed unless enough time has passed."""
-        now = time.time()
-        if now - self.last_update_time < (1.0 / self.simulated_frequency):
+        if time - self.last_update_time < (1.0 / self.simulated_frequency):
             return False
 
-        self.last_update_time = now
+        self.last_update_time = time
         return True

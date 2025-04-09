@@ -1,6 +1,7 @@
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtCore import QThread
 
+from trackers.GazePoint import GazePoint
 from visuals.GazeVisualizer import GazeVisualizer
 
 
@@ -11,7 +12,22 @@ class TrackerNotConnectedError(Exception):
 
 
 class Tracker(QThread):
-    eyes_position_changed: pyqtSignal = pyqtSignal(object, object)
+    """
+    Base eyetracker class that all concrete eyetrackers should inherit from.
+
+    This class provides threading capabilities by inheriting from QThread,
+    and contains an optional gaze visualizer. It emits a signal whenever new
+    gaze data is received from the physical tracker device.
+
+    Attributes:
+        eyes_position_changed (pyqtSignal): Signal emitted when new gaze data is received.
+            Signal emits:
+                - a single point of data as represented by GazePoint
+
+        visualizer (GazeVisualizer or None): Visualizer that follows eye movement.
+    """
+
+    eyes_position_changed: pyqtSignal = pyqtSignal(GazePoint)
     visualizer: GazeVisualizer | None = None
 
     def __init__(self, visualizer: GazeVisualizer | None = None) -> None:

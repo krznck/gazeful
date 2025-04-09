@@ -1,8 +1,10 @@
 import atexit
+import time
 
 import numpy as np
 import tobii_research as tr
 
+from trackers.GazePoint import GazePoint
 from trackers.Tracker import Tracker
 from trackers.Tracker import TrackerNotConnectedError
 from visuals.GazeVisualizer import GazeVisualizer
@@ -35,6 +37,8 @@ class TobiiTracker(Tracker):
         if self.visualizer is None:
             return  # no need to do anything
 
+        gaze = GazePoint(timestamp=time.time())
+
         left_x, left_y = gaze_data[TobiiTracker.TOBII_LEFT]
         right_x, right_y = gaze_data[TobiiTracker.TOBII_RIGHT]
 
@@ -42,15 +46,14 @@ class TobiiTracker(Tracker):
         right_open = coordinates_valid(right_x, right_y)
 
         if left_open and right_open:
-            self.eyes_position_changed.emit(
-                ((left_x + right_x) / 2), (left_y + right_y) / 2
-            )
+            gaze.x = (left_x + right_x) / 2
+            gaze.y = (left_x + right_y) / 2
         elif left_open:
-            self.eyes_position_changed.emit(left_x, left_y)
+            gaze.x, gaze.y = left_x, left_y
         elif right_open:
-            self.eyes_position_changed.emit(right_x, right_y)
-        else:
-            self.eyes_position_changed.emit(None, None)
+            gaze.x, gaze.y = right_x, right_y
+
+        self.eyes_position_changed.emit(gaze)
 
     def __disable(self):
         self.real_tracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA)  # type: ignore

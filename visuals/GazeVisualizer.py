@@ -12,6 +12,9 @@ from PyQt6.QtGui import QShowEvent
 from PyQt6.QtWidgets import QGraphicsOpacityEffect
 from PyQt6.QtWidgets import QWidget
 
+from trackers.GazePoint import GazePoint
+from visuals.VelocityCalculator import VelocityCalculator
+
 _TITLE = "Gaze Visualizer Window"
 _WIDTH = _HEIGHT = 100
 _OPACITY = 153  # out of 255
@@ -33,9 +36,12 @@ class GazeVisualizer(QWidget):
     exit_animation: QPropertyAnimation
     previous_cords: tuple[float, float] | None = None
     bound_screen: QScreen
+    velocity_calc: VelocityCalculator
 
     def __init__(self, screen: QScreen):
         super().__init__()
+
+        self.velocity_calc = VelocityCalculator()
 
         self.bound_screen = screen
 
@@ -99,8 +105,12 @@ class GazeVisualizer(QWidget):
         painter.drawEllipse(x, y, width, height)
 
     # TODO: add detecting saccades and having the animation behave differently with that
-    def set_position(self, x: float | None, y: float | None):
+    def set_position(self, gaze: GazePoint):
+        self.velocity_calc.update(gaze)
+
         was_hiding = self.isHidden()
+
+        x, y = gaze.x, gaze.y
 
         if x is None and y is None:
             self.hide()
