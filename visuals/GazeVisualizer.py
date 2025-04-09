@@ -1,5 +1,3 @@
-from math import sqrt
-
 from PyQt6.QtCore import QEasingCurve
 from PyQt6.QtCore import QPropertyAnimation
 from PyQt6.QtCore import QRect
@@ -26,8 +24,13 @@ _WINDOW_FLAGS = (
     | Qt.WindowType.WindowStaysOnTopHint
     | Qt.WindowType.FramelessWindowHint
 )
+
+# NOTE: all these are in milliseconds
 _DEFAULT_FADE_ANIMATION_DURATION = 150
-_DEFAULT_MOVEMENT_ANIMATION_DURATION = 100
+_MIN_MOVEMENT_ANIMATION_DURATION = 50
+_MAX_MOVEMENT_ANIMATION_DURATION = 800
+
+_MOVEMENT_ANIMATION_DURATION_FALLOFF = 50
 
 
 class GazeVisualizer(QWidget):
@@ -53,7 +56,6 @@ class GazeVisualizer(QWidget):
         self.hide()
 
         self.movement_animation = QPropertyAnimation(self, b"geometry")
-        self.movement_animation.setDuration(_DEFAULT_MOVEMENT_ANIMATION_DURATION)
 
         effect = QGraphicsOpacityEffect(self)
         self.setGraphicsEffect(effect)
@@ -132,9 +134,24 @@ class GazeVisualizer(QWidget):
 
         if not was_hiding:
             self.movement_animation.stop()
+            self.movement_animation.setDuration(
+                get_animation_duration(self.velocity_calc.velocity)
+            )
             self.movement_animation.setStartValue(self.geometry())
             self.movement_animation.setEndValue(QRect(x_pos, y_pos, _HEIGHT, _WIDTH))
             self.movement_animation.start()
         else:
             self.setGeometry(x_pos, y_pos, _HEIGHT, _WIDTH)
         self.show()
+
+
+def get_animation_duration(velocity: float) -> int:
+    min_duration = _MIN_MOVEMENT_ANIMATION_DURATION
+    max_duration = _MAX_MOVEMENT_ANIMATION_DURATION
+    falloff = _MOVEMENT_ANIMATION_DURATION_FALLOFF
+
+    duration = int(
+        min_duration + (max_duration - min_duration) / (1 + (velocity * falloff))
+    )
+    # print("Animation duration: " + str(duration))
+    return duration

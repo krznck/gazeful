@@ -16,9 +16,6 @@ class VelocityCalculator:
         self.__calculate_velocity()
         # print("Velocity: " + str(self.velocity))
 
-    # TODO: Consider changing 0.0 to some high number when eyes are closed,
-    # since closed eyes mean that velocity will be huge when they are open, no?
-    # alternatively, we'll see if the visualizer should handlethat logic
     def __calculate_velocity(self) -> None:
         if len(self.__history) < 2:
             self.velocity = 0.0
