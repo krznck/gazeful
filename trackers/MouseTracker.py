@@ -23,7 +23,10 @@ class MouseTracker(Tracker):
         self.listener.start()
         self.listener.join()
 
-    def __on_click(self, button: mouse.Button) -> None:
+    def __on_click(self, x: float, y: float, button: mouse.Button) -> None:
+        # NOTE: method needs x and y in order to pass button correctly,
+        # but we're not using it anyway
+        _ = x, y
         if button is mouse.Button.left:
             self.left_held = not self.left_held
         if button is mouse.Button.right:
