@@ -18,6 +18,7 @@ class GazeVisualizer(QWidget):
     exit_animation: QPropertyAnimation
     bound_screen: QScreen
     velocity_calc: VelocityCalculator
+    last_x, last_y = 0, 0
 
     def __init__(self, screen: QScreen):
         super().__init__()
@@ -113,18 +114,23 @@ class GazeVisualizer(QWidget):
         x_pos = int(screen_x + x * screen_width - constants.WIDTH / 2)
         y_pos = int(screen_y + y * screen_height - constants.HEIGHT / 2)
 
+        position_changed = self.last_x != x_pos or self.last_y != y_pos
+
+        self.last_x, self.last_y = x_pos, y_pos
+
         if not was_hiding:
-            self.movement_animation.stop()
-            self.movement_animation.setDuration(
-                get_animation_duration(self.velocity_calc.velocity)
-            )
-            self.movement_animation.setStartValue(self.geometry())
-            self.movement_animation.setEndValue(
-                QRect(x_pos, y_pos, constants.HEIGHT, constants.WIDTH)
-            )
-            self.movement_animation.start()
+            if position_changed:
+                self.movement_animation.stop()
+                self.movement_animation.setDuration(
+                    get_animation_duration(self.velocity_calc.velocity)
+                )
+                self.movement_animation.setStartValue(self.geometry())
+                self.movement_animation.setEndValue(
+                    QRect(x_pos, y_pos, constants.WIDTH, constants.HEIGHT)
+                )
+                self.movement_animation.start()
         else:
-            self.setGeometry(x_pos, y_pos, constants.HEIGHT, constants.WIDTH)
+            self.setGeometry(x_pos, y_pos, constants.WIDTH, constants.HEIGHT)
 
         self.show()
 
@@ -137,5 +143,5 @@ def get_animation_duration(velocity: float) -> int:
     duration = int(
         min_duration + (max_duration - min_duration) / (1 + (velocity * falloff))
     )
-    # print("Animation duration: " + str(duration))
+    print("Animation duration: " + str(duration))
     return duration
