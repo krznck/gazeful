@@ -11,12 +11,14 @@ from trackers.GazePoint import GazePoint
 from trackers.Tracker import Tracker
 from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
+DEFAULT_FREQUENCY = 60
+
 
 class MouseTracker(Tracker):
     left_held: bool = False
     right_held: bool = False
     last_update_time: float = 0.0
-    simulated_frequency: int = 60  # hertz
+    simulated_frequency: int = DEFAULT_FREQUENCY  # hertz
     timer: QTimer | None = None
     listener: mouse.Listener
 

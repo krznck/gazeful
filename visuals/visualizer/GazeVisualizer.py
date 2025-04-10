@@ -16,7 +16,6 @@ class GazeVisualizer(QWidget):
     movement_animation: QPropertyAnimation
     entrance_animation: QPropertyAnimation
     exit_animation: QPropertyAnimation
-    previous_cords: tuple[float, float] | None = None
     bound_screen: QScreen
     velocity_calc: VelocityCalculator
 
@@ -114,8 +113,6 @@ class GazeVisualizer(QWidget):
         x_pos = int(screen_x + x * screen_width - constants.WIDTH / 2)
         y_pos = int(screen_y + y * screen_height - constants.HEIGHT / 2)
 
-        self.previous_cords = x, y
-
         if not was_hiding:
             self.movement_animation.stop()
             self.movement_animation.setDuration(
@@ -128,6 +125,7 @@ class GazeVisualizer(QWidget):
             self.movement_animation.start()
         else:
             self.setGeometry(x_pos, y_pos, constants.HEIGHT, constants.WIDTH)
+
         self.show()
 
 

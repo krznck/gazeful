@@ -3,53 +3,47 @@ from math import sqrt
 
 from trackers.GazePoint import GazePoint
 
+TIME_WINDOW_DEFAULT = 0.2  # 200ms
+MAX_SAMPLES_DEFAULT = 60
+
 
 class VelocityCalculator:
-    __history: deque
     velocity: float = 0.0
-
-    def __init__(self, max_samples: int = 20) -> None:
-        self.__history = deque(maxlen=max_samples)
+    window: float = TIME_WINDOW_DEFAULT
+    history: deque = deque(maxlen=MAX_SAMPLES_DEFAULT)
+    last_valid_point: GazePoint | None = None
 
     def update(self, gaze_point: GazePoint):
-        self.__history.append((gaze_point))
-        self.__calculate_velocity()
-        # print("Velocity: " + str(self.velocity))
+        self.history.append(gaze_point)
 
-    def __calculate_velocity(self) -> None:
-        if len(self.__history) < 2:
+        if len(self.history) < 2:
             self.velocity = 0.0
             return
 
-        newest: GazePoint = self.__history[-1]
-        if newest.are_eyes_closed():  # eyes are newly closed, so velocity stops dead
-            self.velocity = 0.0
+        self.__update_last_valid_point(gaze_point)
+
+        if self.last_valid_point is not None:
+            self.velocity = self.__calculate_velocity(self.last_valid_point, gaze_point)
+            # print("Velocity: " + str(self.velocity))
+
+    def __update_last_valid_point(self, current_point: GazePoint):
+        if self.last_valid_point is None:
+            self.last_valid_point = current_point
             return
 
-        oldest = self.__find_oldest_open()
+        if current_point.timestamp - self.last_valid_point.timestamp >= self.window:
+            self.last_valid_point = current_point
 
-        if oldest is None:  # no point in which eyes were open
-            self.velocity = 0.0
-            return
+    def __calculate_velocity(self, old: GazePoint, new: GazePoint) -> float:
+        if new.x is None or new.y is None or old.x is None or old.y is None:
+            return 0.0
 
-        assert newest.x is not None and newest.y is not None
-        assert oldest.x is not None and oldest.y is not None
-
-        dx = newest.x - oldest.x
-        dy = newest.y - oldest.y
-        dt = newest.timestamp - oldest.timestamp
+        dx = new.x - old.x
+        dy = new.y - old.y
+        dt = new.timestamp - old.timestamp
 
         if dt <= 0:
-            self.velocity = 0.0
-            return
+            return 0.0
 
         distance = sqrt(dx * dx + dy * dy)
-        self.velocity = distance / dt
-
-    def __find_oldest_open(self) -> GazePoint | None:
-        for point in self.__history:
-            point: GazePoint
-            if point.are_eyes_open():
-                return point
-
-        return None
+        return distance / dt
