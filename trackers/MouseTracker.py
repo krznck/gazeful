@@ -1,6 +1,10 @@
 import time
 
 from pynput import mouse
+from PyQt6.QtCore import QMetaObject
+from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QTimer
+from PyQt6.QtGui import QCursor
 
 import screens
 from trackers.GazePoint import GazePoint
@@ -13,18 +17,29 @@ class MouseTracker(Tracker):
     right_held: bool = False
     last_update_time: float = 0.0
     simulated_frequency: int = 60  # hertz
+    timer: QTimer | None = None
+    listener: mouse.Listener
 
     def __init__(self, visualizer: GazeVisualizer | None = None) -> None:
         super().__init__(visualizer)
-        self.listener = mouse.Listener(
-            on_move=self.__on_move, on_click=self.__on_click  # type: ignore
-        )
 
     def run(self):
+        self.listener = mouse.Listener(on_click=self.__on_click)  # type: ignore
         self.listener.start()
-        self.listener.join()
 
-    def __on_click(self, x: float, y: float, button: mouse.Button) -> None:
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.__poll_mouse)
+        self.timer.setInterval(int(1000 / self.simulated_frequency))  # milliseconds
+        self.timer.start()
+
+        self.exec()
+
+    def stop(self) -> None:
+        self.__cleanup_timer()
+        self.listener.stop()
+        super().stop()
+
+    def __on_click(self, x, y, button: mouse.Button) -> None:
         # NOTE: method needs x and y in order to pass button correctly,
         # but we're not using it anyway
         _ = x, y
@@ -36,30 +51,26 @@ class MouseTracker(Tracker):
     def __are_eyes_closed(self) -> bool:
         return self.right_held and self.left_held
 
-    def __on_move(self, x: float, y: float) -> None:
+    def __poll_mouse(self):
         if self.visualizer is None:
             return
 
         gaze = GazePoint(timestamp=time.monotonic())
 
-        if not self.__can_update(gaze.timestamp):
-            return
-
         if self.__are_eyes_closed():
             self.eyes_position_changed.emit(gaze)
             return
 
-        # NOTE: little trick here - a real eyetracker has a specific
-        # region (ergo, a screen) that it's tracking within, but your cursor
-        # can be anywhere.
-        # Hence, where for a real tracker the bound screen is only used to inidcate
-        # which screen we should be visualizing on, the dummy tracker uses it to
-        # know what we are pretending to be tracking in the first place
+        position = QCursor.pos()
+        x, y = position.x(), position.y()
 
-        # scr == screen, if it wasn't obvious
-        scr_x, scr_y, scr_width, scr_height = screens.get_scaled_geometry(
+        # NOTE: This is a little trick.
+        # A real eyetracker is already bound to a physical screen,
+        # but your cursor can be anywhere, so the dummy needs to be told which screen
+        # to simulate tracking on. Hence we secretely use the visualizer's bound screen.
+        scr_x, scr_y, scr_width, scr_height = screens.get_geometry(
             self.visualizer.bound_screen
-        )
+        )  # scr == screen, if it wasn't obvious
 
         # when you're not looking within the constraints of the eyetracking region,
         # that would be analogous to the eyetracker thinking your eyes are closed
@@ -74,11 +85,12 @@ class MouseTracker(Tracker):
 
         self.eyes_position_changed.emit(gaze)
 
-    def __can_update(self, time: float) -> bool:
-        """Simulates frequency of a real eyetracker by declaring that an update is not
-        allowed unless enough time has passed."""
-        if time - self.last_update_time < (1.0 / self.simulated_frequency):
-            return False
-
-        self.last_update_time = time
-        return True
+    def __cleanup_timer(self):
+        if self.timer is not None:
+            QMetaObject.invokeMethod(
+                self.timer, "stop", Qt.ConnectionType.QueuedConnection
+            )
+            QMetaObject.invokeMethod(
+                self.timer, "deleteLater", Qt.ConnectionType.QueuedConnection
+            )
+            self.timer = None

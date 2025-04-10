@@ -1,4 +1,3 @@
-import atexit
 import time
 
 import numpy as np
@@ -19,7 +18,6 @@ class TobiiTracker(Tracker):
     def __init__(self, visualizer: GazeVisualizer | None = None) -> None:
         super().__init__(visualizer)
         self.__begin()
-        atexit.register(self.__disable)
 
     def __begin(self):
         trackers = tr.find_all_eyetrackers()  # type: ignore
@@ -55,8 +53,9 @@ class TobiiTracker(Tracker):
 
         self.eyes_position_changed.emit(gaze)
 
-    def __disable(self):
+    def stop(self) -> None:
         self.real_tracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA)  # type: ignore
+        super().stop()
 
 
 def coordinates_valid(cord1: float, cord2: float) -> bool:

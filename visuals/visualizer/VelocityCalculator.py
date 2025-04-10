@@ -2,7 +2,6 @@ from collections import deque
 from math import sqrt
 
 from trackers.GazePoint import GazePoint
-from trackers.GazePoint import InvalidTimestampError
 
 
 class VelocityCalculator:
@@ -41,9 +40,8 @@ class VelocityCalculator:
         dt = newest.timestamp - oldest.timestamp
 
         if dt <= 0:
-            raise InvalidTimestampError(
-                "Found an invalid timestamp when calculating eye velocity."
-            )
+            self.velocity = 0.0
+            return
 
         distance = sqrt(dx * dx + dy * dy)
         self.velocity = distance / dt

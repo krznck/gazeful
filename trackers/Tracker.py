@@ -45,3 +45,7 @@ class Tracker(QThread):
 
         if visualizer:
             self.eyes_position_changed.connect(visualizer.set_position)
+
+    def stop(self) -> None:
+        self.quit()
+        self.wait()

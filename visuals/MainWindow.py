@@ -96,6 +96,11 @@ class MainWindow(QWidget):
 
         self.setLayout(window_vbox)
 
+    def closeEvent(self, a0) -> None:
+        if self.eyetracker is not None:
+            self.eyetracker.stop()
+        return super().closeEvent(a0)
+
     def on_connection_button_clicked(self):
         if self.connect_button.isChecked():
             try:
