@@ -143,5 +143,5 @@ def get_animation_duration(velocity: float) -> int:
     duration = int(
         min_duration + (max_duration - min_duration) / (1 + (velocity * falloff))
     )
-    print("Animation duration: " + str(duration))
+    # print("Animation duration: " + str(duration))
     return duration

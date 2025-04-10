@@ -1,3 +1,4 @@
+import random
 import time
 
 from pynput import mouse
@@ -12,6 +13,8 @@ from trackers.Tracker import Tracker
 from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 DEFAULT_FREQUENCY = 60
+MIN_TREMOR_TRESHHOLD: int = 1
+MAX_TREMOR_TRESHHOLD: int = 7
 
 
 class MouseTracker(Tracker):
@@ -65,6 +68,7 @@ class MouseTracker(Tracker):
 
         position = QCursor.pos()
         x, y = position.x(), position.y()
+        x, y = add_tremor(x), add_tremor(y)
 
         # NOTE: This is a little trick.
         # A real eyetracker is already bound to a physical screen,
@@ -96,3 +100,12 @@ class MouseTracker(Tracker):
                 self.timer, "deleteLater", Qt.ConnectionType.QueuedConnection
             )
             self.timer = None
+
+
+def add_tremor(position: int) -> float:
+    treshhold = random.randint(MIN_TREMOR_TRESHHOLD, MAX_TREMOR_TRESHHOLD)
+    new = position
+    offset = random.gauss(0, treshhold)
+
+    # print("Tremor value: " + str(offset))
+    return new + offset
