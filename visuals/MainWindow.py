@@ -21,6 +21,8 @@ _CONNECTION_BUTTON_CONNECTED_TEXT: str = "Connected"
 _CONNECTION_BUTTON_DISCONNECTED_TEXT: str = "Disconnected"
 _VISUALIZER_BUTTON_ON_TEXT: str = "Gaze visualizer: On"
 _VISUALIZER_BUTTON_OFF_TEXT: str = "Gaze visualizer: Off"
+_VIS_ANIMATIONS_BUTTON_ON_TEXT: str = "Animations: On"
+_VIS_ANIMATIONS_BUTTON_OFF_TEXT: str = "Animations: Off"
 
 
 class MainWindow(QWidget):
@@ -87,13 +89,23 @@ class MainWindow(QWidget):
 
         window_vbox.addLayout(screens_hbox)
 
+        visualizer_hbox = QHBoxLayout()
+
         self.visualizer_toggle = CustomPushButton(_VISUALIZER_BUTTON_OFF_TEXT)
         self.visualizer_toggle.setCheckable(True)
         self.visualizer_toggle.clicked.connect(self.on_visualizer_toggle_clicked)
         self.visualizer_toggle.setDisabled(True)
-        window_vbox.addWidget(self.visualizer_toggle)
-        window_vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
+        visualizer_hbox.addWidget(self.visualizer_toggle)
 
+        self.vis_animation_toggle = CustomPushButton(_VIS_ANIMATIONS_BUTTON_ON_TEXT)
+        self.vis_animation_toggle.setCheckable(True)
+        self.vis_animation_toggle.setChecked(True)
+        self.vis_animation_toggle.clicked.connect(self.on_vis_animation_button_toggle)
+        visualizer_hbox.addWidget(self.vis_animation_toggle)
+
+        window_vbox.addLayout(visualizer_hbox)
+
+        window_vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.setLayout(window_vbox)
 
     def closeEvent(self, a0) -> None:
@@ -185,6 +197,18 @@ class MainWindow(QWidget):
         if self.eyetracker is not None and self.eyetracker.visualizer is not None:
             self.eyetracker.visualizer.bound_screen = self.tracking_screen
 
+    def on_vis_animation_button_toggle(self):
+        if self.eyetracker is not None and self.eyetracker.visualizer is not None:
+            self.eyetracker.visualizer.animations = (
+                self.vis_animation_toggle.isChecked()
+            )
+
+        self.vis_animation_toggle.setText(
+            _VIS_ANIMATIONS_BUTTON_ON_TEXT
+            if self.vis_animation_toggle.isChecked()
+            else _VIS_ANIMATIONS_BUTTON_OFF_TEXT
+        )
+
     def toggleConnectionButton(self, on: bool):
         if on:
             self.connect_button.setText(_CONNECTION_BUTTON_CONNECTED_TEXT)
@@ -199,7 +223,12 @@ class MainWindow(QWidget):
         assert self.eyetracker
 
         if on:
-            self.eyetracker.set_visualizer(GazeVisualizer(screen=self.tracking_screen))
+            self.eyetracker.set_visualizer(
+                GazeVisualizer(
+                    screen=self.tracking_screen,
+                    animations=self.vis_animation_toggle.isChecked(),
+                )
+            )
             self.eyetracker.start()
             self.visualizer_toggle.setChecked(True)
             self.visualizer_toggle.setText(_VISUALIZER_BUTTON_ON_TEXT)

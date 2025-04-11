@@ -19,13 +19,15 @@ class GazeVisualizer(QWidget):
     bound_screen: QScreen
     velocity_calc: VelocityCalculator
     last_x, last_y = 0, 0
+    animations: bool
 
-    def __init__(self, screen: QScreen):
+    def __init__(self, screen: QScreen, animations: bool = True):
         super().__init__()
 
         self.velocity_calc = VelocityCalculator()
 
         self.bound_screen = screen
+        self.animations = animations
 
         self.setWindowTitle(constants.TITLE)
         self.setGeometry(0, 0, constants.WIDTH, constants.HEIGHT)
@@ -60,11 +62,16 @@ class GazeVisualizer(QWidget):
         )  # hide for realsies after finishing
 
     def showEvent(self, a0: QShowEvent | None) -> None:
-        self.entrance_animation.start()
+        if self.animations:
+            self.entrance_animation.start()
         super().showEvent(a0)
 
     def hide(self) -> None:
-        if not hasattr(self, "exit_animation") or self.exit_animation is None:
+        if (
+            not hasattr(self, "exit_animation")
+            or self.exit_animation is None
+            or not self.animations
+        ):
             super().hide()
             return
         self.exit_animation.start()
@@ -118,7 +125,7 @@ class GazeVisualizer(QWidget):
 
         self.last_x, self.last_y = x_pos, y_pos
 
-        if not was_hiding:
+        if not was_hiding and self.animations:
             if position_changed:
                 self.movement_animation.stop()
                 self.movement_animation.setDuration(
