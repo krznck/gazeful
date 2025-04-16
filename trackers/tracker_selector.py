@@ -3,6 +3,7 @@ from enum import Enum
 from trackers.MouseTracker import MouseTracker
 from trackers.TobiiTracker import TobiiTracker
 from trackers.Tracker import Tracker
+from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 
 class TrackersEnum(Enum):
@@ -13,7 +14,9 @@ class TrackersEnum(Enum):
 DEFAULT: TrackersEnum = TrackersEnum.DUMMY
 
 
-def create_tracker(tracker_type: TrackersEnum | str | None) -> Tracker:
+def create_tracker(
+    tracker_type: TrackersEnum | str | None, visualizer: GazeVisualizer
+) -> Tracker:
     if tracker_type is None:
         tracker_type = DEFAULT
 
@@ -22,6 +25,6 @@ def create_tracker(tracker_type: TrackersEnum | str | None) -> Tracker:
 
     match tracker_type:
         case TrackersEnum.DUMMY:
-            return MouseTracker()
+            return MouseTracker(visualizer)
         case TrackersEnum.TOBII:
-            return TobiiTracker()
+            return TobiiTracker(visualizer)

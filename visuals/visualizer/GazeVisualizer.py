@@ -1,5 +1,6 @@
 from PyQt6.QtCore import QPropertyAnimation
 from PyQt6.QtCore import QRect
+from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QPainter
 from PyQt6.QtGui import QPen
 from PyQt6.QtGui import QScreen
@@ -20,6 +21,9 @@ class GazeVisualizer(QWidget):
     velocity_calc: VelocityCalculator
     last_x, last_y = 0, 0
     animations: bool
+    opacity: int = constants.OPACITY
+
+    enabled: bool = False
 
     def __init__(self, screen: QScreen, animations: bool = True):
         super().__init__()
@@ -61,6 +65,11 @@ class GazeVisualizer(QWidget):
             super().hide
         )  # hide for realsies after finishing
 
+    def toggle(self, on: bool) -> None:
+        self.enabled = on
+        if not on:
+            self.hide()
+
     def showEvent(self, a0: QShowEvent | None) -> None:
         if self.animations:
             self.entrance_animation.start()
@@ -84,7 +93,7 @@ class GazeVisualizer(QWidget):
 
         pen = QPen()
         pen.setStyle(constants.RING_STYLE)
-        pen.setColor(constants.RING_COLOR)
+        pen.setColor(QColor(*constants.RING_COLOR, self.opacity))
         pen.setWidth(constants.RING_THICKNESS)
 
         painter.setPen(pen)
@@ -98,6 +107,9 @@ class GazeVisualizer(QWidget):
         painter.drawEllipse(x, y, width, height)
 
     def set_position(self, gaze: GazePoint):
+        if not self.enabled:
+            return
+
         self.velocity_calc.update(gaze)
 
         was_hiding = self.isHidden()
@@ -140,6 +152,16 @@ class GazeVisualizer(QWidget):
             self.setGeometry(x_pos, y_pos, constants.WIDTH, constants.HEIGHT)
 
         self.show()
+
+    def set_opacity(self, opacity: int) -> None:
+        self.opacity = max(0, min(255, opacity))
+        self.update()
+
+    def toggle_animations(self, on: bool | None = None) -> None:
+        if isinstance(on, bool):
+            self.animations = on
+        else:
+            self.animations = not self.animations
 
 
 def get_animation_duration(velocity: float) -> int:

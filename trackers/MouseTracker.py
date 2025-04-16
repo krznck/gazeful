@@ -25,11 +25,11 @@ class MouseTracker(Tracker):
     timer: QTimer | None = None
     listener: mouse.Listener
 
-    def __init__(self, visualizer: GazeVisualizer | None = None) -> None:
+    def __init__(self, visualizer: GazeVisualizer) -> None:
         super().__init__(visualizer)
+        self.listener = mouse.Listener(on_click=self.__on_click)  # type: ignore
 
     def run(self):
-        self.listener = mouse.Listener(on_click=self.__on_click)  # type: ignore
         self.listener.start()
 
         self.timer = QTimer()
@@ -89,6 +89,7 @@ class MouseTracker(Tracker):
         gaze.x = relative_x / scr_width
         gaze.y = relative_y / scr_height
 
+        # print("Gaze: " + str(gaze))
         self.eyes_position_changed.emit(gaze)
 
     def __cleanup_timer(self):

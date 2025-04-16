@@ -18,7 +18,7 @@ WIDGET_ATTRIBUTES: tuple = (
 
 RING_RENDER_HINT = QPainter.RenderHint.Antialiasing
 RING_STYLE = Qt.PenStyle.SolidLine
-RING_COLOR = QColor(255, 0, 0, OPACITY)  # red
+RING_COLOR = (255, 0, 0)  # red
 RING_THICKNESS = 3
 RING_MARGIN = 0.1
 

@@ -2,13 +2,15 @@ import sys
 
 from PyQt6.QtWidgets import QApplication
 
+from AppContext import AppContext
 from visuals.MainWindow import MainWindow
 
 
 def main():
     app = QApplication([])
 
-    window = MainWindow()
+    context = AppContext()
+    window = MainWindow(context)
     window.show()
 
     sys.exit(app.exec())

@@ -15,7 +15,7 @@ class TobiiTracker(Tracker):
 
     real_tracker = None
 
-    def __init__(self, visualizer: GazeVisualizer | None = None) -> None:
+    def __init__(self, visualizer: GazeVisualizer) -> None:
         super().__init__(visualizer)
         self.__begin()
 
