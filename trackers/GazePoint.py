@@ -7,6 +7,9 @@ class InvalidTimestampError(Exception):
     pass
 
 
+EYE_CLOSED: str = "-"
+
+
 @dataclass
 class GazePoint:
     """Represents a basic unit of gaze.
@@ -17,7 +20,7 @@ class GazePoint:
     timestamp: float = 0.0
 
     def __post_init__(self):
-        if self.timestamp <= 0.0:
+        if self.timestamp < 0.0:
             raise InvalidTimestampError(
                 "Attempted to generate a gaze point with an invalid timestamp"
             )
@@ -29,4 +32,6 @@ class GazePoint:
         return not self.are_eyes_closed()
 
     def __str__(self) -> str:
-        return f"{self.x};{self.y};{self.timestamp}"
+        x_str = self.x if self.x is not None else EYE_CLOSED
+        y_str = self.y if self.y is not None else EYE_CLOSED
+        return f"{x_str};{y_str};{self.timestamp}"
