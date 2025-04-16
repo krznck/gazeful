@@ -27,3 +27,6 @@ class GazePoint:
 
     def are_eyes_open(self):
         return not self.are_eyes_closed()
+
+    def __str__(self) -> str:
+        return f"{self.x};{self.y};{self.timestamp}"
