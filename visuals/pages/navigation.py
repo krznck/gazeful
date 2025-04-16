@@ -5,11 +5,16 @@ from AppContext import AppContext
 from visuals.customized_widgets.CustomSidebar import CustomSidebar
 from visuals.pages.MainPage import MainPage
 from visuals.pages.Page import Page
+from visuals.pages.RecordingPage import RecordingPage
 from visuals.pages.VisualizerPage import VisualizerPage
 
 
 def generate_navigation(context: AppContext) -> tuple[CustomSidebar, QStackedWidget]:
-    PAGES: list[Page] = [MainPage(context), VisualizerPage(context)]
+    PAGES: list[Page] = [
+        MainPage(context),
+        VisualizerPage(context),
+        RecordingPage(context),
+    ]
 
     navbar = CustomSidebar()
     pages = QStackedWidget()
