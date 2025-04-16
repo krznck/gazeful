@@ -3,6 +3,7 @@ import time
 import numpy as np
 import tobii_research as tr
 
+from Recorder import Recorder
 from trackers.GazePoint import GazePoint
 from trackers.Tracker import Tracker
 from trackers.Tracker import TrackerNotConnectedError
@@ -15,8 +16,8 @@ class TobiiTracker(Tracker):
 
     real_tracker = None
 
-    def __init__(self, visualizer: GazeVisualizer) -> None:
-        super().__init__(visualizer)
+    def __init__(self, visualizer: GazeVisualizer, recorder: Recorder) -> None:
+        super().__init__(visualizer, recorder)
         self.__begin()
 
     def __begin(self):

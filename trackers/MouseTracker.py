@@ -8,6 +8,7 @@ from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QCursor
 
 import screens
+from Recorder import Recorder
 from trackers.GazePoint import GazePoint
 from trackers.Tracker import Tracker
 from visuals.visualizer.GazeVisualizer import GazeVisualizer
@@ -25,8 +26,8 @@ class MouseTracker(Tracker):
     timer: QTimer | None = None
     listener: mouse.Listener
 
-    def __init__(self, visualizer: GazeVisualizer) -> None:
-        super().__init__(visualizer)
+    def __init__(self, visualizer: GazeVisualizer, recorder: Recorder) -> None:
+        super().__init__(visualizer, recorder)
         self.listener = mouse.Listener(on_click=self.__on_click)  # type: ignore
 
     def run(self):

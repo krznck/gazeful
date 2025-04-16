@@ -1,5 +1,6 @@
 from enum import Enum
 
+from Recorder import Recorder
 from trackers.MouseTracker import MouseTracker
 from trackers.TobiiTracker import TobiiTracker
 from trackers.Tracker import Tracker
@@ -15,7 +16,9 @@ DEFAULT: TrackersEnum = TrackersEnum.DUMMY
 
 
 def create_tracker(
-    tracker_type: TrackersEnum | str | None, visualizer: GazeVisualizer
+    tracker_type: TrackersEnum | str | None,
+    visualizer: GazeVisualizer,
+    recorder: Recorder,
 ) -> Tracker:
     if tracker_type is None:
         tracker_type = DEFAULT
@@ -25,6 +28,6 @@ def create_tracker(
 
     match tracker_type:
         case TrackersEnum.DUMMY:
-            return MouseTracker(visualizer)
+            return MouseTracker(visualizer, recorder)
         case TrackersEnum.TOBII:
-            return TobiiTracker(visualizer)
+            return TobiiTracker(visualizer, recorder)

@@ -3,6 +3,7 @@ from typing import NamedTuple
 from PyQt6.QtGui import QScreen
 
 import screens
+from Recorder import Recorder
 from trackers.Tracker import Tracker
 from trackers.Tracker import TrackerNotConnectedError
 from trackers.tracker_selector import create_tracker
@@ -17,6 +18,7 @@ class OperationResult(NamedTuple):
 class AppContext:
     eyetracker: Tracker | None = None
     visualizer: GazeVisualizer
+    recorder: Recorder = Recorder()
     screen: QScreen
 
     def __init__(self) -> None:
@@ -26,7 +28,7 @@ class AppContext:
 
     def connect_tracker(self, tracker: str) -> OperationResult:
         try:
-            self.eyetracker = create_tracker(tracker, self.visualizer)
+            self.eyetracker = create_tracker(tracker, self.visualizer, self.recorder)
         except TrackerNotConnectedError as e:
             self.disconnect_tracker()
             return OperationResult(False, str(e))
