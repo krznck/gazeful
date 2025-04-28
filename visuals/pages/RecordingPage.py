@@ -17,10 +17,7 @@ TITLE = "Recording"
 
 RECORD_TOGGLE_OFF_TEXT = "Start recording"
 RECORD_TOGGLE_ON_TEXT = "Stop recording"
-EXPLORER_BUTTON_TEXT = "Choose location"
-PATH_PLACEHOLDER_TEXT = "gaze data path"
-PATH_MINIMUM_WIDTH = 200
-
+FILENAME_PLACEHOLDER_TEXT = "data"
 EXPLORER_DIALOG_TEXT = "Select Directory"
 
 
@@ -29,7 +26,10 @@ class RecordingPage(Page):
 
     record_toggle: QPushButton
     explorer_button: QPushButton
-    path_textbox: QLineEdit
+    filename_textbox: QLineEdit
+
+    dir_path: str = ""
+    file_name: str = ""
 
     def __init__(self, context: AppContext) -> None:
         super().__init__(TITLE, context, ICON)
@@ -43,15 +43,14 @@ class RecordingPage(Page):
     def __init_file_section(self):
         hbox = QHBoxLayout()
 
-        self.explorer_button = CustomPushButton(EXPLORER_BUTTON_TEXT)
+        self.explorer_button = CustomPushButton(EXPLORER_DIALOG_TEXT)
         self.explorer_button.clicked.connect(self.on_explorer_button_click)
         hbox.addWidget(self.explorer_button)
 
-        self.path_textbox = QLineEdit()
-        self.path_textbox.setPlaceholderText(PATH_PLACEHOLDER_TEXT)
-        self.path_textbox.setMinimumWidth(PATH_MINIMUM_WIDTH)
-        self.path_textbox.textChanged.connect(self.on_path_textbox_text_changed)
-        hbox.addWidget(self.path_textbox)
+        self.filename_textbox = QLineEdit()
+        self.filename_textbox.setPlaceholderText(FILENAME_PLACEHOLDER_TEXT)
+        self.filename_textbox.textChanged.connect(self.on_path_textbox_text_changed)
+        hbox.addWidget(self.filename_textbox)
 
         self.page_vbox.addLayout(hbox)
 
@@ -67,27 +66,33 @@ class RecordingPage(Page):
 
         self.page_vbox.addLayout(hbox)
 
+    def _check_path(self):
+        # TODO: Potentially check for file overrwrite and stuff
+        valid = is_writeable_dir(self.dir_path) and self.file_name != ""
+        self.record_toggle.setEnabled(valid)
+
     def on_record_toggle_click(self):
         on = self.record_toggle.isChecked()
         recorder = self.recorder
-        recorder.start(self.path_textbox.text()) if on else recorder.stop()
+        path = Path(self.dir_path, self.file_name)
+        recorder.start(path) if on else recorder.stop()
         self.record_toggle.setText(
             RECORD_TOGGLE_ON_TEXT if on else RECORD_TOGGLE_OFF_TEXT
         )
-        self.path_textbox.setEnabled(not on)
+        self.filename_textbox.setEnabled(not on)
 
     def on_explorer_button_click(self):
-        directory = QFileDialog.getExistingDirectory(self, EXPLORER_DIALOG_TEXT)
-        self.path_textbox.setText(directory)
+        self.dir_path = QFileDialog.getExistingDirectory(self, EXPLORER_DIALOG_TEXT)
+        self._check_path()
 
     def on_path_textbox_text_changed(self):
-        valid = is_valid_writeable_path(self.path_textbox.text())
-        self.record_toggle.setEnabled(valid)
+        self.file_name = self.filename_textbox.text()
+        self._check_path()
 
 
-def is_valid_writeable_path(file_path: str):
+def is_writeable_dir(file_path: str):
     path = Path(file_path)
-    if not path.is_absolute() or path.is_dir():
+    if not path.is_absolute() or not path.is_dir():
         return False
     parent_dir = path.parent
     return (
