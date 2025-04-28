@@ -1,13 +1,11 @@
 from dataclasses import dataclass
+from dataclasses import fields
 
 
 class InvalidTimestampError(Exception):
     """Raised when the GazePoint timestamp is not a valid time."""
 
     pass
-
-
-EYE_CLOSED: str = "-"
 
 
 @dataclass
@@ -31,7 +29,6 @@ class GazePoint:
     def are_eyes_open(self):
         return not self.are_eyes_closed()
 
-    def __str__(self) -> str:
-        x_str = self.x if self.x is not None else EYE_CLOSED
-        y_str = self.y if self.y is not None else EYE_CLOSED
-        return f"{x_str};{y_str};{self.timestamp}"
+
+def list_fields():
+    return [f.name for f in fields(GazePoint)]
