@@ -23,7 +23,7 @@ class Recorder:
         if self.path is None:
             return
 
-        with open(self.path, "a", newline="") as f:
+        with self.path.open("a", newline="") as f:
             writer = csv.writer(f)
 
             if f.tell() == 0:
