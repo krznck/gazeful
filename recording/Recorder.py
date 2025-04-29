@@ -67,3 +67,7 @@ def coerce_csv(path: Path) -> Path:
     if path.suffix != EXTENSION:
         return path.with_suffix(EXTENSION)
     return path
+
+
+def file_already_saved(path: Path) -> bool:
+    return coerce_csv(path).exists()

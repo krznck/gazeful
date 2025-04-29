@@ -1,13 +1,15 @@
-import os
 from pathlib import Path
 
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLineEdit
+from PyQt6.QtWidgets import QMessageBox
 from PyQt6.QtWidgets import QPushButton
 
 from AppContext import AppContext
-from Recorder import Recorder
+from recording import validators as val
+from recording.Recorder import file_already_saved
+from recording.Recorder import Recorder
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.icons.icon_selector import IconsEnum
 from visuals.pages.Page import Page
@@ -29,7 +31,7 @@ class RecordingPage(Page):
     filename_textbox: QLineEdit
 
     dir_path: str = ""
-    file_name: str = ""
+    filename: str = ""
 
     def __init__(self, context: AppContext) -> None:
         super().__init__(TITLE, context, ICON)
@@ -67,14 +69,17 @@ class RecordingPage(Page):
         self.page_vbox.addLayout(hbox)
 
     def _check_path(self):
-        # TODO: Potentially check for file overrwrite and stuff
-        valid = is_writeable_dir(self.dir_path) and self.file_name != ""
-        self.record_toggle.setEnabled(valid)
+        ok = val.is_valid_dir(self.dir_path) and val.is_valid_filename(self.filename)
+        self.record_toggle.setEnabled(ok)
 
     def on_record_toggle_click(self):
         on = self.record_toggle.isChecked()
         recorder = self.recorder
-        path = Path(self.dir_path, self.file_name)
+        path = Path(self.dir_path, self.filename)
+        if on and file_already_saved(path) and not self._confirm_overwrite(path):
+            self.record_toggle.setChecked(False)
+            return
+
         recorder.start(path) if on else recorder.stop()
         self.record_toggle.setText(
             RECORD_TOGGLE_ON_TEXT if on else RECORD_TOGGLE_OFF_TEXT
@@ -86,15 +91,16 @@ class RecordingPage(Page):
         self._check_path()
 
     def on_path_textbox_text_changed(self):
-        self.file_name = self.filename_textbox.text()
+        self.filename = self.filename_textbox.text()
         self._check_path()
 
+    def _confirm_overwrite(self, path: Path) -> bool:
+        reply = QMessageBox.question(
+            self,
+            "File Exists",
+            f"The file '{path.name}' already exists. Do you want to append to it?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
 
-def is_writeable_dir(file_path: str):
-    path = Path(file_path)
-    if not path.is_absolute() or not path.is_dir():
-        return False
-    parent_dir = path.parent
-    return (
-        parent_dir.exists() and parent_dir.is_dir() and os.access(parent_dir, os.W_OK)
-    )
+        return reply == QMessageBox.StandardButton.Yes

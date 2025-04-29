@@ -3,7 +3,7 @@ import time
 import numpy as np
 import tobii_research as tr
 
-from Recorder import Recorder
+from recording.Recorder import Recorder
 from trackers.GazePoint import GazePoint
 from trackers.Tracker import Tracker
 from trackers.Tracker import TrackerNotConnectedError

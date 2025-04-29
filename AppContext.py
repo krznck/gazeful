@@ -3,7 +3,7 @@ from typing import NamedTuple
 from PyQt6.QtGui import QScreen
 
 import screens
-from Recorder import Recorder
+from recording.Recorder import Recorder
 from trackers.Tracker import Tracker
 from trackers.Tracker import TrackerNotConnectedError
 from trackers.tracker_selector import create_tracker

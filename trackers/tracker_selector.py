@@ -1,6 +1,6 @@
 from enum import Enum
 
-from Recorder import Recorder
+from recording.Recorder import Recorder
 from trackers.MouseTracker import MouseTracker
 from trackers.TobiiTracker import TobiiTracker
 from trackers.Tracker import Tracker

@@ -1,7 +1,7 @@
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtCore import QThread
 
-from Recorder import Recorder
+from recording.Recorder import Recorder
 from trackers.GazePoint import GazePoint
 from visuals.visualizer.GazeVisualizer import GazeVisualizer
 

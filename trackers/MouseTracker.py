@@ -8,7 +8,7 @@ from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QCursor
 
 import screens
-from Recorder import Recorder
+from recording.Recorder import Recorder
 from trackers.GazePoint import GazePoint
 from trackers.Tracker import Tracker
 from visuals.visualizer.GazeVisualizer import GazeVisualizer
