@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from dataclasses import fields
 
 
 class InvalidTimestampError(Exception):
@@ -17,7 +18,7 @@ class GazePoint:
     timestamp: float = 0.0
 
     def __post_init__(self):
-        if self.timestamp <= 0.0:
+        if self.timestamp < 0.0:
             raise InvalidTimestampError(
                 "Attempted to generate a gaze point with an invalid timestamp"
             )
@@ -27,3 +28,7 @@ class GazePoint:
 
     def are_eyes_open(self):
         return not self.are_eyes_closed()
+
+
+def list_fields():
+    return [f.name for f in fields(GazePoint)]

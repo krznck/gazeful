@@ -8,6 +8,7 @@ PATH = "assets/fluentui-system-icons/"
 class IconsEnum(Enum):
     HOME = "ic_fluent_home_24_regular.svg"
     CIRCLE = "ic_fluent_circle_24_regular.svg"
+    RECORD = "ic_fluent_record_24_regular.svg"
 
 
 def create_icon(choice: IconsEnum) -> QIcon:
