@@ -18,7 +18,14 @@ def ingest_csv(path: Path) -> list[GazePoint]:
     with path.open("r", newline="") as f:
         reader = csv.reader(f)
 
-        if next(reader) != list_fields():
+        valid_header = False
+
+        try:
+            valid_header = next(reader) == list_fields()
+        except StopIteration:  # can't go to next line -> obviously no header
+            valid_header = False
+
+        if not valid_header:
             raise InvalidFormatError(f"{path} does not start with a valid header.")
 
         for line_num, row in enumerate(reader, start=2):
