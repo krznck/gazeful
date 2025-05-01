@@ -7,8 +7,9 @@ from PyQt6.QtWidgets import QMessageBox
 from PyQt6.QtWidgets import QPushButton
 
 from AppContext import AppContext
-from ingestion.ingester import ingest_csv
-from ingestion.ingester import InvalidFormatError
+from processing.GazeStream import GazeStream
+from processing.ingester import ingest_csv
+from processing.ingester import InvalidFormatError
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.icons.icon_selector import IconsEnum
 from visuals.pages.Page import Page
@@ -51,8 +52,8 @@ class AnalysisPage(Page):
         if text != "":
             try:
                 # FIX: Obviously temporary, we need to do something with this
-                points = ingest_csv(Path(text))
-                print(points)
+                stream = GazeStream(ingest_csv(Path(text)))
+                print(stream.get_duration())
 
                 self.path_label.setText(text)
             except InvalidFormatError as e:
