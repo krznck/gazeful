@@ -10,6 +10,7 @@ class IconsEnum(Enum):
     CIRCLE = "ic_fluent_circle_24_regular.svg"
     RECORD = "ic_fluent_record_24_regular.svg"
     MICROSCOPE = "ic_fluent_microscope_24_regular.svg"
+    BOOK_INFO = "ic_fluent_book_information_24_regular.svg"
 
 
 def create_icon(choice: IconsEnum) -> QIcon:
