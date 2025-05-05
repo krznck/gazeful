@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
-from processing.algorithms import blinking
+from processing.algorithms.ClosureAnalyzer import ClosureAnalyzer
 from processing.GazeStream import GazeStream
 from processing.ingester import ingest_csv
 from processing.ingester import InvalidFormatError
@@ -108,10 +108,8 @@ class AnalysisPage(Page):
     def on_file_selected(self):
         assert self.context.main_data is not None  # should not be called in this case!
 
-        defs = self.context.defs
         data = self.context.main_data
+        closures = ClosureAnalyzer(self.context.main_data, self.context.defs)
         self.duration_label.setText(str(round(data.get_duration(), 2)) + " seconds")
-        self.blink_count_label.setText(str(len(blinking.extract_blinks(data, defs))))
-        self.microsleep_count_label.setText(
-            str(len(blinking.extract_microsleeps(data, defs)))
-        )
+        self.blink_count_label.setText(str(len(closures.extract_blinks())))
+        self.microsleep_count_label.setText(str(len(closures.extract_microsleeps())))
