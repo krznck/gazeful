@@ -4,6 +4,7 @@ from PyQt6.QtGui import QScreen
 
 import screens
 from processing.Definitions import Definitions
+from processing.GazeStream import GazeStream
 from recording.Recorder import Recorder
 from trackers.Tracker import Tracker
 from trackers.Tracker import TrackerNotConnectedError
@@ -22,6 +23,7 @@ class AppContext:
     recorder: Recorder = Recorder()
     screen: QScreen
     defs: Definitions = Definitions()
+    main_data: GazeStream | None = None
 
     def __init__(self) -> None:
         self.screen = screens.get_primary_screen()

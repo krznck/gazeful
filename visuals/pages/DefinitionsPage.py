@@ -39,12 +39,11 @@ class DefinitionsPage(Page):
         hbox = QHBoxLayout()
         hbox.addWidget(QLabel(BLINK_SECTION_SLIDER_LABEL))
 
-        # TODO: Consider these parameters more carefully, unsure of how sane they are
         self.blink_threshhold_slider = QSlider(Qt.Orientation.Horizontal)
         self.blink_threshhold_slider.setMinimum(0)
         self.blink_threshhold_slider.setMaximum(1000)
         self.blink_threshhold_slider.setTickInterval(10)
-        self.blink_threshhold_slider.setValue(int(self.defs.blink_treshhold_ms))
+        self.blink_threshhold_slider.setValue(int(self.defs.blink_threshhold_ms))
         self.blink_threshhold_slider.valueChanged.connect(
             self.on_blink_threshhold_slider_valueChanged
         )
@@ -61,6 +60,5 @@ class DefinitionsPage(Page):
 
     def on_blink_threshhold_slider_valueChanged(self) -> None:
         val = self.blink_threshhold_slider.value()
-        self.defs.blink_treshhold_ms = val
+        self.defs.blink_threshhold_ms = val
         self.blink_threshhold_label.setText(str(val))
-        print(self.defs.blink_treshhold_ms)
