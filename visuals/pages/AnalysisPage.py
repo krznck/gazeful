@@ -21,6 +21,7 @@ from visuals.pages.Page import Page
 TITLE = "Analysis"
 ICON = IconsEnum.MICROSCOPE
 
+REFRESH_LABEL = "Refresh"
 EXPLORER_DIALOG_TEXT = "Select Gaze CSV"
 EXPLORER_FILTER_STRING = "CSV Files (*.csv)"
 
@@ -32,6 +33,7 @@ CLOSURES_SECTION_MICROSLEEPS = "Microsleeps: "
 
 
 class AnalysisPage(Page):
+    refresh_buttton: QPushButton
     explorer_button: QPushButton
     path_label: QLabel
     duration_label: QLabel
@@ -49,6 +51,10 @@ class AnalysisPage(Page):
     def __init_selection_section(self) -> None:
         hbox = QHBoxLayout()
 
+        self.refresh_buttton = CustomPushButton(REFRESH_LABEL)
+        self.refresh_buttton.clicked.connect(self.on_file_selected)
+        self.refresh_buttton.setDisabled(True)
+        hbox.addWidget(self.refresh_buttton)
         self.explorer_button = CustomPushButton(EXPLORER_DIALOG_TEXT)
         self.explorer_button.clicked.connect(self.on_explorer_button_clicked)
         hbox.addWidget(self.explorer_button)
@@ -106,8 +112,10 @@ class AnalysisPage(Page):
                 QMessageBox.warning(self, "Import warning", str(e))
 
     def on_file_selected(self):
-        assert self.context.main_data is not None  # should not be called in this case!
+        if self.context.main_data is None:
+            return
 
+        self.refresh_buttton.setEnabled(True)
         data = self.context.main_data
         closures = ClosureAnalyzer(self.context.main_data, self.context.defs)
         self.duration_label.setText(str(round(data.get_duration(), 2)) + " seconds")
