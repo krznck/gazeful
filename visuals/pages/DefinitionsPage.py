@@ -1,4 +1,3 @@
-from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLabel
 from PyQt6.QtWidgets import QSlider
@@ -6,6 +5,8 @@ from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
 from processing.Definitions import Definitions
+from processing.Definitions import Ref
+from visuals.customized_widgets.BoundedTextbox import BoundedFloatTextbox
 from visuals.customized_widgets.Header import Header
 from visuals.icons.icon_selector import IconsEnum
 from visuals.pages.Page import Page
@@ -13,8 +14,12 @@ from visuals.pages.Page import Page
 TITLE = "Definitions"
 ICON = IconsEnum.BOOK_INFO
 
-BLINKS_SECTION_HEADER = "Blinks"
-BLINK_SECTION_SLIDER_LABEL = "Blink threshhold: "
+BLINKS_SECTION_HEADER = "Closures"
+BLINK_SECTION_TEXTBOX_LABEL = "Blink threshhold: "
+
+OCULOMOTOR_SECTION_HEADER = "Oculomotor behavior"
+FIXATION_MINIMUM_DURATION_LABEL = "Fixation minimum duration: "
+FIXATION_MAXIMUM_DISPERSION = "Fixation maximum dispersion (screen area): "
 
 
 class DefinitionsPage(Page):
@@ -30,35 +35,54 @@ class DefinitionsPage(Page):
     def add_content(self) -> None:
         super().add_content()
         self.__init_blinks_section()
+        self.__init_oculomotor_section()
 
     def __init_blinks_section(self) -> None:
-        pass
         vbox = QVBoxLayout()
         vbox.addWidget(Header(BLINKS_SECTION_HEADER))
 
-        hbox = QHBoxLayout()
-        hbox.addWidget(QLabel(BLINK_SECTION_SLIDER_LABEL))
-
-        self.blink_threshhold_slider = QSlider(Qt.Orientation.Horizontal)
-        self.blink_threshhold_slider.setMinimum(0)
-        self.blink_threshhold_slider.setMaximum(1000)
-        self.blink_threshhold_slider.setTickInterval(10)
-        self.blink_threshhold_slider.setValue(int(self.defs.blink_threshhold_ms))
-        self.blink_threshhold_slider.valueChanged.connect(
-            self.on_blink_threshhold_slider_valueChanged
+        textbox = BoundedFloatTextbox(0, 1000, self.defs.blink_threshhold_ms)
+        hbox = generate_definition_item(
+            BLINK_SECTION_TEXTBOX_LABEL,
+            textbox,
+            "ms",
         )
-        hbox.addWidget(self.blink_threshhold_slider)
-
-        self.blink_threshhold_label = QLabel(
-            f"{str(self.blink_threshhold_slider.value())} ms"
-        )
-        hbox.addWidget(self.blink_threshhold_label)
 
         vbox.addLayout(hbox)
 
         self.page_vbox.addLayout(vbox)
 
-    def on_blink_threshhold_slider_valueChanged(self) -> None:
-        val = self.blink_threshhold_slider.value()
-        self.defs.blink_threshhold_ms = val
-        self.blink_threshhold_label.setText(str(val))
+    def __init_oculomotor_section(self) -> None:
+        vbox = QVBoxLayout()
+        vbox.addWidget(Header(OCULOMOTOR_SECTION_HEADER))
+
+        textbox = BoundedFloatTextbox(0, 5000, self.defs.fixation_minimum_duration_ms)
+        hbox = generate_definition_item(
+            FIXATION_MINIMUM_DURATION_LABEL,
+            textbox,
+            "ms",
+        )
+        vbox.addLayout(hbox)
+
+        textbox = BoundedFloatTextbox(
+            0, 100, self.defs.fixation_maximum_dispersion_screen_area_percent
+        )
+        hbox = generate_definition_item(FIXATION_MAXIMUM_DISPERSION, textbox, "%")
+        vbox.addLayout(hbox)
+
+        self.page_vbox.addLayout(vbox)
+
+
+def generate_definition_item(
+    title: str, textbox: BoundedFloatTextbox, measurement: str
+) -> QHBoxLayout:
+    main_hbox = QHBoxLayout()
+    main_hbox.addWidget(QLabel(title))
+
+    value_hbox = QHBoxLayout()
+    value_hbox.addWidget(textbox)
+    type_label = QLabel(measurement)
+    value_hbox.addWidget(type_label)
+
+    main_hbox.addLayout(value_hbox)
+    return main_hbox

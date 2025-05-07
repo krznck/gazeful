@@ -49,7 +49,7 @@ class ClosureAnalyzer:
         return closures
 
     def __is_blink(self, segment: GazeStream) -> bool:
-        return segment.get_duration() * 1000 <= self.defs.blink_threshhold_ms
+        return segment.get_duration() * 1000 <= self.defs.blink_threshhold_ms.value
 
     def __is_microsleep(self, segment: GazeStream) -> bool:
-        return segment.get_duration() * 1000 >= self.defs.blink_threshhold_ms
+        return segment.get_duration() * 1000 >= self.defs.blink_threshhold_ms.value
