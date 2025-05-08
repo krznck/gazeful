@@ -1,5 +1,7 @@
+import statistics
 from dataclasses import dataclass
 from dataclasses import fields
+from os import stat
 
 from processing.algorithms.BaseAnalyzer import BaseAnalyzer
 from processing.GazeStream import GazeStream
@@ -45,6 +47,22 @@ class Extremes:
 
 class OculomotorAnalyzer(BaseAnalyzer):
     fixations: list[GazeStream] | None = None
+    _average: float | None = None
+    _median: float | None = None
+
+    def median_fixation_duration(self) -> float:
+        if self._median is None:
+            self.__calculate_statistics()
+
+        assert self._median is not None
+        return self._median
+
+    def average_fixation_duration(self) -> float:
+        if self._average is None:
+            self.__calculate_statistics()
+
+        assert self._average is not None
+        return self._average
 
     def extract_fixations(self) -> list[GazeStream]:
         fixations = []
@@ -53,7 +71,7 @@ class OculomotorAnalyzer(BaseAnalyzer):
         extremes = None
         for point in self.main_stream.points:
             if point.are_eyes_closed():
-                if not window.is_empty() and self.is_within_duration(window):
+                if not window.is_empty() and self.__is_within_duration(window):
                     fixations.append(window)
                 window = GazeStream()
                 extremes = None
@@ -66,8 +84,8 @@ class OculomotorAnalyzer(BaseAnalyzer):
 
             extremes.update(point)
 
-            if not self.is_within_dispersion(extremes.dispersion()):
-                if self.is_within_duration(window):
+            if not self.__is_within_dispersion(extremes.dispersion()):
+                if self.__is_within_duration(window):
                     fixations.append(window)
                     window = GazeStream()
                     extremes = None
@@ -75,15 +93,23 @@ class OculomotorAnalyzer(BaseAnalyzer):
                 removed = window.pop_first()
                 extremes.check_removal(removed, window)
 
-        if not window.is_empty() and self.is_within_duration(window):
+        if not window.is_empty() and self.__is_within_duration(window):
             fixations.append(window)
 
         return fixations
 
-    def is_within_duration(self, segment: GazeStream) -> bool:
+    def __is_within_duration(self, segment: GazeStream) -> bool:
         norm_duration = segment.get_duration() * 1000
         return norm_duration >= self.defs.fixation_minimum_duration_ms.value
 
-    def is_within_dispersion(self, current_disp: float) -> bool:
+    def __is_within_dispersion(self, current_disp: float) -> bool:
         allowed = self.defs.fixation_maximum_dispersion_screen_area_percent.value
         return current_disp <= allowed
+
+    def __calculate_statistics(self) -> None:
+        if self.fixations is None:
+            self.fixations = self.extract_fixations()
+
+        duration_ms = [fix.get_duration() * 1000 for fix in self.fixations]
+        self._average = statistics.mean(duration_ms)
+        self._median = statistics.median(duration_ms)

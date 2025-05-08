@@ -29,8 +29,13 @@ EXPLORER_FILTER_STRING = "CSV Files (*.csv)"
 DURATION_LABEL = "Session duration: "
 
 CLOSURES_SECTION_HEADER = "Closures"
-CLOSURES_SECTION_BLINKS = "Blinks: "
-CLOSURES_SECTION_MICROSLEEPS = "Microsleeps: "
+CLOSURES_SECTION_BLINKS = "Blink count: "
+CLOSURES_SECTION_MICROSLEEPS = "Microsleep count: "
+
+OCULOMOTOR_SECTION_HEADER = "Oculomotor behavior"
+OCULOMOTOR_SECTION_FIXATION_COUNT = "Fixation count: "
+OCULOMOTOR_SECTION_FIXATION_AVG = "Average fixation duration: "
+OCULOMOTOR_SECTION_FIXATION_MED = "Median fixation duration: "
 
 
 class AnalysisPage(Page):
@@ -47,6 +52,7 @@ class AnalysisPage(Page):
         self.__init_selection_section()
         self.__init_duration_section()
         self.__init_closures_section()
+        self.__init_oculomotor_section()
         return super().add_content()
 
     def __init_selection_section(self) -> None:
@@ -97,6 +103,35 @@ class AnalysisPage(Page):
 
         self.page_vbox.addLayout(vbox)
 
+    def __init_oculomotor_section(self) -> None:
+        vbox = QVBoxLayout()
+
+        header = Header(OCULOMOTOR_SECTION_HEADER)
+        vbox.addWidget(header)
+
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel(OCULOMOTOR_SECTION_FIXATION_COUNT))
+        self.fixation_count_label = QLabel()
+        self.fixation_count_label.setAlignment(Qt.AlignmentFlag.AlignRight)
+        hbox.addWidget(self.fixation_count_label)
+        vbox.addLayout(hbox)
+
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel(OCULOMOTOR_SECTION_FIXATION_AVG))
+        self.fixation_average_label = QLabel()
+        self.fixation_average_label.setAlignment(Qt.AlignmentFlag.AlignRight)
+        hbox.addWidget(self.fixation_average_label)
+        vbox.addLayout(hbox)
+
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel(OCULOMOTOR_SECTION_FIXATION_MED))
+        self.fixation_median_label = QLabel()
+        self.fixation_median_label.setAlignment(Qt.AlignmentFlag.AlignRight)
+        hbox.addWidget(self.fixation_median_label)
+        vbox.addLayout(hbox)
+
+        self.page_vbox.addLayout(vbox)
+
     def on_explorer_button_clicked(self):
         text, _ = QFileDialog.getOpenFileName(
             self, EXPLORER_DIALOG_TEXT, "", EXPLORER_FILTER_STRING
@@ -123,4 +158,10 @@ class AnalysisPage(Page):
         self.duration_label.setText(str(round(data.get_duration(), 2)) + " seconds")
         self.blink_count_label.setText(str(len(closures.extract_blinks())))
         self.microsleep_count_label.setText(str(len(closures.extract_microsleeps())))
-        print(len(oculomotor.extract_fixations()))
+        self.fixation_count_label.setText(str(len(oculomotor.extract_fixations())))
+        self.fixation_average_label.setText(
+            str(round(oculomotor.average_fixation_duration(), 2)) + " ms"
+        )
+        self.fixation_median_label.setText(
+            str(round(oculomotor.median_fixation_duration(), 2)) + " ms"
+        )
