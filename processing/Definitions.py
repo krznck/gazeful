@@ -17,6 +17,6 @@ class Definitions:
     For example, what counts as a fixation, blink, or saccade.
     NOTE: Uses Ref objects to enable data-binding."""
 
-    blink_threshhold_ms = Ref(100)
+    blink_threshhold_ms = Ref(400)
     fixation_minimum_duration_ms = Ref(200)
     fixation_maximum_dispersion_screen_area_percent = Ref(0.05)

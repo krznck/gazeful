@@ -1,15 +1,9 @@
-from processing.Definitions import Definitions
+from processing.algorithms.BaseAnalyzer import BaseAnalyzer
 from processing.GazeStream import GazeStream
 
 
-class ClosureAnalyzer:
-    main_stream: GazeStream
-    defs: Definitions
+class ClosureAnalyzer(BaseAnalyzer):
     closures: list[GazeStream] | None = None
-
-    def __init__(self, data: GazeStream, defs: Definitions) -> None:
-        self.main_stream = data
-        self.defs = defs
 
     def extract_blinks(self) -> list[GazeStream]:
         if self.closures is None:

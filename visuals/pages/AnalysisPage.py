@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
 from processing.algorithms.ClosureAnalyzer import ClosureAnalyzer
+from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.GazeStream import GazeStream
 from processing.ingester import ingest_csv
 from processing.ingester import InvalidFormatError
@@ -118,6 +119,8 @@ class AnalysisPage(Page):
         self.refresh_buttton.setEnabled(True)
         data = self.context.main_data
         closures = ClosureAnalyzer(self.context.main_data, self.context.defs)
+        oculomotor = OculomotorAnalyzer(self.context.main_data, self.context.defs)
         self.duration_label.setText(str(round(data.get_duration(), 2)) + " seconds")
         self.blink_count_label.setText(str(len(closures.extract_blinks())))
         self.microsleep_count_label.setText(str(len(closures.extract_microsleeps())))
+        print(len(oculomotor.extract_fixations()))

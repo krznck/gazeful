@@ -1,5 +1,10 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from dataclasses import fields
+
+# NOTE: __future__ allows us to annotate GazePoint in comparison logic,
+# before the class is fully constructed
 
 
 class InvalidTimestampError(Exception):
@@ -28,6 +33,28 @@ class GazePoint:
 
     def are_eyes_open(self):
         return not self.are_eyes_closed()
+
+    def compare_x(self, other: GazePoint) -> int:
+        if self.x is None and other.x is None:
+            return 0
+        if self.x is None:
+            return -1
+        if self.x is None:
+            return 1
+
+        assert self.x is not None and other.x is not None
+        return (self.x > other.x) - (self.x < other.x)
+
+    def compare_y(self, other: GazePoint) -> int:
+        if self.y is None and other.y is None:
+            return 0
+        if self.y is None:
+            return -1
+        if self.y is None:
+            return 1
+
+        assert self.y is not None and other.y is not None
+        return (self.y > other.y) - (self.y < other.y)
 
 
 def list_fields():
