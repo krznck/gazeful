@@ -1,7 +1,6 @@
 import statistics
 from dataclasses import dataclass
 from dataclasses import fields
-from os import stat
 
 from processing.algorithms.BaseAnalyzer import BaseAnalyzer
 from processing.GazeStream import GazeStream
