@@ -39,7 +39,7 @@ class GazePoint:
             return 0
         if self.x is None:
             return -1
-        if self.x is None:
+        if other.x is None:
             return 1
 
         assert self.x is not None and other.x is not None
@@ -50,7 +50,7 @@ class GazePoint:
             return 0
         if self.y is None:
             return -1
-        if self.y is None:
+        if other.y is None:
             return 1
 
         assert self.y is not None and other.y is not None
