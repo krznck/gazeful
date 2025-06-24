@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from trackers.GazePoint import GazePoint
 
 
@@ -12,6 +14,9 @@ class GazeStream:
         self.points = []
         if data is not None:
             self.points = data
+
+    def copy(self) -> GazeStream:
+        return GazeStream(self.points.copy())
 
     def add(self, point: GazePoint) -> None:
         if self.length() == 0:
@@ -42,3 +47,25 @@ class GazeStream:
 
     def length(self) -> int:
         return len(self.points)
+
+    def clear(self) -> None:
+        self.points.clear()
+
+    def extremes(self) -> tuple[float, float, float, float]:
+        xs = [p.x for p in self.points if p.x is not None]
+        ys = [p.y for p in self.points if p.y is not None]
+
+        if not xs or not ys:
+            raise ValueError("No valid points to compute extremes")
+
+        return max(xs), max(ys), min(xs), min(ys)
+
+    def dispersion(self) -> float:
+        max_x, max_y, min_x, min_y = self.extremes()
+        return (max_x - min_x) + (max_y - min_y)
+
+    def __str__(self) -> str:
+        builder = f"--- {self.get_duration()*1000}ms fixation ---"
+        for point in self.points:
+            builder += "\n" + str(point)
+        return builder
