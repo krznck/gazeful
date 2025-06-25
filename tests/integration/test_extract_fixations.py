@@ -2,6 +2,7 @@ from pathlib import Path
 
 from pytest import approx
 
+from debug import debug_time
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
 from processing.GazeStream import GazeStream
@@ -68,11 +69,13 @@ def test_dispersion_breakup():
 
 
 def test_one_fixation_sample():
+    print("\n-- One fixation --\n")
     defs = Definitions()
     defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
     defs.fixation_minimum_duration_ms.update(200)
 
-    stream = GazeStream(ingest_sample("one_fix"))
+    points = debug_time(lambda: ingest_sample("one_fix"))
+    stream = GazeStream(points)
     assert not stream.is_empty()
 
     analyzer = OculomotorAnalyzer(stream, defs)
@@ -82,11 +85,14 @@ def test_one_fixation_sample():
 
 # sample of a gaze session of reading an article from Ars Technica
 def test_ars_technica_sample():
+    print("\n-- Ars Technica --\n")
     defs = Definitions()
     defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
     defs.fixation_minimum_duration_ms.update(200)
 
-    stream = GazeStream(ingest_sample("ars_technica"))
+    points = debug_time(lambda: ingest_sample("ars_technica"))
+    stream = debug_time(lambda: GazeStream(points))
+    # stream = GazeStream(points)
     assert not stream.is_empty()
 
     analyzer = OculomotorAnalyzer(stream, defs)
@@ -98,11 +104,14 @@ def test_ars_technica_sample():
 
 # sample of a gaze session of playing Balatro
 def test_balatro_sample():
+    print("\n-- Balatro --\n")
     defs = Definitions()
     defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
     defs.fixation_minimum_duration_ms.update(200)
 
-    stream = GazeStream(ingest_sample("balatro"))
+    points = debug_time(lambda: ingest_sample("balatro"))
+    stream = debug_time(lambda: GazeStream(points))
+    # stream = GazeStream(points)
     assert not stream.is_empty()
 
     analyzer = OculomotorAnalyzer(stream, defs)

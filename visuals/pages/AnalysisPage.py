@@ -1,4 +1,5 @@
 from pathlib import Path
+from time import perf_counter
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFileDialog
@@ -26,7 +27,9 @@ REFRESH_LABEL = "Refresh"
 EXPLORER_DIALOG_TEXT = "Select Gaze CSV"
 EXPLORER_FILTER_STRING = "CSV Files (*.csv)"
 
+IMPORT_TIME_LABEL = "Import time: "
 DURATION_LABEL = "Session duration: "
+ANALYSIS_TIME_LABEL = "Analysis time: "
 
 CLOSURES_SECTION_HEADER = "Closures"
 CLOSURES_SECTION_BLINKS = "Blink count: "
@@ -43,6 +46,8 @@ class AnalysisPage(Page):
     explorer_button: QPushButton
     path_label: QLabel
     duration_label: QLabel
+    analysis_time_label: QLabel
+    import_time_label: QLabel
     blink_count_label: QLabel
 
     def __init__(self, context: AppContext) -> None:
@@ -50,7 +55,7 @@ class AnalysisPage(Page):
 
     def add_content(self) -> None:
         self.__init_selection_section()
-        self.__init_duration_section()
+        self.__init_timing_section()
         self.__init_closures_section()
         self.__init_oculomotor_section()
         return super().add_content()
@@ -71,15 +76,31 @@ class AnalysisPage(Page):
 
         self.page_vbox.addLayout(hbox)
 
-    def __init_duration_section(self) -> None:
+    def __init_timing_section(self) -> None:
         hbox = QHBoxLayout()
+        vbox = QVBoxLayout()
 
+        hbox.addWidget(QLabel(IMPORT_TIME_LABEL))
+        self.import_time_label = label = QLabel()
+        label.setAlignment(Qt.AlignmentFlag.AlignRight)
+        hbox.addWidget(label)
+        vbox.addLayout(hbox)
+
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel(ANALYSIS_TIME_LABEL))
+        self.analysis_time_label = label = QLabel()
+        label.setAlignment(Qt.AlignmentFlag.AlignRight)
+        hbox.addWidget(label)
+        vbox.addLayout(hbox)
+
+        hbox = QHBoxLayout()
         hbox.addWidget(QLabel(DURATION_LABEL))
         self.duration_label = label = QLabel()
         label.setAlignment(Qt.AlignmentFlag.AlignRight)
         hbox.addWidget(label)
+        vbox.addLayout(hbox)
 
-        self.page_vbox.addLayout(hbox)
+        self.page_vbox.addLayout(vbox)
 
     def __init_closures_section(self) -> None:
         vbox = QVBoxLayout()
@@ -139,11 +160,17 @@ class AnalysisPage(Page):
 
         if text != "":
             try:
+                start = perf_counter()
+
                 stream = GazeStream(ingest_csv(Path(text)))
                 self.context.main_data = stream
-                self.on_file_selected()
+                end = perf_counter()
+                time = end - start
+                self.import_time_label.setText(f"{time:.10f} seconds")
 
+                self.on_file_selected()
                 self.path_label.setText(text)
+
             except InvalidFormatError as e:
                 QMessageBox.warning(self, "Import warning", str(e))
 
@@ -151,10 +178,17 @@ class AnalysisPage(Page):
         if self.context.main_data is None:
             return
 
+        start = perf_counter()
+
         self.refresh_buttton.setEnabled(True)
         data = self.context.main_data
         closures = ClosureAnalyzer(self.context.main_data, self.context.defs)
         oculomotor = OculomotorAnalyzer(self.context.main_data, self.context.defs)
+
+        end = perf_counter()
+        time = end - start
+        self.analysis_time_label.setText(f"{time:.10f} seconds")
+
         self.duration_label.setText(str(round(data.get_duration(), 2)) + " seconds")
         self.blink_count_label.setText(str(len(closures.extract_blinks())))
         self.microsleep_count_label.setText(str(len(closures.extract_microsleeps())))
