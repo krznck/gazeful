@@ -1,19 +1,11 @@
-from pathlib import Path
-
 from pytest import approx
 
 from debug import debug_time
+from debug import ingest_sample
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
 from processing.GazeStream import GazeStream
-from processing.ingester import ingest_csv
 from trackers.GazePoint import GazePoint
-
-
-def ingest_sample(name: str) -> list[GazePoint]:
-    current_dir = Path(__file__).parent
-    csv_file = current_dir / "samples" / f"{name}.csv"
-    return ingest_csv(csv_file)
 
 
 def test_two_fixations():
