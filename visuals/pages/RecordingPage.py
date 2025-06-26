@@ -94,12 +94,11 @@ class RecordingPage(Page):
         self.filename = self.filename_textbox.text()
         self._check_path()
 
-    # TODO: Change to overwrite completely, rather than append
     def _confirm_overwrite(self, path: Path) -> bool:
         reply = QMessageBox.question(
             self,
             "File Exists",
-            f"The file '{path.name}' already exists. Do you want to append to it?",
+            f"The file '{path.name}' already exists. Do you want to overwrite to it?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             QMessageBox.StandardButton.No,
         )
