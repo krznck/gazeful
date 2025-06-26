@@ -47,14 +47,14 @@ def test_dispersion_breakup():
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 1
 
-    stream.add(GazePoint(0.2, 0.2, 1.3))
-    stream.add(GazePoint(0.2, 0.2, 1.5))  # <- should count new fix due to dispersion
+    stream.append(GazePoint(0.2, 0.2, 1.3))
+    stream.append(GazePoint(0.2, 0.2, 1.5))  # <- should count new fix due to dispersion
     analyzer = OculomotorAnalyzer(stream, defs)
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 2
 
     # too far from previous fixation, but didn't take up enough time -> should not count
-    stream.add(GazePoint(0.9, 0.9, 1.6))
+    stream.append(GazePoint(0.9, 0.9, 1.6))
     analyzer = OculomotorAnalyzer(stream, defs)
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 2

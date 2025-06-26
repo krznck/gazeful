@@ -31,13 +31,13 @@ class OculomotorAnalyzer(BaseAnalyzer):
             self._calculate_statistics()
 
         assert self.fixations is not None
-        return max(point.get_duration() for point in self.fixations)
+        return max(point.duration() for point in self.fixations)
 
     def _calculate_statistics(self) -> None:
         if self.fixations is None:
             self.fixations = self.extract_fixations()
 
-        duration_ms = [fix.get_duration() * 1000 for fix in self.fixations]
+        duration_ms = [fix.duration() * 1000 for fix in self.fixations]
         self._average = statistics.mean(duration_ms)
         self._median = statistics.median(duration_ms)
 
@@ -45,28 +45,28 @@ class OculomotorAnalyzer(BaseAnalyzer):
         fixations: list[GazeStream] = []
         window = GazeStream()
 
-        for candidate in self.main_stream.points:
+        for candidate in self.main_stream:
             # we discard right away on eyes being closed
             if candidate.are_eyes_closed():
                 self._save_if_valid(fixations, window)
                 continue
 
             future = window.copy()
-            future.add(candidate)
+            future.append(candidate)
 
             if self._is_within_dispersion(future):
                 # the fixation is growing -> accept
                 window = future
             elif self._save_if_valid(fixations, window):
                 # the candidate breaks the fixation, but it was valid before
-                window.add(candidate)
+                window.append(candidate)
             else:
                 # the candidate breaks the bounds, but it was too short
                 # so we slide until it is within bounds
                 while not self._is_within_dispersion(future):
-                    if future.length() <= 1:
+                    if len(future) <= 1:
                         break
-                    future.pop_first()
+                    future.pop(0)
                 window = future
 
         self._save_if_valid(fixations, window)
@@ -87,14 +87,14 @@ class OculomotorAnalyzer(BaseAnalyzer):
         )
 
     def _is_within_duration(self, segment: GazeStream):
-        if segment.length() < 2:
+        if len(segment) < 2:
             return False
 
-        norm = segment.get_duration() * 1000
+        norm = segment.duration() * 1000
         return norm >= self.defs.fixation_minimum_duration_ms.value
 
     def _is_within_dispersion(self, segment: GazeStream):
-        if segment.length() < 2:
+        if len(segment) < 2:
             return True
 
         allowed = self.defs.fixation_maximum_dispersion_screen_area_percent.value

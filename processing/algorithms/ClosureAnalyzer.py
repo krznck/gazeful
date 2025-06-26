@@ -30,9 +30,9 @@ class ClosureAnalyzer(BaseAnalyzer):
     def __extract_closures(self) -> list[GazeStream]:
         closures = []
         current = GazeStream()
-        for point in self.main_stream.points:
+        for point in self.main_stream:
             if point.are_eyes_closed():
-                current.add(point)
+                current.append(point)
             elif not current.is_empty():
                 closures.append(current)
                 current = GazeStream()
@@ -43,7 +43,7 @@ class ClosureAnalyzer(BaseAnalyzer):
         return closures
 
     def __is_blink(self, segment: GazeStream) -> bool:
-        return segment.get_duration() * 1000 <= self.defs.blink_threshhold_ms.value
+        return segment.duration() * 1000 <= self.defs.blink_threshhold_ms.value
 
     def __is_microsleep(self, segment: GazeStream) -> bool:
-        return segment.get_duration() * 1000 >= self.defs.blink_threshhold_ms.value
+        return segment.duration() * 1000 >= self.defs.blink_threshhold_ms.value

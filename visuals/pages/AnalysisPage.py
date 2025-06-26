@@ -189,7 +189,7 @@ class AnalysisPage(Page):
         time = end - start
         self.analysis_time_label.setText(f"{time:.10f} seconds")
 
-        self.duration_label.setText(str(round(data.get_duration(), 2)) + " seconds")
+        self.duration_label.setText(str(round(data.duration(), 2)) + " seconds")
         self.blink_count_label.setText(str(len(closures.extract_blinks())))
         self.microsleep_count_label.setText(str(len(closures.extract_microsleeps())))
         self.fixation_count_label.setText(str(len(oculomotor.extract_fixations())))
