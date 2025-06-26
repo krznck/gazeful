@@ -94,6 +94,7 @@ class RecordingPage(Page):
         self.filename = self.filename_textbox.text()
         self._check_path()
 
+    # TODO: Change to overwrite completely, rather than append
     def _confirm_overwrite(self, path: Path) -> bool:
         reply = QMessageBox.question(
             self,

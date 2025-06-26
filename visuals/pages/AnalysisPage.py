@@ -1,6 +1,7 @@
 from pathlib import Path
 from time import perf_counter
 
+import matplotlib.pyplot as plt
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QHBoxLayout
@@ -15,6 +16,9 @@ from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.GazeStream import GazeStream
 from processing.ingester import ingest_csv
 from processing.ingester import InvalidFormatError
+from visualizing.visualization_selector import create_visualizer
+from visualizing.visualization_selector import VisualizationsEnum
+from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.customized_widgets.Header import Header
 from visuals.icons.icon_selector import IconsEnum
@@ -40,6 +44,8 @@ OCULOMOTOR_SECTION_FIXATION_COUNT = "Fixation count: "
 OCULOMOTOR_SECTION_FIXATION_AVG = "Average fixation duration: "
 OCULOMOTOR_SECTION_FIXATION_MED = "Median fixation duration: "
 
+GENERATE_BUTTON_TEXT = "Generate visualization"
+
 
 class AnalysisPage(Page):
     refresh_buttton: QPushButton
@@ -49,6 +55,10 @@ class AnalysisPage(Page):
     analysis_time_label: QLabel
     import_time_label: QLabel
     blink_count_label: QLabel
+    visualizers_combo_box: CustomComboBox
+    generate_button: CustomPushButton
+
+    fixations: list[GazeStream] | None = None
 
     def __init__(self, context: AppContext) -> None:
         super().__init__(TITLE, context, ICON)
@@ -58,6 +68,7 @@ class AnalysisPage(Page):
         self.__init_timing_section()
         self.__init_closures_section()
         self.__init_oculomotor_section()
+        self.__init_visualization_section()
         return super().add_content()
 
     def __init_selection_section(self) -> None:
@@ -153,6 +164,22 @@ class AnalysisPage(Page):
 
         self.page_vbox.addLayout(vbox)
 
+    def __init_visualization_section(self) -> None:
+        hbox = QHBoxLayout()
+
+        self.visualizers_combo_box = cb = CustomComboBox()
+        for vis in VisualizationsEnum:
+            cb.addItem(vis.name.lower().capitalize())
+
+        hbox.addWidget(cb)
+
+        self.generate_button = gb = CustomPushButton(GENERATE_BUTTON_TEXT)
+        gb.setDisabled(True)
+        gb.clicked.connect(self.on_generate_visualization_clicked)
+        hbox.addWidget(gb)
+
+        self.page_vbox.addLayout(hbox)
+
     def on_explorer_button_clicked(self):
         text, _ = QFileDialog.getOpenFileName(
             self, EXPLORER_DIALOG_TEXT, "", EXPLORER_FILTER_STRING
@@ -180,7 +207,6 @@ class AnalysisPage(Page):
 
         start = perf_counter()
 
-        self.refresh_buttton.setEnabled(True)
         data = self.context.main_data
         closures = ClosureAnalyzer(self.context.main_data, self.context.defs)
         oculomotor = OculomotorAnalyzer(self.context.main_data, self.context.defs)
@@ -189,13 +215,28 @@ class AnalysisPage(Page):
         time = end - start
         self.analysis_time_label.setText(f"{time:.10f} seconds")
 
+        fixations = self.fixations = oculomotor.extract_fixations()
         self.duration_label.setText(str(round(data.duration(), 2)) + " seconds")
         self.blink_count_label.setText(str(len(closures.extract_blinks())))
         self.microsleep_count_label.setText(str(len(closures.extract_microsleeps())))
-        self.fixation_count_label.setText(str(len(oculomotor.extract_fixations())))
+        self.fixation_count_label.setText(str(len(fixations)))
         self.fixation_average_label.setText(
             str(round(oculomotor.average_fixation_duration(), 2)) + " ms"
         )
         self.fixation_median_label.setText(
             str(round(oculomotor.median_fixation_duration(), 2)) + " ms"
         )
+
+        self.refresh_buttton.setEnabled(True)
+        self.generate_button.setEnabled(True)
+
+    # TODO: Figure out why this causes
+    # "QCoreApplication::exec: The event loop is already running"
+    def on_generate_visualization_clicked(self):
+        if self.fixations is None:
+            return
+
+        name = self.visualizers_combo_box.currentText().upper()
+        strategy = create_visualizer(name)
+        strategy.visualize(self.fixations)
+        plt.show()

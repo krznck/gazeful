@@ -11,7 +11,7 @@ from visualizing.VisualizationStrategy import VisualizationStrategy
 
 class GazePlotStrategy(VisualizationStrategy):
     def __init__(self) -> None:
-        self._screen_w, self._screen_h = 1920, 1080  # TODO: make this adjustable
+        self._screen_w, self._screen_h = 1920, 1200  # TODO: make this adjustable
         super().__init__()
 
     def visualize(self, data: Sequence[GazeStream]) -> tuple[Figure, Axes]:
@@ -77,6 +77,7 @@ class GazePlotStrategy(VisualizationStrategy):
     def _set_axes(self, axes: Axes) -> None:
         axes.set_xlim(0, self._screen_w)
         axes.set_ylim(0, self._screen_h)
+        axes.invert_yaxis()
         axes.set_aspect("equal", adjustable="box")
         axes.set_xlabel("X")
         axes.set_ylabel("Y")
