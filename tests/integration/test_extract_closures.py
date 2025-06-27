@@ -53,8 +53,7 @@ def test_ars_technica_sample():
     defs = Definitions()
     defs.blink_threshhold_ms.update(400)
 
-    points = ingest_sample("ars_technica")
-    stream = GazeStream(points)
+    stream = ingest_sample("ars_technica")
     assert not stream.is_empty()
 
     analyzer = ClosureAnalyzer(stream, defs)
@@ -68,8 +67,7 @@ def test_balatro_sample():
     defs = Definitions()
     defs.blink_threshhold_ms.update(400)
 
-    points = ingest_sample("balatro")
-    stream = GazeStream(points)
+    stream = ingest_sample("balatro")
     assert not stream.is_empty()
 
     analyzer = ClosureAnalyzer(stream, defs)

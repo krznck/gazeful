@@ -1,6 +1,7 @@
 import csv
 from pathlib import Path
 
+from processing.GazeStream import GazeStream
 from recording.Recorder import EYE_CLOSED
 from trackers.GazePoint import GazePoint
 from trackers.GazePoint import list_fields
@@ -12,8 +13,8 @@ class InvalidFormatError(Exception):
     pass
 
 
-def ingest_csv(path: Path) -> list[GazePoint]:
-    points = []
+def ingest_csv(path: Path) -> GazeStream:
+    points = GazeStream()
 
     with path.open("r", newline="") as f:
         reader = csv.reader(f)

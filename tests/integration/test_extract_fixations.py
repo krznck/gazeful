@@ -61,34 +61,34 @@ def test_dispersion_breakup():
 
 
 def test_one_fixation_sample():
-    print("\n-- One fixation --\n")
     defs = Definitions()
     defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
     defs.fixation_minimum_duration_ms.update(200)
 
-    points = debug_time(lambda: ingest_sample("one_fix"))
-    stream = GazeStream(points)
+    stream = ingest_sample("one_fix")
     assert not stream.is_empty()
 
     analyzer = OculomotorAnalyzer(stream, defs)
-    fixations = analyzer.extract_fixations()
+    fixations = debug_time(
+        lambda: analyzer.extract_fixations(), "one fix sample fixation analysis"
+    )
+    # fixations = analyzer.extract_fixations()
     assert len(fixations) == 1
 
 
 # sample of a gaze session of reading an article from Ars Technica
 def test_ars_technica_sample():
-    print("\n-- Ars Technica --\n")
     defs = Definitions()
     defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
     defs.fixation_minimum_duration_ms.update(200)
 
-    points = debug_time(lambda: ingest_sample("ars_technica"))
-    stream = debug_time(lambda: GazeStream(points))
-    # stream = GazeStream(points)
+    stream = ingest_sample("ars_technica")
     assert not stream.is_empty()
 
     analyzer = OculomotorAnalyzer(stream, defs)
-    fixations = analyzer.extract_fixations()
+    fixations = debug_time(
+        lambda: analyzer.extract_fixations(), "ars technica sample fixation analysis"
+    )
     assert len(fixations) == 379
     assert round(analyzer.average_fixation_duration(), 2) == approx(359.67)
     assert analyzer.median_fixation_duration() == approx(313)
@@ -96,18 +96,17 @@ def test_ars_technica_sample():
 
 # sample of a gaze session of playing Balatro
 def test_balatro_sample():
-    print("\n-- Balatro --\n")
     defs = Definitions()
     defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
     defs.fixation_minimum_duration_ms.update(200)
 
-    points = debug_time(lambda: ingest_sample("balatro"))
-    stream = debug_time(lambda: GazeStream(points))
-    # stream = GazeStream(points)
+    stream = ingest_sample("balatro")
     assert not stream.is_empty()
 
     analyzer = OculomotorAnalyzer(stream, defs)
-    fixations = analyzer.extract_fixations()
+    fixations = debug_time(
+        lambda: analyzer.extract_fixations(), "balatro sample fixation analysis"
+    )
     assert len(fixations) == 1457
     assert round(analyzer.average_fixation_duration(), 2) == approx(288.95)
     assert analyzer.median_fixation_duration() == approx(250)

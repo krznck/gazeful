@@ -189,7 +189,7 @@ class AnalysisPage(Page):
             try:
                 start = perf_counter()
 
-                stream = GazeStream(ingest_csv(Path(text)))
+                stream = ingest_csv(Path(text))
                 self.context.main_data = stream
                 end = perf_counter()
                 time = end - start
@@ -211,10 +211,6 @@ class AnalysisPage(Page):
         closures = ClosureAnalyzer(self.context.main_data, self.context.defs)
         oculomotor = OculomotorAnalyzer(self.context.main_data, self.context.defs)
 
-        end = perf_counter()
-        time = end - start
-        self.analysis_time_label.setText(f"{time:.10f} seconds")
-
         fixations = self.fixations = oculomotor.extract_fixations()
         self.duration_label.setText(str(round(data.duration(), 2)) + " seconds")
         self.blink_count_label.setText(str(len(closures.extract_blinks())))
@@ -226,6 +222,9 @@ class AnalysisPage(Page):
         self.fixation_median_label.setText(
             str(round(oculomotor.median_fixation_duration(), 2)) + " ms"
         )
+        end = perf_counter()
+        time = end - start
+        self.analysis_time_label.setText(f"{time:.10f} seconds")
 
         self.refresh_buttton.setEnabled(True)
         self.generate_button.setEnabled(True)
