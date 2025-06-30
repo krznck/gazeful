@@ -39,9 +39,9 @@ def test_visualize_simple():
     # data points are scaled by screen dims
     expected = np.array(
         [
-            (0.5 * strategy._screen_w, 0.5 * strategy._screen_h),
-            (0.75 * strategy._screen_w, 0.65 * strategy._screen_h),
-            (0.91 * strategy._screen_w, 0.87 * strategy._screen_h),
+            (0.5 * strategy._screen_w, strategy._screen_h - 0.5 * strategy._screen_h),
+            (0.75 * strategy._screen_w, strategy._screen_h - 0.65 * strategy._screen_h),
+            (0.91 * strategy._screen_w, strategy._screen_h - 0.87 * strategy._screen_h),
         ]
     )
     assert np.allclose(offsets, expected)
@@ -65,7 +65,10 @@ def check_sample(sample: str):
     # check where the data points should be
     expected = np.array(
         [
-            (f.centroid()[0] * strategy._screen_w, f.centroid()[1] * strategy._screen_h)
+            (
+                f.centroid()[0] * strategy._screen_w,
+                strategy._screen_h - f.centroid()[1] * strategy._screen_h,
+            )
             for f in fixations
         ]
     )

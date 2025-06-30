@@ -50,7 +50,9 @@ class GazePlotStrategy(VisualizationStrategy):
         for i, point in enumerate(data):
             cords = point.centroid()
             xs.append(cords[0] * self._screen_w)
-            ys.append(cords[1] * self._screen_h)
+            # NOTE: In matplolib coordinates start from bottom-left instead of top-left,
+            # so we need to flip them
+            ys.append(self._screen_h - cords[1] * self._screen_h)
             sizes.append(point.duration() * 500)  # TODO: make adjustable as well
             labels.append(i + 1)
 
@@ -76,8 +78,8 @@ class GazePlotStrategy(VisualizationStrategy):
 
     def _set_axes(self, axes: Axes) -> None:
         axes.set_xlim(0, self._screen_w)
-        # NOTE: matplotlib's coordinate system starts at bottom-left, not top-left
-        axes.set_ylim(self._screen_h, 0)
+        axes.set_ylim(0, self._screen_h)
+        # axes.invert_yaxis()
         axes.set_aspect("equal", adjustable="box")
         axes.set_xlabel("X")
         axes.set_ylabel("Y")
