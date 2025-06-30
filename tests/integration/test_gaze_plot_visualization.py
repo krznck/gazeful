@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pytest
 
 from debug import ingest_sample
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
@@ -47,7 +48,7 @@ def test_visualize_simple():
 
 
 def check_sample(sample: str):
-    stream = GazeStream(ingest_sample(sample))
+    stream = ingest_sample(sample)
     strategy = GazePlotStrategy()
     analyzer = OculomotorAnalyzer(stream, Definitions())
     fixations = analyzer.extract_fixations()
@@ -83,3 +84,9 @@ def test_ars_technica_sample():
 
 def test_balatro_sample():
     check_sample("balatro")
+
+
+@pytest.mark.visual
+def test_ars_technica_visual():
+    test_ars_technica_sample()
+    plt.show()

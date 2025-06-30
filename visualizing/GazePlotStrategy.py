@@ -76,8 +76,8 @@ class GazePlotStrategy(VisualizationStrategy):
 
     def _set_axes(self, axes: Axes) -> None:
         axes.set_xlim(0, self._screen_w)
-        axes.set_ylim(0, self._screen_h)
-        axes.invert_yaxis()
+        # NOTE: matplotlib's coordinate system starts at bottom-left, not top-left
+        axes.set_ylim(self._screen_h, 0)
         axes.set_aspect("equal", adjustable="box")
         axes.set_xlabel("X")
         axes.set_ylabel("Y")
