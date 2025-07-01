@@ -258,8 +258,6 @@ class AnalysisPage(Page):
 
         self.editor.show()
 
-    # TODO: Figure out why this causes
-    # "QCoreApplication::exec: The event loop is already running"
     def on_generate_visualization_clicked(self):
         if self.fixations is None:
             return
@@ -269,4 +267,4 @@ class AnalysisPage(Page):
             _, self.strategy, self.editor = create_visualizer(name)
 
         self.strategy.visualize(self.fixations)
-        plt.show()
+        plt.show(block=False)
