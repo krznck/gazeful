@@ -18,11 +18,15 @@ from processing.ingester import ingest_csv
 from processing.ingester import InvalidFormatError
 from visualizing.visualization_selector import create_visualizer
 from visualizing.visualization_selector import VisualizationsEnum
+from visualizing.VisualizationStrategy import VisualizationStrategy
 from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.customized_widgets.Header import Header
 from visuals.icons.icon_selector import IconsEnum
 from visuals.pages.Page import Page
+from visuals.visualization_configurations.BaseConfigurationEditor import (
+    BaseConfigurationEditor,
+)
 
 TITLE = "Analysis"
 ICON = IconsEnum.MICROSCOPE
@@ -44,7 +48,7 @@ OCULOMOTOR_SECTION_FIXATION_COUNT = "Fixation count: "
 OCULOMOTOR_SECTION_FIXATION_AVG = "Average fixation duration: "
 OCULOMOTOR_SECTION_FIXATION_MED = "Median fixation duration: "
 
-GENERATE_BUTTON_TEXT = "Generate visualization"
+GENERATE_BUTTON_TEXT = "Generate"
 
 
 class AnalysisPage(Page):
@@ -57,8 +61,11 @@ class AnalysisPage(Page):
     blink_count_label: QLabel
     visualizers_combo_box: CustomComboBox
     generate_button: CustomPushButton
+    editor_button: CustomPushButton
 
     fixations: list[GazeStream] | None = None
+    editor: BaseConfigurationEditor | None = None
+    strategy: VisualizationStrategy | None = None
 
     def __init__(self, context: AppContext) -> None:
         super().__init__(TITLE, context, ICON)
@@ -165,20 +172,33 @@ class AnalysisPage(Page):
         self.page_vbox.addLayout(vbox)
 
     def __init_visualization_section(self) -> None:
+        vbox = QVBoxLayout()
+
+        header = Header("Visualization")
+        vbox.addWidget(header)
+
         hbox = QHBoxLayout()
 
         self.visualizers_combo_box = cb = CustomComboBox()
         for vis in VisualizationsEnum:
             cb.addItem(vis.name.lower().capitalize())
+        cb.setEnabled(False)
 
         hbox.addWidget(cb)
+
+        self.editor_button = eb = CustomPushButton("Configure")
+        eb.setEnabled(False)
+        eb.clicked.connect(self.on_editor_button_clicked)
+        hbox.addWidget(eb)
 
         self.generate_button = gb = CustomPushButton(GENERATE_BUTTON_TEXT)
         gb.setDisabled(True)
         gb.clicked.connect(self.on_generate_visualization_clicked)
         hbox.addWidget(gb)
 
-        self.page_vbox.addLayout(hbox)
+        vbox.addLayout(hbox)
+
+        self.page_vbox.addLayout(vbox)
 
     def on_explorer_button_clicked(self):
         text, _ = QFileDialog.getOpenFileName(
@@ -227,7 +247,16 @@ class AnalysisPage(Page):
         self.analysis_time_label.setText(f"{time:.10f} seconds")
 
         self.refresh_buttton.setEnabled(True)
+        self.visualizers_combo_box.setEnabled(True)
+        self.editor_button.setEnabled(True)
         self.generate_button.setEnabled(True)
+
+    def on_editor_button_clicked(self):
+        if not self.editor:
+            name = self.visualizers_combo_box.currentText().upper()
+            _, self.strategy, self.editor = create_visualizer(name)
+
+        self.editor.show()
 
     # TODO: Figure out why this causes
     # "QCoreApplication::exec: The event loop is already running"
@@ -235,7 +264,9 @@ class AnalysisPage(Page):
         if self.fixations is None:
             return
 
-        name = self.visualizers_combo_box.currentText().upper()
-        strategy = create_visualizer(name)
-        strategy.visualize(self.fixations)
+        if not self.strategy:
+            name = self.visualizers_combo_box.currentText().upper()
+            _, self.strategy, self.editor = create_visualizer(name)
+
+        self.strategy.visualize(self.fixations)
         plt.show()

@@ -6,7 +6,10 @@ from debug import ingest_sample
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
 from processing.GazeStream import GazeStream
+from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguration
 from visualizing.GazePlotStrategy import GazePlotStrategy
+
+confs = GazePlotConfiguration(1920, 1200)
 
 
 class DummyGaze(GazeStream):
@@ -27,7 +30,7 @@ def test_visualize_simple():
         DummyGaze(0.75, 0.65, 0.5),
         DummyGaze(0.91, 0.87, 1.5),
     ]
-    strategy = GazePlotStrategy()
+    strategy = GazePlotStrategy(confs)
     _, axes = strategy.visualize(data)
 
     cols = axes.collections
@@ -37,11 +40,13 @@ def test_visualize_simple():
     offsets = coll.get_offsets()
 
     # data points are scaled by screen dims
+    sw = confs.screen_width.value
+    sh = confs.screen_height.value
     expected = np.array(
         [
-            (0.5 * strategy._screen_w, strategy._screen_h - 0.5 * strategy._screen_h),
-            (0.75 * strategy._screen_w, strategy._screen_h - 0.65 * strategy._screen_h),
-            (0.91 * strategy._screen_w, strategy._screen_h - 0.87 * strategy._screen_h),
+            (0.5 * sw, sh - 0.5 * sh),
+            (0.75 * sw, sh - 0.65 * sh),
+            (0.91 * sw, sh - 0.87 * sh),
         ]
     )
     assert np.allclose(offsets, expected)
@@ -49,7 +54,7 @@ def test_visualize_simple():
 
 def check_sample(sample: str):
     stream = ingest_sample(sample)
-    strategy = GazePlotStrategy()
+    strategy = GazePlotStrategy(confs)
     analyzer = OculomotorAnalyzer(stream, Definitions())
     fixations = analyzer.extract_fixations()
     _, axes = strategy.visualize(fixations)
@@ -63,11 +68,13 @@ def check_sample(sample: str):
     assert len(fixations) == len(offsets)
 
     # check where the data points should be
+    sw = confs.screen_width.value
+    sh = confs.screen_height.value
     expected = np.array(
         [
             (
-                f.centroid()[0] * strategy._screen_w,
-                strategy._screen_h - f.centroid()[1] * strategy._screen_h,
+                f.centroid()[0] * sw,
+                sh - f.centroid()[1] * sh,
             )
             for f in fixations
         ]

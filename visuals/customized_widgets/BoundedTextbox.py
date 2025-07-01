@@ -2,7 +2,7 @@ from PyQt6 import QtGui
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QLineEdit
 
-from processing.Definitions import Ref
+from Ref import Ref
 
 
 class BoundedFloatTextbox(QLineEdit):
@@ -20,7 +20,15 @@ class BoundedFloatTextbox(QLineEdit):
             val = float(self.text())
             if not (self.min <= val <= self.max):
                 raise ValueError
-            self.binding.update(val)
+
+            # if the value doesn't have decimal values, no reason to force a float
+            if val == int(val):
+                final = int(val)
+            else:
+                final = val
+
+            self.binding.update(final)
+            self.setText(str(final))
         except ValueError:
             self.setText(str(self.fallback))
             self.binding.update(self.fallback)

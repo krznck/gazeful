@@ -5,7 +5,6 @@ from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
 from processing.Definitions import Definitions
-from processing.Definitions import Ref
 from visuals.customized_widgets.BoundedTextbox import BoundedFloatTextbox
 from visuals.customized_widgets.Header import Header
 from visuals.icons.icon_selector import IconsEnum

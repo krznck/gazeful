@@ -6,13 +6,13 @@ from matplotlib.figure import Figure
 from matplotlib.patches import Rectangle
 
 from processing.GazeStream import GazeStream
+from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguration
 from visualizing.VisualizationStrategy import VisualizationStrategy
 
 
-class GazePlotStrategy(VisualizationStrategy):
-    def __init__(self) -> None:
-        self._screen_w, self._screen_h = 1920, 1200  # TODO: make this adjustable
-        super().__init__()
+class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
+    def __init__(self, configuration: GazePlotConfiguration) -> None:
+        super().__init__(configuration)
 
     def visualize(self, data: Sequence[GazeStream]) -> tuple[Figure, Axes]:
         xs, ys, sizes, labels = self._unpack(data)
@@ -39,37 +39,46 @@ class GazePlotStrategy(VisualizationStrategy):
 
         self._set_axes(axes)
 
-        figure.patch.set_alpha(0.0)
-        axes.patch.set_alpha(0.0)
         return figure, axes
 
     def _unpack(
         self, data: Sequence[GazeStream]
     ) -> tuple[list[float], list[float], list[float], list[int]]:
+        sw = self.configuration.screen_width.value
+        sh = self.configuration.screen_height.value
         xs, ys, sizes, labels = [], [], [], []
         for i, point in enumerate(data):
             cords = point.centroid()
-            xs.append(cords[0] * self._screen_w)
+            xs.append(cords[0] * sw)
+
             # NOTE: In matplolib coordinates start from bottom-left instead of top-left,
             # so we need to flip them
-            ys.append(self._screen_h - cords[1] * self._screen_h)
-            sizes.append(point.duration() * 500)  # TODO: make adjustable as well
+            ys.append(sh - cords[1] * sh)
+
+            sizes.append(point.duration() * self.configuration.size_multiplier.value)
             labels.append(i + 1)
 
         return xs, ys, sizes, labels
 
     def _prepare_subplots(self) -> tuple[Figure, Axes]:
+        sw = self.configuration.screen_width.value
+        sh = self.configuration.screen_height.value
         dpi = 100  # TODO: make adjustable
-        fig_w, fig_h = self._screen_w / dpi, self._screen_h / dpi
+        fig_w, fig_h = (
+            sw / dpi,
+            sh / dpi,
+        )
         figure, axes = plt.subplots(figsize=(fig_w / 2, fig_h / 2), dpi=dpi)
         return figure, axes
 
     def _draw_screen_patch(self, axes: Axes) -> None:
+        sw = self.configuration.screen_width.value
+        sh = self.configuration.screen_height.value
         axes.add_patch(
             Rectangle(
                 (0, 0),
-                self._screen_w,
-                self._screen_h,
+                sw,
+                sh,
                 fill=False,
                 lw=2,
                 edgecolor="gray",
@@ -77,10 +86,11 @@ class GazePlotStrategy(VisualizationStrategy):
         )
 
     def _set_axes(self, axes: Axes) -> None:
-        axes.set_xlim(0, self._screen_w)
-        axes.set_ylim(0, self._screen_h)
-        # axes.invert_yaxis()
+        sw = self.configuration.screen_width.value
+        sh = self.configuration.screen_height.value
+        axes.set_xlim(0, sw)
+        axes.set_ylim(0, sh)
         axes.set_aspect("equal", adjustable="box")
         axes.set_xlabel("X")
         axes.set_ylabel("Y")
-        axes.set_title(f"Screen Map ({self._screen_w}x{self._screen_h})")
+        axes.set_title(f"Screen Map ({sw}x{sh})")
