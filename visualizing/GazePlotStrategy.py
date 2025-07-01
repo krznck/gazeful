@@ -15,55 +15,87 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
         super().__init__(configuration)
 
     def visualize(self, data: Sequence[GazeStream]) -> tuple[Figure, Axes]:
-        xs, ys, sizes, labels = self._unpack(data)
+        xs, ys, sizes = self._interpret(data)
 
         figure, axes = self._prepare_subplots()
 
         self._draw_screen_patch(axes)
 
-        axes.plot(xs, ys, linestyle="-", color="blue", linewidth=1, alpha=1)
+        self._draw_lines(axes, xs, ys)
 
-        axes.scatter(xs, ys, s=sizes, alpha=1, edgecolor="black", facecolor="blue")
-
-        for x, y, label in zip(xs, ys, labels):
-            axes.text(
-                x,
-                y,
-                str(label),
-                ha="center",
-                va="center",
-                fontsize=6,
-                weight="bold",
-                color="white",
-            )
+        for i, (x, y, size) in enumerate(zip(xs, ys, sizes)):
+            self._draw_point(axes, i, x, y, size)
+            self._draw_label(axes, i, x, y, size)
 
         self._set_axes(axes)
 
         return figure, axes
 
-    def _unpack(
+    def _draw_lines(self, ax: Axes, x_cords: list[float], y_cords: list[float]) -> None:
+        # NOTE: Lines not as important as points - looks better with a low zorder
+        ax.plot(
+            x_cords,
+            y_cords,
+            linestyle="-",
+            color="blue",
+            linewidth=1,
+            alpha=1,
+            zorder=0,
+        )
+
+    def _draw_point(self, axes: Axes, number: int, x: float, y: float, size: float):
+        axes.plot(
+            x,
+            y,
+            marker="o",
+            markersize=(size**0.5),
+            markerfacecolor="blue",
+            markeredgecolor="black",
+            linestyle="None",
+            zorder=number * 2,
+        )
+
+    def _draw_label(self, axes: Axes, number: int, x: float, y: float, size: float):
+        axes.text(
+            x,
+            y,
+            str(number + 1),
+            ha="center",
+            va="center",
+            fontsize=self._calculate_font_size(size),
+            weight="bold",
+            color="white",
+            zorder=number * 2 + 1,
+        )
+
+    def _calculate_font_size(self, size: float) -> float:
+        scaling_factor = 0.4
+        min_font_size = 4
+        font_size = scaling_factor * (size**0.5)
+        return max(font_size, min_font_size)
+
+    def _interpret(
         self, data: Sequence[GazeStream]
-    ) -> tuple[list[float], list[float], list[float], list[int]]:
+    ) -> tuple[list[float], list[float], list[float]]:
         sw = self.configuration.screen_width.value
         sh = self.configuration.screen_height.value
-        xs, ys, sizes, labels = [], [], [], []
-        for i, point in enumerate(data):
-            cords = point.centroid()
+        xs, ys, sizes = [], [], []
+        for stream in data:
+            cords = stream.centroid()
             xs.append(cords[0] * sw)
 
             # NOTE: In matplolib coordinates start from bottom-left instead of top-left,
             # so we need to flip them
             ys.append(sh - cords[1] * sh)
 
-            sizes.append(point.duration() * self.configuration.size_multiplier.value)
-            labels.append(i + 1)
+            sizes.append(stream.duration() * self.configuration.size_multiplier.value)
 
-        return xs, ys, sizes, labels
+        return xs, ys, sizes
 
     def _prepare_subplots(self) -> tuple[Figure, Axes]:
         sw = self.configuration.screen_width.value
         sh = self.configuration.screen_height.value
-        dpi = 100  # TODO: make adjustable
+        dpi = 100
         fig_w, fig_h = (
             sw / dpi,
             sh / dpi,
@@ -93,4 +125,4 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
         axes.set_aspect("equal", adjustable="box")
         axes.set_xlabel("X")
         axes.set_ylabel("Y")
-        axes.set_title(f"Screen Map ({sw}x{sh})")
+        axes.set_title(f"Gaze Sequence Map ({sw}x{sh})")

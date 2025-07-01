@@ -1,8 +1,8 @@
 from PyQt6.QtWidgets import QHBoxLayout
+from PyQt6.QtWidgets import QLabel
 
 from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguration
 from visuals.customized_widgets.BoundedTextbox import BoundedFloatTextbox
-from visuals.customized_widgets.Header import Header
 from visuals.visualization_configurations.BaseConfigurationEditor import (
     BaseConfigurationEditor,
 )
@@ -21,7 +21,7 @@ class GazePlotConfigurationEditor(BaseConfigurationEditor):
     def _init_size_mulitplier_section(self) -> None:
         hbox = QHBoxLayout()
 
-        hbox.addWidget(Header("Point size multiplier"))
+        hbox.addWidget(QLabel("Point size multiplier"))
         hbox.addWidget(
             BoundedFloatTextbox(10, 10000, binding=self.configuration.size_multiplier)
         )
