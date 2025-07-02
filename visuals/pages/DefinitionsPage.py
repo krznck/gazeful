@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLabel
-from PyQt6.QtWidgets import QSlider
 from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
@@ -24,7 +23,6 @@ FIXATION_MAXIMUM_DISPERSION = "Fixation maximum dispersion (screen area): "
 class DefinitionsPage(Page):
     defs: Definitions
 
-    blink_threshhold_slider: QSlider
     blink_threshhold_label: QLabel
 
     def __init__(self, context: AppContext) -> None:

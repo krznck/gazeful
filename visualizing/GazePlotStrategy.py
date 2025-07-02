@@ -74,7 +74,7 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
             linestyle="-",
             color="blue",
             linewidth=1,
-            alpha=1,
+            alpha=self.configuration.opaqueness.value,
             zorder=0,
         )
 
@@ -88,6 +88,7 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
             markeredgecolor="black",
             linestyle="None",
             zorder=number * 2,
+            alpha=self.configuration.opaqueness.value,
         )
 
     def _draw_label(self, axes: Axes, number: int, x: float, y: float, size: float):
@@ -101,6 +102,7 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
             weight="bold",
             color="white",
             zorder=number * 2 + 1,
+            alpha=self.configuration.opaqueness.value,
         )
 
     def _calculate_font_size(self, size: float) -> float:

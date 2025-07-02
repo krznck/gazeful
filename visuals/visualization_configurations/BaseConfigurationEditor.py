@@ -6,6 +6,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLabel
+from PyQt6.QtWidgets import QSlider
 from PyQt6.QtWidgets import QVBoxLayout
 from PyQt6.QtWidgets import QWidget
 
@@ -21,11 +22,12 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
 
     configuration: Configuration
     window_vbox: QVBoxLayout
+    opaqueness_slider: QSlider
 
     def __init__(self, configuration: Configuration) -> None:
         self.configuration = configuration
         super().__init__()
-        self.setWindowTitle("Visualization configuration")
+        self.setWindowTitle("Visualization configuration:")
         self.window_vbox = QVBoxLayout()
         self.add_content()
         self.window_vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
@@ -34,10 +36,11 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
     def add_content(self) -> None:
         self._init_screen_dimensions_section()
         self._init_image_section()
+        self._init_opaqueness_section()
 
     def _init_screen_dimensions_section(self):
         hbox = QHBoxLayout()
-        hbox.addWidget(QLabel("Screen dimensions"))
+        hbox.addWidget(QLabel("Screen dimensions:"))
 
         inner_hbox = QHBoxLayout()
         # NOTE: 8K UHD resolution as max
@@ -53,7 +56,7 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
 
     def _init_image_section(self):
         hbox = QHBoxLayout()
-        hbox.addWidget(QLabel("Background image"))
+        hbox.addWidget(QLabel("Background image:"))
 
         inner_hbox = QHBoxLayout()
         self.image_path_label = label = QLabel("no path selected")
@@ -65,6 +68,27 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
         hbox.addLayout(inner_hbox)
         self.window_vbox.addLayout(hbox)
 
+    def _init_opaqueness_section(self):
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel("Opaqueness:"))
+
+        inner_hbox = QHBoxLayout()
+        self.opaqueness_slider = slider = QSlider(Qt.Orientation.Horizontal)
+        slider.setMinimum(0)
+        slider.setMaximum(100)
+        slider.setTickInterval(10)
+        slider.setSingleStep(10)
+        slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+        slider.setValue(int(self.configuration.opaqueness.value * 100))
+        slider.valueChanged.connect(self.on_opaqueness_slider_value_changed)
+        self.opaqueness_label = label = QLabel(str(self.configuration.opaqueness.value))
+        inner_hbox.addWidget(label)
+        inner_hbox.addWidget(slider)
+
+        hbox.addLayout(inner_hbox)
+
+        self.window_vbox.addLayout(hbox)
+
     def on_image_selection_button_click(self):
         path, _ = QFileDialog.getOpenFileName(
             self,
@@ -73,3 +97,7 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
         )
         self.configuration.background_image.update(Path(path))
         self.image_path_label.setText(path)
+
+    def on_opaqueness_slider_value_changed(self):
+        self.configuration.opaqueness.update(self.opaqueness_slider.value() / 100)
+        self.opaqueness_label.setText(str(self.configuration.opaqueness.value))

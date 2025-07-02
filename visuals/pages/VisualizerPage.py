@@ -54,12 +54,14 @@ class VisualizerPage(Page):
         label = QLabel(OPACITY_LABEL_TEXT)
         hbox.addWidget(label)
 
-        self.slider = QSlider(Qt.Orientation.Horizontal)
-        self.slider.setMinimum(0)
-        self.slider.setMaximum(255)
-        self.slider.setValue(OPACITY)
-        self.slider.setTickInterval(15)
-        self.slider.valueChanged.connect(self.on_opacity_slider_value_changed)
+        self.slider = slider = QSlider(Qt.Orientation.Horizontal)
+        slider.setMinimum(0)
+        slider.setMaximum(255)
+        slider.setValue(OPACITY)
+        slider.setTickInterval(15)
+        slider.setSingleStep(15)
+        slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+        slider.valueChanged.connect(self.on_opacity_slider_value_changed)
 
         hbox.addWidget(self.slider)
 
