@@ -42,14 +42,7 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
         axes.imshow(image, extent=(0, sw, 0, sh))
 
     def _prepare_subplots(self) -> tuple[Figure, Axes]:
-        sw = self.configuration.screen_width.value
-        sh = self.configuration.screen_height.value
-        dpi = 100
-        fig_w, fig_h = (
-            sw / dpi,
-            sh / dpi,
-        )
-        figure, axes = plt.subplots(figsize=(fig_w / 2, fig_h / 2), dpi=dpi)
+        figure, axes = plt.subplots(figsize=(10, 8), dpi=150)
         return figure, axes
 
     def _draw_screen_patch(self, axes: Axes) -> None:

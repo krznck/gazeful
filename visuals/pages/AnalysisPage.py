@@ -1,8 +1,11 @@
+import os
 from pathlib import Path
 from time import perf_counter
 
 import matplotlib.pyplot as plt
 from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QUrl
+from PyQt6.QtGui import QDesktopServices
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLabel
@@ -266,5 +269,18 @@ class AnalysisPage(Page):
             name = self.visualizers_combo_box.currentText().upper()
             _, self.strategy, self.editor = create_visualizer(name)
 
-        self.strategy.visualize(self.fixations)
-        plt.show(block=False)
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save Figure As...",
+            filter=(
+                "PNG Image (*.png);;"
+                "JPEG Image (*jpg);;"
+                "SVG Vector Image (*svg);;"
+                "PDF Documetn (*pdf)"
+            ),
+        )
+
+        if file_path:
+            self.strategy.visualize(self.fixations)
+            plt.savefig(file_path, dpi=1000, bbox_inches="tight")
+            QDesktopServices.openUrl(QUrl.fromLocalFile(file_path))

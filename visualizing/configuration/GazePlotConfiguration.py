@@ -9,7 +9,7 @@ class GazePlotConfiguration(BaseConfiguration):
         self,
         screen_width: int = 1920,
         screen_height: int = 1080,
-        size_multiplier: int = 500,
+        size_multiplier: int = 300,
     ) -> None:
         self.size_multiplier = Ref(size_multiplier)
         super().__init__(screen_width, screen_height)
