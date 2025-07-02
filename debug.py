@@ -19,3 +19,11 @@ def ingest_sample(name: str) -> GazeStream:
     current_dir = Path(__file__).parent
     csv_file = current_dir / "tests" / "integration" / "samples" / f"{name}.csv"
     return ingest_csv(csv_file)
+
+
+def get_sample_image(name: str) -> Path:
+    current_dir = Path(__file__).parent
+    image_file = (
+        current_dir / "tests" / "integration" / "samples" / "images" / f"{name}.png"
+    )
+    return image_file

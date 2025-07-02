@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pytest
 
 from debug import debug_time
+from debug import get_sample_image
 from debug import ingest_sample
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
@@ -49,5 +49,6 @@ def test_balatro_sample():
 
 @pytest.mark.visual
 def test_ars_technica_visual():
+    confs.background_image.update(get_sample_image("ars_technica"))
     test_ars_technica_sample()
     plt.show()

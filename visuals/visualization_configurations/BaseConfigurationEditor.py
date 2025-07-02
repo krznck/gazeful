@@ -1,7 +1,9 @@
+from pathlib import Path
 from typing import Generic
 from typing import TypeVar
 
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLabel
 from PyQt6.QtWidgets import QVBoxLayout
@@ -9,12 +11,14 @@ from PyQt6.QtWidgets import QWidget
 
 from visualizing.configuration.BaseConfiguration import BaseConfiguration
 from visuals.customized_widgets.BoundedTextbox import BoundedFloatTextbox
-from visuals.customized_widgets.Header import Header
+from visuals.customized_widgets.CustomPushButton import CustomPushButton
 
 Configuration = TypeVar("Configuration", bound=BaseConfiguration)
 
 
 class BaseConfigurationEditor(QWidget, Generic[Configuration]):
+    image_path_label: QLabel
+
     configuration: Configuration
     window_vbox: QVBoxLayout
 
@@ -29,6 +33,7 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
 
     def add_content(self) -> None:
         self._init_screen_dimensions_section()
+        self._init_image_section()
 
     def _init_screen_dimensions_section(self):
         hbox = QHBoxLayout()
@@ -45,3 +50,26 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
 
         hbox.addLayout(inner_hbox)
         self.window_vbox.addLayout(hbox)
+
+    def _init_image_section(self):
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel("Background image"))
+
+        inner_hbox = QHBoxLayout()
+        self.image_path_label = label = QLabel("no path selected")
+        inner_hbox.addWidget(label)
+        button = CustomPushButton("Select image")
+        button.clicked.connect(self.on_image_selection_button_click)
+        inner_hbox.addWidget(button)
+
+        hbox.addLayout(inner_hbox)
+        self.window_vbox.addLayout(hbox)
+
+    def on_image_selection_button_click(self):
+        path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Select image",
+            filter="Images (*.png *.jpg *.jpeg *.bmp *.webp)",
+        )
+        self.configuration.background_image.update(Path(path))
+        self.image_path_label.setText(path)
