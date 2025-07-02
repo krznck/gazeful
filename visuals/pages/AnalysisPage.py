@@ -257,7 +257,7 @@ class AnalysisPage(Page):
     def on_editor_button_clicked(self):
         if not self.editor:
             name = self.visualizers_combo_box.currentText().upper()
-            _, self.strategy, self.editor = create_visualizer(name)
+            self.configuration, self.strategy, self.editor = create_visualizer(name)
 
         self.editor.show()
 
@@ -267,7 +267,7 @@ class AnalysisPage(Page):
 
         if not self.strategy:
             name = self.visualizers_combo_box.currentText().upper()
-            _, self.strategy, self.editor = create_visualizer(name)
+            self.configuration, self.strategy, self.editor = create_visualizer(name)
 
         file_path, _ = QFileDialog.getSaveFileName(
             self,
@@ -282,5 +282,7 @@ class AnalysisPage(Page):
 
         if file_path:
             self.strategy.visualize(self.fixations)
-            plt.savefig(file_path, dpi=1000, bbox_inches="tight")
+            plt.savefig(
+                file_path, dpi=self.configuration.dpi.value, bbox_inches="tight"
+            )
             QDesktopServices.openUrl(QUrl.fromLocalFile(file_path))

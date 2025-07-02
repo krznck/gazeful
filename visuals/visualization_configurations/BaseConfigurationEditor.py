@@ -11,7 +11,9 @@ from PyQt6.QtWidgets import QVBoxLayout
 from PyQt6.QtWidgets import QWidget
 
 from visualizing.configuration.BaseConfiguration import BaseConfiguration
+from visualizing.configuration.BaseConfiguration import DpiQualities
 from visuals.customized_widgets.BoundedTextbox import BoundedFloatTextbox
+from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 
 Configuration = TypeVar("Configuration", bound=BaseConfiguration)
@@ -37,6 +39,7 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
         self._init_screen_dimensions_section()
         self._init_image_section()
         self._init_opaqueness_section()
+        self._init_quality_section()
 
     def _init_screen_dimensions_section(self):
         hbox = QHBoxLayout()
@@ -87,6 +90,29 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
 
         hbox.addLayout(inner_hbox)
 
+        self.window_vbox.addLayout(hbox)
+
+    def _init_quality_section(self):
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel("Quality:"))
+        qcb = CustomComboBox()
+        qcb.addItem(
+            f"{DpiQualities.LOW.value} DPI - Fast, Low Quality", DpiQualities.LOW.value
+        )
+        qcb.addItem(
+            f"{DpiQualities.MEDIUM.value} DPI - Medium speed, Medium Quality",
+            DpiQualities.MEDIUM.value,
+        )
+        qcb.addItem(
+            f"{DpiQualities.HIGH.value} DPI - Slow, High Quality",
+            DpiQualities.HIGH.value,
+        )
+        qcb.setCurrentIndex(1)
+        qcb.currentIndexChanged.connect(
+            lambda: self.configuration.dpi.update(qcb.currentData())
+        )
+
+        hbox.addWidget(qcb)
         self.window_vbox.addLayout(hbox)
 
     def on_image_selection_button_click(self):
