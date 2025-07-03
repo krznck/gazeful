@@ -4,8 +4,8 @@ from PyQt6.QtWidgets import QVBoxLayout
 from PyQt6.QtWidgets import QWidget
 
 from AppContext import AppContext
-from visuals.icons.icon_selector import create_icon
-from visuals.icons.icon_selector import IconsEnum
+from visuals.assets.icon_selector import create_icon
+from visuals.assets.icon_selector import IconsEnum
 
 
 LAYOUT_ALLIGNMENT: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignTop

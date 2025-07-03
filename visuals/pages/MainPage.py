@@ -6,9 +6,9 @@ from PyQt6.QtWidgets import QPushButton
 import screens
 from AppContext import AppContext
 from trackers.tracker_selector import TrackersEnum
+from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
-from visuals.icons.icon_selector import IconsEnum
 from visuals.pages.Page import Page
 
 TITLE = "Home"

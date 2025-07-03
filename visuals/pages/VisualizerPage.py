@@ -5,8 +5,8 @@ from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtWidgets import QSlider
 
 from AppContext import AppContext
+from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
-from visuals.icons.icon_selector import IconsEnum
 from visuals.pages.Page import Page
 from visuals.visualizer.constants import OPACITY
 from visuals.visualizer.GazeVisualizer import GazeVisualizer

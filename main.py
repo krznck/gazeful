@@ -8,11 +8,10 @@ from visuals.MainWindow import MainWindow
 
 def main():
     app = QApplication([])
-
     context = AppContext()
     window = MainWindow(context)
-    window.show()
 
+    window.show()
     sys.exit(app.exec())
 
 

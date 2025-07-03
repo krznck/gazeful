@@ -22,10 +22,10 @@ from processing.ingester import InvalidFormatError
 from visualizing.visualization_selector import create_visualizer
 from visualizing.visualization_selector import VisualizationsEnum
 from visualizing.VisualizationStrategy import VisualizationStrategy
+from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.customized_widgets.Header import Header
-from visuals.icons.icon_selector import IconsEnum
 from visuals.pages.Page import Page
 from visuals.visualization_configurations.BaseConfigurationEditor import (
     BaseConfigurationEditor,

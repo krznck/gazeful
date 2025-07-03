@@ -4,9 +4,9 @@ from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
 from processing.Definitions import Definitions
+from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.BoundedTextbox import BoundedFloatTextbox
 from visuals.customized_widgets.Header import Header
-from visuals.icons.icon_selector import IconsEnum
 from visuals.pages.Page import Page
 
 TITLE = "Definitions"
