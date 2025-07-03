@@ -2,7 +2,7 @@ from pathlib import Path
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtCore import QTimer
-from PyQt6.QtMultimedia import QSoundEffect
+from PyQt6.QtWidgets import QCheckBox
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLabel
@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import QLineEdit
 from PyQt6.QtWidgets import QMessageBox
 from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtWidgets import QSlider
+from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
 from recording import validators as val
@@ -39,17 +40,21 @@ class RecordingPage(Page):
     dir_path: str = ""
     filename: str = ""
     delay: int
-    record_sound: QSoundEffect
+    endless: bool
+    duration: int
 
     def __init__(self, context: AppContext) -> None:
+        self.delay = 0
+        self.endless = True
+        self.duration = 3
         super().__init__(TITLE, context, ICON)
         self.recorder = self.context.recorder
-        self.delay = 0
 
     def add_content(self) -> None:
         self._init_file_section()
         self._init_enable_section()
         self._init_delay_section()
+        self._init_duration_section()
         return super().add_content()
 
     def _init_file_section(self):
@@ -98,6 +103,57 @@ class RecordingPage(Page):
 
         self.page_vbox.addLayout(hbox)
 
+    def _init_duration_section(self):
+        vbox = QVBoxLayout()
+
+        checkbox = QCheckBox("Limit recording duration")
+        checkbox.setChecked(False)
+
+        vbox.addWidget(checkbox)
+
+        hbox = QHBoxLayout()
+        label = QLabel("Recording duration")
+        label.setEnabled(False)
+        hbox.addWidget(label)
+        slider = QSlider(Qt.Orientation.Horizontal)
+        slider.setMinimum(3)
+        slider.setMaximum(120)
+        slider.setEnabled(False)
+        slider.setValue(self.duration)
+        descriptor = QLabel(f"{slider.value()} s")
+        descriptor.setEnabled(False)
+        slider.valueChanged.connect(
+            lambda: self.on_duration_slider_value_changed(slider, descriptor)
+        )
+        hbox.addWidget(descriptor)
+        hbox.addWidget(slider)
+
+        vbox.addLayout(hbox)
+
+        checkbox.clicked.connect(
+            lambda: self.on_duration_checkbox_state_changed(
+                checkbox, slider, [label, descriptor]
+            )
+        )
+
+        self.page_vbox.addLayout(vbox)
+
+    def on_duration_checkbox_state_changed(
+        self, checkbox: QCheckBox, slider: QSlider, labels: list[QLabel]
+    ):
+        checked = checkbox.isChecked()
+        checkbox.setChecked(checked)
+        slider.setEnabled(checked)
+        self.endless = not checked
+        for label in labels:
+            label.setEnabled(checked)
+
+    def on_duration_slider_value_changed(self, slider: QSlider, descriptor: QLabel):
+        val = slider.value()
+        descriptor.setText(f"{val} s")
+        self.duration = val
+        pass
+
     def on_recording_delay_slider_value_changed(self):
         label = self.recording_delay_value_label
         slider = self.recording_delay_slider
@@ -122,14 +178,14 @@ class RecordingPage(Page):
             if delay > 0:
 
                 def play():
-                    recorder.start(path)
-                    AudioEnum.PIP.value.play()
                     self.record_toggle.setEnabled(True)
+                    self._begin_recording(path)
+                    AudioEnum.PIP.value.play()
 
                 self.record_toggle.setEnabled(False)
                 QTimer.singleShot(delay, lambda: play())
             else:
-                recorder.start(path)
+                self._begin_recording(path)
         else:
             recorder.stop()
 
@@ -157,3 +213,22 @@ class RecordingPage(Page):
         )
 
         return reply == QMessageBox.StandardButton.Yes
+
+    def _begin_recording(self, path: Path):
+        recorder = self.recorder
+        if self.endless:
+            recorder.start(path)
+            return
+
+        rt = self.record_toggle
+
+        def stop():
+            recorder.stop()
+            AudioEnum.PIP.value.play()
+            rt.setEnabled(True)
+            rt.setText(RECORD_TOGGLE_OFF_TEXT)
+            rt.setChecked(False)
+
+        rt.setEnabled(False)
+        recorder.start(path)
+        QTimer.singleShot(self.duration * 1000, lambda: stop())
