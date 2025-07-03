@@ -16,6 +16,7 @@ from AppContext import AppContext
 from recording import validators as val
 from recording.Recorder import file_already_saved
 from recording.Recorder import Recorder
+from recording.screenshots import shoot_screen
 from visuals.assets.AudioEnum import AudioEnum
 from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
@@ -36,6 +37,7 @@ class RecordingPage(Page):
     record_toggle: QPushButton
     explorer_button: QPushButton
     filename_textbox: QLineEdit
+    screenshot_checkbox: QCheckBox
 
     dir_path: str = ""
     filename: str = ""
@@ -55,6 +57,7 @@ class RecordingPage(Page):
         self._init_enable_section()
         self._init_delay_section()
         self._init_duration_section()
+        self._init_screenshot_section()
         return super().add_content()
 
     def _init_file_section(self):
@@ -130,13 +133,20 @@ class RecordingPage(Page):
 
         vbox.addLayout(hbox)
 
-        checkbox.clicked.connect(
+        checkbox.checkStateChanged.connect(
             lambda: self.on_duration_checkbox_state_changed(
                 checkbox, slider, [label, descriptor]
             )
         )
 
         self.page_vbox.addLayout(vbox)
+
+    def _init_screenshot_section(self):
+        self.screenshot_checkbox = checkbox = QCheckBox(
+            "Take screenshot when recording starts"
+        )
+        checkbox.setChecked(False)
+        self.page_vbox.addWidget(checkbox)
 
     def on_duration_checkbox_state_changed(
         self, checkbox: QCheckBox, slider: QSlider, labels: list[QLabel]
@@ -193,7 +203,7 @@ class RecordingPage(Page):
             RECORD_TOGGLE_ON_TEXT if on else RECORD_TOGGLE_OFF_TEXT
         )
         self.filename_textbox.setEnabled(not on)
-        self.recording_delay_slider.setEnabled(not on)
+        # self.recording_delay_slider.setEnabled(not on)
 
     def on_explorer_button_click(self):
         self.dir_path = QFileDialog.getExistingDirectory(self, EXPLORER_DIALOG_TEXT)
@@ -215,6 +225,12 @@ class RecordingPage(Page):
         return reply == QMessageBox.StandardButton.Yes
 
     def _begin_recording(self, path: Path):
+        if self.screenshot_checkbox.isChecked():
+            shoot_screen(
+                self.context.screen,
+                (self.dir_path + "/" + self.filename + "_screenshot.png"),
+            )
+
         recorder = self.recorder
         if self.endless:
             recorder.start(path)
@@ -228,6 +244,7 @@ class RecordingPage(Page):
             rt.setEnabled(True)
             rt.setText(RECORD_TOGGLE_OFF_TEXT)
             rt.setChecked(False)
+            self.filename_textbox.setEnabled(True)
 
         rt.setEnabled(False)
         recorder.start(path)

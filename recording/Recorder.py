@@ -13,11 +13,17 @@ EXTENSION = ".csv"
 
 
 class Recorder:
-    path: Path | None = None
-    _queue: queue.Queue = queue.Queue()
-    _thread: threading.Thread | None = None
-    _stop_event: threading.Event = threading.Event()
-    _start_timestamp: float = 0.0
+    path: Path | None
+    _queue: queue.Queue
+    _thread: threading.Thread | None
+    _stop_event: threading.Event
+    _start_timestamp: float
+
+    def __init__(self) -> None:
+        self.path = None
+        self._queue = queue.Queue()
+        self._thread = None
+        self._stop_event = threading.Event()
 
     def _writer_thread(self) -> None:
         if self.path is None:
@@ -60,7 +66,7 @@ class Recorder:
         self._stop_event.set()
 
     def _offset_gaze(self, gp: GazePoint) -> GazePoint:
-        return GazePoint(gp.x, gp.y, gp.timestamp - self._start_timestamp)
+        return GazePoint(gp.x, gp.y, max((gp.timestamp - self._start_timestamp), 0))
 
 
 def coerce_csv(path: Path) -> Path:
