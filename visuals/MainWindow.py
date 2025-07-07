@@ -6,10 +6,8 @@ from PyQt6.QtWidgets import QStackedWidget
 from PyQt6.QtWidgets import QWidget
 
 from AppContext import AppContext
+from assets.resources import APP_NAME
 from visuals.pages.navigation import generate_navigation
-
-
-TITLE = "nnetp"
 
 
 class MainWindow(QMainWindow):
@@ -20,7 +18,7 @@ class MainWindow(QMainWindow):
     def __init__(self, context: AppContext) -> None:
         super().__init__()
         self.context = context
-        self.setWindowTitle(TITLE)
+        self.setWindowTitle(APP_NAME)
 
         self.sidebar = QListWidget()
         self.pages = QStackedWidget()

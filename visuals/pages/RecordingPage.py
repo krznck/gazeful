@@ -2,6 +2,8 @@ from pathlib import Path
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtCore import QTimer
+from PyQt6.QtCore import QUrl
+from PyQt6.QtGui import QDesktopServices
 from PyQt6.QtWidgets import QCheckBox
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QHBoxLayout
@@ -27,7 +29,7 @@ TITLE = "Recording"
 
 RECORD_TOGGLE_OFF_TEXT = "Start recording"
 RECORD_TOGGLE_ON_TEXT = "Stop recording"
-FILENAME_PLACEHOLDER_TEXT = "data"
+FILENAME_PLACEHOLDER_TEXT = "filename"
 EXPLORER_DIALOG_TEXT = "Select Directory"
 
 
@@ -38,9 +40,9 @@ class RecordingPage(Page):
     explorer_button: QPushButton
     filename_textbox: QLineEdit
     screenshot_checkbox: QCheckBox
+    dir_path_label: QLabel
 
-    dir_path: str = ""
-    filename: str = ""
+    filename: str
     delay: int
     endless: bool
     duration: int
@@ -49,8 +51,23 @@ class RecordingPage(Page):
         self.delay = 0
         self.endless = True
         self.duration = 3
+        self.recorder = context.recorder
+        self.dir_path_label = QLabel()  # NOTE: gotta instantiate this for the property
+        self.dir_path = val.get_default_recording_dir()
+        self.filename = f"recording-{val.iso_8601_time()}"
         super().__init__(TITLE, context, ICON)
-        self.recorder = self.context.recorder
+
+    @property
+    def dir_path(self) -> str:
+        return self._dir_path
+
+    @dir_path.setter
+    def dir_path(self, value: str) -> None:
+        pl = self.dir_path_label
+        if pl:
+            pl.setText(f"Path: {value}")
+
+        self._dir_path = value
 
     def add_content(self) -> None:
         self._init_file_section()
@@ -61,25 +78,38 @@ class RecordingPage(Page):
         return super().add_content()
 
     def _init_file_section(self):
+        vbox = QVBoxLayout()
         hbox = QHBoxLayout()
 
-        self.explorer_button = CustomPushButton(EXPLORER_DIALOG_TEXT)
-        self.explorer_button.clicked.connect(self.on_explorer_button_click)
-        hbox.addWidget(self.explorer_button)
+        eb = self.explorer_button = CustomPushButton(EXPLORER_DIALOG_TEXT)
+        eb.clicked.connect(self.on_explorer_button_click)
+        hbox.addWidget(eb)
+        pl = self.dir_path_label = QLabel(f"Path: {self.dir_path}")
+        hbox.addWidget(pl)
+        vbox.addLayout(hbox)
 
-        self.filename_textbox = QLineEdit()
-        self.filename_textbox.setPlaceholderText(FILENAME_PLACEHOLDER_TEXT)
-        self.filename_textbox.textChanged.connect(self.on_path_textbox_text_changed)
-        hbox.addWidget(self.filename_textbox)
+        hbox = QHBoxLayout()  # clear out
+        fl = QLabel("Filename:")
+        hbox.addWidget(fl)
+        ft = self.filename_textbox = QLineEdit()
+        ft.setPlaceholderText(FILENAME_PLACEHOLDER_TEXT)
+        ft.setText(self.filename)
+        ft.textChanged.connect(self.on_path_textbox_text_changed)
+        hbox.addWidget(ft)
+        vbox.addLayout(hbox)
 
-        self.page_vbox.addLayout(hbox)
+        odb = CustomPushButton("Open directory")
+        odb.clicked.connect(lambda: QDesktopServices.openUrl(QUrl.fromLocalFile(self.dir_path)))
+        vbox.addWidget(odb)
+
+        self.page_vbox.addLayout(vbox)
 
     def _init_enable_section(self):
         hbox = QHBoxLayout()
 
         self.record_toggle = CustomPushButton(RECORD_TOGGLE_OFF_TEXT)
         self.record_toggle.setCheckable(True)
-        self.record_toggle.setEnabled(False)
+        # self.record_toggle.setEnabled(False)
         self.record_toggle.clicked.connect(self.on_record_toggle_click)
 
         hbox.addWidget(self.record_toggle)
@@ -145,7 +175,7 @@ class RecordingPage(Page):
         self.screenshot_checkbox = checkbox = QCheckBox(
             "Take screenshot when recording starts"
         )
-        checkbox.setChecked(False)
+        checkbox.setChecked(True)
         self.page_vbox.addWidget(checkbox)
 
     def on_duration_checkbox_state_changed(
@@ -206,8 +236,12 @@ class RecordingPage(Page):
         # self.recording_delay_slider.setEnabled(not on)
 
     def on_explorer_button_click(self):
-        self.dir_path = QFileDialog.getExistingDirectory(self, EXPLORER_DIALOG_TEXT)
-        self._check_path()
+        selection = QFileDialog.getExistingDirectory(
+            self, directory=self.dir_path, caption=EXPLORER_DIALOG_TEXT
+        )
+        if len(selection) > 0:
+            self.dir_path = selection
+            self._check_path()
 
     def on_path_textbox_text_changed(self):
         self.filename = self.filename_textbox.text()

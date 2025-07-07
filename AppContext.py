@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import NamedTuple
 
 from PyQt6.QtGui import QScreen
@@ -19,17 +20,20 @@ class OperationResult(NamedTuple):
 
 
 class AppContext:
-    eyetracker: Tracker | None = None
+    eyetracker: Tracker | None
     visualizer: GazeVisualizer
-    recorder: Recorder = Recorder()
+    recorder: Recorder
     screen: QScreen
-    defs: Definitions = Definitions()
+    defs: Definitions
     main_data: GazeStream | None = None
 
     def __init__(self) -> None:
         self.screen = screens.get_primary_screen()
+        self.recorder = Recorder()
+        self.defs = Definitions()
         self.visualizer = GazeVisualizer(screen=self.screen)
         self.eyetracker = default_to_first_connected(self.visualizer, self.recorder)
+        self.eyetracker.track()
 
     def connect_tracker(self, tracker: str) -> OperationResult:
         try:

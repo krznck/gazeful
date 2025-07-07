@@ -28,17 +28,17 @@ class MainPage(Page):
     connect_toggle: QPushButton
     visualizer_toggle: QPushButton
 
-    __screens_refreshing = False
+    _screens_refreshing = False
 
     def __init__(self, context: AppContext) -> None:
         super().__init__(TITLE, context, ICON)
 
     def add_content(self) -> None:
-        self.__init_tracker_section()
-        self.__init_screens_section()
-        self.__init_visualizer_section()
+        self._init_tracker_section()
+        self._init_screens_section()
+        self._init_visualizer_section()
 
-    def __init_tracker_section(self):
+    def _init_tracker_section(self):
         hbox = QHBoxLayout()
 
         tcb = self.trackers_combo_box = CustomComboBox()
@@ -58,17 +58,18 @@ class MainPage(Page):
 
         hbox.addWidget(tcb)
 
-        self.connect_toggle = CustomPushButton(CONNECTION_TOGGLE_DISCONNECTED_TEXT)
-        self.connect_toggle.setMinimumWidth(100)  # should be same size when on and off
-        self.connect_toggle.setCheckable(True)
+        ct = self.connect_toggle = CustomPushButton(CONNECTION_TOGGLE_CONNECTED_TEXT)
+        ct.setMinimumWidth(100)  # should be same size when on and off
+        ct.setCheckable(True)
+        ct.setChecked(True)
 
-        self.connect_toggle.clicked.connect(self.on_connection_button_clicked)
+        ct.clicked.connect(self.on_connection_button_clicked)
 
-        hbox.addWidget(self.connect_toggle)
+        hbox.addWidget(ct)
 
         self.page_vbox.addLayout(hbox)
 
-    def __init_screens_section(self):
+    def _init_screens_section(self):
         hbox = QHBoxLayout()
 
         self.screens_combo_box = CustomComboBox()
@@ -90,7 +91,7 @@ class MainPage(Page):
 
         self.page_vbox.addLayout(hbox)
 
-    def __init_visualizer_section(self):
+    def _init_visualizer_section(self):
         hbox = QHBoxLayout()
 
         self.visualizer_toggle = CustomPushButton(VISUALIZER_TOGGLE_OFF_TEXT)
@@ -123,7 +124,7 @@ class MainPage(Page):
             self.trigger_connection_toggle(on=False)
 
     def on_screens_combo_box_index_changed(self):
-        if self.__screens_refreshing:
+        if self._screens_refreshing:
             return
 
         name = self.screens_combo_box.currentText().split(": ", 1)[-1]
@@ -135,7 +136,7 @@ class MainPage(Page):
             self.screen_refresh_button.click()
 
     def on_screen_refresh_button_clicked(self):
-        self.__screens_refreshing = True
+        self._screens_refreshing = True
 
         result, names, choice = self.context.check_screens_state()
 
@@ -148,7 +149,7 @@ class MainPage(Page):
             err = result.error
             QMessageBox.warning(self, "Screen configuration warning", err)
 
-        self.__screens_refreshing = False
+        self._screens_refreshing = False
 
     def on_visualizer_toggle_clicked(self):
         on = self.visualizer_toggle.isChecked()
