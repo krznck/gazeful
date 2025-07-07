@@ -18,9 +18,9 @@ class TobiiTracker(Tracker):
 
     def __init__(self, visualizer: GazeVisualizer, recorder: Recorder) -> None:
         super().__init__(visualizer, recorder)
-        self.__begin()
+        self._begin()
 
-    def __begin(self):
+    def _begin(self):
         trackers = tr.find_all_eyetrackers()  # type: ignore
         if not trackers:
             raise TrackerNotConnectedError("The Tobii SDK could not find any tracker.")
@@ -28,11 +28,11 @@ class TobiiTracker(Tracker):
         self.real_tracker = trackers[0]
         self.real_tracker.subscribe_to(
             tr.EYETRACKER_GAZE_DATA,  # type: ignore
-            self.__gaze_callback,
+            self._gaze_callback,
             as_dictionary=True,
         )
 
-    def __gaze_callback(self, gaze_data) -> None:
+    def _gaze_callback(self, gaze_data) -> None:
         if self.visualizer is None:
             return  # no need to do anything
 
@@ -57,6 +57,10 @@ class TobiiTracker(Tracker):
     def stop(self) -> None:
         self.real_tracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA)  # type: ignore
         super().stop()
+
+    @staticmethod
+    def connected() -> bool:
+        return len(tr.find_all_eyetrackers()) > 0  # type: ignore
 
 
 def coordinates_valid(cord1: float, cord2: float) -> bool:

@@ -41,15 +41,22 @@ class MainPage(Page):
     def __init_tracker_section(self):
         hbox = QHBoxLayout()
 
-        self.trackers_combo_box = CustomComboBox()
+        tcb = self.trackers_combo_box = CustomComboBox()
         for tracker in TrackersEnum:
             self.trackers_combo_box.addItem(tracker.name.lower().capitalize())
 
-        self.trackers_combo_box.currentIndexChanged.connect(
+        selected = self.context.eyetracker
+
+        if selected:
+            for i, tracker in enumerate(TrackersEnum):
+                if type(selected) == tracker.value:
+                    tcb.setCurrentIndex(i)
+
+        tcb.currentIndexChanged.connect(
             self.on_trackers_combo_box_index_changed
         )
 
-        hbox.addWidget(self.trackers_combo_box)
+        hbox.addWidget(tcb)
 
         self.connect_toggle = CustomPushButton(CONNECTION_TOGGLE_DISCONNECTED_TEXT)
         self.connect_toggle.setMinimumWidth(100)  # should be same size when on and off
@@ -107,6 +114,7 @@ class MainPage(Page):
                 err = result.error
                 QMessageBox.warning(self, CONNECTION_TOGGLE_DISCONNECTED_TEXT, str(err))
                 self.trigger_connection_toggle(on=False)
+                return
 
             self.trigger_connection_toggle(on=True)
 

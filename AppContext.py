@@ -9,6 +9,7 @@ from recording.Recorder import Recorder
 from trackers.Tracker import Tracker
 from trackers.Tracker import TrackerNotConnectedError
 from trackers.tracker_selector import create_tracker
+from trackers.tracker_selector import default_to_first_connected
 from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 
@@ -28,7 +29,7 @@ class AppContext:
     def __init__(self) -> None:
         self.screen = screens.get_primary_screen()
         self.visualizer = GazeVisualizer(screen=self.screen)
-        pass
+        self.eyetracker = default_to_first_connected(self.visualizer, self.recorder)
 
     def connect_tracker(self, tracker: str) -> OperationResult:
         try:

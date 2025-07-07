@@ -1,3 +1,7 @@
+from abc import ABC
+from abc import ABCMeta
+from abc import abstractmethod
+
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtCore import QThread
 
@@ -6,13 +10,21 @@ from trackers.GazePoint import GazePoint
 from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 
+class _TrackerMeta(ABCMeta, type(QThread)):
+    """
+    Custom metaclass solely for the purpose of resolving metaclass conflict between
+    ABD and QThread.
+    """
+    pass
+
+
 class TrackerNotConnectedError(Exception):
     """Raised when the physical tracker device is not connected to the computer."""
 
     pass
 
 
-class Tracker(QThread):
+class Tracker(ABC, QThread, metaclass=_TrackerMeta):
     """
     Base eyetracker class that all concrete eyetrackers should inherit from.
 
@@ -47,3 +59,8 @@ class Tracker(QThread):
         self.visualizer.hide()  # hide it before dying
         self.quit()
         self.wait()
+
+    @staticmethod
+    @abstractmethod
+    def connected() -> bool:
+        pass

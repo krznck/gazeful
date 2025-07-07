@@ -8,8 +8,8 @@ from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 
 class TrackersEnum(Enum):
-    DUMMY = 0
-    TOBII = 1
+    TOBII = TobiiTracker
+    DUMMY = MouseTracker
 
 
 DEFAULT: TrackersEnum = TrackersEnum.DUMMY
@@ -31,3 +31,12 @@ def create_tracker(
             return MouseTracker(visualizer, recorder)
         case TrackersEnum.TOBII:
             return TobiiTracker(visualizer, recorder)
+
+def default_to_first_connected(visualizer: GazeVisualizer, recorder: Recorder):
+    selected = DEFAULT
+    for tracker in TrackersEnum:
+        if tracker.value.connected():
+            selected = tracker
+            break
+
+    return create_tracker(selected, visualizer, recorder)

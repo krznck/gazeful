@@ -28,24 +28,29 @@ class MouseTracker(Tracker):
 
     def __init__(self, visualizer: GazeVisualizer, recorder: Recorder) -> None:
         super().__init__(visualizer, recorder)
-        self.listener = mouse.Listener(on_click=self.__on_click)  # type: ignore
+        self.listener = mouse.Listener(on_click=self._on_click)  # type: ignore
+
+    @staticmethod
+    def connected() -> bool:
+        # NOTE: I just assume that any given computer has a pointing device of some sort
+        return True
 
     def run(self):
         self.listener.start()
 
         self.timer = QTimer()
-        self.timer.timeout.connect(self.__poll_mouse)
+        self.timer.timeout.connect(self._poll_mouse)
         self.timer.setInterval(int(1000 / self.simulated_frequency))  # milliseconds
         self.timer.start()
 
         self.exec()
 
     def stop(self) -> None:
-        self.__cleanup_timer()
+        self._cleanup_timer()
         self.listener.stop()
         super().stop()
 
-    def __on_click(self, x, y, button: mouse.Button) -> None:
+    def _on_click(self, x, y, button: mouse.Button) -> None:
         # NOTE: method needs x and y in order to pass button correctly,
         # but we're not using it anyway
         _ = x, y
@@ -54,16 +59,16 @@ class MouseTracker(Tracker):
         if button is mouse.Button.right:
             self.right_held = not self.right_held
 
-    def __are_eyes_closed(self) -> bool:
+    def _are_eyes_closed(self) -> bool:
         return self.right_held and self.left_held
 
-    def __poll_mouse(self):
+    def _poll_mouse(self):
         if self.visualizer is None:
             return
 
         gaze = GazePoint(timestamp=time.monotonic())
 
-        if self.__are_eyes_closed():
+        if self._are_eyes_closed():
             self.eyes_position_changed.emit(gaze)
             return
 
@@ -93,7 +98,7 @@ class MouseTracker(Tracker):
         # print("Gaze: " + str(gaze))
         self.eyes_position_changed.emit(gaze)
 
-    def __cleanup_timer(self):
+    def _cleanup_timer(self):
         if self.timer is not None:
             QMetaObject.invokeMethod(
                 self.timer, "stop", Qt.ConnectionType.QueuedConnection
