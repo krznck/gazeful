@@ -6,6 +6,7 @@ from PyQt6.QtGui import QScreen
 import screens
 from processing.Definitions import Definitions
 from processing.GazeStream import GazeStream
+from processing.ingester import ingest_csv
 from recording.Recorder import Recorder
 from trackers.Tracker import Tracker
 from trackers.Tracker import TrackerNotConnectedError
@@ -25,7 +26,7 @@ class AppContext:
     recorder: Recorder
     screen: QScreen
     defs: Definitions
-    main_data: GazeStream | None = None
+    _main_data: GazeStream | None
 
     def __init__(self) -> None:
         self.screen = screens.get_primary_screen()
@@ -34,6 +35,18 @@ class AppContext:
         self.visualizer = GazeVisualizer(screen=self.screen)
         self.eyetracker = default_to_first_connected(self.visualizer, self.recorder)
         self.eyetracker.track()
+        self._main_data = None
+
+    @property
+    def main_data(self) -> GazeStream | None:
+        return self._main_data
+
+    @main_data.setter
+    def main_data(self, data: GazeStream | Path):
+        if isinstance(data, GazeStream):
+            self._main_data = data
+        elif isinstance(data, Path):
+            self._main_data = ingest_csv(data)
 
     def connect_tracker(self, tracker: str) -> OperationResult:
         try:

@@ -11,6 +11,14 @@ from visuals.assets.icon_selector import IconsEnum
 LAYOUT_ALLIGNMENT: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignTop
 
 
+class InvalidInteractionError(Exception):
+    """Raised when an user interface component is interacted with when that should
+    not be possible.
+    For example, clicking to open a directory, where no path has been chosen."""
+
+    pass
+
+
 class Page(QWidget):
     context: AppContext
     page_vbox: QVBoxLayout

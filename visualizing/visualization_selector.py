@@ -13,7 +13,7 @@ from visuals.visualization_configurations.GazePlotConfigurationEditor import (
 
 
 class VisualizationsEnum(Enum):
-    PLOT = 0
+    PLOT = GazePlotStrategy
 
 
 def create_visualizer(

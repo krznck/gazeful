@@ -1,8 +1,6 @@
-import os
 from pathlib import Path
 from time import perf_counter
 
-import matplotlib.pyplot as plt
 from PyQt6.QtCore import Qt
 from PyQt6.QtCore import QUrl
 from PyQt6.QtGui import QDesktopServices
@@ -14,18 +12,16 @@ from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
-from processing.algorithms.ClosureAnalyzer import ClosureAnalyzer
-from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
+from processing.AnalysisService import AnalysisService
 from processing.GazeStream import GazeStream
-from processing.ingester import ingest_csv
 from processing.ingester import InvalidFormatError
-from visualizing.visualization_selector import create_visualizer
 from visualizing.visualization_selector import VisualizationsEnum
 from visualizing.VisualizationStrategy import VisualizationStrategy
 from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.customized_widgets.Header import Header
+from visuals.pages.Page import InvalidInteractionError
 from visuals.pages.Page import Page
 from visuals.visualization_configurations.BaseConfigurationEditor import (
     BaseConfigurationEditor,
@@ -66,26 +62,43 @@ class AnalysisPage(Page):
     generate_button: CustomPushButton
     editor_button: CustomPushButton
 
-    fixations: list[GazeStream] | None = None
-    editor: BaseConfigurationEditor | None = None
-    strategy: VisualizationStrategy | None = None
+    editor: BaseConfigurationEditor | None
+    strategy: VisualizationStrategy | None
+    _service: AnalysisService | None
 
     def __init__(self, context: AppContext) -> None:
         super().__init__(TITLE, context, ICON)
+        self.editor = None
+        self.strategy = None
+        self._service = None
+        if context.main_data:
+            self._service = AnalysisService(
+                context.defs,
+                context.main_data,
+                self._visualization_choice,
+            )
+
+    def load_data(self, data: GazeStream | Path):
+        con = self.context
+        self._service = AnalysisService(con.defs, data, self._visualization_choice)
+        con.main_data = data
+        if isinstance(data, Path):
+            self.path_label.setText(str(data))
+        self._on_data_selected()
 
     def add_content(self) -> None:
-        self.__init_selection_section()
-        self.__init_timing_section()
-        self.__init_closures_section()
-        self.__init_oculomotor_section()
-        self.__init_visualization_section()
+        self._init_selection_section()
+        self._init_timing_section()
+        self._init_closures_section()
+        self._init_oculomotor_section()
+        self._init_visualization_section()
         return super().add_content()
 
-    def __init_selection_section(self) -> None:
+    def _init_selection_section(self) -> None:
         hbox = QHBoxLayout()
 
         self.refresh_buttton = CustomPushButton(REFRESH_LABEL)
-        self.refresh_buttton.clicked.connect(self.on_file_selected)
+        self.refresh_buttton.clicked.connect(self._on_data_selected)
         self.refresh_buttton.setDisabled(True)
         hbox.addWidget(self.refresh_buttton)
         self.explorer_button = CustomPushButton(EXPLORER_DIALOG_TEXT)
@@ -97,7 +110,7 @@ class AnalysisPage(Page):
 
         self.page_vbox.addLayout(hbox)
 
-    def __init_timing_section(self) -> None:
+    def _init_timing_section(self) -> None:
         hbox = QHBoxLayout()
         vbox = QVBoxLayout()
 
@@ -123,7 +136,7 @@ class AnalysisPage(Page):
 
         self.page_vbox.addLayout(vbox)
 
-    def __init_closures_section(self) -> None:
+    def _init_closures_section(self) -> None:
         vbox = QVBoxLayout()
 
         header = Header(CLOSURES_SECTION_HEADER)
@@ -145,7 +158,7 @@ class AnalysisPage(Page):
 
         self.page_vbox.addLayout(vbox)
 
-    def __init_oculomotor_section(self) -> None:
+    def _init_oculomotor_section(self) -> None:
         vbox = QVBoxLayout()
 
         header = Header(OCULOMOTOR_SECTION_HEADER)
@@ -174,7 +187,7 @@ class AnalysisPage(Page):
 
         self.page_vbox.addLayout(vbox)
 
-    def __init_visualization_section(self) -> None:
+    def _init_visualization_section(self) -> None:
         vbox = QVBoxLayout()
 
         header = Header("Visualization")
@@ -186,6 +199,7 @@ class AnalysisPage(Page):
         for vis in VisualizationsEnum:
             cb.addItem(vis.name.lower().capitalize())
         cb.setEnabled(False)
+        cb.currentIndexChanged.connect(self._on_visualizers_combo_box_index_changed)
 
         hbox.addWidget(cb)
 
@@ -203,6 +217,18 @@ class AnalysisPage(Page):
 
         self.page_vbox.addLayout(vbox)
 
+    @property
+    def _visualization_choice(self) -> VisualizationsEnum:
+        return VisualizationsEnum[self.visualizers_combo_box.currentText().upper()]
+
+    def _on_visualizers_combo_box_index_changed(self):
+        serv = self._service
+        if not serv:
+            raise InvalidInteractionError(
+                "Attempted to change visualization type before anything has been analyzed."
+            )
+        serv.set_strategy(self._visualization_choice)
+
     def on_explorer_button_clicked(self):
         text, _ = QFileDialog.getOpenFileName(
             self, EXPLORER_DIALOG_TEXT, "", EXPLORER_FILTER_STRING
@@ -211,40 +237,29 @@ class AnalysisPage(Page):
         if text != "":
             try:
                 start = perf_counter()
-
-                stream = ingest_csv(Path(text))
-                self.context.main_data = stream
+                self.load_data(Path(text))
                 end = perf_counter()
                 time = end - start
                 self.import_time_label.setText(f"{time:.10f} seconds")
-
-                self.on_file_selected()
-                self.path_label.setText(text)
-
             except InvalidFormatError as e:
                 QMessageBox.warning(self, "Import warning", str(e))
 
-    def on_file_selected(self):
-        if self.context.main_data is None:
-            return
+    def _on_data_selected(self):
+        if not self._service:
+            raise InvalidInteractionError(
+                "Attempted to analyze data that has not been chosen"
+            )
 
         start = perf_counter()
 
-        data = self.context.main_data
-        closures = ClosureAnalyzer(self.context.main_data, self.context.defs)
-        oculomotor = OculomotorAnalyzer(self.context.main_data, self.context.defs)
+        serv = self._service
 
-        fixations = self.fixations = oculomotor.extract_fixations()
-        self.duration_label.setText(str(round(data.duration(), 2)) + " seconds")
-        self.blink_count_label.setText(str(len(closures.extract_blinks())))
-        self.microsleep_count_label.setText(str(len(closures.extract_microsleeps())))
-        self.fixation_count_label.setText(str(len(fixations)))
-        self.fixation_average_label.setText(
-            str(round(oculomotor.average_fixation_duration(), 2)) + " ms"
-        )
-        self.fixation_median_label.setText(
-            str(round(oculomotor.median_fixation_duration(), 2)) + " ms"
-        )
+        self.duration_label.setText(f"{serv.session_duration} seconds")
+        self.blink_count_label.setText(f"{serv.blink_count} blinks")
+        self.microsleep_count_label.setText(f"{serv.microsleep_count} microsleeps")
+        self.fixation_count_label.setText(f"{serv.fixation_count} fixations")
+        self.fixation_average_label.setText(f"{serv.fixation_average} ms")
+        self.fixation_median_label.setText(f"{serv.fixation_median} ms")
         end = perf_counter()
         time = end - start
         self.analysis_time_label.setText(f"{time:.10f} seconds")
@@ -255,19 +270,19 @@ class AnalysisPage(Page):
         self.generate_button.setEnabled(True)
 
     def on_editor_button_clicked(self):
-        if not self.editor:
-            name = self.visualizers_combo_box.currentText().upper()
-            self.configuration, self.strategy, self.editor = create_visualizer(name)
-
-        self.editor.show()
+        serv = self._service
+        if not serv:
+            raise InvalidInteractionError(
+                "Attempted to edit a configuration that hasn't been chosen"
+            )
+        serv.active_editor.show()
 
     def on_generate_visualization_clicked(self):
-        if self.fixations is None:
-            return
-
-        if not self.strategy:
-            name = self.visualizers_combo_box.currentText().upper()
-            self.configuration, self.strategy, self.editor = create_visualizer(name)
+        serv = self._service
+        if not serv:
+            raise InvalidInteractionError(
+                "Attempted to generate visualization without anything to visualize"
+            )
 
         file_path, _ = QFileDialog.getSaveFileName(
             self,
@@ -280,9 +295,5 @@ class AnalysisPage(Page):
             ),
         )
 
-        if file_path:
-            self.strategy.visualize(self.fixations)
-            plt.savefig(
-                file_path, dpi=self.configuration.dpi.value, bbox_inches="tight"
-            )
-            QDesktopServices.openUrl(QUrl.fromLocalFile(file_path))
+        serv.save_visualization(Path(file_path))
+        QDesktopServices.openUrl(QUrl.fromLocalFile(file_path))

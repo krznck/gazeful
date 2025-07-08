@@ -1,0 +1,78 @@
+from pathlib import Path
+
+from processing.algorithms.ClosureAnalyzer import ClosureAnalyzer
+from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
+from processing.Definitions import Definitions
+from processing.GazeStream import GazeStream
+from processing.ingester import ingest_csv
+from visualizing.visualization_selector import create_visualizer
+from visualizing.visualization_selector import VisualizationsEnum
+from visuals.visualization_configurations.BaseConfigurationEditor import (
+    BaseConfigurationEditor,
+)
+
+
+class AnalysisService:
+    def __init__(
+        self,
+        definitions: Definitions,
+        data: GazeStream | Path,
+        vis_type: VisualizationsEnum,
+    ) -> None:
+        if isinstance(data, GazeStream):
+            self._data = data
+        elif isinstance(data, Path):
+            self._data = ingest_csv(data)
+        self._oculomotor = OculomotorAnalyzer(self._data, definitions)
+        self._closures = ClosureAnalyzer(self._data, definitions)
+        if vis_type:
+            self.set_strategy(vis_type)
+
+    def set_strategy(self, vis_type: VisualizationsEnum):
+        self._configuration, self._strategy, self._editor = create_visualizer(vis_type)
+        # NOTE: Having this service create and hold a UI component (the editor) makes
+        # it somewhat of a leaky abstraction. I'm fine with it here, but not too happy about it.
+
+    @property
+    def active_editor(self) -> BaseConfigurationEditor:
+        return self._editor
+
+    def save_visualization(self, path: Path) -> None:
+        fig, _ = self._strategy.visualize(self._fixations)
+        fig.savefig(path, dpi=self._configuration.dpi.value, bbox_inches="tight")
+
+    @property
+    def session_duration(self) -> float:
+        return round(self._data.duration(), 2)
+
+    @property
+    def fixation_count(self) -> int:
+        return len(self._fixations)
+
+    @property
+    def fixation_average(self) -> float:
+        return round(self._oculomotor.average_fixation_duration(), 2)
+
+    @property
+    def fixation_median(self) -> float:
+        return round(self._oculomotor.median_fixation_duration(), 2)
+
+    @property
+    def _fixations(self) -> list[GazeStream]:
+        return self._oculomotor.extract_fixations()
+
+    @property
+    def blink_count(self) -> int:
+        return len(self._blinks)
+
+    @property
+    def _blinks(self) -> list[GazeStream]:
+        return self._closures.extract_blinks()
+
+    @property
+    def microsleep_count(self) -> int:
+        return len(self._microsleeps)
+
+    @property
+    def _microsleeps(self) -> list[GazeStream]:
+        return self._closures.extract_microsleeps()
