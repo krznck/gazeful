@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
 from processing.AnalysisService import AnalysisService
+from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 from processing.ingester import InvalidFormatError
 from recording.validators import get_default_recording_dir
@@ -65,13 +66,16 @@ class AnalysisPage(Page):
                 context.main_data,
                 self._visualization_choice,
             )
+        context.main_data_changed.connect(self._on_data_loaded)
 
-    def load_data(self, data: GazeStream | Path):
+    def _on_data_loaded(self):
         con = self.context
-        self._service = AnalysisService(con.defs, data, self._visualization_choice)
-        con.main_data = data
-        if isinstance(data, Path):
-            self.path_label.setText(str(data))
+        if not con.main_data:
+            raise InvalidInteractionError("Attempted to load empty data.")
+
+        self._service = AnalysisService(
+            con.defs, con.main_data, self._visualization_choice
+        )
         self._on_data_selected()
 
     def set_save_location(self, path: str | Path):
@@ -251,7 +255,8 @@ class AnalysisPage(Page):
         if text != "":
             try:
                 start = perf_counter()
-                self.load_data(Path(text))
+                self.context.main_data = Path(text)
+                self.path_label.setText(text)
                 end = perf_counter()
                 time = end - start
                 self.import_time_label.setText(f"{time:.10f} seconds")

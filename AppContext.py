@@ -1,6 +1,8 @@
 from pathlib import Path
 from typing import NamedTuple
 
+from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtCore import QObject
 from PyQt6.QtGui import QScreen
 
 import screens
@@ -21,8 +23,11 @@ class OperationResult(NamedTuple):
     error: str | None = None
 
 
-class AppContext:
+class AppContext(QObject):
+    main_data_changed = pyqtSignal()
+
     def __init__(self) -> None:
+        super().__init__()
         self.tracked_screen: QScreen = screens.get_primary_screen()
         self.recorder: Recorder = Recorder(screens.get_screen_size(self.tracked_screen))
         self.defs: Definitions = Definitions()
@@ -38,11 +43,16 @@ class AppContext:
         return self._main_data
 
     @main_data.setter
-    def main_data(self, data: GazeStream | Path):
-        if isinstance(data, GazeStream):
-            self._main_data = GazeRecording(data)
-        elif isinstance(data, Path):
-            self._main_data = ingest_csv(data)
+    def main_data(self, data: GazeStream | Path | GazeRecording):
+        match data:
+            case Path() as path:
+                self._main_data = ingest_csv(path)
+            case GazeStream() as stream:
+                self._main_data = GazeRecording(data=stream)
+            case GazeRecording() as recording:
+                self._main_data = recording
+
+        self.main_data_changed.emit()
 
     def connect_tracker(self, tracker: str) -> OperationResult:
         try:
@@ -108,7 +118,7 @@ class AppContext:
         return OperationResult(False, warning), names, primary_index
 
     def toggle_visualizer(self, on: bool | None = None) -> None:
-        if isinstance(on, bool):
+        if on is not None:
             self.visualizer.toggle(on)
         else:
             self.visualizer.toggle(not self.visualizer.enabled)

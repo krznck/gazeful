@@ -20,16 +20,16 @@ class AnalysisService:
         data: GazeRecording | GazeStream | Path,
         vis_type: VisualizationsEnum,
     ) -> None:
-        if isinstance(data, GazeStream):
-            self._recording = GazeRecording(data)
-        elif isinstance(data, GazeRecording):
-            self._recording = data
-        elif isinstance(data, Path):
-            self._recording = ingest_csv(data)
+        match data:
+            case GazeStream() as stream:
+                self._recording = GazeRecording(stream)
+            case GazeRecording() as recording:
+                self._recording = recording
+            case Path() as path:
+                self._recording = ingest_csv(path)
         self._oculomotor = OculomotorAnalyzer(self._recording.data, definitions)
         self._closures = ClosureAnalyzer(self._recording.data, definitions)
-        if vis_type:
-            self.set_strategy(vis_type)
+        self.set_strategy(vis_type)
 
     # NOTE: Having this service create and hold a UI component (the editor) makes
     # it somewhat of a leaky abstraction.

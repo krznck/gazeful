@@ -231,7 +231,7 @@ class RecordingPage(Page):
             else:
                 self._begin_recording(path)
         else:
-            recorder.stop()
+            self.context.main_data = recorder.stop()
 
         self.record_toggle.setText(
             RECORD_TOGGLE_ON_TEXT if on else RECORD_TOGGLE_OFF_TEXT
@@ -277,7 +277,7 @@ class RecordingPage(Page):
         rt = self.record_toggle
 
         def stop():
-            recorder.stop()
+            self.context.main_data = recorder.stop()
             AudioEnum.PIP.value.play()
             rt.setEnabled(True)
             rt.setText(RECORD_TOGGLE_OFF_TEXT)

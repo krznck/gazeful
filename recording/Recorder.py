@@ -4,6 +4,8 @@ import threading
 import time
 from pathlib import Path
 
+from processing.GazeRecording import GazeRecording
+from processing.GazeStream import GazeStream
 from trackers.GazePoint import GazePoint
 from trackers.GazePoint import list_fields
 
@@ -25,6 +27,7 @@ class Recorder:
         self._thread = None
         self._stop_event = threading.Event()
         self._screen = screen
+        self._recording = GazeStream()
 
     def set_screen(self, screen: tuple[int, int]) -> None:
         self._screen = screen
@@ -44,6 +47,7 @@ class Recorder:
                 try:
                     data: GazePoint = self._queue.get(timeout=TIMEOUT)
                     data = self._offset_gaze(data)
+                    self._recording.append(data)
                     row = [
                         EYE_CLOSED if data.x is None else data.x,
                         EYE_CLOSED if data.y is None else data.y,
@@ -60,6 +64,7 @@ class Recorder:
             self._queue.put(data)
 
     def start(self, path: Path) -> None:
+        self._recording.clear()
         self.path = coerce_csv(path)
         if self._thread is None or not self._thread.is_alive():
             self._stop_event.clear()
@@ -67,8 +72,9 @@ class Recorder:
             self._thread.start()
             self._start_timestamp = time.monotonic()
 
-    def stop(self) -> None:
+    def stop(self) -> GazeRecording:
         self._stop_event.set()
+        return GazeRecording(data=self._recording, screen_dimensions=self._screen)
 
     def _offset_gaze(self, gp: GazePoint) -> GazePoint:
         return GazePoint(gp.x, gp.y, max((gp.timestamp - self._start_timestamp), 0))
