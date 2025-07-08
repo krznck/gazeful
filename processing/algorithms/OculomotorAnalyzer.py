@@ -38,6 +38,10 @@ class OculomotorAnalyzer(BaseAnalyzer):
             self.fixations = self.extract_fixations()
 
         duration_ms = [fix.duration() * 1000 for fix in self.fixations]
+        if len(self.fixations) < 1:
+            self._average = 0
+            self._median = 0
+            return
         self._average = statistics.mean(duration_ms)
         self._median = statistics.median(duration_ms)
 
