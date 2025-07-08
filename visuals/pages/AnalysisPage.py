@@ -8,24 +8,21 @@ from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLabel
 from PyQt6.QtWidgets import QMessageBox
-from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
 from processing.AnalysisService import AnalysisService
 from processing.GazeStream import GazeStream
 from processing.ingester import InvalidFormatError
+from recording.validators import get_default_visualization_dir
+from recording.validators import iso_8601_time
 from visualizing.visualization_selector import VisualizationsEnum
-from visualizing.VisualizationStrategy import VisualizationStrategy
 from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.customized_widgets.Header import Header
 from visuals.pages.Page import InvalidInteractionError
 from visuals.pages.Page import Page
-from visuals.visualization_configurations.BaseConfigurationEditor import (
-    BaseConfigurationEditor,
-)
 
 TITLE = "Analysis"
 ICON = IconsEnum.MICROSCOPE
@@ -51,26 +48,14 @@ GENERATE_BUTTON_TEXT = "Generate"
 
 
 class AnalysisPage(Page):
-    refresh_buttton: QPushButton
-    explorer_button: QPushButton
-    path_label: QLabel
-    duration_label: QLabel
-    analysis_time_label: QLabel
-    import_time_label: QLabel
-    blink_count_label: QLabel
-    visualizers_combo_box: CustomComboBox
-    generate_button: CustomPushButton
-    editor_button: CustomPushButton
-
-    editor: BaseConfigurationEditor | None
-    strategy: VisualizationStrategy | None
-    _service: AnalysisService | None
-
     def __init__(self, context: AppContext) -> None:
+        self._save_path: Path = (
+            Path(get_default_visualization_dir()) / f"figure-{iso_8601_time()}.png"
+        )
         super().__init__(TITLE, context, ICON)
         self.editor = None
         self.strategy = None
-        self._service = None
+        self._service: AnalysisService | None = None
         if context.main_data:
             self._service = AnalysisService(
                 context.defs,
@@ -86,6 +71,13 @@ class AnalysisPage(Page):
             self.path_label.setText(str(data))
         self._on_data_selected()
 
+    def set_save_location(self, path: str | Path):
+        if isinstance(path, str):
+            self._save_path = Path(path)
+        elif isinstance(path, Path):
+            self._save_path = path
+        self.save_location_label.setText(f"Path: {path}")
+
     def add_content(self) -> None:
         self._init_selection_section()
         self._init_timing_section()
@@ -97,12 +89,12 @@ class AnalysisPage(Page):
     def _init_selection_section(self) -> None:
         hbox = QHBoxLayout()
 
-        self.refresh_buttton = CustomPushButton(REFRESH_LABEL)
-        self.refresh_buttton.clicked.connect(self._on_data_selected)
-        self.refresh_buttton.setDisabled(True)
-        hbox.addWidget(self.refresh_buttton)
+        self.refresh_button = CustomPushButton(REFRESH_LABEL)
+        self.refresh_button.clicked.connect(self._on_data_selected)
+        self.refresh_button.setDisabled(True)
+        hbox.addWidget(self.refresh_button)
         self.explorer_button = CustomPushButton(EXPLORER_DIALOG_TEXT)
-        self.explorer_button.clicked.connect(self.on_explorer_button_clicked)
+        self.explorer_button.clicked.connect(self._on_explorer_button_clicked)
         hbox.addWidget(self.explorer_button)
 
         self.path_label = QLabel()
@@ -205,12 +197,28 @@ class AnalysisPage(Page):
 
         self.editor_button = eb = CustomPushButton("Configure")
         eb.setEnabled(False)
-        eb.clicked.connect(self.on_editor_button_clicked)
+        eb.clicked.connect(self._on_editor_button_clicked)
         hbox.addWidget(eb)
+
+        vbox.addLayout(hbox)
+
+        hbox = QHBoxLayout()
+
+        inner_vbox = QVBoxLayout()
+        self.choose_save_location_button = cslb = CustomPushButton(
+            "Choose save location"
+        )
+        cslb.setEnabled(False)
+        cslb.clicked.connect(self._on_choose_save_location_button_clicked)
+        inner_vbox.addWidget(cslb)
+        self.save_location_label = sll = QLabel(f"Path: {self._save_path}")
+        sll.setEnabled(False)
+        inner_vbox.addWidget(sll)
+        hbox.addLayout(inner_vbox)
 
         self.generate_button = gb = CustomPushButton(GENERATE_BUTTON_TEXT)
         gb.setDisabled(True)
-        gb.clicked.connect(self.on_generate_visualization_clicked)
+        gb.clicked.connect(self._on_generate_visualization_clicked)
         hbox.addWidget(gb)
 
         vbox.addLayout(hbox)
@@ -229,7 +237,7 @@ class AnalysisPage(Page):
             )
         serv.set_strategy(self._visualization_choice)
 
-    def on_explorer_button_clicked(self):
+    def _on_explorer_button_clicked(self):
         text, _ = QFileDialog.getOpenFileName(
             self, EXPLORER_DIALOG_TEXT, "", EXPLORER_FILTER_STRING
         )
@@ -264,26 +272,14 @@ class AnalysisPage(Page):
         time = end - start
         self.analysis_time_label.setText(f"{time:.10f} seconds")
 
-        self.refresh_buttton.setEnabled(True)
+        self.refresh_button.setEnabled(True)
         self.visualizers_combo_box.setEnabled(True)
         self.editor_button.setEnabled(True)
         self.generate_button.setEnabled(True)
+        self.choose_save_location_button.setEnabled(True)
+        self.save_location_label.setEnabled(True)
 
-    def on_editor_button_clicked(self):
-        serv = self._service
-        if not serv:
-            raise InvalidInteractionError(
-                "Attempted to edit a configuration that hasn't been chosen"
-            )
-        serv.active_editor.show()
-
-    def on_generate_visualization_clicked(self):
-        serv = self._service
-        if not serv:
-            raise InvalidInteractionError(
-                "Attempted to generate visualization without anything to visualize"
-            )
-
+    def _on_choose_save_location_button_clicked(self):
         file_path, _ = QFileDialog.getSaveFileName(
             self,
             "Save Figure As...",
@@ -294,6 +290,23 @@ class AnalysisPage(Page):
                 "PDF Documetn (*pdf)"
             ),
         )
+        self.set_save_location(file_path)
 
-        serv.save_visualization(Path(file_path))
-        QDesktopServices.openUrl(QUrl.fromLocalFile(file_path))
+    def _on_editor_button_clicked(self):
+        serv = self._service
+        if not serv:
+            raise InvalidInteractionError(
+                "Attempted to edit a configuration that hasn't been chosen"
+            )
+        serv.active_editor.show()
+
+    def _on_generate_visualization_clicked(self):
+        serv = self._service
+        if not serv:
+            raise InvalidInteractionError(
+                "Attempted to generate visualization without anything to visualize"
+            )
+
+        location = self._save_path
+        serv.save_visualization(location)
+        QDesktopServices.openUrl(QUrl.fromLocalFile(str(location)))

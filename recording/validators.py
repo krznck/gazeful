@@ -57,6 +57,13 @@ def get_default_recording_dir() -> str:
     return str(dir)
 
 
+def get_default_visualization_dir() -> str:
+    dir = Path(user_data_dir(appname=APP_NAME, appauthor=False))
+    dir = dir / "visualizations" / f"visualization-{iso_8601_date()}"
+    dir.mkdir(parents=True, exist_ok=True)
+    return str(dir)
+
+
 def iso_8601_time() -> str:
     return datetime.now().strftime("T%H%M")
 
