@@ -53,7 +53,9 @@ class RecordingPage(Page):
         self.duration = 3
         self.recorder = context.recorder
         self.dir_path_label = QLabel()  # NOTE: gotta instantiate this for the property
-        self.dir_path = val.get_default_recording_dir()
+        self.dir_path = str(
+            val.get_default_recording_dir() / f"gaze-session-{val.iso_8601_date()}"
+        )
         self.filename = f"recording-{val.iso_8601_time()}"
         super().__init__(TITLE, context, ICON)
 

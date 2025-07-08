@@ -47,6 +47,7 @@ class AnalysisService:
         return self._editor
 
     def save_visualization(self, path: Path) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
         fig, _ = self._strategy.visualize(self._fixations)
         fig.savefig(path, dpi=self._configuration.dpi.value, bbox_inches="tight")
 

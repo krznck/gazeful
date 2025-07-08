@@ -21,6 +21,8 @@ RESERVED_NAMES = {".", ".."}
 INVALID_CHARS_POSIX = {"/", "\0"}
 INVALID_CHARS_WIN = {"<", ">", ":", '"', "/", "\\", "|", "?", "*"}
 
+APP_DIR = Path(user_data_dir(appname=APP_NAME, appauthor=False))
+
 
 def is_valid_dir(dir: str) -> bool:
     path = Path(dir)
@@ -50,18 +52,16 @@ def is_valid_filename(name: str) -> bool:
     return True
 
 
-def get_default_recording_dir() -> str:
-    dir = Path(user_data_dir(appname=APP_NAME, appauthor=False))
-    dir = dir / "recordings" / f"gaze-session-{iso_8601_date()}"
+def get_default_recording_dir() -> Path:
+    dir = APP_DIR / "recordings"
     dir.mkdir(parents=True, exist_ok=True)
-    return str(dir)
+    return dir
 
 
-def get_default_visualization_dir() -> str:
-    dir = Path(user_data_dir(appname=APP_NAME, appauthor=False))
-    dir = dir / "visualizations" / f"visualization-{iso_8601_date()}"
+def get_default_visualization_dir() -> Path:
+    dir = APP_DIR / "visualizations"
     dir.mkdir(parents=True, exist_ok=True)
-    return str(dir)
+    return dir
 
 
 def iso_8601_time() -> str:

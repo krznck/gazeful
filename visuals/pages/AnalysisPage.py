@@ -14,7 +14,9 @@ from AppContext import AppContext
 from processing.AnalysisService import AnalysisService
 from processing.GazeStream import GazeStream
 from processing.ingester import InvalidFormatError
+from recording.validators import get_default_recording_dir
 from recording.validators import get_default_visualization_dir
+from recording.validators import iso_8601_date
 from recording.validators import iso_8601_time
 from visualizing.visualization_selector import VisualizationsEnum
 from visuals.assets.icon_selector import IconsEnum
@@ -29,7 +31,6 @@ ICON = IconsEnum.MICROSCOPE
 
 REFRESH_LABEL = "Refresh"
 EXPLORER_DIALOG_TEXT = "Select Gaze CSV"
-EXPLORER_FILTER_STRING = "CSV Files (*.csv)"
 
 IMPORT_TIME_LABEL = "Import time: "
 DURATION_LABEL = "Session duration: "
@@ -50,7 +51,9 @@ GENERATE_BUTTON_TEXT = "Generate"
 class AnalysisPage(Page):
     def __init__(self, context: AppContext) -> None:
         self._save_path: Path = (
-            Path(get_default_visualization_dir()) / f"figure-{iso_8601_time()}.png"
+            get_default_visualization_dir()
+            / f"figures-{iso_8601_date()}"
+            / f"figure-{iso_8601_time()}.png"
         )
         super().__init__(TITLE, context, ICON)
         self.editor = None
@@ -89,13 +92,13 @@ class AnalysisPage(Page):
     def _init_selection_section(self) -> None:
         hbox = QHBoxLayout()
 
-        self.refresh_button = CustomPushButton(REFRESH_LABEL)
-        self.refresh_button.clicked.connect(self._on_data_selected)
-        self.refresh_button.setDisabled(True)
-        hbox.addWidget(self.refresh_button)
-        self.explorer_button = CustomPushButton(EXPLORER_DIALOG_TEXT)
-        self.explorer_button.clicked.connect(self._on_explorer_button_clicked)
-        hbox.addWidget(self.explorer_button)
+        rb = self.refresh_button = CustomPushButton(REFRESH_LABEL)
+        rb.clicked.connect(self._on_data_selected)
+        rb.setDisabled(True)
+        hbox.addWidget(rb)
+        eb = self.explorer_button = CustomPushButton(EXPLORER_DIALOG_TEXT)
+        eb.clicked.connect(self._on_explorer_button_clicked)
+        hbox.addWidget(eb)
 
         self.path_label = QLabel()
         hbox.addWidget(self.path_label)
@@ -239,7 +242,10 @@ class AnalysisPage(Page):
 
     def _on_explorer_button_clicked(self):
         text, _ = QFileDialog.getOpenFileName(
-            self, EXPLORER_DIALOG_TEXT, "", EXPLORER_FILTER_STRING
+            self,
+            caption=EXPLORER_DIALOG_TEXT,
+            directory=str(get_default_recording_dir()),
+            filter="CSV Files (*.csv)",
         )
 
         if text != "":
