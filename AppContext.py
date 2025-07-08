@@ -5,6 +5,7 @@ from PyQt6.QtGui import QScreen
 
 import screens
 from processing.Definitions import Definitions
+from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 from processing.ingester import ingest_csv
 from recording.Recorder import Recorder
@@ -21,30 +22,25 @@ class OperationResult(NamedTuple):
 
 
 class AppContext:
-    eyetracker: Tracker | None
-    visualizer: GazeVisualizer
-    recorder: Recorder
-    screen: QScreen
-    defs: Definitions
-    _main_data: GazeStream | None
-
     def __init__(self) -> None:
-        self.screen = screens.get_primary_screen()
-        self.recorder = Recorder()
-        self.defs = Definitions()
-        self.visualizer = GazeVisualizer(screen=self.screen)
-        self.eyetracker = default_to_first_connected(self.visualizer, self.recorder)
+        self.tracked_screen: QScreen = screens.get_primary_screen()
+        self.recorder: Recorder = Recorder(screens.get_screen_size(self.tracked_screen))
+        self.defs: Definitions = Definitions()
+        self.visualizer: GazeVisualizer = GazeVisualizer(screen=self.tracked_screen)
+        self.eyetracker: Tracker | None = default_to_first_connected(
+            self.visualizer, self.recorder
+        )
         self.eyetracker.track()
-        self._main_data = None
+        self._main_data: GazeRecording | None = None
 
     @property
-    def main_data(self) -> GazeStream | None:
+    def main_data(self) -> GazeRecording | None:
         return self._main_data
 
     @main_data.setter
     def main_data(self, data: GazeStream | Path):
         if isinstance(data, GazeStream):
-            self._main_data = data
+            self._main_data = GazeRecording(data)
         elif isinstance(data, Path):
             self._main_data = ingest_csv(data)
 
@@ -65,15 +61,16 @@ class AppContext:
 
     def specify_screen(self, screen: str | QScreen) -> OperationResult:
         if isinstance(screen, QScreen):
-            self.screen = screen
+            self.tracked_screen = screen
         else:
             try:
-                self.screen = screens.get_screen(screen)
+                self.tracked_screen = screens.get_screen(screen)
             except screens.InvalidScreenBinding as e:
-                self.screen = screens.get_primary_screen()
+                self.tracked_screen = screens.get_primary_screen()
                 return OperationResult(False, str(e))
 
-        self.visualizer.bound_screen = self.screen
+        self.visualizer.bound_screen = self.tracked_screen
+        self.recorder.set_screen(screens.get_screen_size(self.tracked_screen))
         return OperationResult(True)
 
     def check_screens_state(self) -> tuple[OperationResult, list[str], int]:
@@ -89,7 +86,7 @@ class AppContext:
         primary_index = None
 
         try:
-            screen_name = self.screen.name()
+            screen_name = self.tracked_screen.name()
         except RuntimeError:
             # "wrapped C/C++ object of type QScreen has been deleted" -> check negative
             screen_name = None

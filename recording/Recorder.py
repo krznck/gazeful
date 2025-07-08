@@ -19,11 +19,15 @@ class Recorder:
     _stop_event: threading.Event
     _start_timestamp: float
 
-    def __init__(self) -> None:
+    def __init__(self, screen: tuple[int, int]) -> None:
         self.path = None
         self._queue = queue.Queue()
         self._thread = None
         self._stop_event = threading.Event()
+        self._screen = screen
+
+    def set_screen(self, screen: tuple[int, int]) -> None:
+        self._screen = screen
 
     def _writer_thread(self) -> None:
         if self.path is None:
@@ -33,6 +37,7 @@ class Recorder:
             writer = csv.writer(f)
 
             if f.tell() == 0:
+                writer.writerow([f"#{self._screen[0]}x{self._screen[1]}"])
                 writer.writerow(list_fields())
 
             while not self._stop_event.is_set() or not self._queue.empty():

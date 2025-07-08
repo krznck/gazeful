@@ -99,7 +99,9 @@ class RecordingPage(Page):
         vbox.addLayout(hbox)
 
         odb = CustomPushButton("Open directory")
-        odb.clicked.connect(lambda: QDesktopServices.openUrl(QUrl.fromLocalFile(self.dir_path)))
+        odb.clicked.connect(
+            lambda: QDesktopServices.openUrl(QUrl.fromLocalFile(self.dir_path))
+        )
         vbox.addWidget(odb)
 
         self.page_vbox.addLayout(vbox)
@@ -261,7 +263,7 @@ class RecordingPage(Page):
     def _begin_recording(self, path: Path):
         if self.screenshot_checkbox.isChecked():
             shoot_screen(
-                self.context.screen,
+                self.context.tracked_screen,
                 (self.dir_path + "/" + self.filename + "_screenshot.png"),
             )
 

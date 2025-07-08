@@ -22,8 +22,8 @@ class BaseConfiguration(ABC):
 
     def __init__(
         self,
-        screen_width: int,
-        screen_height: int,
+        screen_width: int = 1920,
+        screen_height: int = 1080,
         background_image: Path | None = None,
         opagueness: float = 1.0,
         dpi: int = DpiQualities.MEDIUM.value,

@@ -3,6 +3,7 @@ from pathlib import Path
 from processing.algorithms.ClosureAnalyzer import ClosureAnalyzer
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
+from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 from processing.ingester import ingest_csv
 from visualizing.visualization_selector import create_visualizer
@@ -16,22 +17,30 @@ class AnalysisService:
     def __init__(
         self,
         definitions: Definitions,
-        data: GazeStream | Path,
+        data: GazeRecording | GazeStream | Path,
         vis_type: VisualizationsEnum,
     ) -> None:
         if isinstance(data, GazeStream):
-            self._data = data
+            self._recording = GazeRecording(data)
+        elif isinstance(data, GazeRecording):
+            self._recording = data
         elif isinstance(data, Path):
-            self._data = ingest_csv(data)
-        self._oculomotor = OculomotorAnalyzer(self._data, definitions)
-        self._closures = ClosureAnalyzer(self._data, definitions)
+            self._recording = ingest_csv(data)
+        self._oculomotor = OculomotorAnalyzer(self._recording.data, definitions)
+        self._closures = ClosureAnalyzer(self._recording.data, definitions)
         if vis_type:
             self.set_strategy(vis_type)
 
+    # NOTE: Having this service create and hold a UI component (the editor) makes
+    # it somewhat of a leaky abstraction.
+    # I'm fine with it here, but not too happy about it.
     def set_strategy(self, vis_type: VisualizationsEnum):
-        self._configuration, self._strategy, self._editor = create_visualizer(vis_type)
-        # NOTE: Having this service create and hold a UI component (the editor) makes
-        # it somewhat of a leaky abstraction. I'm fine with it here, but not too happy about it.
+        conf, self._strategy, self._editor = create_visualizer(vis_type)
+        self._configuration = conf
+        screen = self._recording.screen
+        if screen:
+            conf.screen_width.update(screen[0])
+            conf.screen_height.update(screen[1])
 
     @property
     def active_editor(self) -> BaseConfigurationEditor:
@@ -43,7 +52,7 @@ class AnalysisService:
 
     @property
     def session_duration(self) -> float:
-        return round(self._data.duration(), 2)
+        return round(self._recording.data.duration(), 2)
 
     @property
     def fixation_count(self) -> int:
