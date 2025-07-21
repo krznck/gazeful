@@ -36,6 +36,7 @@ class Recorder:
         if self.path is None:
             return
 
+        self.path.parent.mkdir(parents=True, exist_ok=True)  # need to create parents
         with self.path.open("w", newline="") as f:
             writer = csv.writer(f)
 
