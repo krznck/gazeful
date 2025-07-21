@@ -1,3 +1,4 @@
+from processing.GazeRecording import GazeRecording
 from Ref import Ref
 from visualizing.configuration.BaseConfiguration import BaseConfiguration
 
@@ -7,9 +8,8 @@ class GazePlotConfiguration(BaseConfiguration):
 
     def __init__(
         self,
-        screen_width: int = 1920,
-        screen_height: int = 1080,
+        recording: GazeRecording | None,
         size_multiplier: int = 300,
     ) -> None:
         self.size_multiplier = Ref(size_multiplier)
-        super().__init__(screen_width, screen_height)
+        super().__init__(recording)

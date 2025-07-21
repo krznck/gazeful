@@ -35,12 +35,17 @@ class AnalysisService:
     # it somewhat of a leaky abstraction.
     # I'm fine with it here, but not too happy about it.
     def set_strategy(self, vis_type: VisualizationsEnum):
-        conf, self._strategy, self._editor = create_visualizer(vis_type)
+        conf, self._strategy, self._editor = create_visualizer(
+            vis_type, self._recording
+        )
         self._configuration = conf
         screen = self._recording.screen
         if screen:
             conf.screen_width.update(screen[0])
             conf.screen_height.update(screen[1])
+        background = self._recording.screenshot
+        if background:
+            conf.background_image.update(background)
 
     @property
     def active_editor(self) -> BaseConfigurationEditor:

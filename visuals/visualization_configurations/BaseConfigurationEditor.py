@@ -63,6 +63,9 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
 
         inner_hbox = QHBoxLayout()
         self.image_path_label = label = QLabel("no path selected")
+        image = self.configuration.background_image.value
+        if image:
+            label.setText(str(image))
         inner_hbox.addWidget(label)
         button = CustomPushButton("Select image")
         button.clicked.connect(self.on_image_selection_button_click)

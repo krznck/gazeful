@@ -12,8 +12,6 @@ from PyQt6.QtWidgets import QVBoxLayout
 
 from AppContext import AppContext
 from processing.AnalysisService import AnalysisService
-from processing.GazeRecording import GazeRecording
-from processing.GazeStream import GazeStream
 from processing.ingester import InvalidFormatError
 from recording.validators import get_default_recording_dir
 from recording.validators import get_default_visualization_dir
@@ -76,6 +74,8 @@ class AnalysisPage(Page):
         self._service = AnalysisService(
             con.defs, con.main_data, self._visualization_choice
         )
+        self.path_label.setText("data loaded from recording")
+        self.import_time_label.setText("not applicable")
         self._on_data_selected()
 
     def set_save_location(self, path: str | Path):

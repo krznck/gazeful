@@ -10,7 +10,7 @@ from processing.GazeStream import GazeStream
 from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguration
 from visualizing.GazePlotStrategy import GazePlotStrategy
 
-confs = GazePlotConfiguration(1920, 1200, 400)
+confs = GazePlotConfiguration(None, 400)
 
 
 class DummyGaze(GazeStream):

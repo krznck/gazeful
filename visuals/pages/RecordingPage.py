@@ -263,15 +263,13 @@ class RecordingPage(Page):
         return reply == QMessageBox.StandardButton.Yes
 
     def _begin_recording(self, path: Path):
+        screen = None
         if self.screenshot_checkbox.isChecked():
-            shoot_screen(
-                self.context.tracked_screen,
-                (self.dir_path + "/" + self.filename + "_screenshot.png"),
-            )
+            screen = self.context.tracked_screen
 
         recorder = self.recorder
         if self.endless:
-            recorder.start(path)
+            recorder.start(path=path, screenshot_screen=screen)
             return
 
         rt = self.record_toggle
@@ -285,5 +283,5 @@ class RecordingPage(Page):
             self.filename_textbox.setEnabled(True)
 
         rt.setEnabled(False)
-        recorder.start(path)
+        recorder.start(path=path, screenshot_screen=screen)
         QTimer.singleShot(self.duration * 1000, lambda: stop())

@@ -4,8 +4,11 @@ import threading
 import time
 from pathlib import Path
 
+from PyQt6.QtGui import QScreen
+
 from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
+from recording.screenshots import shoot_screen
 from trackers.GazePoint import GazePoint
 from trackers.GazePoint import list_fields
 
@@ -20,6 +23,7 @@ class Recorder:
     _thread: threading.Thread | None
     _stop_event: threading.Event
     _start_timestamp: float
+    _screenshot_path: Path | None
 
     def __init__(self, screen: tuple[int, int]) -> None:
         self.path = None
@@ -28,6 +32,7 @@ class Recorder:
         self._stop_event = threading.Event()
         self._screen = screen
         self._recording = GazeStream()
+        self._screenshot_path = None
 
     def set_screen(self, screen: tuple[int, int]) -> None:
         self._screen = screen
@@ -64,8 +69,12 @@ class Recorder:
         if not self._stop_event.is_set() and self._thread is not None:
             self._queue.put(data)
 
-    def start(self, path: Path) -> None:
+    def start(self, path: Path, screenshot_screen: QScreen | None = None) -> None:
         self._recording.clear()
+        if screenshot_screen:
+            ss_path = coerce_screenshot_path(path)
+            shoot_screen(screenshot_screen, ss_path)
+            self._screenshot_path = ss_path
         self.path = coerce_csv(path)
         if self._thread is None or not self._thread.is_alive():
             self._stop_event.clear()
@@ -75,7 +84,11 @@ class Recorder:
 
     def stop(self) -> GazeRecording:
         self._stop_event.set()
-        return GazeRecording(data=self._recording, screen_dimensions=self._screen)
+        return GazeRecording(
+            data=self._recording,
+            screen_dimensions=self._screen,
+            screenshot=self._screenshot_path,
+        )
 
     def _offset_gaze(self, gp: GazePoint) -> GazePoint:
         return GazePoint(gp.x, gp.y, max((gp.timestamp - self._start_timestamp), 0))
@@ -85,6 +98,11 @@ def coerce_csv(path: Path) -> Path:
     if path.suffix != EXTENSION:
         return path.with_suffix(EXTENSION)
     return path
+
+
+def coerce_screenshot_path(path: Path) -> Path:
+    new = path.with_name(f"{path.stem}-screenshot.png")
+    return new
 
 
 def file_already_saved(path: Path) -> bool:

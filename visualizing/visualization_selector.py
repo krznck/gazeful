@@ -1,5 +1,6 @@
 from enum import Enum
 
+from processing.GazeRecording import GazeRecording
 from visualizing.configuration.BaseConfiguration import BaseConfiguration
 from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguration
 from visualizing.GazePlotStrategy import GazePlotStrategy
@@ -17,12 +18,12 @@ class VisualizationsEnum(Enum):
 
 
 def create_visualizer(
-    vis_type: VisualizationsEnum | str,
+    vis_type: VisualizationsEnum | str, recording: GazeRecording
 ) -> tuple[BaseConfiguration, VisualizationStrategy, BaseConfigurationEditor]:
     if isinstance(vis_type, str):
         vis_type = VisualizationsEnum[vis_type.upper()]
 
     match vis_type:
         case VisualizationsEnum.PLOT:
-            conf = GazePlotConfiguration()
+            conf = GazePlotConfiguration(recording)
             return conf, GazePlotStrategy(conf), GazePlotConfigurationEditor(conf)
