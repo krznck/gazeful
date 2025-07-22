@@ -8,6 +8,7 @@ from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
 from processing.GazeStream import GazeStream
 from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguration
+from visualizing.configuration.Metadata import Metadata
 from visualizing.GazePlotStrategy import GazePlotStrategy
 
 confs = GazePlotConfiguration(None, 400)
@@ -30,9 +31,10 @@ class DummyGaze(GazeStream):
 def check_sample(sample: str):
     stream = ingest_sample(sample)
     strategy = GazePlotStrategy(confs)
-    analyzer = OculomotorAnalyzer(stream, Definitions())
+    defs = Definitions()
+    analyzer = OculomotorAnalyzer(stream, defs)
     fixations = analyzer.extract_fixations()
-    strategy.visualize(fixations)
+    strategy.visualize(fixations, Metadata(stream.duration(), defs))
 
 
 def test_one_fix_sample():
@@ -50,5 +52,7 @@ def test_balatro_sample():
 @pytest.mark.visual
 def test_ars_technica_visual():
     confs.background_image.update(get_sample_image("ars_technica"))
+    confs.legend.update(False)
+    confs.metadata.update(False)
     test_ars_technica_sample()
     plt.show()
