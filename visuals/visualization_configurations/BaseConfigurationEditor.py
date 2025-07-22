@@ -3,6 +3,7 @@ from typing import Generic
 from typing import TypeVar
 
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QCheckBox
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLabel
@@ -40,6 +41,7 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
         self._init_image_section()
         self._init_opaqueness_section()
         self._init_quality_section()
+        self._init_additions_section()
 
     def _init_screen_dimensions_section(self):
         hbox = QHBoxLayout()
@@ -116,6 +118,25 @@ class BaseConfigurationEditor(QWidget, Generic[Configuration]):
         )
 
         hbox.addWidget(qcb)
+        self.window_vbox.addLayout(hbox)
+
+    def _init_additions_section(self):
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel("Legend:"))
+        lcb = QCheckBox()
+        legend = self.configuration.legend
+        lcb.setChecked(legend.value)
+        lcb.checkStateChanged.connect(lambda: legend.update(not legend))
+        hbox.addWidget(lcb)
+        self.window_vbox.addLayout(hbox)
+
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel("Metadata text:"))
+        mcb = QCheckBox()
+        meta = self.configuration.metadata
+        mcb.setChecked(meta.value)
+        mcb.checkStateChanged.connect(lambda: meta.update(not meta))
+        hbox.addWidget(mcb)
         self.window_vbox.addLayout(hbox)
 
     def on_image_selection_button_click(self):

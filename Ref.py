@@ -13,3 +13,6 @@ class Ref(Generic[Type]):
 
     def update(self, value: Type):
         self.value = value
+
+    def __bool__(self) -> bool:
+        return bool(self.value)

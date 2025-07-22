@@ -20,22 +20,8 @@ class BaseConfiguration(ABC):
     background_image: Ref[Path | None]
     opaqueness: Ref[float]
     dpi: Ref[int]
-
-    # def __init__(
-    #     self,
-    #     screen_width: int = 1920,
-    #     screen_height: int = 1080,
-    #     background_image: Path | None = None,
-    #     opagueness: float = 1.0,
-    #     dpi: int = DpiQualities.MEDIUM.value,
-    # ) -> None:
-    #     self.screen_width, self.screen_height = Ref(screen_width), Ref(screen_height)
-    #     self.background_image = Ref(None)
-    #     if background_image:
-    #         self.background_image = Ref(background_image)
-    #     self.opaqueness = Ref(opagueness)
-    #     self.dpi = Ref(dpi)
-    #     super().__init__()
+    legend: Ref[bool]
+    metadata: Ref[bool]
 
     def __init__(self, recording: GazeRecording | None) -> None:
         self._default()
@@ -55,3 +41,5 @@ class BaseConfiguration(ABC):
         self.background_image = Ref(None)
         self.opaqueness = Ref(1.0)
         self.dpi = Ref(DpiQualities.MEDIUM.value)
+        self.legend = Ref(True)
+        self.metadata = Ref(True)

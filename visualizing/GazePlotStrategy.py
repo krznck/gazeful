@@ -33,8 +33,10 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
             self._draw_label(axes, i, x, y, size)
 
         self._set_axes(axes)
-        self._set_legend(axes)
-        self._set_metadata(figure, axes, meta)
+        if self.configuration.legend:
+            self._set_legend(axes)
+        if self.configuration.metadata:
+            self._set_metadata(figure, axes, meta)
 
         return figure, axes
 
