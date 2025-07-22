@@ -6,6 +6,7 @@ from processing.Definitions import Definitions
 from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 from processing.ingester import ingest_csv
+from visualizing.configuration.Metadata import Metadata
 from visualizing.visualization_selector import create_visualizer
 from visualizing.visualization_selector import VisualizationsEnum
 from visuals.visualization_configurations.BaseConfigurationEditor import (
@@ -29,6 +30,7 @@ class AnalysisService:
                 self._recording = ingest_csv(path)
         self._oculomotor = OculomotorAnalyzer(self._recording.data, definitions)
         self._closures = ClosureAnalyzer(self._recording.data, definitions)
+        self._defs = definitions
         self.set_strategy(vis_type)
 
     # NOTE: Having this service create and hold a UI component (the editor) makes
@@ -53,7 +55,8 @@ class AnalysisService:
 
     def save_visualization(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        fig, _ = self._strategy.visualize(self._fixations)
+        meta = Metadata(self.session_duration, self._defs)
+        fig, _ = self._strategy.visualize(self._fixations, meta)
         fig.savefig(path, dpi=self._configuration.dpi.value, bbox_inches="tight")
 
     @property

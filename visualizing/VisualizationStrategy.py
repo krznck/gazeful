@@ -10,6 +10,7 @@ from matplotlib.figure import Figure
 
 from processing.GazeStream import GazeStream
 from visualizing.configuration.BaseConfiguration import BaseConfiguration
+from visualizing.configuration.Metadata import Metadata
 
 Configuration = TypeVar("Configuration", bound=BaseConfiguration)
 
@@ -25,5 +26,7 @@ class VisualizationStrategy(ABC, Generic[Configuration]):
         super().__init__()
 
     @abstractmethod
-    def visualize(self, data: Sequence[GazeStream]) -> tuple[Figure, Axes]:
+    def visualize(
+        self, data: Sequence[GazeStream], meta: Metadata
+    ) -> tuple[Figure, Axes]:
         pass

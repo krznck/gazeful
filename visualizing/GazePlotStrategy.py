@@ -7,6 +7,7 @@ from matplotlib.lines import Line2D
 
 from processing.GazeStream import GazeStream
 from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguration
+from visualizing.configuration.Metadata import Metadata
 from visualizing.VisualizationStrategy import VisualizationStrategy
 
 SCALING_FACTOR = 0.5
@@ -16,7 +17,9 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
     def __init__(self, configuration: GazePlotConfiguration) -> None:
         super().__init__(configuration)
 
-    def visualize(self, data: Sequence[GazeStream]) -> tuple[Figure, Axes]:
+    def visualize(
+        self, data: Sequence[GazeStream], meta: Metadata
+    ) -> tuple[Figure, Axes]:
         xs, ys, sizes = self._interpret(data)
 
         figure, axes = self._prepare_subplots()
@@ -31,6 +34,7 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
 
         self._set_axes(axes)
         self._set_legend(axes)
+        self._set_metadata(figure, axes, meta)
 
         return figure, axes
 
@@ -161,5 +165,21 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
             loc="upper left",
             labelspacing=1.6,
             borderpad=1.0,
+            fontsize="x-small",
+        )
+
+    def _set_metadata(self, figure: Figure, axes: Axes, meta: Metadata) -> None:
+        pos = axes.get_position()
+        figure.subplots_adjust(bottom=0.1)
+        figure.text(
+            x=pos.x0,
+            y=pos.y0 - 0.04,
+            s=(
+                f"Recording duration: {meta.duration}s\n"
+                f"Minimum accepted fixation duration: {meta.min_fixation_duration}ms\n"
+                f"Maximum accepted fixation dispersion within screen area: {meta.max_fixation_dispersion}%\n"
+            ),
+            ha="left",
+            va="center",
             fontsize="x-small",
         )
