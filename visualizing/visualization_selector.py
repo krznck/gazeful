@@ -2,6 +2,9 @@ from enum import Enum
 
 from processing.GazeRecording import GazeRecording
 from visualizing.configuration.BaseConfiguration import BaseConfiguration
+from visualizing.configuration.FixationCountHeatmapConfiguration import (
+    FixationCountHeatmapConfiguration,
+)
 from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguration
 from visualizing.FixationCountHeatmapStrategy import FixationCountHeatmapStrategy
 from visualizing.GazePlotStrategy import GazePlotStrategy
@@ -33,7 +36,7 @@ def create_visualizer(
             conf = GazePlotConfiguration(recording)
             return conf, GazePlotStrategy(conf), GazePlotConfigurationEditor(conf)
         case VisualizationsEnum.FIXATION_COUNT:
-            conf = BaseConfiguration(recording)
+            conf = FixationCountHeatmapConfiguration(recording)
             return (
                 conf,
                 FixationCountHeatmapStrategy(conf),

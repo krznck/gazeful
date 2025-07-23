@@ -8,13 +8,17 @@ from matplotlib.figure import Figure
 from scipy.ndimage import gaussian_filter
 
 from processing.GazeStream import GazeStream
-from visualizing.configuration.BaseConfiguration import BaseConfiguration
+from visualizing.configuration.FixationCountHeatmapConfiguration import (
+    FixationCountHeatmapConfiguration,
+)
 from visualizing.configuration.Metadata import Metadata
 from visualizing.VisualizationStrategy import VisualizationStrategy
 
 
-class FixationCountHeatmapStrategy(VisualizationStrategy[BaseConfiguration]):
-    def __init__(self, configuration: BaseConfiguration) -> None:
+class FixationCountHeatmapStrategy(
+    VisualizationStrategy[FixationCountHeatmapConfiguration]
+):
+    def __init__(self, configuration: FixationCountHeatmapConfiguration) -> None:
         super().__init__(configuration)
 
     def visualize(
@@ -60,12 +64,13 @@ class FixationCountHeatmapStrategy(VisualizationStrategy[BaseConfiguration]):
         return heatmap
 
     def _generate_colormap(self) -> ListedColormap:
-        colormap = plt.get_cmap("hot")
-        cmap_colors = colormap(np.arange(colormap.N))
         # NOTE: This way, the heatmap starts off completely transparent at low values,
         # and sharply increases to being opaque
-        gamma = 0.3
-        non_linear_alpha = np.linspace(0.0, 1.0, colormap.N) ** gamma
-        cmap_colors[:, -1] = non_linear_alpha
-        transparent_colormap = ListedColormap(cmap_colors)
-        return transparent_colormap
+        cutoff = 0.05
+        cmap = plt.get_cmap("hot")
+        N = cmap.N
+        colors = cmap(np.linspace(0, 1, N))
+        x = np.linspace(0, 1, N)
+        alpha = np.where(x <= cutoff, x / cutoff, 1.0)
+        colors[:, 3] = alpha
+        return ListedColormap(colors)
