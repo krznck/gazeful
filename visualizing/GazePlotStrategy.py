@@ -143,19 +143,3 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
             borderpad=1.0,
             fontsize="x-small",
         )
-
-    def _set_metadata(self, figure: Figure, axes: Axes, meta: Metadata) -> None:
-        pos = axes.get_position()
-        figure.subplots_adjust(bottom=0.1)
-        figure.text(
-            x=pos.x0,
-            y=pos.y0 - 0.04,
-            s=(
-                f"Recording duration: {meta.duration}s\n"
-                f"Minimum accepted fixation duration: {meta.min_fixation_duration}ms\n"
-                f"Maximum accepted fixation dispersion within screen area: {meta.max_fixation_dispersion}%\n"
-            ),
-            ha="left",
-            va="center",
-            fontsize="x-small",
-        )

@@ -44,14 +44,31 @@ class VisualizationStrategy(ABC, Generic[Configuration]):
         figure, axes = plt.subplots(figsize=(10, 8), dpi=150)
         return figure, axes
 
-    def _set_axes(self, axes: Axes, title: str) -> None:
+    def _set_axes(self, axes: Axes, title: str | None = None) -> None:
         sw = self.configuration.screen_width.value
         sh = self.configuration.screen_height.value
         axes.set_xlim(0, sw)
         axes.set_ylim(0, sh)
         axes.set_aspect("equal", adjustable="box")
-        axes.set_title(f"{title} ({sw}x{sh})")
+        if title:
+            axes.set_title(f"{title} ({sw}x{sh})")
 
         # coordinate ticks aren't all that relevant for these
         axes.set_xticks([])
         axes.set_yticks([])
+
+    def _set_metadata(self, figure: Figure, axes: Axes, meta: Metadata) -> None:
+        pos = axes.get_position()
+        figure.subplots_adjust(bottom=0.1)
+        figure.text(
+            x=pos.x0,
+            y=pos.y0 - 0.04,
+            s=(
+                f"Recording duration: {meta.duration}s\n"
+                f"Minimum accepted fixation duration: {meta.min_fixation_duration}ms\n"
+                f"Maximum accepted fixation dispersion within screen area: {meta.max_fixation_dispersion}%\n"
+            ),
+            ha="left",
+            va="center",
+            fontsize="x-small",
+        )
