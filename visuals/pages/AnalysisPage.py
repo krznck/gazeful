@@ -196,7 +196,7 @@ class AnalysisPage(Page):
 
         self.visualizers_combo_box = cb = CustomComboBox()
         for vis in VisualizationsEnum:
-            cb.addItem(vis.name.lower().capitalize())
+            cb.addItem(str(vis))
         cb.setEnabled(False)
         cb.currentIndexChanged.connect(self._on_visualizers_combo_box_index_changed)
 
@@ -234,7 +234,7 @@ class AnalysisPage(Page):
 
     @property
     def _visualization_choice(self) -> VisualizationsEnum:
-        return VisualizationsEnum[self.visualizers_combo_box.currentText().upper()]
+        return list(VisualizationsEnum)[self.visualizers_combo_box.currentIndex()]
 
     def _on_visualizers_combo_box_index_changed(self):
         serv = self._service

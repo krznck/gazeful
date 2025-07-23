@@ -3,6 +3,7 @@ from enum import Enum
 from processing.GazeRecording import GazeRecording
 from visualizing.configuration.BaseConfiguration import BaseConfiguration
 from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguration
+from visualizing.FixationCountHeatmapStrategy import FixationCountHeatmapStrategy
 from visualizing.GazePlotStrategy import GazePlotStrategy
 from visualizing.VisualizationStrategy import VisualizationStrategy
 from visuals.visualization_configurations.BaseConfigurationEditor import (
@@ -14,7 +15,11 @@ from visuals.visualization_configurations.GazePlotConfigurationEditor import (
 
 
 class VisualizationsEnum(Enum):
-    PLOT = GazePlotStrategy
+    PLOT = 0
+    FIXATION_COUNT = 1
+
+    def __str__(self) -> str:
+        return self.name.lower().capitalize().replace("_", " ")
 
 
 def create_visualizer(
@@ -27,3 +32,10 @@ def create_visualizer(
         case VisualizationsEnum.PLOT:
             conf = GazePlotConfiguration(recording)
             return conf, GazePlotStrategy(conf), GazePlotConfigurationEditor(conf)
+        case VisualizationsEnum.FIXATION_COUNT:
+            conf = BaseConfiguration(recording)
+            return (
+                conf,
+                FixationCountHeatmapStrategy(conf),
+                BaseConfigurationEditor(conf),
+            )

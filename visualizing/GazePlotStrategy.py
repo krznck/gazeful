@@ -1,6 +1,6 @@
+from typing import Final
 from typing import Sequence
 
-import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
@@ -10,11 +10,10 @@ from visualizing.configuration.GazePlotConfiguration import GazePlotConfiguratio
 from visualizing.configuration.Metadata import Metadata
 from visualizing.VisualizationStrategy import VisualizationStrategy
 
-SCALING_FACTOR = 0.5
-
 
 class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
     def __init__(self, configuration: GazePlotConfiguration) -> None:
+        self._scaling_factor: Final[float] = 0.5
         super().__init__(configuration)
 
     def visualize(
@@ -32,25 +31,12 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
             self._draw_point(axes, i, x, y, size)
             self._draw_label(axes, i, x, y, size)
 
-        self._set_axes(axes)
+        self._set_axes(axes, "Gaze Sequence Map")
         if self.configuration.legend:
             self._set_legend(axes)
         if self.configuration.metadata:
             self._set_metadata(figure, axes, meta)
 
-        return figure, axes
-
-    def _draw_background(self, axes: Axes):
-        if self.configuration.background_image.value is None:
-            return
-
-        sw = self.configuration.screen_width.value
-        sh = self.configuration.screen_height.value
-        image = plt.imread(self.configuration.background_image.value)
-        axes.imshow(image, extent=(0, sw, 0, sh))
-
-    def _prepare_subplots(self) -> tuple[Figure, Axes]:
-        figure, axes = plt.subplots(figsize=(10, 8), dpi=150)
         return figure, axes
 
     def _draw_lines(self, ax: Axes, x_cords: list[float], y_cords: list[float]) -> None:
@@ -70,7 +56,7 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
             x,
             y,
             marker="o",
-            markersize=(size**SCALING_FACTOR),
+            markersize=(size**self._scaling_factor),
             markerfacecolor="blue",
             markeredgecolor="black",
             linestyle="None",
@@ -95,7 +81,7 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
     def _calculate_font_size(self, size: float) -> float:
         scaling_factor = 0.4
         min_font_size = 4
-        font_size = scaling_factor * (size**SCALING_FACTOR)
+        font_size = scaling_factor * (size**self._scaling_factor)
         return max(font_size, min_font_size)
 
     def _interpret(
@@ -116,18 +102,6 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
 
         return xs, ys, sizes
 
-    def _set_axes(self, axes: Axes) -> None:
-        sw = self.configuration.screen_width.value
-        sh = self.configuration.screen_height.value
-        axes.set_xlim(0, sw)
-        axes.set_ylim(0, sh)
-        axes.set_aspect("equal", adjustable="box")
-        axes.set_title(f"Gaze Sequence Map ({sw}x{sh})")
-
-        # coordinate ticks aren't all that relevant for these
-        axes.set_xticks([])
-        axes.set_yticks([])
-
     def _set_legend(self, axes: Axes) -> None:
         example_durations = [0.25, 0.5, 0.75]
         size_mult = self.configuration.size_multiplier.value
@@ -145,7 +119,7 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
         ]
 
         for duration in example_durations:
-            marker_size = (duration * size_mult) ** SCALING_FACTOR
+            marker_size = (duration * size_mult) ** self._scaling_factor
             legend_elements.append(
                 Line2D(
                     [0],

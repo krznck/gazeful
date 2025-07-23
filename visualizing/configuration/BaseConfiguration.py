@@ -23,7 +23,7 @@ class BaseConfiguration(ABC):
     legend: Ref[bool]
     metadata: Ref[bool]
 
-    def __init__(self, recording: GazeRecording | None) -> None:
+    def __init__(self, recording: GazeRecording | None = None) -> None:
         self._default()
 
         if recording:
