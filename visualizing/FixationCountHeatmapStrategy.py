@@ -39,10 +39,17 @@ class FixationCountHeatmapStrategy(
             alpha=conf.opaqueness.value,
         )
 
+        if conf.legend:
+            fig.colorbar(
+                mappable=im,
+                ax=ax,
+                shrink=0.5,
+                pad=0.02,
+                label="color per amount of fixations",
+            )
+
         if conf.metadata:
             self._set_metadata(fig, ax, meta)
-
-        # fig.colorbar(mappable=im, ax=ax, label="Fixation Overlap Count")
 
         return fig, ax
 

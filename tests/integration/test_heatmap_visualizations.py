@@ -6,11 +6,13 @@ from debug import get_sample_image
 from debug import ingest_sample
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
-from visualizing.configuration.BaseConfiguration import BaseConfiguration
+from visualizing.configuration.FixationCountHeatmapConfiguration import (
+    FixationCountHeatmapConfiguration,
+)
 from visualizing.configuration.Metadata import Metadata
 from visualizing.FixationCountHeatmapStrategy import FixationCountHeatmapStrategy
 
-confs = BaseConfiguration()
+confs = FixationCountHeatmapConfiguration()
 
 
 def check_sample(sample: str):
