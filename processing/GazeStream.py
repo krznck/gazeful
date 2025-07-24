@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from collections import deque
+from typing import Deque
+
 from trackers.GazePoint import GazePoint
 
 
@@ -8,12 +11,12 @@ class NonMonotonicTimesstampError(Exception):
 
 
 class GazeStream:
-    points: list[GazePoint]
+    points: deque[GazePoint]
 
-    def __init__(self, data: list[GazePoint] | None = None) -> None:
-        self.points = []
+    def __init__(self, data: list[GazePoint] | None | Deque = None) -> None:
+        self.points = deque()
         if data is not None:
-            self.points = data
+            self.points = deque(data)
 
     def __iter__(self):
         return iter(self.points)
@@ -46,8 +49,8 @@ class GazeStream:
 
         self.points.append(point)
 
-    def pop(self, index: int = -1) -> GazePoint:
-        return self.points.pop(index)
+    def pop(self) -> GazePoint:
+        return self.points.popleft()
 
     def duration(self) -> float:
         if (len(self)) == 1:

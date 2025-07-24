@@ -70,7 +70,7 @@ class OculomotorAnalyzer(BaseAnalyzer):
                 while not self._is_within_dispersion(future):
                     if len(future) <= 1:
                         break
-                    future.pop(0)
+                    future.pop()
                 window = future
 
         self._save_if_valid(fixations, window)
