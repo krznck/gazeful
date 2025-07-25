@@ -4,8 +4,10 @@ import pytest
 from debug import debug_time
 from debug import get_sample_image
 from debug import ingest_sample
+from debug import Samples
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
+from processing.GazeStream import GazeStream
 from visualizing.configuration.FixationCountHeatmapConfiguration import (
     FixationCountHeatmapConfiguration,
 )
@@ -15,23 +17,32 @@ from visualizing.FixationCountHeatmapStrategy import FixationCountHeatmapStrateg
 confs = FixationCountHeatmapConfiguration()
 
 
-def check_sample(sample: str):
+def prepare_sample(sample: str):
     stream = ingest_sample(sample)
-    strategy = FixationCountHeatmapStrategy(confs)
     defs = Definitions()
     analyzer = OculomotorAnalyzer(stream, defs)
-    fixations = analyzer.extract_fixations()
-    strategy.visualize(fixations, Metadata(stream.duration(), defs))
+    return analyzer.extract_fixations(), stream, defs
 
 
-def test_ars_technica_sample():
-    debug_time(lambda: check_sample("ars_technica"))
+def check_visualization(fixs: list[GazeStream], data: GazeStream, defs: Definitions):
+    strategy = FixationCountHeatmapStrategy(confs)
+    strategy.visualize(fixs, Metadata(data.duration(), defs))
+
+
+@pytest.mark.perf
+def test_perf():
+    for sample in Samples:
+        args = prepare_sample(sample.value)
+        debug_time(
+            func=lambda: check_visualization(*args),
+            message=f"{sample.value} fixation count heatmap",
+        )
 
 
 @pytest.mark.visual
 def test_ars_technica_visual():
-    confs.background_image.update(get_sample_image("ars_technica"))
+    confs.background_image.update(get_sample_image(Samples.ARS.value))
     confs.legend.update(False)
     confs.metadata.update(False)
-    test_ars_technica_sample()
+    check_visualization(*prepare_sample(Samples.ARS.value))
     plt.show()

@@ -1,14 +1,22 @@
+import pytest
+
 from debug import debug_time
 from debug import ingest_sample
+from debug import Samples
 
 
 def test_ars_technica_sample():
-    stream = debug_time(lambda: ingest_sample("ars_technica"), "ars sample ingestion")
-
-    assert len(stream) == 9353
+    assert len(ingest_sample(Samples.ARS.value)) == 9353
 
 
 def test_balatro_sample():
-    stream = debug_time(lambda: ingest_sample("balatro"), "balatro sample ingestion")
+    assert len(ingest_sample(Samples.BALATRO.value)) == 47128
 
-    assert len(stream) == 47128
+
+@pytest.mark.perf
+def test_performance():
+    for sample in Samples:
+        debug_time(
+            func=lambda: ingest_sample(sample.value),
+            message=f"{sample.value} ingestion",
+        )

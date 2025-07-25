@@ -1,7 +1,9 @@
+import pytest
 from pytest import approx
 
 from debug import debug_time
 from debug import ingest_sample
+from debug import Samples
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
 from processing.GazeStream import GazeStream
@@ -60,35 +62,27 @@ def test_dispersion_breakup():
     assert len(fixations) == 2
 
 
-def test_one_fixation_sample():
+def prepare_sample(sample: str) -> OculomotorAnalyzer:
     defs = Definitions()
     defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
     defs.fixation_minimum_duration_ms.update(200)
 
-    stream = ingest_sample("one_fix")
+    stream = ingest_sample(sample)
     assert not stream.is_empty()
 
-    analyzer = OculomotorAnalyzer(stream, defs)
-    fixations = debug_time(
-        lambda: analyzer.extract_fixations(), "one fix sample fixation analysis"
-    )
-    # fixations = analyzer.extract_fixations()
+    return OculomotorAnalyzer(stream, defs)
+
+
+def test_one_fixation_sample():
+    analyzer = prepare_sample(Samples.ONE.value)
+    fixations = analyzer.extract_fixations()
     assert len(fixations) == 1
 
 
 # sample of a gaze session of reading an article from Ars Technica
 def test_ars_technica_sample():
-    defs = Definitions()
-    defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
-    defs.fixation_minimum_duration_ms.update(200)
-
-    stream = ingest_sample("ars_technica")
-    assert not stream.is_empty()
-
-    analyzer = OculomotorAnalyzer(stream, defs)
-    fixations = debug_time(
-        lambda: analyzer.extract_fixations(), "ars technica sample fixation analysis"
-    )
+    analyzer = prepare_sample(Samples.ARS.value)
+    fixations = analyzer.extract_fixations()
     assert len(fixations) == 379
     assert round(analyzer.average_fixation_duration(), 2) == approx(359.67)
     assert analyzer.median_fixation_duration() == approx(313)
@@ -96,17 +90,17 @@ def test_ars_technica_sample():
 
 # sample of a gaze session of playing Balatro
 def test_balatro_sample():
-    defs = Definitions()
-    defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
-    defs.fixation_minimum_duration_ms.update(200)
-
-    stream = ingest_sample("balatro")
-    assert not stream.is_empty()
-
-    analyzer = OculomotorAnalyzer(stream, defs)
-    fixations = debug_time(
-        lambda: analyzer.extract_fixations(), "balatro sample fixation analysis"
-    )
+    analyzer = prepare_sample(Samples.BALATRO.value)
+    fixations = analyzer.extract_fixations()
     assert len(fixations) == 1457
     assert round(analyzer.average_fixation_duration(), 2) == approx(288.95)
     assert analyzer.median_fixation_duration() == approx(250)
+
+
+@pytest.mark.perf
+def test_perfomace():
+    for sample in Samples:
+        debug_time(
+            func=lambda: prepare_sample(sample.value).extract_fixations(),
+            message=f"{sample.value} fixation extraction",
+        )

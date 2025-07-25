@@ -4,6 +4,7 @@ import pytest
 from debug import debug_time
 from debug import get_sample_image
 from debug import ingest_sample
+from debug import Samples
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
 from processing.GazeStream import GazeStream
@@ -14,45 +15,34 @@ from visualizing.GazePlotStrategy import GazePlotStrategy
 confs = GazePlotConfiguration(None, 400)
 
 
-class DummyGaze(GazeStream):
-    def __init__(self, x, y, d):
-        self._c = (x, y)
-        self._d = d
-
-    def centroid(self):
-        return self._c
-
-    def duration(self):
-        return self._d
-
-
 # NOTE: These are here just for testing performance,
 # as well as visually checking results with `-m visual`
-def check_sample(sample: str):
+def prepare_sample(sample: str):
     stream = ingest_sample(sample)
-    strategy = GazePlotStrategy(confs)
     defs = Definitions()
     analyzer = OculomotorAnalyzer(stream, defs)
-    fixations = analyzer.extract_fixations()
-    strategy.visualize(fixations, Metadata(stream.duration(), defs))
+    return analyzer.extract_fixations(), stream, defs
 
 
-def test_one_fix_sample():
-    debug_time(lambda: check_sample("one_fix"))
+def check_visualization(fixs: list[GazeStream], data: GazeStream, defs: Definitions):
+    strategy = GazePlotStrategy(confs)
+    strategy.visualize(fixs, Metadata(data.duration(), defs))
 
 
-def test_ars_technica_sample():
-    debug_time(lambda: check_sample("ars_technica"))
-
-
-def test_balatro_sample():
-    debug_time(lambda: check_sample("balatro"))
+@pytest.mark.perf
+def test_perf():
+    for sample in Samples:
+        args = prepare_sample(sample.value)
+        debug_time(
+            func=lambda: check_visualization(*args),
+            message=f"{sample.value} gaze sequence map",
+        )
 
 
 @pytest.mark.visual
 def test_ars_technica_visual():
-    confs.background_image.update(get_sample_image("ars_technica"))
+    confs.background_image.update(get_sample_image(Samples.ARS.value))
     confs.legend.update(False)
     confs.metadata.update(False)
-    test_ars_technica_sample()
+    check_visualization(*prepare_sample(Samples.ARS.value))
     plt.show()
