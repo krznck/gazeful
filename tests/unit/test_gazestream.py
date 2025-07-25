@@ -54,4 +54,4 @@ def test_centroid_simple():
     gs.append(GazePoint(0, 0, 1))
     gs.append(GazePoint(1, 1, 2))
 
-    assert gs.centroid() == (0.5, 0.5)
+    assert gs.centroid == (0.5, 0.5)

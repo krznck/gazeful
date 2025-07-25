@@ -91,7 +91,7 @@ class GazePlotStrategy(VisualizationStrategy[GazePlotConfiguration]):
         sh = self.configuration.screen_height.value
         xs, ys, sizes = [], [], []
         for stream in data:
-            cords = stream.centroid()
+            cords = stream.centroid
             xs.append(cords[0] * sw)
 
             # NOTE: In matplolib coordinates start from bottom-left instead of top-left,

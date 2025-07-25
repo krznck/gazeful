@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import deque
+from functools import cached_property
 from typing import Deque
 
 from trackers.GazePoint import GazePoint
@@ -12,8 +13,12 @@ class NonMonotonicTimesstampError(Exception):
 
 class GazeStream:
     points: deque[GazePoint]
+    _cached_properties = ["extremes", "centroid"]
 
-    def __init__(self, data: list[GazePoint] | None | Deque = None) -> None:
+    def __init__(
+        self,
+        data: list[GazePoint] | None | Deque = None,
+    ) -> None:
         self.points = deque()
         if data is not None:
             self.points = deque(data)
@@ -33,11 +38,21 @@ class GazeStream:
             builder += f"\n {point}"
         return builder
 
+    def _invalidate_caches(self) -> None:
+        for property in self._cached_properties:
+            if property in self.__dict__:
+                del self.__dict__[property]
+
     def copy(self) -> GazeStream:
-        return GazeStream(self.points.copy())
+        new = GazeStream(self.points.copy())
+        for property in self._cached_properties:
+            if property in self.__dict__:
+                new.__dict__[property] = self.__dict__[property]
+        return new
 
     def append(self, point: GazePoint) -> None:
         if len(self) == 0:
+            self._invalidate_caches()
             self.points.append(point)
             return
 
@@ -47,9 +62,11 @@ class GazeStream:
                 f"Tried to add point with timestamp {point.timestamp} after {last}"
             )
 
+        self._invalidate_caches()
         self.points.append(point)
 
     def pop(self) -> GazePoint:
+        self._invalidate_caches()
         return self.points.popleft()
 
     def duration(self) -> float:
@@ -64,8 +81,10 @@ class GazeStream:
         return len(self) <= 0
 
     def clear(self) -> None:
+        self._invalidate_caches()
         self.points.clear()
 
+    @cached_property
     def extremes(self) -> tuple[float, float, float, float]:
         xs = [p.x for p in self if p.x is not None]
         ys = [p.y for p in self if p.y is not None]
@@ -75,6 +94,7 @@ class GazeStream:
 
         return max(xs), max(ys), min(xs), min(ys)
 
+    @cached_property
     def centroid(self) -> tuple[float, float]:
         if self.is_empty():
             raise ValueError("No points in stream")
@@ -84,5 +104,5 @@ class GazeStream:
         return (sum(xs) / len(xs)), (sum(ys) / len(ys))
 
     def dispersion(self) -> float:
-        max_x, max_y, min_x, min_y = self.extremes()
+        max_x, max_y, min_x, min_y = self.extremes
         return (max_x - min_x) + (max_y - min_y)

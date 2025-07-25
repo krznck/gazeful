@@ -60,7 +60,7 @@ class FixationCountHeatmapStrategy(
 
         for fixation in data:
             disp = fixation.dispersion()
-            cent = fixation.centroid()
+            cent = fixation.centroid
 
             center_x = int(cent[0] * sw)
             center_y = int(sh - cent[1] * sh)
