@@ -15,7 +15,7 @@ class InvalidFormatError(Exception):
 
 
 def ingest_csv(path: Path) -> GazeRecording:
-    points = GazeStream()
+    points = []
 
     with path.open("r", newline="") as f:
         reader = csv.reader(f)
@@ -48,7 +48,7 @@ def ingest_csv(path: Path) -> GazeRecording:
                     f"Invalid data encountered at row {line_num} in {path}"
                 )
 
-    return GazeRecording(data=points, screen_dimensions=screen_dimensions)
+    return GazeRecording(data=GazeStream(points), screen_dimensions=screen_dimensions)
 
 
 def ingest_screen_dimension_comment(line: str) -> tuple[int, int]:

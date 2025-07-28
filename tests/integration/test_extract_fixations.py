@@ -84,7 +84,7 @@ def test_ars_technica_sample():
     analyzer = prepare_sample(Samples.ARS.value)
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 379
-    assert round(analyzer.average_fixation_duration(), 2) == approx(359.67)
+    assert round(analyzer.average_fixation_duration(), 2) == approx(361.73)
     assert analyzer.median_fixation_duration() == approx(313)
 
 
@@ -92,8 +92,8 @@ def test_ars_technica_sample():
 def test_balatro_sample():
     analyzer = prepare_sample(Samples.BALATRO.value)
     fixations = analyzer.extract_fixations()
-    assert len(fixations) == 1457
-    assert round(analyzer.average_fixation_duration(), 2) == approx(288.95)
+    assert len(fixations) == 1543
+    assert round(analyzer.average_fixation_duration(), 2) == approx(290.13)
     assert analyzer.median_fixation_duration() == approx(250)
 
 
