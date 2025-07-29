@@ -8,9 +8,9 @@ class GazeRecording:
     def __init__(
         self,
         data: GazeStream,
-        screen_dimensions: tuple[int, int] | None = None,
+        screen_dimensions: tuple[int, int],
         screenshot: Path | None = None,
     ) -> None:
         self.data: Final[GazeStream] = data
-        self.screen: None | Final[tuple[int, int]] = screen_dimensions
+        self.screen: Final[tuple[int, int]] = screen_dimensions
         self.screenshot: Final[Path] | None = screenshot

@@ -48,7 +48,10 @@ class AppContext(QObject):
             case Path() as path:
                 self._main_data = ingest_csv(path)
             case GazeStream() as stream:
-                self._main_data = GazeRecording(data=stream)
+                self._main_data = GazeRecording(
+                    data=stream,
+                    screen_dimensions=screens.get_screen_size(self.tracked_screen),
+                )
             case GazeRecording() as recording:
                 self._main_data = recording
 

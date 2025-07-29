@@ -27,9 +27,8 @@ class BaseConfiguration(ABC):
         self._default()
 
         if recording:
-            if recording.screen:
-                self.screen_width = Ref(recording.screen[0])
-                self.screen_height = Ref(recording.screen[1])
+            self.screen_width = Ref(recording.screen[0])
+            self.screen_height = Ref(recording.screen[1])
 
             if recording.screenshot:
                 self.background_image = Ref(recording.screenshot)

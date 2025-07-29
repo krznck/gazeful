@@ -59,19 +59,21 @@ class FixationCountHeatmapStrategy(
         heatmap = np.zeros((sh, sw), dtype=np.float32)
 
         for fixation in data:
-            disp = fixation.dispersion()
-            cent = fixation.centroid
+            ex = fixation.extremes
+            leftmost = int(ex[2] * sw)
+            rightmost = int(ex[0] * sw)
+            bottommost = int(sh - ex[1] * sh)
+            topmost = int(sh - ex[3] * sh)
 
-            center_x = int(cent[0] * sw)
-            center_y = int(sh - cent[1] * sh)
-            radius = int(disp * sw)
+            # clamping margin to not get crazy
+            # leftmost = max(0, leftmost - margin)
+            # rightmost = min(sw, rightmost + margin)
+            # bottommost = max(0, bottommost - margin)
+            # topmost = min(sh, topmost + margin)
 
-            y, x = np.ogrid[-center_y : sh - center_y, -center_x : sw - center_x]
-            mask = x * x + y * y <= radius * radius
+            heatmap[bottommost:topmost, leftmost:rightmost] += 1
 
-            heatmap[mask] += 1
-
-        heatmap = gaussian_filter(heatmap, sigma=2.0)
+        # heatmap = gaussian_filter(heatmap, sigma=2.0)
         return heatmap
 
     def _generate_colormap(self) -> ListedColormap:

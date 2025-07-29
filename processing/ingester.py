@@ -29,13 +29,16 @@ def ingest_csv(path: Path) -> GazeRecording:
                 screen_dimensions = ingest_screen_dimension_comment(line[0])
                 if next(reader) == list_fields():
                     valid_header = True
-            elif line == list_fields():
-                valid_header = True
         except StopIteration:  # can't go to next line -> obviously no header
+            valid_header = False
+
+        if not screen_dimensions:
             valid_header = False
 
         if not valid_header:
             raise InvalidFormatError(f"{path} does not start with a valid header.")
+
+        assert screen_dimensions is not None
 
         for line_num, row in enumerate(reader, start=2):
             try:

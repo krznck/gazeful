@@ -18,12 +18,10 @@ class AnalysisService:
     def __init__(
         self,
         definitions: Definitions,
-        data: GazeRecording | GazeStream | Path,
+        data: GazeRecording | Path,
         vis_type: VisualizationsEnum,
     ) -> None:
         match data:
-            case GazeStream() as stream:
-                self._recording = GazeRecording(stream)
             case GazeRecording() as recording:
                 self._recording = recording
             case Path() as path:
