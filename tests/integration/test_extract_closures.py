@@ -1,8 +1,11 @@
 from debug import ingest_sample
 from processing.algorithms.ClosureAnalyzer import ClosureAnalyzer
 from processing.Definitions import Definitions
+from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 from trackers.GazePoint import GazePoint
+
+screen = (1920, 1200)
 
 
 def test_two_closures():
@@ -23,8 +26,8 @@ def test_two_closures():
         GazePoint(None, None, 5),
     ]
 
-    stream = GazeStream(pts)
-    analyzer = ClosureAnalyzer(stream, defs)
+    recording = GazeRecording(data=GazeStream(pts), screen_dimensions=screen)
+    analyzer = ClosureAnalyzer(recording, defs)
     closures = analyzer.extract_microsleeps()
     assert len(closures) == 2
 
@@ -43,8 +46,8 @@ def test_two_closures():
         GazePoint(None, None, 3.15),
     ]
 
-    stream = GazeStream(pts)
-    analyzer = ClosureAnalyzer(stream, defs)
+    recording = GazeRecording(data=GazeStream(pts), screen_dimensions=screen)
+    analyzer = ClosureAnalyzer(recording, defs)
     closures = analyzer.extract_blinks()
     assert len(closures) == 2
 
@@ -53,10 +56,10 @@ def test_ars_technica_sample():
     defs = Definitions()
     defs.blink_threshhold_ms.update(400)
 
-    stream = ingest_sample("ars_technica")
-    assert not stream.is_empty()
+    recording = ingest_sample("ars_technica")
+    assert not len(recording) == 0
 
-    analyzer = ClosureAnalyzer(stream, defs)
+    analyzer = ClosureAnalyzer(recording, defs)
     blinks = analyzer.extract_blinks()
     microsleeps = analyzer.extract_microsleeps()
     assert len(blinks) == 6
@@ -67,10 +70,10 @@ def test_balatro_sample():
     defs = Definitions()
     defs.blink_threshhold_ms.update(400)
 
-    stream = ingest_sample("balatro")
-    assert not stream.is_empty()
+    recording = ingest_sample("balatro")
+    assert not len(recording) == 0
 
-    analyzer = ClosureAnalyzer(stream, defs)
+    analyzer = ClosureAnalyzer(recording, defs)
     blinks = analyzer.extract_blinks()
     microsleeps = analyzer.extract_microsleeps()
     assert len(blinks) == 210

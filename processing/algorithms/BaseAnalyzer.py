@@ -1,13 +1,13 @@
 from typing import Final
 
 from processing.Definitions import Definitions
-from processing.GazeStream import GazeStream
+from processing.GazeRecording import GazeRecording
 
 
 class BaseAnalyzer:
-    main_stream: Final[GazeStream]
+    recording: Final[GazeRecording]
     defs: Final[Definitions]
 
-    def __init__(self, data: GazeStream, defs: Definitions) -> None:
-        self.main_stream = data
+    def __init__(self, data: GazeRecording, defs: Definitions) -> None:
+        self.recording = data
         self.defs = defs

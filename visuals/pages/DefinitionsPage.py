@@ -17,7 +17,7 @@ BLINK_SECTION_TEXTBOX_LABEL = "Blink threshhold: "
 
 OCULOMOTOR_SECTION_HEADER = "Oculomotor behavior"
 FIXATION_MINIMUM_DURATION_LABEL = "Fixation minimum duration: "
-FIXATION_MAXIMUM_DISPERSION = "Fixation maximum dispersion (screen area): "
+FIXATION_MAXIMUM_DISPERSION = "Fixation maximum dispersion (in pixels): "
 
 
 class DefinitionsPage(Page):
@@ -53,7 +53,7 @@ class DefinitionsPage(Page):
         vbox = QVBoxLayout()
         vbox.addWidget(Header(OCULOMOTOR_SECTION_HEADER))
 
-        textbox = BoundedFloatTextbox(0, 5000, self.defs.fixation_minimum_duration_ms)
+        textbox = BoundedFloatTextbox(0, 5000, self.defs.fixation_min_duration_ms)
         hbox = generate_definition_item(
             FIXATION_MINIMUM_DURATION_LABEL,
             textbox,
@@ -61,10 +61,8 @@ class DefinitionsPage(Page):
         )
         vbox.addLayout(hbox)
 
-        textbox = BoundedFloatTextbox(
-            0, 100, self.defs.fixation_maximum_dispersion_screen_area_percent
-        )
-        hbox = generate_definition_item(FIXATION_MAXIMUM_DISPERSION, textbox, "%")
+        textbox = BoundedFloatTextbox(0, 100, self.defs.fixation_max_dispersion_px)
+        hbox = generate_definition_item(FIXATION_MAXIMUM_DISPERSION, textbox, "pixels")
         vbox.addLayout(hbox)
 
         self.page_vbox.addLayout(vbox)

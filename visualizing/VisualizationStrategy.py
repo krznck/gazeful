@@ -66,7 +66,7 @@ class VisualizationStrategy(ABC, Generic[Configuration]):
             s=(
                 f"Recording duration: {meta.duration}s\n"
                 f"Minimum accepted fixation duration: {meta.min_fixation_duration}ms\n"
-                f"Maximum accepted fixation dispersion within screen area: {meta.max_fixation_dispersion}%\n"
+                f"Maximum accepted fixation dispersion: {meta.max_fixation_dispersion} pixels\n"
             ),
             ha="left",
             va="center",

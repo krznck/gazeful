@@ -13,8 +13,6 @@ class Metadata:
     duration: float
 
     def __init__(self, duration: float, defs: Definitions) -> None:
-        self.min_fixation_duration = defs.fixation_minimum_duration_ms.value
-        self.max_fixation_dispersion = (
-            defs.fixation_maximum_dispersion_screen_area_percent.value
-        )
+        self.min_fixation_duration = defs.fixation_min_duration_ms.value
+        self.max_fixation_dispersion = defs.fixation_max_dispersion_px.value
         self.duration = duration

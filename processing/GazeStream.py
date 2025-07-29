@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import deque
 from typing import Deque
+from typing import NamedTuple
 
 from trackers.GazePoint import GazePoint
 
@@ -188,7 +189,7 @@ class GazeStream:
         self.points.clear()
 
     @property
-    def extremes(self) -> tuple[float, float, float, float]:
+    def extremes(self) -> Extremes:
         c = self._ex_cache
         if not c:
             for point in self:
@@ -199,7 +200,7 @@ class GazeStream:
         if not c:
             raise RuntimeError("Attempted to gather empty extremes")
 
-        return c.max_x, c.max_y, c.min_x, c.min_y
+        return Extremes(max_x=c.max_x, max_y=c.max_y, min_x=c.min_x, min_y=c.min_y)
 
     @property
     def centroid(self) -> tuple[float, float]:
@@ -214,6 +215,9 @@ class GazeStream:
 
         return c.centroid
 
-    def dispersion(self) -> float:
-        max_x, max_y, min_x, min_y = self.extremes
-        return (max_x - min_x) + (max_y - min_y)
+
+class Extremes(NamedTuple):
+    max_x: float
+    max_y: float
+    min_x: float
+    min_y: float

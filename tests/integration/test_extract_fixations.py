@@ -6,14 +6,17 @@ from debug import ingest_sample
 from debug import Samples
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.Definitions import Definitions
+from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 from trackers.GazePoint import GazePoint
+
+screen = (1920, 1200)
 
 
 def test_two_fixations():
     defs = Definitions()
     defs.blink_threshhold_ms.update(200)  # a blink is minimum 200ms
-    defs.fixation_minimum_duration_ms.update(200)  # a fixation as well
+    defs.fixation_min_duration_ms.update(200)  # a fixation as well
 
     pts = [
         GazePoint(0.1, 0.1, 0),
@@ -26,8 +29,8 @@ def test_two_fixations():
         GazePoint(0.5, 0.5, 2),
     ]
 
-    stream = GazeStream(pts)
-    analyzer = OculomotorAnalyzer(stream, defs)
+    recording = GazeRecording(data=GazeStream(pts), screen_dimensions=screen)
+    analyzer = OculomotorAnalyzer(recording, defs)
     fixations = analyzer.extract_fixations()
 
     assert len(fixations) == 2
@@ -36,41 +39,42 @@ def test_two_fixations():
 def test_dispersion_breakup():
     defs = Definitions()
     # even a tiny dispersion should break the fixation
-    defs.fixation_maximum_dispersion_screen_area_percent.update(0.00001)
-    defs.fixation_minimum_duration_ms.update(100)
+    defs.fixation_max_dispersion_px.update(0.00001)
+    defs.fixation_min_duration_ms.update(100)
 
     pts = [
         GazePoint(0.1, 0.1, 0),
         GazePoint(0.1, 0.1, 1.2),  # <- should be 1st fixation of 1.2 seconds
     ]
 
-    stream = GazeStream(pts)
-    analyzer = OculomotorAnalyzer(stream, defs)
+    recording = GazeRecording(data=GazeStream(pts), screen_dimensions=screen)
+    analyzer = OculomotorAnalyzer(recording, defs)
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 1
 
+    stream = recording.data
     stream.append(GazePoint(0.2, 0.2, 1.3))
     stream.append(GazePoint(0.2, 0.2, 1.5))  # <- should count new fix due to dispersion
-    analyzer = OculomotorAnalyzer(stream, defs)
+    analyzer = OculomotorAnalyzer(recording, defs)
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 2
 
     # too far from previous fixation, but didn't take up enough time -> should not count
     stream.append(GazePoint(0.9, 0.9, 1.6))
-    analyzer = OculomotorAnalyzer(stream, defs)
+    analyzer = OculomotorAnalyzer(recording, defs)
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 2
 
 
 def prepare_sample(sample: str) -> OculomotorAnalyzer:
     defs = Definitions()
-    defs.fixation_maximum_dispersion_screen_area_percent.update(0.05)
-    defs.fixation_minimum_duration_ms.update(200)
+    defs.fixation_max_dispersion_px.update(65)
+    defs.fixation_min_duration_ms.update(200)
 
-    stream = ingest_sample(sample)
-    assert not stream.is_empty()
+    recording = ingest_sample(sample)
+    assert not len(recording) == 0
 
-    return OculomotorAnalyzer(stream, defs)
+    return OculomotorAnalyzer(recording, defs)
 
 
 def test_one_fixation_sample():
@@ -83,17 +87,17 @@ def test_one_fixation_sample():
 def test_ars_technica_sample():
     analyzer = prepare_sample(Samples.ARS.value)
     fixations = analyzer.extract_fixations()
-    assert len(fixations) == 379
-    assert round(analyzer.average_fixation_duration(), 2) == approx(361.73)
-    assert analyzer.median_fixation_duration() == approx(313)
+    assert len(fixations) == 417
+    assert round(analyzer.average_fixation_duration(), 2) == approx(306.45)
+    assert analyzer.median_fixation_duration() == approx(281)
 
 
 # sample of a gaze session of playing Balatro
 def test_balatro_sample():
     analyzer = prepare_sample(Samples.BALATRO.value)
     fixations = analyzer.extract_fixations()
-    assert len(fixations) == 1543
-    assert round(analyzer.average_fixation_duration(), 2) == approx(290.13)
+    assert len(fixations) == 1483
+    assert round(analyzer.average_fixation_duration(), 2) == approx(284.26)
     assert analyzer.median_fixation_duration() == approx(250)
 
 

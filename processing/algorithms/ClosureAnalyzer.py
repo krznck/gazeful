@@ -30,7 +30,7 @@ class ClosureAnalyzer(BaseAnalyzer):
     def __extract_closures(self) -> list[GazeStream]:
         closures = []
         current = GazeStream()
-        for point in self.main_stream:
+        for point in self.recording.data:
             if point.are_eyes_closed():
                 current.append(point)
             elif not current.is_empty():

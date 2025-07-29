@@ -2,11 +2,12 @@ import statistics
 
 from processing.algorithms.BaseAnalyzer import BaseAnalyzer
 from processing.Definitions import Definitions
+from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 
 
 class OculomotorAnalyzer(BaseAnalyzer):
-    def __init__(self, data: GazeStream, defs: Definitions) -> None:
+    def __init__(self, data: GazeRecording, defs: Definitions) -> None:
         super().__init__(data, defs)
         self.fixations: list[GazeStream] | None = None
         self._average: float | None = None
@@ -49,7 +50,7 @@ class OculomotorAnalyzer(BaseAnalyzer):
         fixations: list[GazeStream] = []
         window = GazeStream()
 
-        for candidate in self.main_stream:
+        for candidate in self.recording.data:
             # we discard right away on eyes being closed
             if candidate.are_eyes_closed():
                 self._save_if_valid(fixations, window)
@@ -95,11 +96,17 @@ class OculomotorAnalyzer(BaseAnalyzer):
             return False
 
         norm = segment.duration() * 1000
-        return norm >= self.defs.fixation_minimum_duration_ms.value
+        return norm >= self.defs.fixation_min_duration_ms.value
 
     def _is_within_dispersion(self, segment: GazeStream):
         if len(segment) < 2:
             return True
 
-        allowed = self.defs.fixation_maximum_dispersion_screen_area_percent.value
-        return segment.dispersion() <= allowed
+        sw, sh = self.recording.screen
+        extremes = segment.extremes
+        dx_norm = extremes.max_x - extremes.min_x
+        dy_norm = extremes.max_y - extremes.min_y
+        dx_px = dx_norm * sw
+        dy_px = dy_norm * sh
+
+        return (dx_px + dy_px) <= self.defs.fixation_max_dispersion_px.value

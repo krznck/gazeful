@@ -26,8 +26,8 @@ class AnalysisService:
                 self._recording = recording
             case Path() as path:
                 self._recording = ingest_csv(path)
-        self._oculomotor = OculomotorAnalyzer(self._recording.data, definitions)
-        self._closures = ClosureAnalyzer(self._recording.data, definitions)
+        self._oculomotor = OculomotorAnalyzer(self._recording, definitions)
+        self._closures = ClosureAnalyzer(self._recording, definitions)
         self._defs = definitions
         self.set_strategy(vis_type)
 

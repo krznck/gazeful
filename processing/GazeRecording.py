@@ -14,3 +14,6 @@ class GazeRecording:
         self.data: Final[GazeStream] = data
         self.screen: Final[tuple[int, int]] = screen_dimensions
         self.screenshot: Final[Path] | None = screenshot
+
+    def __len__(self) -> int:
+        return len(self.data)
