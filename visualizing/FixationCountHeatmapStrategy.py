@@ -6,6 +6,7 @@ from matplotlib.axes import Axes
 from matplotlib.colors import ListedColormap
 from matplotlib.figure import Figure
 from scipy.ndimage import gaussian_filter
+from skimage.draw import disk
 
 from processing.GazeStream import GazeStream
 from visualizing.configuration.FixationCountHeatmapConfiguration import (
@@ -33,7 +34,7 @@ class FixationCountHeatmapStrategy(
         self._set_axes(ax, "Fixation Count Heatmap")
 
         im = ax.imshow(
-            X=self._generate_heatmap(data),
+            X=self._generate_heatmap(data=data, max_disp=meta.max_fixation_dispersion),
             cmap=self._generate_colormap(),
             origin="lower",
             alpha=conf.opaqueness.value,
@@ -45,7 +46,7 @@ class FixationCountHeatmapStrategy(
                 ax=ax,
                 shrink=0.5,
                 pad=0.02,
-                label="color per amount of fixations",
+                label="color per overlapping fixations",
             )
 
         if conf.metadata:
@@ -53,27 +54,22 @@ class FixationCountHeatmapStrategy(
 
         return fig, ax
 
-    def _generate_heatmap(self, data: Sequence[GazeStream]) -> np.ndarray:
+    def _generate_heatmap(
+        self, data: Sequence[GazeStream], max_disp: float
+    ) -> np.ndarray:
         sh = self.configuration.screen_height.value
         sw = self.configuration.screen_width.value
         heatmap = np.zeros((sh, sw), dtype=np.float32)
+        radius = max_disp / 2  # we want the max dispersion to be the diamater
 
         for fixation in data:
-            ex = fixation.extremes
-            leftmost = int(ex[2] * sw)
-            rightmost = int(ex[0] * sw)
-            bottommost = int(sh - ex[1] * sh)
-            topmost = int(sh - ex[3] * sh)
+            cx, cy = fixation.centroid
+            x = int(cx * sw)
+            y = sh - int(cy * sh)
+            rr, cc = disk((y, x), radius, shape=heatmap.shape)
+            heatmap[rr, cc] += 1
 
-            # clamping margin to not get crazy
-            # leftmost = max(0, leftmost - margin)
-            # rightmost = min(sw, rightmost + margin)
-            # bottommost = max(0, bottommost - margin)
-            # topmost = min(sh, topmost + margin)
-
-            heatmap[bottommost:topmost, leftmost:rightmost] += 1
-
-        # heatmap = gaussian_filter(heatmap, sigma=2.0)
+        heatmap = gaussian_filter(heatmap, sigma=5.0)
         return heatmap
 
     def _generate_colormap(self) -> ListedColormap:
