@@ -1,6 +1,7 @@
 from typing import Sequence
 
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
 import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.colors import ListedColormap
@@ -41,12 +42,16 @@ class FixationCountHeatmapStrategy(
         )
 
         if conf.legend:
-            fig.colorbar(
+            cbar = fig.colorbar(
                 mappable=im,
                 ax=ax,
                 shrink=0.5,
                 pad=0.02,
-                label="color per overlapping fixations",
+            )
+            vmin, vmax = im.get_clim()
+            cbar.set_ticks([vmin, vmax])
+            cbar.ax.yaxis.set_major_formatter(
+                mticker.FuncFormatter(lambda x, _: f"{int(x)} fixations")
             )
 
         if conf.metadata:
