@@ -9,12 +9,12 @@ from visualizing.configuration.HeatmapConfiguration import HeatmapConfiguration
 from visualizing.HeatmapStrategy import HeatmapStrategy
 
 
-class FixationCountHeatmapStrategy(HeatmapStrategy):
+class AbsoluteGazeDurationHeatmapStrategy(HeatmapStrategy):
     def __init__(self, configuration: HeatmapConfiguration) -> None:
         super().__init__(
             configuration=configuration,
-            title="Fixation Count Heatmap",
-            tick_label="fixations",
+            title="Absolute Gaze Duration Heatmap",
+            tick_label="sec",
         )
 
     def _generate_heatmap(
@@ -30,7 +30,7 @@ class FixationCountHeatmapStrategy(HeatmapStrategy):
             x = int(cx * sw)
             y = sh - int(cy * sh)
             rr, cc = disk((y, x), radius, shape=heatmap.shape)
-            heatmap[rr, cc] += 1
+            heatmap[rr, cc] += fixation.duration()
 
-        heatmap = gaussian_filter(heatmap, sigma=10.0)
+        heatmap = gaussian_filter(heatmap, sigma=self.blur_power)
         return heatmap

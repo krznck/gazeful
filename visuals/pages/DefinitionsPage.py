@@ -61,7 +61,7 @@ class DefinitionsPage(Page):
         )
         vbox.addLayout(hbox)
 
-        textbox = BoundedFloatTextbox(0, 100, self.defs.fixation_max_dispersion_px)
+        textbox = BoundedFloatTextbox(0, 1000, self.defs.fixation_max_dispersion_px)
         hbox = generate_definition_item(FIXATION_MAXIMUM_DISPERSION, textbox, "pixels")
         vbox.addLayout(hbox)
 
