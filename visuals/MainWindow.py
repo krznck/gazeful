@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import QStackedWidget
 from PyQt6.QtWidgets import QWidget
 
 from AppContext import AppContext
-from assets.resources import APP_NAME
+from assets.resources import APP_NAME, DEF_HEIGHT, DEF_WIDTH
 from visuals.pages.navigation import generate_navigation
 
 
@@ -22,6 +22,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.context = context
         self.setWindowTitle(APP_NAME)
+        self.resize(DEF_WIDTH, DEF_HEIGHT)
 
         self.sidebar = QListWidget()
         self.pages = QStackedWidget()

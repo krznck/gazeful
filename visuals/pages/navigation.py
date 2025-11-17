@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QListWidgetItem
 from PyQt6.QtWidgets import QStackedWidget
 
 from AppContext import AppContext
+from editor.EditorPage import EditorPage
 from visuals.customized_widgets.CustomSidebar import CustomSidebar
 from visuals.pages.AnalysisPage import AnalysisPage
 from visuals.pages.DefinitionsPage import DefinitionsPage
@@ -9,7 +10,14 @@ from visuals.pages.MainPage import MainPage
 from visuals.pages.RecordingPage import RecordingPage
 from visuals.pages.VisualizerPage import VisualizerPage
 
-PAGES = [MainPage, VisualizerPage, RecordingPage, DefinitionsPage, AnalysisPage]
+PAGES = [
+    MainPage,
+    VisualizerPage,
+    RecordingPage,
+    DefinitionsPage,
+    AnalysisPage,
+    EditorPage,
+]
 
 
 def generate_navigation(context: AppContext) -> tuple[CustomSidebar, QStackedWidget]:
