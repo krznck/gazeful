@@ -2,10 +2,27 @@ from pyqtgraph.parametertree import Parameter
 from pyqtgraph.parametertree.ParameterTree import ParameterTree
 
 
+class ParameterError(Exception):
+    """Raised when an attempt to access or manipulate a parameter is invalid."""
+
+    pass
+
+
 class CommonParameterTree(ParameterTree):
+    _parameters = Parameter
+
     def __init__(self, parent=None, showHeader=True):
         super().__init__(parent, showHeader)
-        self.setParameters(self._init_parameters(), showTop=False)
+        self._parameters = self._init_parameters()
+        self.setParameters(self._parameters, showTop=False)
+
+    def get_param(self, name: str) -> Parameter:
+        param = self._parameters.param(name)  # type: ignore
+        # WARN: Did not test whether PyQtGraph's param works this way
+        if param:
+            return param
+        else:
+            raise ParameterError(f"Could not find parameter {name}.")
 
     def _init_parameters(self) -> Parameter:
         params = [

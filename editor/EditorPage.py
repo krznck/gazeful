@@ -1,29 +1,39 @@
+from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QHBoxLayout, QLabel, QVBoxLayout
+from PyQt6.QtWidgets import QHBoxLayout, QLabel, QMessageBox, QVBoxLayout
 from pyqtgraph.widgets.GraphicsLayoutWidget import GraphicsLayoutWidget
 from AppContext import AppContext
 from editor.CommonParameters import CommonParameterTree
-from processing.GazeRecording import GazeRecording
+from editor.EditorController import EditorController
+from editor.GazeModel import GazeModel
 from visuals.pages.Page import Page
 
 
 # TODO: Should this even have a dedicated section, as opposed to being in /visuals/pages?
 # Really should consider the separation here.
 class EditorPage(Page):
-    _recording: GazeRecording
+    _controller: EditorController
+
     _param_tree: CommonParameterTree
     _graphics: GraphicsLayoutWidget
     _hover_label: QLabel
 
+    recording_selected = pyqtSignal(str)
+
     def __init__(self, context: AppContext) -> None:
         super().__init__(title="Editor", context=context)
-        # self._recording = recording # TODO: add recording detection
-        # NOTE: I guess that's a behavior thing though. Maybe seperating behavior and
-        # appearance would be good here, haven't been too good with that so far.
+
+        # WARN: It's stupid that the view is responsible for instantiating these.
+        # But that's a function of how I created the Pages, with the base Page holding context.
+        # Might be worth refactoring.
+        model = GazeModel(context)
+        self._controller = EditorController(view=self, model=model)
+
         self._param_tree = CommonParameterTree()
         self._graphics = GraphicsLayoutWidget()
         self._hover_label = QLabel()
         self.page_vbox.addLayout(self._init_layout())
+        self._init_interactions()
 
     def _init_layout(self) -> QHBoxLayout:
         pt, g, hl = self._param_tree, self._graphics, self._hover_label
@@ -31,7 +41,6 @@ class EditorPage(Page):
         layout = QHBoxLayout()
         layout.addWidget(pt, stretch=1)
 
-        hl.setText("no information")
         font = QFont()
         font.setPointSize(18)
         hl.setFont(font)
@@ -42,3 +51,16 @@ class EditorPage(Page):
 
         layout.addLayout(preview, stretch=2)
         return layout
+
+    def _init_interactions(self) -> None:
+        pt = self._param_tree
+
+        csv = pt.get_param("Gaze CSV")
+        csv.sigValueChanged.connect(self._gaze_csv_selector_clicked)
+
+    def _gaze_csv_selector_clicked(self, _, value) -> None:
+        if value == "":
+            QMessageBox.warning(self, "Import warning", "Empty selection")
+            return
+
+        self.recording_selected.emit(value)
