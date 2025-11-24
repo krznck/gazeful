@@ -13,12 +13,14 @@ class GazeModel(QObject):
     recording: GazeRecording | None
     _context: AppContext
     _analyzer: OculomotorAnalyzer | None
+    _background_cache: Path | None
 
     def __init__(self, context: AppContext) -> None:
         super().__init__()
         self._context = context
         self.recording = context.main_data
         self._analyzer = None
+        self._background_cache = None
 
         context.main_data_changed.connect(self._recording_changed)
 
@@ -27,4 +29,16 @@ class GazeModel(QObject):
         self.recording_changed_sig.emit()
 
     def change_recording(self, path: str) -> None:
-        self._context.main_data = ingest_csv(Path(path))
+        recording = ingest_csv(Path(path))
+        if bg := self._background_cache:
+            recording.screenshot = bg
+        self._context.main_data = recording
+
+    def change_background(self, path: str) -> None:
+        r = self.recording
+        if r is None:
+            self._background_cache = Path(path)
+            return
+
+        r.screenshot = Path(path)
+        self.recording_changed_sig.emit()

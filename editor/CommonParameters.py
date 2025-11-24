@@ -18,7 +18,6 @@ class CommonParameterTree(ParameterTree):
 
     def get_param(self, name: str) -> Parameter:
         param = self._parameters.param(name)  # type: ignore
-        # WARN: Did not test whether PyQtGraph's param works this way
         if param:
             return param
         else:
