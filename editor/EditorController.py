@@ -42,4 +42,6 @@ class EditorController(QObject):
             return
 
         graphics = self._view.graphics
-        self._vis_strat.setup_plot(graphics=graphics, recording=rec)
+        vis = self._vis_strat
+        vis.setup_plot(graphics=graphics, recording=rec)
+        vis.update()

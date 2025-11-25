@@ -31,12 +31,12 @@ class EditorPage(Page):
         # But that's a function of how I created the Pages, with the base Page holding context.
         # Might be worth refactoring.
         model = GazeModel(context)
-        vis_strat = HeatmapVisualizationStrategy()
+        self._params = ParameterCollection()
+        vis_strat = HeatmapVisualizationStrategy(parameters=self._params)
         self._controller = EditorController(
             view=self, model=model, visualization_strategy=vis_strat
         )
 
-        self._params = ParameterCollection()
         self._graphics = GraphicsLayoutWidget()
         self._hover_label = QLabel()
         self.page_vbox.addLayout(self._init_layout())

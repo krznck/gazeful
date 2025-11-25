@@ -1,26 +1,33 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
 from PIL import Image
 from PyQt6.QtCore import QRectF
 from pyqtgraph import GraphicsLayoutWidget, ImageItem, PlotItem
 
 import numpy as np
+from editor.ParameterCollection import ParameterCollection
 from processing.GazeRecording import GazeRecording
 
 
 class VisualizationStrategy(ABC):
-    def __init__(self) -> None:
+    _plot = PlotItem | None
+    _parameters: ParameterCollection
+    _recording: GazeRecording | None
+
+    def __init__(self, parameters: ParameterCollection) -> None:
         super().__init__()
+        self._parameters = parameters
 
     def setup_plot(
         self, graphics: GraphicsLayoutWidget, recording: GazeRecording
     ) -> None:
+        self._recording = recording
         graphics.clear()  # type: ignore
 
         graphics.setBackground("white")
 
-        plot = PlotItem()
-        graphics.addItem(plot, row=1, col=1)  # type: ignore
+        self.plot = plot = PlotItem()
+        graphics.addItem(plot, row=1, col=0)  # type: ignore
         if view := plot.getViewBox():
             view.setAspectLocked(True)
             view.invertY(True)
@@ -35,3 +42,7 @@ class VisualizationStrategy(ABC):
                 plot.addItem(img_item)
             except FileNotFoundError:
                 print(f"Warning: Image file not found at {img_path}")
+
+    @abstractmethod
+    def update(self) -> None:
+        pass
