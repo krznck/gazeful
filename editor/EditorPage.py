@@ -1,12 +1,13 @@
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QHBoxLayout, QLabel, QMessageBox, QVBoxLayout
+from pyqtgraph.parametertree import ParameterTree
 from pyqtgraph.widgets.GraphicsLayoutWidget import GraphicsLayoutWidget
 from AppContext import AppContext
-from editor.CommonParameters import CommonParameterTree
 from editor.EditorController import EditorController
 from editor.GazeModel import GazeModel
 from editor.HeatmapVisualizationStrategy import HeatmapVisualizationStrategy
+from editor.ParameterCollection import ParameterCollection, ParameterEnum
 from visuals.assets.icon_selector import IconsEnum
 from visuals.pages.Page import Page
 
@@ -16,7 +17,7 @@ from visuals.pages.Page import Page
 class EditorPage(Page):
     _controller: EditorController
 
-    _param_tree: CommonParameterTree
+    _params: ParameterCollection
     _graphics: GraphicsLayoutWidget
     _hover_label: QLabel
 
@@ -35,7 +36,7 @@ class EditorPage(Page):
             view=self, model=model, visualization_strategy=vis_strat
         )
 
-        self._param_tree = CommonParameterTree()
+        self._params = ParameterCollection()
         self._graphics = GraphicsLayoutWidget()
         self._hover_label = QLabel()
         self.page_vbox.addLayout(self._init_layout())
@@ -46,9 +47,11 @@ class EditorPage(Page):
         return self._graphics
 
     def _init_layout(self) -> QHBoxLayout:
-        pt, g, hl = self._param_tree, self._graphics, self._hover_label
+        p, g, hl = self._params, self._graphics, self._hover_label
 
         layout = QHBoxLayout()
+        pt = ParameterTree()
+        p.connect_tree(pt)
         layout.addWidget(pt, stretch=1)
 
         font = QFont()
@@ -63,13 +66,10 @@ class EditorPage(Page):
         return layout
 
     def _init_interactions(self) -> None:
-        pt = self._param_tree
+        p = self._params
 
-        csv = pt.get_param("Gaze CSV")
-        csv.sigValueChanged.connect(self._gaze_csv_selector_clicked)
-
-        back = pt.get_param("Background Image")
-        back.sigValueChanged.connect(self._background_image_selector_clicked)
+        p.connect(ParameterEnum.GAZE_FILE, self._gaze_csv_selector_clicked)
+        p.connect(ParameterEnum.BACKGROUND, self._background_image_selector_clicked)
 
     def _gaze_csv_selector_clicked(self, _, value) -> None:
         if value == "":
