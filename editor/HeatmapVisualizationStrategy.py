@@ -1,6 +1,6 @@
 from PyQt6.QtCore import QRectF
 import numpy as np
-from pyqtgraph import GraphicsLayoutWidget, colormap
+from pyqtgraph import colormap
 from pyqtgraph.graphicsItems.ColorBarItem import ColorBarItem
 from editor.HoverableImageItem import HoverableImageItem
 from editor.ParameterCollection import ParameterCollection, ParameterEnum
@@ -16,17 +16,19 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
     _colorbar: ColorBarItem | None
 
     def __init__(self, parameters: ParameterCollection) -> None:
+        self._heatmap_item = None
+        self._colorbar = None
         super().__init__(parameters)
 
-    def setup_plot(
-        self, graphics: GraphicsLayoutWidget, recording: GazeRecording
-    ) -> None:
-        super().setup_plot(graphics, recording)
+    def setup_plot(self, recording: GazeRecording) -> None:
+        super().setup_plot(recording)
+        params = self._parameters
+        opacity = params.get_value(ParameterEnum.OPACITY)
 
         self._heatmap_item = heatmap_item = HoverableImageItem()
-        heatmap_item.setOpacity(0.8)  # TODO: Figure out why I set this to a constant
+        heatmap_item.setOpacity(opacity)
         heatmap_item.hovered.connect(self._on_hover)
-        self.plot.addItem(heatmap_item)
+        self._plot.addItem(heatmap_item)
 
         cmap = colormap.get(name="turbo")  # TODO: ditto
         self._colorbar = colorbar = ColorBarItem(
@@ -36,14 +38,14 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
             orientation="horizontal",
         )
         colorbar.setImageItem(heatmap_item)
-        graphics.addItem(colorbar, row=2, col=0)  # type: ignore
+        self._graphics.addItem(colorbar, row=2, col=0)  # type: ignore
 
     def update(self):
         rec = self._recording
         heat_i = self._heatmap_item
         colorbar = self._colorbar
         if not rec or not heat_i or not colorbar:
-            raise RuntimeError("Cannot update heatmap with no recording loaded.")
+            return
 
         fix_disp = self._parameters.get_value(ParameterEnum.FIX_MAX_DISPERSION)
         fix_dur = self._parameters.get_value(ParameterEnum.FIX_MIN_DURATION)
@@ -66,6 +68,13 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
         heat_i.setImage(heatmap.T)
         heat_i.setRect(QRectF(0, 0, sw, sh))
         colorbar.setLevels(values=(np.nanmin(heatmap), np.nanmax(heatmap)))
+
+    def _opacity_updated(self, _, value) -> None:
+        heat_i = self._heatmap_item
+        if not heat_i:
+            return
+
+        heat_i.setOpacity(value)
 
     # TODO: Implement in ABC in a sane way.
     # Though in the exploratory repo the two hover methods work differently with

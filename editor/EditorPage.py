@@ -22,7 +22,6 @@ class EditorPage(Page):
     _hover_label: QLabel
 
     recording_selected = pyqtSignal(str)
-    background_image_selected = pyqtSignal(str)
 
     def __init__(self, context: AppContext) -> None:
         super().__init__(title="Editor", context=context, icon=IconsEnum.MICROSCOPE)
@@ -37,14 +36,10 @@ class EditorPage(Page):
             view=self, model=model, visualization_strategy=vis_strat
         )
 
-        self._graphics = GraphicsLayoutWidget()
+        self._graphics = vis_strat.graphics
         self._hover_label = QLabel()
         self.page_vbox.addLayout(self._init_layout())
         self._init_interactions()
-
-    @property
-    def graphics(self) -> GraphicsLayoutWidget:
-        return self._graphics
 
     def _init_layout(self) -> QHBoxLayout:
         p, g, hl = self._params, self._graphics, self._hover_label
@@ -69,17 +64,12 @@ class EditorPage(Page):
         p = self._params
 
         p.connect(ParameterEnum.GAZE_FILE, self._gaze_csv_selector_clicked)
-        p.connect(ParameterEnum.BACKGROUND, self._background_image_selector_clicked)
 
+    # TODO: remove this completely and just do the parameter signalling in the
+    # visualziation strategy directly
     def _gaze_csv_selector_clicked(self, _, value) -> None:
         if value == "":
             QMessageBox.warning(self, "Import warning", "Empty selection")
             return
 
         self.recording_selected.emit(value)
-
-    def _background_image_selector_clicked(self, _, value) -> None:
-        if value == "":
-            QMessageBox.warning(self, "Import warning", "Empty selection")
-
-        self.background_image_selected.emit(value)

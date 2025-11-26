@@ -9,7 +9,6 @@ class ParameterEnum(Enum):
     FIX_MIN_DURATION = "Fixation Min Duration (ms)"
     FIX_MAX_DISPERSION = "Fixation Max Dispersion (px)"
     OPACITY = "Opacity"
-    ANTIALIASING = "Antialiasing"
     GAZE_FILE = "Gaze File"
     BACKGROUND = "Background Image"
     SAVE = "Save as Image"
@@ -56,11 +55,6 @@ class ParameterCollection:
                 "value": 0.8,
                 "step": 0.05,
                 "limits": (0, 1),
-            },
-            {
-                "name": "Antialiasing",
-                "type": "bool",
-                "value": False,
             },
             {
                 "name": "Gaze File",

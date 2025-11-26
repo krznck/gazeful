@@ -2,7 +2,6 @@ from pathlib import Path
 from PyQt6.QtCore import QObject, pyqtSignal
 from AppContext import AppContext
 from processing.GazeRecording import GazeRecording
-from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.ingester import ingest_csv
 
 
@@ -12,14 +11,12 @@ class GazeModel(QObject):
 
     recording: GazeRecording | None
     _context: AppContext
-    _analyzer: OculomotorAnalyzer | None
     _background_cache: Path | None
 
     def __init__(self, context: AppContext) -> None:
         super().__init__()
         self._context = context
         self.recording = context.main_data
-        self._analyzer = None
         self._background_cache = None
 
         context.main_data_changed.connect(self._recording_changed)

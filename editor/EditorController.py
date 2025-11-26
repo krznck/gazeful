@@ -32,16 +32,12 @@ class EditorController(QObject):
         view, model = self._view, self._model
         model.recording_changed_sig.connect(self._recording_received)
         view.recording_selected.connect(lambda path: model.change_recording(path))
-        view.background_image_selected.connect(
-            lambda path: model.change_background(path)
-        )
 
     def _recording_received(self) -> None:
         rec = self._model.recording
         if rec is None:
             return
 
-        graphics = self._view.graphics
         vis = self._vis_strat
-        vis.setup_plot(graphics=graphics, recording=rec)
+        vis.setup_plot(recording=rec)
         vis.update()
