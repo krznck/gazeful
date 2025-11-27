@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 from PIL import Image
-from PyQt6.QtCore import QRectF, QTimer
+from PyQt6.QtCore import QRectF
 from pyqtgraph import GraphicsLayoutWidget, ImageItem, PlotItem
 
 import numpy as np
@@ -11,7 +11,14 @@ from pathlib import Path
 
 
 class VisualizationStrategy(ABC):
-    _graphics: GraphicsLayoutWidget
+    """
+    Acts as a Model class for the Editor - handles all the logic in creating an
+    interactable visualization, which is available via the `graphics` property.
+    As it is a Strategy pattern, the model is interchangeable depending on which
+    visualization is needed.
+    This class is abstract and should not be instantiated directly.
+    """
+
     _plot: PlotItem
     _parameters: ParameterCollection
     _image_item: ImageItem
@@ -20,7 +27,6 @@ class VisualizationStrategy(ABC):
 
     def __init__(self, parameters: ParameterCollection) -> None:
         super().__init__()
-        self._graphics = GraphicsLayoutWidget()
         self._parameters = parameters
         self._plot = PlotItem()
         self._recording = None
@@ -31,13 +37,10 @@ class VisualizationStrategy(ABC):
         parameters.connect(ParameterEnum.FIX_MAX_DISPERSION, self._fix_info_updated)
         parameters.connect(ParameterEnum.BACKGROUND, self._background_updated)
 
-    @property
-    def graphics(self) -> GraphicsLayoutWidget:
-        return self._graphics
-
-    def setup_plot(self, recording: GazeRecording) -> None:
+    def setup_plot(
+        self, graphics: GraphicsLayoutWidget, recording: GazeRecording
+    ) -> None:
         self._recording = recording
-        graphics = self._graphics
         graphics.clear()  # type: ignore
         self._plot.clear()
 

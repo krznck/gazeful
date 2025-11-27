@@ -1,6 +1,6 @@
 from PyQt6.QtCore import QRectF
 import numpy as np
-from pyqtgraph import colormap
+from pyqtgraph import GraphicsLayoutWidget, colormap
 from pyqtgraph.graphicsItems.ColorBarItem import ColorBarItem
 from editor.HoverableImageItem import HoverableImageItem
 from editor.ParameterCollection import ParameterCollection, ParameterEnum
@@ -20,8 +20,10 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
         self._colorbar = None
         super().__init__(parameters)
 
-    def setup_plot(self, recording: GazeRecording) -> None:
-        super().setup_plot(recording)
+    def setup_plot(
+        self, graphics: GraphicsLayoutWidget, recording: GazeRecording
+    ) -> None:
+        super().setup_plot(graphics, recording)
         params = self._parameters
         opacity = params.get_value(ParameterEnum.OPACITY)
 
@@ -30,7 +32,7 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
         heatmap_item.hovered.connect(self._on_hover)
         self._plot.addItem(heatmap_item)
 
-        cmap = colormap.get(name="turbo")  # TODO: ditto
+        cmap = colormap.get(name="turbo")  # TODO: rely on param value, not magic str
         self._colorbar = colorbar = ColorBarItem(
             colorMap=cmap,
             interactive=True,
@@ -38,7 +40,7 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
             orientation="horizontal",
         )
         colorbar.setImageItem(heatmap_item)
-        self._graphics.addItem(colorbar, row=2, col=0)  # type: ignore
+        graphics.addItem(colorbar, row=2, col=0)  # type: ignore
 
     def update(self):
         rec = self._recording

@@ -47,7 +47,7 @@ class DefinitionsPage(Page):
 
         vbox.addLayout(hbox)
 
-        self.page_vbox.addLayout(vbox)
+        self._page_vbox.addLayout(vbox)
 
     def __init_oculomotor_section(self) -> None:
         vbox = QVBoxLayout()
@@ -65,7 +65,7 @@ class DefinitionsPage(Page):
         hbox = generate_definition_item(FIXATION_MAXIMUM_DISPERSION, textbox, "pixels")
         vbox.addLayout(hbox)
 
-        self.page_vbox.addLayout(vbox)
+        self._page_vbox.addLayout(vbox)
 
 
 def generate_definition_item(
