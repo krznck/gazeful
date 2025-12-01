@@ -1,4 +1,3 @@
-from enum import Enum
 from editor.visualization.HeatmapVisualizationStrategy import (
     HeatmapVisualizationStrategy,
 )
@@ -6,7 +5,7 @@ from editor.visualization.GazePlotVisualizationStrategy import (
     GazePlotVisualizationStrategy,
 )
 from editor.visualization.VisualizationKind import VisualizationKind
-from visualizing.VisualizationStrategy import VisualizationStrategy
+from editor.visualization.VisualizationStrategy import VisualizationStrategy
 
 
 STRAT_BY_KIND = {
@@ -15,7 +14,7 @@ STRAT_BY_KIND = {
 }
 
 
-def make_strategy(kind: str | VisualizationKind) -> VisualizationStrategy:
+def make_strategy(kind: str | VisualizationKind) -> type[VisualizationStrategy]:
     match kind:
         case VisualizationKind():
             return STRAT_BY_KIND[kind]

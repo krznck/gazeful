@@ -9,6 +9,9 @@ from editor.ParameterCollection import ParameterCollection, ParameterEnum
 from processing.GazeRecording import GazeRecording
 from pathlib import Path
 
+from processing.GazeStream import GazeStream
+from processing.algorithms2.OculomotorAnalyzer import OculomotorAnalyzer
+
 
 class VisualizationStrategy(ABC):
     """
@@ -88,6 +91,13 @@ class VisualizationStrategy(ABC):
 
     def _fix_info_updated(self, _) -> None:
         self.update()
+
+    def _analyze(self, recording: GazeRecording) -> list[GazeStream]:
+        fix_disp = self._parameters.get_value(ParameterEnum.FIX_MAX_DISPERSION)
+        fix_dur = self._parameters.get_value(ParameterEnum.FIX_MIN_DURATION)
+        analyzer = OculomotorAnalyzer(recording, fix_dur, fix_disp)
+
+        return analyzer.extract_fixations()
 
     @abstractmethod
     def _opacity_updated(self, _, value) -> None:

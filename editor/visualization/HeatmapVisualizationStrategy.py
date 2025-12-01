@@ -6,18 +6,23 @@ from editor.HoverableImageItem import HoverableImageItem
 from editor.ParameterCollection import ParameterCollection, ParameterEnum
 from editor.visualization.VisualizationStrategy import VisualizationStrategy
 from processing.GazeRecording import GazeRecording
-from processing.algorithms2.OculomotorAnalyzer import OculomotorAnalyzer
 from scipy.ndimage import gaussian_filter
 from skimage.draw import disk
 
 
 class HeatmapVisualizationStrategy(VisualizationStrategy):
-    _heatmap_item: HoverableImageItem | None
-    _colorbar: ColorBarItem | None
+    _heatmap_item: HoverableImageItem
+    _colorbar: ColorBarItem
 
     def __init__(self, parameters: ParameterCollection) -> None:
-        self._heatmap_item = None
-        self._colorbar = None
+        self._heatmap_item = HoverableImageItem()
+        cmap = colormap.get(name="turbo")  # FIXME: rely on param value, not magic str
+        self._colorbar = ColorBarItem(
+            colorMap=cmap,
+            interactive=True,
+            label="Seconds of fixation duration",
+            orientation="horizontal",
+        )
         super().__init__(parameters)
 
     def setup_plot(
@@ -27,36 +32,27 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
         params = self._parameters
         opacity = params.get_value(ParameterEnum.OPACITY)
 
-        self._heatmap_item = heatmap_item = HoverableImageItem()
-        heatmap_item.setOpacity(opacity)
-        heatmap_item.hovered.connect(self._on_hover)
-        self._plot.addItem(heatmap_item)
+        hi = self._heatmap_item
+        hi.setOpacity(opacity)
+        hi.hovered.connect(self._on_hover)
+        self._plot.addItem(hi)
 
-        cmap = colormap.get(name="turbo")  # FIXME: rely on param value, not magic str
-        self._colorbar = colorbar = ColorBarItem(
-            colorMap=cmap,
-            interactive=True,
-            label="Seconds of fixation duration",
-            orientation="horizontal",
-        )
-        colorbar.setImageItem(heatmap_item)
-        graphics.addItem(colorbar, row=2, col=0)  # type: ignore
+        color = self._colorbar
+        color.setImageItem(hi)
+        graphics.addItem(color, row=2, col=0)  # type: ignore
 
     def update(self):
         rec = self._recording
+        if not rec:
+            return
         heat_i = self._heatmap_item
         colorbar = self._colorbar
-        if not rec or not heat_i or not colorbar:
-            return
 
-        fix_disp = self._parameters.get_value(ParameterEnum.FIX_MAX_DISPERSION)
-        fix_dur = self._parameters.get_value(ParameterEnum.FIX_MIN_DURATION)
-        analyzer = OculomotorAnalyzer(rec, fix_dur, fix_disp)
-
-        fixations = analyzer.extract_fixations()
+        fixations = self._analyze(rec)
 
         sw, sh = rec.screen
         heatmap = np.zeros((sh, sw), dtype=np.float32)
+        fix_disp = self._parameters.get_value(ParameterEnum.FIX_MAX_DISPERSION)
         if fixations:
             radius = fix_disp / 2
             for fixation in fixations:
