@@ -1,4 +1,3 @@
-from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QHBoxLayout, QLabel, QVBoxLayout
 from pyqtgraph.parametertree import ParameterTree
@@ -13,8 +12,6 @@ class EditorPage(Page):
     graphics: GraphicsLayoutWidget
     hover_label: QLabel
     parameter_tree: ParameterTree
-
-    recording_selected = pyqtSignal(str)
 
     def __init__(self) -> None:
         super().__init__(title="Editor", icon=IconsEnum.MICROSCOPE)

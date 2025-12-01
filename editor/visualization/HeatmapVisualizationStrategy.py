@@ -4,7 +4,7 @@ from pyqtgraph import GraphicsLayoutWidget, colormap
 from pyqtgraph.graphicsItems.ColorBarItem import ColorBarItem
 from editor.HoverableImageItem import HoverableImageItem
 from editor.ParameterCollection import ParameterCollection, ParameterEnum
-from editor.VisualizationStrategy import VisualizationStrategy
+from editor.visualization.VisualizationStrategy import VisualizationStrategy
 from processing.GazeRecording import GazeRecording
 from processing.algorithms2.OculomotorAnalyzer import OculomotorAnalyzer
 from scipy.ndimage import gaussian_filter
@@ -32,7 +32,7 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
         heatmap_item.hovered.connect(self._on_hover)
         self._plot.addItem(heatmap_item)
 
-        cmap = colormap.get(name="turbo")  # TODO: rely on param value, not magic str
+        cmap = colormap.get(name="turbo")  # FIXME: rely on param value, not magic str
         self._colorbar = colorbar = ColorBarItem(
             colorMap=cmap,
             interactive=True,

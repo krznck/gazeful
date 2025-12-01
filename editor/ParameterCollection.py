@@ -3,6 +3,8 @@ from typing import Any
 
 from pyqtgraph.parametertree import Parameter, ParameterTree
 
+from editor.visualization.VisualizationKind import VisualizationKind
+
 
 class ParameterEnum(Enum):
     VISUALIZATION = "Visualization"
@@ -33,7 +35,7 @@ class ParameterCollection:
             {
                 "name": "Visualization",
                 "type": "list",
-                "limits": ["Fixation duration heatmap", "Gaze plot"],
+                "limits": [kind.value for kind in VisualizationKind],
             },
             {
                 "name": "Fixation Min Duration (ms)",

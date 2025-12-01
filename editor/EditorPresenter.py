@@ -2,9 +2,12 @@ from pathlib import Path
 from PyQt6.QtWidgets import QMessageBox
 from AppContext import AppContext
 from editor.EditorPage import EditorPage
-from editor.HeatmapVisualizationStrategy import HeatmapVisualizationStrategy
 from editor.ParameterCollection import ParameterCollection, ParameterEnum
-from editor.VisualizationStrategy import VisualizationStrategy
+from editor.visualization.HeatmapVisualizationStrategy import (
+    HeatmapVisualizationStrategy,
+)
+from editor.visualization.VisualizationStrategy import VisualizationStrategy
+from editor.visualization.generator import make_strategy
 from processing.ingester import ingest_csv
 from visuals.pages.presenters.PagePresenter import PagePresenter
 
@@ -38,6 +41,7 @@ class EditorPresenter(PagePresenter[EditorPage]):
     def _connect_signals(self) -> None:
         p = self._params
         p.connect(ParameterEnum.GAZE_FILE, self._on_gaze_csv_selected)
+        p.connect(ParameterEnum.VISUALIZATION, self._on_visualization_type_selected)
 
     def _on_gaze_csv_selected(self, _, value) -> None:
         v, c, vs = self._view, self._context, self._vis_strat
@@ -50,3 +54,13 @@ class EditorPresenter(PagePresenter[EditorPage]):
         c.main_data = recording
         vs.setup_plot(v.graphics, recording)
         vs.update()
+
+    def _on_visualization_type_selected(self, _, value) -> None:
+        strat = make_strategy(value)
+        self._vis_strat = strat(self._params)
+
+        v, c, vs = self._view, self._context, self._vis_strat
+
+        if recording := c.main_data:
+            vs.setup_plot(graphics=v.graphics, recording=recording)
+            vs.update()
