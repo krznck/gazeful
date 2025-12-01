@@ -1,16 +1,24 @@
-from abc import ABC, abstractmethod
+from abc import ABC, ABCMeta, abstractmethod
 
 from PIL import Image
-from PyQt6.QtCore import QRectF
+from PyQt6.QtCore import QObject, QRectF, pyqtSignal
 from pyqtgraph import GraphicsLayoutWidget, ImageItem, PlotItem
 
 import numpy as np
-from editor.ParameterCollection import ParameterCollection, ParameterEnum
+from editor.ParameterCollection import ParameterCollection
+from editor.parameters.base import ParameterEnum
 from processing.GazeRecording import GazeRecording
 from pathlib import Path
 
+from processing.GazeStream import GazeStream
+from processing.algorithms2.OculomotorAnalyzer import OculomotorAnalyzer
 
-class VisualizationStrategy(ABC):
+
+class _VisualizationMeta(ABCMeta, type(QObject)):
+    pass
+
+
+class VisualizationStrategy(ABC, QObject, metaclass=_VisualizationMeta):
     """
     Acts as a Model class for the Editor - handles all the logic in creating an
     interactable visualization, which is available via the `graphics` property.
@@ -24,6 +32,9 @@ class VisualizationStrategy(ABC):
     _image_item: ImageItem
     _recording: GazeRecording | None
     _background_cache: Path | None
+    _fixations: list[GazeStream] | None
+
+    hovered = pyqtSignal(str)
 
     def __init__(self, parameters: ParameterCollection) -> None:
         super().__init__()
@@ -32,6 +43,7 @@ class VisualizationStrategy(ABC):
         self._recording = None
         self._background_cache = None
         self._image_item = ImageItem()
+
         parameters.connect(ParameterEnum.OPACITY, self._opacity_updated)
         parameters.connect(ParameterEnum.FIX_MIN_DURATION, self._fix_info_updated)
         parameters.connect(ParameterEnum.FIX_MAX_DISPERSION, self._fix_info_updated)
@@ -88,6 +100,14 @@ class VisualizationStrategy(ABC):
 
     def _fix_info_updated(self, _) -> None:
         self.update()
+
+    def _analyze(self, recording: GazeRecording) -> list[GazeStream]:
+        fix_disp = self._parameters.get_value(ParameterEnum.FIX_MAX_DISPERSION)
+        fix_dur = self._parameters.get_value(ParameterEnum.FIX_MIN_DURATION)
+        analyzer = OculomotorAnalyzer(recording, fix_dur, fix_disp)
+        self._fixations = analyzer.extract_fixations()
+
+        return self._fixations
 
     @abstractmethod
     def _opacity_updated(self, _, value) -> None:
