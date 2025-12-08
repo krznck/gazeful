@@ -1,11 +1,12 @@
-from abc import ABC, abstractmethod
+from abc import ABC, ABCMeta, abstractmethod
 
 from PIL import Image
-from PyQt6.QtCore import QRectF
+from PyQt6.QtCore import QObject, QRectF
 from pyqtgraph import GraphicsLayoutWidget, ImageItem, PlotItem
 
 import numpy as np
-from editor.ParameterCollection import ParameterCollection, ParameterEnum
+from editor.ParameterCollection import ParameterCollection
+from editor.parameters.base import ParameterEnum
 from processing.GazeRecording import GazeRecording
 from pathlib import Path
 
@@ -13,7 +14,11 @@ from processing.GazeStream import GazeStream
 from processing.algorithms2.OculomotorAnalyzer import OculomotorAnalyzer
 
 
-class VisualizationStrategy(ABC):
+class _VisualizationMeta(ABCMeta, type(QObject)):
+    pass
+
+
+class VisualizationStrategy(ABC, QObject, metaclass=_VisualizationMeta):
     """
     Acts as a Model class for the Editor - handles all the logic in creating an
     interactable visualization, which is available via the `graphics` property.
@@ -35,6 +40,10 @@ class VisualizationStrategy(ABC):
         self._recording = None
         self._background_cache = None
         self._image_item = ImageItem()
+
+        # TODO: connect these for the specific enum values in specific strategies
+        # (gaze plot opacity, the fixation and stuff color changes)
+
         parameters.connect(ParameterEnum.OPACITY, self._opacity_updated)
         parameters.connect(ParameterEnum.FIX_MIN_DURATION, self._fix_info_updated)
         parameters.connect(ParameterEnum.FIX_MAX_DISPERSION, self._fix_info_updated)

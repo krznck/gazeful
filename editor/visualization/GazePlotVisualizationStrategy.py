@@ -1,10 +1,12 @@
-from pyqtgraph import GraphicsLayoutWidget
+from pyqtgraph import GraphicsLayoutWidget, mkColor
 from pyqtgraph.functions import mkBrush, mkPen
 from pyqtgraph.graphicsItems.PlotDataItem import PlotDataItem
 from pyqtgraph.graphicsItems.ScatterPlotItem import ScatterPlotItem
 from pyqtgraph.graphicsItems.TextItem import TextItem
+from editor.parameters.base import ParameterEnum
+from editor.parameters.gaze_plot import GazePlotParameterEnum
 from editor.visualization.VisualizationStrategy import VisualizationStrategy
-from editor.ParameterCollection import ParameterCollection, ParameterEnum
+from editor.ParameterCollection import ParameterCollection
 from processing.GazeRecording import GazeRecording
 
 
@@ -18,8 +20,17 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
         self._fix_labels = []
         self._connection_lines = []
 
-        # FIXME: magic value
-        self._scatter = ScatterPlotItem(size=10, brush=mkBrush("blue"))
+        self._scatter = ScatterPlotItem(
+            size=10,
+            brush=mkBrush(self._parameters.get_value(GazePlotParameterEnum.FIX_COLOR)),
+        )
+
+        parameters.connect(GazePlotParameterEnum.HOV_COLOR, self._update_hover_color)
+        parameters.connect(
+            GazePlotParameterEnum.CON_COLOR, self._update_connection_color
+        )
+        parameters.connect(GazePlotParameterEnum.FIX_COLOR, self._update_fix_color)
+        parameters.connect(GazePlotParameterEnum.ANTIALIAS, self.update)
 
     def setup_plot(
         self, graphics: GraphicsLayoutWidget, recording: GazeRecording
@@ -27,7 +38,22 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
         super().setup_plot(graphics, recording)
 
     def _opacity_updated(self, _, value) -> None:
-        return super()._opacity_updated(_, value)
+        self._scatter.setOpacity(value)
+        for line in self._connection_lines:
+            line.setOpacity(value)
+        for label in self._fix_labels:
+            label.setOpacity(value)
+
+    def _update_hover_color(self, _, value):
+        # maniuplating the `opts` dictionary directly when there is no setter
+        self._scatter.opts["hoverBrush"] = mkColor(value)
+
+    def _update_fix_color(self, _, value):
+        self._scatter.setBrush(value)
+
+    def _update_connection_color(self, _, value):
+        for line in self._connection_lines:
+            line.setPen(color=value, width=2)
 
     def update(self) -> None:
         super().update()
@@ -54,9 +80,6 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
         path_cords = {"x": [], "y": []}
         sw, sh = rec.screen
         opacity = params.get_value(ParameterEnum.OPACITY)
-        # c_color = self.parameters.param("Connection color").value()
-        # h_color = self.parameters.param("Hover color").value()
-        # aa = self.parameters.param("Antialiasing").value()
 
         for i, fix in enumerate(fixations):
             if fix.is_empty():
@@ -96,8 +119,10 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
             line = plot.plot(
                 [x_coords[i], x_coords[i + 1]],
                 [y_coords[i], y_coords[i + 1]],
-                pen=mkPen(color="blue", width=2),  # FIXME: magic value
-                antialias=False,  # FIXME: magic bool (should be param)
+                pen=mkPen(
+                    color=params.get_value(GazePlotParameterEnum.CON_COLOR), width=2
+                ),
+                antialias=params.get_value(GazePlotParameterEnum.ANTIALIAS),
             )
             line.setOpacity(opacity)
             cl.append(line)
@@ -106,10 +131,10 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
         scatter.setOpacity(opacity)
         scatter.addPoints(
             spots=fixation_spots,
-            antialias=False,  # FIXME: magic bool (should be param)
+            antialias=params.get_value(GazePlotParameterEnum.ANTIALIAS),
             hoverable=True,
             hoverSize=-1,
-            hoverBrush="orange",  # FIXME: magic string
+            hoverBrush=params.get_value(GazePlotParameterEnum.HOV_COLOR),
             pxMode=False,
             tip=None,
         )

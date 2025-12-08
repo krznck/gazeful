@@ -1,38 +1,45 @@
 from pathlib import Path
 from PyQt6.QtWidgets import QMessageBox
+from pyqtgraph.parametertree.Parameter import Parameter
 from AppContext import AppContext
 from editor.EditorPage import EditorPage
-from editor.ParameterCollection import ParameterCollection, ParameterEnum
-from editor.visualization.HeatmapVisualizationStrategy import (
-    HeatmapVisualizationStrategy,
-)
+from editor.ParameterCollection import ParameterCollection
 from editor.visualization.VisualizationStrategy import VisualizationStrategy
-from editor.visualization.generator import make_strategy
+from editor.visualization.generator import make_param, make_strategy
 from processing.ingester import ingest_csv
 from visuals.pages.presenters.PagePresenter import PagePresenter
+
+from editor.parameters.base import PARAMS, ParameterEnum
 
 
 class EditorPresenter(PagePresenter[EditorPage]):
     _vis_strat: VisualizationStrategy
     _params: ParameterCollection
+    _root_param: Parameter  # container for the tree view
+    _common_params: Parameter  # long-lived params
+    _specific_params: Parameter | None  # disposable, specific params
 
     def __init__(
         self,
         view: EditorPage,
         context: AppContext,
-        visualization_strategy: VisualizationStrategy | None = None,
     ) -> None:
         super().__init__(view, context)
-        self._params = ParameterCollection()
 
-        if visualization_strategy:
-            self._vis_strat = visualization_strategy
-        else:
-            default = HeatmapVisualizationStrategy(parameters=self._params)
-            self._vis_strat = default
+        self._common_params = cp = Parameter.create(
+            name="Common", type="group", children=PARAMS
+        )
+        self._specific_params = None
+        self._root_param = rp = Parameter.create(
+            name="params", type="group", children=[cp]
+        )
+        self._params = ParameterCollection(rp)
 
         self._init_view_state()
         self._connect_signals()
+
+        initial_vis_type = self._params.get_value(ParameterEnum.VISUALIZATION)
+        self._on_visualization_type_selected(None, initial_vis_type)
 
     def _init_view_state(self) -> None:
         v, p = self._view, self._params
@@ -56,11 +63,20 @@ class EditorPresenter(PagePresenter[EditorPage]):
         vs.update()
 
     def _on_visualization_type_selected(self, _, value) -> None:
-        strat = make_strategy(value)
-        self._vis_strat = strat(self._params)
+        if self._specific_params is not None:
+            self._root_param.removeChild(self._specific_params)
+            self._specific_params = None
 
-        v, c, vs = self._view, self._context, self._vis_strat
+        strat_type = make_strategy(value)
+        self._specific_params = sp = Parameter.create(
+            name="Specific", type="group", children=make_param(value)
+        )
 
-        if recording := c.main_data:
-            vs.setup_plot(graphics=v.graphics, recording=recording)
-            vs.update()
+        if sp is not None:
+            self._root_param.addChild(sp)
+
+        self._vis_strat = strat_type(self._params)
+
+        if recording := self._context.main_data:
+            self._vis_strat.setup_plot(self._view.graphics, recording)
+            self._vis_strat.update()
