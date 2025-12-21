@@ -76,6 +76,7 @@ class EditorPresenter(PagePresenter[EditorPage]):
             self._root_param.addChild(sp)
 
         self._vis_strat = strat_type(self._params)
+        self._vis_strat.hovered.connect(self._view.hover_label.setText)
 
         if recording := self._context.main_data:
             self._vis_strat.setup_plot(self._view.graphics, recording)

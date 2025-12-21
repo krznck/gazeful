@@ -1,4 +1,4 @@
-from pyqtgraph import GraphicsLayoutWidget, mkColor
+from pyqtgraph import GraphicsLayoutWidget, SpotItem, mkColor
 from pyqtgraph.functions import mkBrush, mkPen
 from pyqtgraph.graphicsItems.PlotDataItem import PlotDataItem
 from pyqtgraph.graphicsItems.ScatterPlotItem import ScatterPlotItem
@@ -8,6 +8,7 @@ from editor.parameters.gaze_plot import GazePlotParameterEnum
 from editor.visualization.VisualizationStrategy import VisualizationStrategy
 from editor.ParameterCollection import ParameterCollection
 from processing.GazeRecording import GazeRecording
+import numpy as np
 
 
 class GazePlotVisualizationStrategy(VisualizationStrategy):
@@ -19,6 +20,8 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
         super().__init__(parameters)
         self._fix_labels = []
         self._connection_lines = []
+        self._currently_hovered_spots = []
+        self.HOVER_MULT = 1.5
 
         self._scatter = ScatterPlotItem(
             size=10,
@@ -140,10 +143,62 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
         )
         plot.addItem(scatter)
 
-    # TODO: Implement in ABC in a sane way.
-    # Though in the exploratory repo the two hover methods work differently with
-    # different signatures, I think they could still be turned into the same
-    # signature that just then emits/returns the information that the hover label
-    # should have.
-    def _on_hover(self):
-        pass
+    def _on_hover(self, scatter: ScatterPlotItem, hovered: np.ndarray):
+        params = self._parameters
+        fix_color = params.get_value(GazePlotParameterEnum.FIX_COLOR)
+        adj_color = params.get_value(GazePlotParameterEnum.ADJ_COLOR)
+        con_color = params.get_value(GazePlotParameterEnum.CON_COLOR)
+        last: set[SpotItem] = set(self._currently_hovered_spots)
+        current: set[SpotItem] = set(hovered)
+        info_text = ""
+
+        for spot in last - current:
+            spot.setSize(spot.size() / self.HOVER_MULT)
+            prev, next = spot.index() - 1, spot.index() + 1
+            all: list[SpotItem] = list(scatter.points())
+            if prev >= 0:
+                self._connection_lines[prev].setPen(con_color, width=2)
+                prev = all[prev]
+                prev.setBrush(fix_color)
+            if next < len(all):
+                self._connection_lines[next - 1].setPen(con_color, width=2)
+                next = all[next]
+                next.setBrush(fix_color)
+
+        for spot in current - last:
+            spot.setSize(spot.size() * self.HOVER_MULT)
+            prev, next = spot.index() - 1, spot.index() + 1
+            all: list[SpotItem] = list(scatter.points())
+            if prev >= 0:
+                self._connection_lines[prev].setPen(adj_color, width=4)
+                prev = all[prev]
+                prev.setBrush(adj_color)
+            if next < len(all):
+                self._connection_lines[next - 1].setPen(adj_color, width=4)
+                next = all[next]
+                next.setBrush(adj_color)
+
+        point = ""
+        duration = xs = ys = 0
+        for spot in current:
+            spot: SpotItem
+            for data in spot.data():
+                data = data.split(";")
+                point += f"{data[0]}, "
+                pos = spot.pos()
+                xs += pos.x()
+                ys += pos.y()
+                duration += float(data[-1])
+
+        if current:
+            info_text = (
+                f"Points {point}"
+                f"around x:{round(xs/len(current))} "
+                f"and y:{round(ys/len(current))} "
+                f"total duration of {round(duration, 2)}s"
+            )
+
+        if len(current) > 0:
+            self.hovered.emit(info_text)
+
+        self._currently_hovered_spots = hovered

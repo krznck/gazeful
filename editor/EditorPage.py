@@ -14,8 +14,8 @@ class EditorPage(Page):
     parameter_tree: ParameterTree
 
     def __init__(self) -> None:
-        super().__init__(title="Editor", icon=IconsEnum.MICROSCOPE)
         self.hover_label = QLabel()
+        super().__init__(title="Editor", icon=IconsEnum.MICROSCOPE)
 
     def add_content(self) -> None:
         self._init_layout()
@@ -27,7 +27,7 @@ class EditorPage(Page):
 
         font = QFont()
         font.setPointSize(18)
-        self.hover_label = hl = QLabel()
+        hl = self.hover_label
         hl.setFont(font)
 
         preview = QVBoxLayout()

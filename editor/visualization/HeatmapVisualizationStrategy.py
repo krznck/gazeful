@@ -12,6 +12,8 @@ from processing.GazeRecording import GazeRecording
 from scipy.ndimage import gaussian_filter
 from skimage.draw import disk
 
+from processing.GazeStream import GazeStream
+
 
 class HeatmapVisualizationStrategy(VisualizationStrategy):
     _heatmap_item: HoverableImageItem
@@ -108,10 +110,43 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
 
         heat_i.setOpacity(value)
 
-    # TODO: Implement in ABC in a sane way.
-    # Though in the exploratory repo the two hover methods work differently with
-    # different signatures, I think they could still be turned into the same
-    # signature that just then emits/returns the information that the hover label
-    # should have.
-    def _on_hover(self):
-        pass
+    def _on_hover(self, pos):
+        rec = self._recording
+        if not rec:
+            return
+
+        sw, sh = rec.screen
+        hover_x, hover_y = pos.x(), pos.y()
+
+        radius = self._parameters.get_value(ParameterEnum.FIX_MAX_DISPERSION) / 2
+
+        found_fixations = []
+        # NOTE:
+        # Weirdly not that time-consuming to iterate over these on the balatro sample;
+        # still, I can't help but wonder if maybe a hashmap (with position being keys)
+        # would be better for this?
+
+        fixations = self._fixations
+        if not fixations:
+            fixations = self._analyze(rec)
+
+        for fixation in fixations:
+            fix_x_px = fixation.centroid[0] * sw
+            fix_y_px = fixation.centroid[1] * sh
+
+            distance_sq = (hover_x - fix_x_px) ** 2 + (hover_y - fix_y_px) ** 2
+            if distance_sq <= radius**2:
+                found_fixations.append(fixation)
+
+        duration = count = 0
+        for fix in found_fixations:
+            fix: GazeStream
+            duration += fix.duration()
+            count += 1
+        if found_fixations:
+            text = (
+                f"{count} fixations at x: {round(pos.x())} "
+                f"and y: {round(pos.y())}, total duration of "
+                f"{round(duration, 2)}s"
+            )
+            self.hovered.emit(text)

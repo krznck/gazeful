@@ -1,7 +1,7 @@
 from abc import ABC, ABCMeta, abstractmethod
 
 from PIL import Image
-from PyQt6.QtCore import QObject, QRectF
+from PyQt6.QtCore import QObject, QRectF, pyqtSignal
 from pyqtgraph import GraphicsLayoutWidget, ImageItem, PlotItem
 
 import numpy as np
@@ -32,6 +32,9 @@ class VisualizationStrategy(ABC, QObject, metaclass=_VisualizationMeta):
     _image_item: ImageItem
     _recording: GazeRecording | None
     _background_cache: Path | None
+    _fixations: list[GazeStream] | None
+
+    hovered = pyqtSignal(str)
 
     def __init__(self, parameters: ParameterCollection) -> None:
         super().__init__()
@@ -40,9 +43,6 @@ class VisualizationStrategy(ABC, QObject, metaclass=_VisualizationMeta):
         self._recording = None
         self._background_cache = None
         self._image_item = ImageItem()
-
-        # TODO: connect these for the specific enum values in specific strategies
-        # (gaze plot opacity, the fixation and stuff color changes)
 
         parameters.connect(ParameterEnum.OPACITY, self._opacity_updated)
         parameters.connect(ParameterEnum.FIX_MIN_DURATION, self._fix_info_updated)
@@ -105,8 +105,9 @@ class VisualizationStrategy(ABC, QObject, metaclass=_VisualizationMeta):
         fix_disp = self._parameters.get_value(ParameterEnum.FIX_MAX_DISPERSION)
         fix_dur = self._parameters.get_value(ParameterEnum.FIX_MIN_DURATION)
         analyzer = OculomotorAnalyzer(recording, fix_dur, fix_disp)
+        self._fixations = analyzer.extract_fixations()
 
-        return analyzer.extract_fixations()
+        return self._fixations
 
     @abstractmethod
     def _opacity_updated(self, _, value) -> None:
