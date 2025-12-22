@@ -39,4 +39,9 @@ class ParameterCollection:
 
     def connect(self, target: Enum, slot) -> None:
         param = self.get_param(target)
+
+        if param.opts["type"] == "action":
+            param.sigActivated.connect(slot)  # type: ignore
+            return
+
         param.sigValueChanged.connect(slot)

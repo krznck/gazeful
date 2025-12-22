@@ -1,5 +1,6 @@
 from pathlib import Path
-from PyQt6.QtWidgets import QMessageBox
+from pyqtgraph.exporters import ImageExporter
+from PyQt6.QtWidgets import QFileDialog, QMessageBox
 from pyqtgraph.parametertree.Parameter import Parameter
 from AppContext import AppContext
 from editor.EditorPage import EditorPage
@@ -10,6 +11,8 @@ from processing.ingester import ingest_csv
 from visuals.pages.presenters.PagePresenter import PagePresenter
 
 from editor.parameters.base import PARAMS, ParameterEnum
+
+IMAGE_WIDTH = 2000
 
 
 class EditorPresenter(PagePresenter[EditorPage]):
@@ -49,6 +52,26 @@ class EditorPresenter(PagePresenter[EditorPage]):
         p = self._params
         p.connect(ParameterEnum.GAZE_FILE, self._on_gaze_csv_selected)
         p.connect(ParameterEnum.VISUALIZATION, self._on_visualization_type_selected)
+
+        p.connect(ParameterEnum.SAVE, self._on_export_clicked)
+
+    def _on_export_clicked(self, _) -> None:
+        v, c = self._view, self._context
+
+        if not c.main_data:
+            return
+
+        file_path, _ = QFileDialog.getSaveFileName(
+            v,
+            "Save Figure As...",
+            filter=("PNG Image (*.png);;" "JPEG Image (*jpg);;"),
+        )
+        if not file_path.endswith((".jpg", ".png")):
+            file_path += ".png"
+
+        exporter = ImageExporter(v.graphics.scene())
+        exporter.parameters()["width"] = IMAGE_WIDTH
+        exporter.export(file_path)
 
     def _on_gaze_csv_selected(self, _, value) -> None:
         v, c, vs = self._view, self._context, self._vis_strat
