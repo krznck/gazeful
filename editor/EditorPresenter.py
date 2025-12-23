@@ -49,11 +49,20 @@ class EditorPresenter(PagePresenter[EditorPage]):
         p.connect_tree(v.parameter_tree)
 
     def _connect_signals(self) -> None:
-        p = self._params
+        p, c = self._params, self._context
         p.connect(ParameterEnum.GAZE_FILE, self._on_gaze_csv_selected)
         p.connect(ParameterEnum.VISUALIZATION, self._on_visualization_type_selected)
 
         p.connect(ParameterEnum.SAVE, self._on_export_clicked)
+
+        def import_recording():
+            if not c.main_data:
+                return
+            vs, v = self._vis_strat, self._view
+            vs.setup_plot(v.graphics, c.main_data)
+            vs.update()
+
+        c.main_data_changed.connect(import_recording)
 
     def _on_export_clicked(self, _) -> None:
         v, c = self._view, self._context
