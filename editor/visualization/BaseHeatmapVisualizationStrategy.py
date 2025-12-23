@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from PyQt6.QtCore import QRectF, QTimer
 import numpy as np
 from numpy.typing import NDArray
@@ -15,19 +16,19 @@ from skimage.draw import disk
 from processing.GazeStream import GazeStream
 
 
-class HeatmapVisualizationStrategy(VisualizationStrategy):
+class BaseHeatmapVisualizationStrategy(VisualizationStrategy):
     _heatmap_item: HoverableImageItem
     _colorbar: ColorBarItem
     _heatmap: NDArray | None
 
-    def __init__(self, parameters: ParameterCollection) -> None:
+    def __init__(self, parameters: ParameterCollection, cbar_label: str) -> None:
         self._heatmap = None
         self._heatmap_item = HoverableImageItem()
         cmap = colormap.get(name=parameters.get_value(HeatmapParameterEnum.C_MAP))
         self._colorbar = ColorBarItem(
             colorMap=cmap,
             interactive=True,
-            label="Seconds of fixation duration",
+            label=cbar_label,
             orientation="horizontal",
         )
         super().__init__(parameters)
@@ -94,7 +95,7 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
                 x = int(cx * sw)
                 y = int(cy * sh)
                 rr, cc = disk((y, x), radius, shape=self._heatmap.shape)
-                self._heatmap[rr, cc] += fixation.duration()
+                self._apply_fixation(self._heatmap, rr, cc, fixation)
 
         heatmap = gaussian_filter(
             self._heatmap, sigma=self._parameters.get_value(HeatmapParameterEnum.BLUR)
@@ -102,6 +103,16 @@ class HeatmapVisualizationStrategy(VisualizationStrategy):
         heat_i.setImage(heatmap.T)
         heat_i.setRect(QRectF(0, 0, sw, sh))
         colorbar.setLevels(values=(np.nanmin(heatmap), np.nanmax(heatmap)))
+
+    @abstractmethod
+    def _apply_fixation(
+        self,
+        heatmap: NDArray,
+        row_indices: np.ndarray,
+        column_indices: np.ndarray,
+        fixation: GazeStream,
+    ) -> None:
+        pass
 
     def _opacity_updated(self, _, value) -> None:
         heat_i = self._heatmap_item

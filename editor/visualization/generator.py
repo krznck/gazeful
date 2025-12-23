@@ -1,6 +1,9 @@
 from typing import Any
-from editor.visualization.HeatmapVisualizationStrategy import (
-    HeatmapVisualizationStrategy,
+from editor.visualization.AbsoluteGazeDurationHeatmapVisualizationStrategy import (
+    AbsoluteGazeDurationHeatmapVisualizationStrategy,
+)
+from editor.visualization.FixationCountHeatmapVisualizationStrategy import (
+    FixationCountHeatmapVisualizationStrategy,
 )
 from editor.visualization.GazePlotVisualizationStrategy import (
     GazePlotVisualizationStrategy,
@@ -12,12 +15,14 @@ import editor.parameters.gaze_plot as gaze_plot
 
 STRAT_BY_KIND = {
     VisualizationKind.GAZE_PLOT: GazePlotVisualizationStrategy,
-    VisualizationKind.ABS_FIX_DUR_HEAT: HeatmapVisualizationStrategy,
+    VisualizationKind.ABS_FIX_DUR_HEAT: AbsoluteGazeDurationHeatmapVisualizationStrategy,
+    VisualizationKind.FIX_COUNT_HEAT: FixationCountHeatmapVisualizationStrategy,
 }
 
 PARAM_BY_KIND = {
     VisualizationKind.GAZE_PLOT: gaze_plot.PARAMS,
     VisualizationKind.ABS_FIX_DUR_HEAT: heatmap.PARAMS,
+    VisualizationKind.FIX_COUNT_HEAT: heatmap.PARAMS,
 }
 
 
