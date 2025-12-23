@@ -39,6 +39,7 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
         self, graphics: GraphicsLayoutWidget, recording: GazeRecording
     ) -> None:
         super().setup_plot(graphics, recording)
+        self._plot.addItem(self._scatter)
 
     def _opacity_updated(self, _, value) -> None:
         self._scatter.setOpacity(value)
@@ -53,6 +54,8 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
 
     def _update_fix_color(self, _, value):
         self._scatter.setBrush(value)
+        for spot in self._scatter.points():
+            spot.setBrush(value)
 
     def _update_connection_color(self, _, value):
         for line in self._connection_lines:
@@ -141,7 +144,6 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
             pxMode=False,
             tip=None,
         )
-        plot.addItem(scatter)
 
     def _on_hover(self, scatter: ScatterPlotItem, hovered: np.ndarray):
         params = self._parameters

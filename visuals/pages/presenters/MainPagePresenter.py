@@ -44,7 +44,8 @@ class MainPagePresenter(PagePresenter[MainPage]):
             self._on_screens_combo_box_index_changed
         )
         v.screen_refresh_button.clicked.connect(self._on_screen_refresh_button_clicked)
-        v.visualizer_toggle.clicked.connect(self._on_visualizer_toggle_clicked)
+        if v.visualizer_toggle:
+            v.visualizer_toggle.clicked.connect(self._on_visualizer_toggle_clicked)
 
     def _trigger_connection_toggle(self, on: bool):
         v = self._view

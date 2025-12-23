@@ -6,7 +6,6 @@ from PyQt6.QtCore import QObject
 from PyQt6.QtGui import QScreen
 
 import screens
-from processing.Definitions import Definitions
 from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 from processing.ingester import ingest_csv
@@ -30,7 +29,6 @@ class AppContext(QObject):
         super().__init__()
         self.tracked_screen: QScreen = screens.get_primary_screen()
         self.recorder: Recorder = Recorder(screens.get_screen_size(self.tracked_screen))
-        self.defs: Definitions = Definitions()
         self.visualizer: GazeVisualizer = GazeVisualizer(screen=self.tracked_screen)
         self.eyetracker: Tracker | None = default_to_first_connected(
             self.visualizer, self.recorder

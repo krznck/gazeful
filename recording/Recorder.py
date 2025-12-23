@@ -71,11 +71,11 @@ class Recorder:
 
     def start(self, path: Path, screenshot_screen: QScreen | None = None) -> None:
         self._recording.clear()
+        self.path = coerce_csv(path)
         if screenshot_screen:
-            ss_path = coerce_screenshot_path(path)
+            ss_path = coerce_screenshot_path(self.path)
             shoot_screen(screenshot_screen, ss_path)
             self._screenshot_path = ss_path
-        self.path = coerce_csv(path)
         if self._thread is None or not self._thread.is_alive():
             self._stop_event.clear()
             self._thread = threading.Thread(target=self._writer_thread, daemon=True)

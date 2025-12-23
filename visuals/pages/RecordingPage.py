@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import (
 from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.pages.Page import Page
+import os
 
 RECORD_TOGGLE_OFF_TEXT = "Start recording"
 RECORD_TOGGLE_ON_TEXT = "Stop recording"
@@ -23,7 +24,7 @@ class RecordingPage(Page):
     explorer_button: QPushButton
     open_dir_button: QPushButton
     filename_textbox: QLineEdit
-    screenshot_checkbox: QCheckBox
+    screenshot_checkbox: QCheckBox | None
     dir_path_label: QLabel
     recording_delay_slider: QSlider
     recording_delay_value_label: QLabel
@@ -33,6 +34,7 @@ class RecordingPage(Page):
     duration_descriptor: QLabel
 
     def __init__(self) -> None:
+        self.screenshot_checkbox = None
         super().__init__("Recording", IconsEnum.RECORD)
 
     def add_content(self) -> None:
@@ -40,7 +42,9 @@ class RecordingPage(Page):
         self._init_enable_section()
         self._init_delay_section()
         self._init_duration_section()
-        self._init_screenshot_section()
+        # screenshots do not work on Wayland
+        if not os.environ.get("WAYLAND_DISPLAY"):
+            self._init_screenshot_section()
         return super().add_content()
 
     def _init_file_section(self):

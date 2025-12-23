@@ -11,13 +11,12 @@ from visuals.pages.VisualizerPage import VisualizerPage
 from visuals.pages.presenters.MainPagePresenter import MainPagePresenter
 from visuals.pages.presenters.RecordingPresenter import RecordingPresenter
 from visuals.pages.presenters.VisualizerPresenter import VisualizerPresenter
+import os
 
 PAGES = [
     (MainPagePresenter, MainPage),
     (VisualizerPresenter, VisualizerPage),
     (RecordingPresenter, RecordingPage),
-    # DefinitionsPage,
-    # AnalysisPage,
     (EditorPresenter, EditorPage),
 ]
 
@@ -27,6 +26,11 @@ def generate_navigation(context: AppContext) -> tuple[CustomSidebar, QStackedWid
     pages = QStackedWidget()
 
     for PresenterClass, PageClass in PAGES:
+        # Wayland does not allow for anything but the compositor to change the
+        # positioning of an application, so the Gaze Visualizer does not work
+        if type(PageClass()) == VisualizerPage and os.environ.get("WAYLAND_DISPLAY"):
+            continue
+
         page = PageClass()
         presenter = PresenterClass(view=page, context=context)
 

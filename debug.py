@@ -4,7 +4,6 @@ from time import perf_counter
 from typing import Callable
 
 from processing.GazeRecording import GazeRecording
-from processing.GazeStream import GazeStream
 from processing.ingester import ingest_csv
 
 
@@ -25,13 +24,11 @@ def debug_time(func: Callable, message: str | None = None):
 
 def ingest_sample(name: str) -> GazeRecording:
     current_dir = Path(__file__).parent
-    csv_file = current_dir / "tests" / "integration" / "samples" / f"{name}.csv"
+    csv_file = current_dir / "tests" / "samples" / f"{name}.csv"
     return ingest_csv(csv_file)
 
 
 def get_sample_image(name: str) -> Path:
     current_dir = Path(__file__).parent
-    image_file = (
-        current_dir / "tests" / "integration" / "samples" / "images" / f"{name}.png"
-    )
+    image_file = current_dir / "tests" / "samples" / "images" / f"{name}.png"
     return image_file

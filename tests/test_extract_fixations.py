@@ -5,7 +5,6 @@ from debug import debug_time
 from debug import ingest_sample
 from debug import Samples
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
-from processing.Definitions import Definitions
 from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 from trackers.GazePoint import GazePoint
@@ -14,10 +13,6 @@ screen = (1920, 1200)
 
 
 def test_two_fixations():
-    defs = Definitions()
-    defs.blink_threshhold_ms.update(200)  # a blink is minimum 200ms
-    defs.fixation_min_duration_ms.update(200)  # a fixation as well
-
     pts = [
         GazePoint(0.1, 0.1, 0),
         GazePoint(0.1, 0.1, 0.1),
@@ -30,17 +25,16 @@ def test_two_fixations():
     ]
 
     recording = GazeRecording(data=GazeStream(pts), screen_dimensions=screen)
-    analyzer = OculomotorAnalyzer(recording, defs)
+    analyzer = OculomotorAnalyzer(recording, 200, 65)
     fixations = analyzer.extract_fixations()
 
     assert len(fixations) == 2
 
 
 def test_dispersion_breakup():
-    defs = Definitions()
     # even a tiny dispersion should break the fixation
-    defs.fixation_max_dispersion_px.update(0.00001)
-    defs.fixation_min_duration_ms.update(100)
+    duration = 100
+    disp = 0.00001
 
     pts = [
         GazePoint(0.1, 0.1, 0),
@@ -48,33 +42,29 @@ def test_dispersion_breakup():
     ]
 
     recording = GazeRecording(data=GazeStream(pts), screen_dimensions=screen)
-    analyzer = OculomotorAnalyzer(recording, defs)
+    analyzer = OculomotorAnalyzer(recording, duration, disp)
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 1
 
     stream = recording.data
     stream.append(GazePoint(0.2, 0.2, 1.3))
     stream.append(GazePoint(0.2, 0.2, 1.5))  # <- should count new fix due to dispersion
-    analyzer = OculomotorAnalyzer(recording, defs)
+    analyzer = OculomotorAnalyzer(recording, duration, disp)
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 2
 
     # too far from previous fixation, but didn't take up enough time -> should not count
     stream.append(GazePoint(0.9, 0.9, 1.6))
-    analyzer = OculomotorAnalyzer(recording, defs)
+    analyzer = OculomotorAnalyzer(recording, duration, disp)
     fixations = analyzer.extract_fixations()
     assert len(fixations) == 2
 
 
 def prepare_sample(sample: str) -> OculomotorAnalyzer:
-    defs = Definitions()
-    defs.fixation_max_dispersion_px.update(65)
-    defs.fixation_min_duration_ms.update(200)
-
     recording = ingest_sample(sample)
     assert not len(recording) == 0
 
-    return OculomotorAnalyzer(recording, defs)
+    return OculomotorAnalyzer(recording, 200, 65)
 
 
 def test_one_fixation_sample():

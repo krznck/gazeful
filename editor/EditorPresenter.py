@@ -83,16 +83,16 @@ class EditorPresenter(PagePresenter[EditorPage]):
         exporter.export(file_path)
 
     def _on_gaze_csv_selected(self, _, value) -> None:
-        v, c, vs = self._view, self._context, self._vis_strat
+        v, c = self._view, self._context
 
         if value == "":
             QMessageBox.warning(v, "Import warning", "Empty selection")
             return
 
+        image = c.main_data.screenshot if c.main_data else None
         recording = ingest_csv(Path(value))
+        recording.screenshot = image
         c.main_data = recording
-        vs.setup_plot(v.graphics, recording)
-        vs.update()
 
     def _on_visualization_type_selected(self, _, value) -> None:
         if self._specific_params is not None:

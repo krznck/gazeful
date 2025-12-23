@@ -35,6 +35,7 @@ class RecordingPresenter(PagePresenter[RecordingPage]):
         self._dir_path = str(
             val.get_default_recording_dir() / f"gaze-session-{val.iso_8601_date()}"
         )
+        Path(self._dir_path).mkdir(parents=True, exist_ok=True)
         self._filename = f"recording-{val.iso_8601_time()}"
 
     def _init_view_state(self):
@@ -136,7 +137,11 @@ class RecordingPresenter(PagePresenter[RecordingPage]):
 
     def _begin_recording(self, path: Path):
         v, c = self._view, self._context
-        screen = c.tracked_screen if v.screenshot_checkbox.isChecked() else None
+        screen = (
+            c.tracked_screen
+            if v.screenshot_checkbox and v.screenshot_checkbox.isChecked()
+            else None
+        )
 
         recorder = c.recorder
         if self._endless:
@@ -156,4 +161,3 @@ class RecordingPresenter(PagePresenter[RecordingPage]):
         rt.setEnabled(False)
         recorder.start(path=path, screenshot_screen=screen)
         QTimer.singleShot(self._duration * 1000, stop)
-

@@ -11,7 +11,7 @@ from processing.GazeRecording import GazeRecording
 from pathlib import Path
 
 from processing.GazeStream import GazeStream
-from processing.algorithms2.OculomotorAnalyzer import OculomotorAnalyzer
+from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 
 
 class _VisualizationMeta(ABCMeta, type(QObject)):
@@ -53,6 +53,10 @@ class VisualizationStrategy(ABC, QObject, metaclass=_VisualizationMeta):
         self, graphics: GraphicsLayoutWidget, recording: GazeRecording
     ) -> None:
         self._recording = recording
+
+        if not recording.screenshot and (cache := self._background_cache):
+            recording.screenshot = cache
+
         graphics.clear()  # type: ignore
         self._plot.clear()
 
