@@ -35,6 +35,7 @@ class RecordingPresenter(PagePresenter[RecordingPage]):
         self._dir_path = str(
             val.get_default_recording_dir() / f"gaze-session-{val.iso_8601_date()}"
         )
+        Path(self._dir_path).mkdir(parents=True, exist_ok=True)
         self._filename = f"recording-{val.iso_8601_time()}"
 
     def _init_view_state(self):
