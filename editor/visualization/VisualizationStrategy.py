@@ -11,7 +11,7 @@ from processing.GazeRecording import GazeRecording
 from pathlib import Path
 
 from processing.GazeStream import GazeStream
-from processing.algorithms2.OculomotorAnalyzer import OculomotorAnalyzer
+from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 
 
 class _VisualizationMeta(ABCMeta, type(QObject)):

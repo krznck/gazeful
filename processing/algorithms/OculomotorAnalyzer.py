@@ -1,17 +1,30 @@
 import statistics
 
-from processing.algorithms.BaseAnalyzer import BaseAnalyzer
-from processing.Definitions import Definitions
 from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
+from processing.algorithms.BaseAnalyzer import BaseAnalyzer
 
 
 class OculomotorAnalyzer(BaseAnalyzer):
-    def __init__(self, data: GazeRecording, defs: Definitions) -> None:
-        super().__init__(data, defs)
-        self.fixations: list[GazeStream] | None = None
-        self._average: float | None = None
-        self._median: float | None = None
+    _fixations: list[GazeStream] | None
+    _average: float | None
+    _median: float | None
+
+    _fixation_min_duration_ms: float
+    _fixation_max_dispersion_px: float
+
+    def __init__(
+        self,
+        data: GazeRecording,
+        fixation_min_duration_ms: float,
+        fixation_max_dispersion_px: float,
+    ) -> None:
+        super().__init__(data)
+        self._fixations = None
+        self._average = None
+        self._median = None
+        self._fixation_min_duration_ms = fixation_min_duration_ms
+        self._fixation_max_dispersion_px = fixation_max_dispersion_px
 
     def median_fixation_duration(self) -> float:
         if self._median is None:
@@ -28,18 +41,18 @@ class OculomotorAnalyzer(BaseAnalyzer):
         return self._average
 
     def longest_fixation_duration(self) -> float:
-        if self.fixations is None:
+        if self._fixations is None:
             self._calculate_statistics()
 
-        assert self.fixations is not None
-        return max(point.duration() for point in self.fixations)
+        assert self._fixations is not None
+        return max(point.duration() for point in self._fixations)
 
     def _calculate_statistics(self) -> None:
-        if self.fixations is None:
-            self.fixations = self.extract_fixations()
+        if self._fixations is None:
+            self._fixations = self.extract_fixations()
 
-        duration_ms = [fix.duration() * 1000 for fix in self.fixations]
-        if len(self.fixations) < 1:
+        duration_ms = [fix.duration() * 1000 for fix in self._fixations]
+        if len(self._fixations) < 1:
             self._average = 0
             self._median = 0
             return
@@ -96,7 +109,7 @@ class OculomotorAnalyzer(BaseAnalyzer):
             return False
 
         norm = segment.duration() * 1000
-        return norm >= self.defs.fixation_min_duration_ms.value
+        return norm >= self._fixation_min_duration_ms
 
     def _is_within_dispersion(self, segment: GazeStream):
         if len(segment) < 2:
@@ -109,4 +122,4 @@ class OculomotorAnalyzer(BaseAnalyzer):
         dx_px = dx_norm * sw
         dy_px = dy_norm * sh
 
-        return (dx_px + dy_px) <= self.defs.fixation_max_dispersion_px.value
+        return (dx_px + dy_px) <= self._fixation_max_dispersion_px
