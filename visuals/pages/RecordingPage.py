@@ -42,6 +42,7 @@ class RecordingPage(Page):
         self._init_enable_section()
         self._init_delay_section()
         self._init_duration_section()
+        # screenshots do not work on Wayland
         if not os.environ.get("WAYLAND_DISPLAY"):
             self._init_screenshot_section()
         return super().add_content()

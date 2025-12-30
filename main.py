@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 
 from PyQt6.QtWidgets import QApplication
@@ -18,6 +19,14 @@ def main():
         "-h", "--help", action="help", help="show this help message and exit"
     )
     args = parser.parse_args()
+
+    # NOTE:
+    # The Gaze Visualizer will break on Wayland, due to Wayland disallowing anything
+    # other than the compositor from moving windows. By setting this environment
+    # variable, we tell Qt to use the X C-bindings instead, and use the XWayland
+    # compatibility layer. This does not fix screenshotting on Wayland however, sadly.
+    if sys.platform == "linux":
+        os.environ["QT_QPA_PLATFORM"] = "xcb"
 
     app = QApplication([])
     context = AppContext()
