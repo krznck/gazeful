@@ -34,8 +34,8 @@ class RecordingPage(Page):
     duration_descriptor: QLabel
 
     def __init__(self) -> None:
-        super().__init__("Recording", IconsEnum.RECORD)
         self.screenshot_checkbox = None
+        super().__init__("Recording", IconsEnum.RECORD)
 
     def add_content(self) -> None:
         self._init_file_section()
