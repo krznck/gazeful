@@ -8,23 +8,26 @@ from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.pages.Page import Page
+import os
 
 
 class MainPage(Page):
     trackers_combo_box: QComboBox
     screens_combo_box: QComboBox
     connect_toggle: QPushButton
-    visualizer_toggle: QPushButton
+    visualizer_toggle: QPushButton | None
 
     _screens_refreshing = False
 
     def __init__(self) -> None:
+        self.visualizer_toggle = None
         super().__init__("Home", IconsEnum.HOME)
 
     def add_content(self) -> None:
         self._init_tracker_section()
         self._init_screens_section()
-        self._init_visualizer_section()
+        if not os.environ.get("WAYLAND_DISPLAY"):
+            self._init_visualizer_section()
 
     def _init_tracker_section(self):
         hbox = QHBoxLayout()
