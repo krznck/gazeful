@@ -14,10 +14,8 @@ class HoverableImageItem(ImageItem):
         # we can't stop displaying the information. Might be fine with what is planned
 
     def hoverEvent(self, ev):
-        if ev is None:
+        if ev is None or ev.isExit():
             return
 
         pos = ev.pos()
-        pos: Point
-        # print(pos.x(), pos.y())
         self.hovered.emit(pos)

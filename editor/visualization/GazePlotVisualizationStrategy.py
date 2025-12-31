@@ -39,6 +39,7 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
         self, graphics: GraphicsLayoutWidget, recording: GazeRecording
     ) -> None:
         super().setup_plot(graphics, recording)
+        self._plot.addItem(self._scatter)
 
     def _opacity_updated(self, _, value) -> None:
         self._scatter.setOpacity(value)
@@ -143,7 +144,6 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
             pxMode=False,
             tip=None,
         )
-        plot.addItem(scatter)
 
     def _on_hover(self, scatter: ScatterPlotItem, hovered: np.ndarray):
         params = self._parameters
