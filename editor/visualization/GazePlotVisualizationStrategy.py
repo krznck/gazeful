@@ -53,6 +53,8 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
 
     def _update_fix_color(self, _, value):
         self._scatter.setBrush(value)
+        for spot in self._scatter.points():
+            spot.setBrush(value)
 
     def _update_connection_color(self, _, value):
         for line in self._connection_lines:
