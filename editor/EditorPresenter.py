@@ -1,6 +1,8 @@
 from pathlib import Path
+import re
 from pyqtgraph.exporters import ImageExporter
 from PyQt6.QtWidgets import QFileDialog, QMessageBox
+from pyqtgraph.exporters.SVGExporter import SVGExporter
 from pyqtgraph.parametertree.Parameter import Parameter
 from AppContext import AppContext
 from editor.EditorPage import EditorPage
@@ -70,17 +72,30 @@ class EditorPresenter(PagePresenter[EditorPage]):
         if not c.main_data:
             return
 
-        file_path, _ = QFileDialog.getSaveFileName(
+        file_path, selected_filter = QFileDialog.getSaveFileName(
             v,
             "Save Figure As...",
-            filter=("PNG Image (*.png);;" "JPEG Image (*jpg);;"),
+            filter=("PNG Image (*.png);;" "JPEG Image (*.jpg);;" "SVG Image (*.svg);;"),
         )
-        if not file_path.endswith((".jpg", ".png")):
-            file_path += ".png"
 
-        exporter = ImageExporter(v.graphics.scene())
-        exporter.parameters()["width"] = IMAGE_WIDTH
-        exporter.export(file_path)
+        if not file_path:
+            return
+        path = Path(file_path)
+
+        if path.suffix == "":
+            match = re.search(r"\*\.(\w+)", selected_filter)
+            if match:
+                path = path.with_suffix("." + match.group(1))
+            else:
+                path = path.with_suffix(".png")  # fallback
+
+        if path.suffix == ".svg":
+            exporter = SVGExporter(v.graphics.scene())
+        else:
+            exporter = ImageExporter(v.graphics.scene())
+            exporter.parameters()["width"] = IMAGE_WIDTH
+
+        exporter.export(str(path))
 
     def _on_gaze_csv_selected(self, _, value) -> None:
         v, c = self._view, self._context
