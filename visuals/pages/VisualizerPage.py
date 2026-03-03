@@ -1,8 +1,6 @@
+"""The page for configuring the appearance of the real-time gaze visualizer."""
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QHBoxLayout
-from PyQt6.QtWidgets import QLabel
-from PyQt6.QtWidgets import QPushButton
-from PyQt6.QtWidgets import QSlider
+from PyQt6.QtWidgets import QHBoxLayout, QLabel, QPushButton, QSlider
 
 from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
@@ -14,20 +12,31 @@ OPACITY_LABEL_TEXT: str = "Opacity: "
 
 
 class VisualizerPage(Page):
+    """The page used for controlling visualizer animations and transparency.
+
+    Attributes:
+        visualizer: Reference to the visualizer widget.
+        animation_toggle: Button to enable/disable visualizer animations.
+        opacity_slider: Slider to adjust the visualizer's opacity.
+    """
+
     visualizer: GazeVisualizer
 
     animation_toggle: QPushButton
     opacity_slider: QSlider
 
     def __init__(self) -> None:
+        """Initializes the visualizer page."""
         super().__init__("Visualizer", IconsEnum.CIRCLE)
 
     def add_content(self) -> None:
+        """Adds page content, including animation and opacity sections."""
         super().add_content()
         self.__init_animation_section()
         self.__init_opacity_section()
 
     def __init_animation_section(self):
+        """Initializes the visualizer animation toggle button."""
         hbox = QHBoxLayout()
 
         self.animation_toggle = CustomPushButton("Animations: On")
@@ -38,6 +47,7 @@ class VisualizerPage(Page):
         self._page_vbox.addLayout(hbox)
 
     def __init_opacity_section(self):
+        """Initializes the slider for adjusting visualizer opacity."""
         hbox = QHBoxLayout()
 
         label = QLabel(OPACITY_LABEL_TEXT)

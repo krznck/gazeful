@@ -1,5 +1,5 @@
-from PyQt6.QtCore import QEasingCurve
-from PyQt6.QtCore import Qt
+"""Visual constants and configuration for the gaze visualizer."""
+from PyQt6.QtCore import QEasingCurve, Qt
 from PyQt6.QtGui import QPainter
 
 TITLE = "Gaze Visualizer Window"

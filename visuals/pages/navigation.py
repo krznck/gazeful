@@ -1,17 +1,18 @@
-from PyQt6.QtWidgets import QListWidgetItem
-from PyQt6.QtWidgets import QStackedWidget
+"""Logic for generating application-wide navigation components."""
+import os
 
 from AppContext import AppContext
 from editor.EditorPage import EditorPage
 from editor.EditorPresenter import EditorPresenter
+from PyQt6.QtWidgets import QListWidgetItem, QStackedWidget
+
 from visuals.customized_widgets.CustomSidebar import CustomSidebar
 from visuals.pages.MainPage import MainPage
-from visuals.pages.RecordingPage import RecordingPage
-from visuals.pages.VisualizerPage import VisualizerPage
 from visuals.pages.presenters.MainPagePresenter import MainPagePresenter
 from visuals.pages.presenters.RecordingPresenter import RecordingPresenter
 from visuals.pages.presenters.VisualizerPresenter import VisualizerPresenter
-import os
+from visuals.pages.RecordingPage import RecordingPage
+from visuals.pages.VisualizerPage import VisualizerPage
 
 PAGES = [
     (MainPagePresenter, MainPage),
@@ -22,6 +23,17 @@ PAGES = [
 
 
 def generate_navigation(context: AppContext) -> tuple[CustomSidebar, QStackedWidget]:
+    """Factory function that creates the navigation sidebar and page stack.
+
+    Instantiates all pages and their corresponding presenters, linking them
+    to the sidebar for navigation.
+
+    Args:
+        context: The global application context.
+
+    Returns:
+        A tuple containing the initialized (sidebar, page_stack).
+    """
     navbar = CustomSidebar()
     pages = QStackedWidget()
 

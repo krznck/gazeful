@@ -1,14 +1,30 @@
-from PyQt6.QtWidgets import QMessageBox
+"""Presenter for the Main/Home page, coordinating hardware and screen settings."""
 from AppContext import AppContext
+from PyQt6.QtWidgets import QMessageBox
 from trackers.tracker_selector import TrackersEnum
+
 from visuals.pages.MainPage import MainPage
 from visuals.pages.presenters.PagePresenter import PagePresenter
 
 
 class MainPagePresenter(PagePresenter[MainPage]):
+    """Presenter managing the interaction logic of the Home page.
+
+    Handles tracker connection, screen selection, and real-time refreshes.
+
+    Attributes:
+        _screens_refreshing: Internal flag to prevent recursive screen selection signals.
+    """
+
     _screens_refreshing: bool
 
     def __init__(self, view: MainPage, context: AppContext) -> None:
+        """Initializes the main page presenter.
+
+        Args:
+            view: The MainPage view.
+            context: The application context.
+        """
         super().__init__(view, context)
 
         self._screens_refreshing = False
@@ -16,7 +32,7 @@ class MainPagePresenter(PagePresenter[MainPage]):
         self._connect_signals()
 
     def _init_view_state(self) -> None:
-        """Sets initial state of the widgets in the view."""
+        """Sets initial state of the widgets in the view from the context."""
         v = self._view
 
         selected_tracker = self._context.eyetracker
@@ -48,16 +64,23 @@ class MainPagePresenter(PagePresenter[MainPage]):
             v.visualizer_toggle.clicked.connect(self._on_visualizer_toggle_clicked)
 
     def _trigger_connection_toggle(self, on: bool):
+        """Updates the visual state of the connection button.
+
+        Args:
+            on: Whether the tracker is connected.
+        """
         v = self._view
 
         v.connect_toggle.setText("Connected" if on else "Disconnected")
         v.connect_toggle.setChecked(on)
 
     def _on_trackers_combo_box_index_changed(self):
+        """Slot triggered when a different tracker is selected from the dropdown."""
         self._trigger_connection_toggle(on=False)
         self._context.disconnect_tracker()
 
     def _on_connection_button_clicked(self):
+        """Slot triggered when the connect/disconnect toggle is clicked."""
         v, c = self._view, self._context
 
         if v.connect_toggle.isChecked():
@@ -77,6 +100,7 @@ class MainPagePresenter(PagePresenter[MainPage]):
             self._trigger_connection_toggle(on=False)
 
     def _on_screens_combo_box_index_changed(self):
+        """Slot triggered when the tracked screen selection is changed."""
         v, c = self._view, self._context
 
         if self._screens_refreshing:
@@ -91,6 +115,7 @@ class MainPagePresenter(PagePresenter[MainPage]):
             v.screen_refresh_button.click()
 
     def _on_screen_refresh_button_clicked(self):
+        """Slot triggered to refresh the list of connected monitors."""
         v, c = self._view, self._context
 
         self._screens_refreshing = True
@@ -109,7 +134,11 @@ class MainPagePresenter(PagePresenter[MainPage]):
         self._screens_refreshing = False
 
     def _on_visualizer_toggle_clicked(self):
+        """Slot triggered to show/hide the real-time gaze visualizer."""
         v, c = self._view, self._context
+
+        if v.visualizer_toggle is None:
+            return
 
         on = v.visualizer_toggle.isChecked()
         v.visualizer_toggle.setText(

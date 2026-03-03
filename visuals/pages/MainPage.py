@@ -1,17 +1,26 @@
-from PyQt6.QtWidgets import QComboBox
-from PyQt6.QtWidgets import QHBoxLayout
-from PyQt6.QtWidgets import QPushButton
+"""The home page of the application, used for tracker and screen selection."""
+import os
 
 import screens
+from PyQt6.QtWidgets import QComboBox, QHBoxLayout, QPushButton
 from trackers.tracker_selector import TrackersEnum
+
 from visuals.assets.icon_selector import IconsEnum
 from visuals.customized_widgets.CustomComboBox import CustomComboBox
 from visuals.customized_widgets.CustomPushButton import CustomPushButton
 from visuals.pages.Page import Page
-import os
 
 
 class MainPage(Page):
+    """The home page for configuring hardware and monitoring settings.
+
+    Attributes:
+        trackers_combo_box: Dropdown for selecting the eyetracker.
+        screens_combo_box: Dropdown for selecting the screen to track.
+        connect_toggle: Button to connect/disconnect the tracker.
+        visualizer_toggle: Button to show/hide the gaze visualizer.
+    """
+
     trackers_combo_box: QComboBox
     screens_combo_box: QComboBox
     connect_toggle: QPushButton
@@ -20,16 +29,19 @@ class MainPage(Page):
     _screens_refreshing = False
 
     def __init__(self) -> None:
+        """Initializes the main page."""
         self.visualizer_toggle = None
         super().__init__("Home", IconsEnum.HOME)
 
     def add_content(self) -> None:
+        """Adds page content, including tracker, screen, and visualizer sections."""
         self._init_tracker_section()
         self._init_screens_section()
         if not os.environ.get("WAYLAND_DISPLAY"):
             self._init_visualizer_section()
 
     def _init_tracker_section(self):
+        """Initializes the section for selecting and connecting a tracker."""
         hbox = QHBoxLayout()
 
         tcb = self.trackers_combo_box = CustomComboBox()
@@ -46,6 +58,7 @@ class MainPage(Page):
         self._page_vbox.addLayout(hbox)
 
     def _init_screens_section(self):
+        """Initializes the section for selecting and refreshing connected screens."""
         hbox = QHBoxLayout()
 
         self.screens_combo_box = CustomComboBox()
@@ -59,6 +72,7 @@ class MainPage(Page):
         self._page_vbox.addLayout(hbox)
 
     def _init_visualizer_section(self):
+        """Initializes the visualizer toggle button (not available on Wayland)."""
         hbox = QHBoxLayout()
 
         self.visualizer_toggle = CustomPushButton("Gaze visualizer: Off")
