@@ -1,3 +1,4 @@
+"""Utilities for selecting and instantiating different tracker implementations."""
 from enum import Enum
 
 from recording.Recorder import Recorder
@@ -8,6 +9,8 @@ from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 
 class TrackersEnum(Enum):
+    """Enumeration of available tracker implementations."""
+
     TOBII = TobiiTracker
     DUMMY = MouseTracker
 
@@ -20,6 +23,16 @@ def create_tracker(
     visualizer: GazeVisualizer,
     recorder: Recorder,
 ) -> Tracker:
+    """Factory function for creating tracker instances.
+
+    Args:
+        tracker_type: The type of tracker to create.
+        visualizer: The gaze visualizer to attach to the tracker.
+        recorder: The recorder to attach to the tracker.
+
+    Returns:
+        An initialized Tracker instance of the requested type.
+    """
     if tracker_type is None:
         tracker_type = DEFAULT
 
@@ -32,7 +45,19 @@ def create_tracker(
         case TrackersEnum.TOBII:
             return TobiiTracker(visualizer, recorder)
 
+
 def default_to_first_connected(visualizer: GazeVisualizer, recorder: Recorder):
+    """Selects and creates the first physically connected tracker.
+
+    If no hardware trackers are found, it defaults to the DUMMY (mouse) tracker.
+
+    Args:
+        visualizer: The gaze visualizer to attach to the tracker.
+        recorder: The recorder to attach to the tracker.
+
+    Returns:
+        The first connected Tracker instance, or the default dummy tracker.
+    """
     selected = DEFAULT
     for tracker in TrackersEnum:
         if tracker.value.connected():

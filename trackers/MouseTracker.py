@@ -1,10 +1,9 @@
+"""Implementation of a simulated eyetracker using the system mouse cursor."""
 import random
 import time
 
 from pynput import mouse
-from PyQt6.QtCore import QMetaObject
-from PyQt6.QtCore import Qt
-from PyQt6.QtCore import QTimer
+from PyQt6.QtCore import QMetaObject, Qt, QTimer
 from PyQt6.QtGui import QCursor
 
 import screens
@@ -19,6 +18,17 @@ MAX_TREMOR_TRESHHOLD: int = 7
 
 
 class MouseTracker(Tracker):
+    """Tracker implementation that simulates eye movement using the system cursor.
+
+    Attributes:
+        left_held: Whether the left mouse button is currently toggled.
+        right_held: Whether the right mouse button is currently toggled.
+        last_update_time: Timestamp of the last polling event.
+        simulated_frequency: Frequency at which the mouse is polled (in Hz).
+        timer: QTimer driving the polling loop.
+        listener: pynput mouse listener for capturing clicks.
+    """
+
     left_held: bool = False
     right_held: bool = False
     last_update_time: float = 0.0
@@ -27,15 +37,31 @@ class MouseTracker(Tracker):
     listener: mouse.Listener
 
     def __init__(self, visualizer: GazeVisualizer, recorder: Recorder) -> None:
+        """Initializes the mouse tracker and click listener.
+
+        Args:
+            visualizer: The visualizer that follows eye movement.
+            recorder: The recorder that writes gaze data to a file.
+        """
         super().__init__(visualizer, recorder)
         self.listener = mouse.Listener(on_click=self._on_click)  # type: ignore
 
     @staticmethod
     def connected() -> bool:
+        """Checks if the tracker is available for use.
+
+        Returns:
+            Always True for MouseTracker as a pointing device is assumed to exist.
+        """
         # NOTE: I just assume that any given computer has a pointing device of some sort
         return True
 
     def run(self):
+        """Starts the mouse polling loop and input listener.
+
+        Note:
+            Inherited from QThread.
+        """
         self.listener.start()
 
         self.timer = QTimer()
@@ -46,11 +72,21 @@ class MouseTracker(Tracker):
         self.exec()
 
     def stop(self) -> None:
+        """Cleans up timers and stops the mouse listener."""
         self._cleanup_timer()
         self.listener.stop()
         super().stop()
 
     def _on_click(self, x, y, button: mouse.Button) -> None:
+        """Callback for mouse click events.
+
+        Toggles left_held or right_held status when respective buttons are clicked.
+
+        Args:
+            x: Mouse x coordinate.
+            y: Mouse y coordinate.
+            button: The button that was clicked.
+        """
         # NOTE: method needs x and y in order to pass button correctly,
         # but we're not using it anyway
         _ = x, y
@@ -60,9 +96,11 @@ class MouseTracker(Tracker):
             self.right_held = not self.right_held
 
     def _are_eyes_closed(self) -> bool:
+        """Returns True if both mouse buttons are toggled 'held'."""
         return self.right_held and self.left_held
 
     def _poll_mouse(self):
+        """Captures the current mouse position and emits a GazePoint signal."""
         if self.visualizer is None:
             return
 
@@ -99,6 +137,7 @@ class MouseTracker(Tracker):
         self.eyes_position_changed.emit(gaze)
 
     def _cleanup_timer(self):
+        """Stops and deallocates the polling timer."""
         if self.timer is not None:
             QMetaObject.invokeMethod(
                 self.timer, "stop", Qt.ConnectionType.QueuedConnection
@@ -110,6 +149,14 @@ class MouseTracker(Tracker):
 
 
 def add_tremor(position: int) -> float:
+    """Adds random noise to a coordinate to simulate eye jitter.
+
+    Args:
+        position: The original coordinate value.
+
+    Returns:
+        The position with added Gaussian noise.
+    """
     treshhold = random.randint(MIN_TREMOR_TRESHHOLD, MAX_TREMOR_TRESHHOLD)
     new = position
     offset = random.gauss(0, treshhold)

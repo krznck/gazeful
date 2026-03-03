@@ -1,9 +1,7 @@
-from abc import ABC
-from abc import ABCMeta
-from abc import abstractmethod
+"""Base abstract classes and interfaces for all eyetracker implementations."""
+from abc import ABC, ABCMeta, abstractmethod
 
-from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtCore import QThread
+from PyQt6.QtCore import QThread, pyqtSignal
 
 from recording.Recorder import Recorder
 from trackers.GazePoint import GazePoint
@@ -11,10 +9,12 @@ from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 
 class _TrackerMeta(ABCMeta, type(QThread)):
+    """Custom metaclass to resolve the metaclass conflict between ABCMeta and QThread.
+
+    This metaclass exists solely to resolve the metaclass conflict between
+    ABCMeta and QThread.
     """
-    Custom metaclass solely for the purpose of resolving metaclass conflict between
-    ABD and QThread.
-    """
+    pass
     pass
 
 
@@ -25,26 +25,28 @@ class TrackerNotConnectedError(Exception):
 
 
 class Tracker(ABC, QThread, metaclass=_TrackerMeta):
-    """
-    Base eyetracker class that all concrete eyetrackers should inherit from.
+    """Base eyetracker class that all concrete eyetrackers should inherit from.
 
     This class provides threading capabilities by inheriting from QThread,
     and contains an optional gaze visualizer. It emits a signal whenever new
     gaze data is received from the physical tracker device.
 
     Attributes:
-        eyes_position_changed (pyqtSignal): Signal emitted when new gaze data is received.
-            Signal emits:
-                - a single point of data as represented by GazePoint
-
-        visualizer (GazeVisualizer): Visualizer that follows eye movement.
-        recorder (Recorder): Recorder that writes gaze data to a file.
+        eyes_position_changed: Signal emitted when new gaze data is received.
+        visualizer: Visualizer that follows eye movement.
+        recorder: Recorder that writes gaze data to a file.
     """
 
     eyes_position_changed: pyqtSignal = pyqtSignal(GazePoint)
     visualizer: GazeVisualizer
 
     def __init__(self, visualizer: GazeVisualizer, recorder: Recorder) -> None:
+        """Initializes the base tracker.
+
+        Args:
+            visualizer: Visualizer that follows eye movement.
+            recorder: Recorder that writes gaze data to a file.
+        """
         super().__init__()
 
         self.visualizer = visualizer
@@ -53,9 +55,11 @@ class Tracker(ABC, QThread, metaclass=_TrackerMeta):
         self.eyes_position_changed.connect(self.recorder.write)
 
     def track(self) -> None:
+        """Starts the tracking thread."""
         self.start()
 
     def stop(self) -> None:
+        """Stops the tracking thread and hides the visualizer."""
         self.visualizer.hide()  # hide it before dying
         self.quit()
         self.wait()
@@ -63,4 +67,9 @@ class Tracker(ABC, QThread, metaclass=_TrackerMeta):
     @staticmethod
     @abstractmethod
     def connected() -> bool:
+        """Checks if the physical tracker device is connected.
+
+        Returns:
+            True if the tracker is connected, False otherwise.
+        """
         pass

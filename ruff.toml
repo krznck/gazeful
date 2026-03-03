@@ -1,0 +1,7 @@
+target-version = "py310"
+
+[lint]
+select = ["D"]
+
+[lint.pydocstyle]
+convention = "google"

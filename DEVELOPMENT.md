@@ -2,9 +2,10 @@
 
 <!--toc:start-->
 - [Development Guide](#development-guide)
-  - [Recommended Tools](#recommended-tools)
+  - [Environment Setup](#environment-setup)
+    - [Development Tools](#development-tools)
   - [Architecture Overview](#architecture-overview)
-  - [Extending Gazeful](#extending-gazeful)
+  - [Data Interchange](#data-interchange)
     - [Adding a New Eye Tracker](#adding-a-new-eye-tracker)
     - [Adding a New Visualization](#adding-a-new-visualization)
   - [Asset Management](#asset-management)
@@ -24,8 +25,10 @@ For installation instructions, refer to
 
 The following are a list of tools meant to be used when contributing to Gazeful.
 
-- [black](https://pypi.org/project/black/):
-  A Python code formatter.
+- [ruff](https://github.com/astral-sh/ruff/):
+  A Python linter and code formatter.
+  In Gazeful, it is used for style formatting and docstring linting.
+  The repository provides a [configuration file](./ruff.toml) for ruff.
 
 - [isort](https://pypi.org/project/isort/):
   A utility to sort Python imports alphabetically.
