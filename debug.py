@@ -1,3 +1,4 @@
+"""Diagnostic and debugging utilities for gaze data ingestion."""
 from enum import Enum
 from pathlib import Path
 from time import perf_counter
@@ -8,12 +9,22 @@ from processing.ingester import ingest_csv
 
 
 class Samples(Enum):
+    """Enumeration of available sample gaze data files."""
     ONE = "one_fix"
     ARS = "ars_technica"
     BALATRO = "balatro"
 
 
 def debug_time(func: Callable, message: str | None = None):
+    """Measures and prints the execution time of a function.
+
+    Args:
+        func: The callable to measure.
+        message: Optional custom message to print with the duration.
+
+    Returns:
+        The return value of the executed function.
+    """
     start = perf_counter()
     return_val = func()
     end = perf_counter()
@@ -23,12 +34,28 @@ def debug_time(func: Callable, message: str | None = None):
 
 
 def ingest_sample(name: str) -> GazeRecording:
+    """Loads a gaze recording from the project's sample directory.
+
+    Args:
+        name: Filename of the sample (without extension).
+
+    Returns:
+        A GazeRecording instance of the sample data.
+    """
     current_dir = Path(__file__).parent
     csv_file = current_dir / "tests" / "samples" / f"{name}.csv"
     return ingest_csv(csv_file)
 
 
 def get_sample_image(name: str) -> Path:
+    """Retrieves the path to a sample background image.
+
+    Args:
+        name: Filename of the sample image (without extension).
+
+    Returns:
+        A Path object pointing to the image.
+    """
     current_dir = Path(__file__).parent
     image_file = current_dir / "tests" / "samples" / "images" / f"{name}.png"
     return image_file

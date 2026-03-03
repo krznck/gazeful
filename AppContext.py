@@ -1,8 +1,8 @@
+"""Global application state and service container."""
 from pathlib import Path
 from typing import NamedTuple
 
-from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtCore import QObject
+from PyQt6.QtCore import QObject, pyqtSignal
 from PyQt6.QtGui import QScreen
 
 import screens
@@ -10,22 +10,39 @@ from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
 from processing.ingester import ingest_csv
 from recording.Recorder import Recorder
-from trackers.Tracker import Tracker
-from trackers.Tracker import TrackerNotConnectedError
-from trackers.tracker_selector import create_tracker
-from trackers.tracker_selector import default_to_first_connected
+from trackers.Tracker import Tracker, TrackerNotConnectedError
+from trackers.tracker_selector import (create_tracker,
+                                       default_to_first_connected)
 from visuals.visualizer.GazeVisualizer import GazeVisualizer
 
 
 class OperationResult(NamedTuple):
+    """Result of a state-changing operation.
+
+    Attributes:
+        success: Whether the operation completed successfully.
+        error: An error message if success is False.
+    """
     success: bool
     error: str | None = None
 
 
 class AppContext(QObject):
+    """Central container for application-wide state and shared services.
+
+    Manages hardware connections, screen tracking, and the global data recording.
+
+    Attributes:
+        main_data_changed: Signal emitted whenever the primary gaze recording is updated.
+        tracked_screen: The monitor currently selected for tracking.
+        recorder: The service handling data persistence.
+        visualizer: The overlay for real-time gaze visualization.
+        eyetracker: The currently active tracker hardware or simulation.
+    """
     main_data_changed = pyqtSignal()
 
     def __init__(self) -> None:
+        """Initializes the application context and hardware connections."""
         super().__init__()
         self.tracked_screen: QScreen = screens.get_primary_screen()
         self.recorder: Recorder = Recorder(screens.get_screen_size(self.tracked_screen))
@@ -38,10 +55,16 @@ class AppContext(QObject):
 
     @property
     def main_data(self) -> GazeRecording | None:
+        """The currently active gaze recording."""
         return self._main_data
 
     @main_data.setter
     def main_data(self, data: GazeStream | Path | GazeRecording):
+        """Sets the active gaze data, accepting a stream, a path, or a recording object.
+
+        Args:
+            data: The new gaze data to load into the context.
+        """
         match data:
             case Path() as path:
                 self._main_data = ingest_csv(path)
@@ -56,6 +79,14 @@ class AppContext(QObject):
         self.main_data_changed.emit()
 
     def connect_tracker(self, tracker: str) -> OperationResult:
+        """Attempts to connect to a specific tracker hardware.
+
+        Args:
+            tracker: The name of the tracker to connect to.
+
+        Returns:
+            OperationResult indicating success or failure.
+        """
         try:
             self.eyetracker = create_tracker(tracker, self.visualizer, self.recorder)
         except TrackerNotConnectedError as e:
@@ -66,11 +97,20 @@ class AppContext(QObject):
         return OperationResult(True)
 
     def disconnect_tracker(self):
+        """Stops and disconnects the current tracker."""
         if self.eyetracker is not None:
             self.eyetracker.stop()
         self.eyetracker = None
 
     def specify_screen(self, screen: str | QScreen) -> OperationResult:
+        """Binds the application to a specific screen for tracking.
+
+        Args:
+            screen: The name of the screen or a QScreen object.
+
+        Returns:
+            OperationResult indicating if the binding was successful.
+        """
         if isinstance(screen, QScreen):
             self.tracked_screen = screen
         else:
@@ -86,11 +126,14 @@ class AppContext(QObject):
 
     def check_screens_state(self) -> tuple[OperationResult, list[str], int]:
         """Checks whether the currently chosen screen is still connected to the machine.
+
         If not, defaults to the primary screen.
+
         Returns:
-            ConnectResult: positive when it is, otherwise negative with warning
-            list[str]: names of all screens accessible to the application
-            int: index on that list of the chosen screen after the check
+            A tuple containing:
+                - OperationResult: positive when it is, otherwise negative with warning
+                - list[str]: names of all screens accessible to the application
+                - int: index on that list of the chosen screen after the check
         """
         names = screens.get_screen_names()
         primary = screens.get_primary_screen()
@@ -119,6 +162,11 @@ class AppContext(QObject):
         return OperationResult(False, warning), names, primary_index
 
     def toggle_visualizer(self, on: bool | None = None) -> None:
+        """Toggles the gaze visualizer overlay.
+
+        Args:
+            on: Explicit state to set. If None, toggles current state.
+        """
         if on is not None:
             self.visualizer.toggle(on)
         else:

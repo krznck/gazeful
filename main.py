@@ -1,3 +1,4 @@
+"""Main entry point for the application."""
 import argparse
 import sys
 
@@ -9,6 +10,7 @@ from visuals.MainWindow import MainWindow
 
 
 def main():
+    """Parses command line arguments and launches the application."""
     parser = argparse.ArgumentParser(description=f"Run {APP_NAME}.", add_help=False)
     group = parser.add_mutually_exclusive_group()
     group.add_argument(
