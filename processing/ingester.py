@@ -1,11 +1,12 @@
+"""Functions for ingesting gaze data from CSV files."""
 import csv
 from pathlib import Path
 
+from recording.Recorder import EYE_CLOSED
+from trackers.GazePoint import GazePoint, list_fields
+
 from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
-from recording.Recorder import EYE_CLOSED
-from trackers.GazePoint import GazePoint
-from trackers.GazePoint import list_fields
 
 
 class InvalidFormatError(Exception):
@@ -15,6 +16,22 @@ class InvalidFormatError(Exception):
 
 
 def ingest_csv(path: Path) -> GazeRecording:
+    """Loads a gaze recording from a CSV file.
+
+    The file must start with a comment line indicating screen dimensions
+    (e.g., #1920x1080), followed by a header matching GazePoint fields.
+    You can find examples of valid CSV files in `../tests/samples/`.
+
+    Args:
+        path: Path to the CSV file to ingest.
+
+    Returns:
+        A GazeRecording instance containing the loaded data.
+
+    Raises:
+        InvalidFormatError: If the file header is missing or data rows
+            contain invalid values.
+    """
     points = []
 
     with path.open("r", newline="") as f:
@@ -55,6 +72,17 @@ def ingest_csv(path: Path) -> GazeRecording:
 
 
 def ingest_screen_dimension_comment(line: str) -> tuple[int, int]:
+    """Parses a screen dimensions comment from a CSV header.
+
+    Args:
+        line: The header line (e.g., "#1920x1080").
+
+    Returns:
+        A tuple of (width, height).
+
+    Raises:
+        InvalidFormatError: If the comment is malformed.
+    """
     try:
         s = line.lstrip("#")
         w, h = s.split("x")
