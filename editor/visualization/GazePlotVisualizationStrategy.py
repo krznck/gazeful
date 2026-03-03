@@ -1,22 +1,40 @@
+"""Visualization strategy for generating gaze plots (a type of scanpath)."""
+import numpy as np
+from processing.GazeRecording import GazeRecording
 from pyqtgraph import GraphicsLayoutWidget, SpotItem, mkColor
 from pyqtgraph.functions import mkBrush, mkPen
 from pyqtgraph.graphicsItems.PlotDataItem import PlotDataItem
 from pyqtgraph.graphicsItems.ScatterPlotItem import ScatterPlotItem
 from pyqtgraph.graphicsItems.TextItem import TextItem
+
+from editor.ParameterCollection import ParameterCollection
 from editor.parameters.base import ParameterEnum
 from editor.parameters.gaze_plot import GazePlotParameterEnum
 from editor.visualization.VisualizationStrategy import VisualizationStrategy
-from editor.ParameterCollection import ParameterCollection
-from processing.GazeRecording import GazeRecording
-import numpy as np
 
 
 class GazePlotVisualizationStrategy(VisualizationStrategy):
+    """Generates a scanpath visualization with fixation circles and connection lines.
+
+    Fixations are represented as numbered circles where the radius is proportional
+    to the duration. Chronological connections are drawn between consecutive fixations.
+
+    Attributes:
+        _fix_labels: List of text items showing the chronological index of fixations.
+        _connection_lines: List of plot items representing the saccades (path).
+        _scatter: The main scatter plot item for fixation circles.
+    """
+
     _fix_labels: list[TextItem]
     _connection_lines: list[PlotDataItem]
     _scatter: ScatterPlotItem
 
     def __init__(self, parameters: ParameterCollection) -> None:
+        """Initializes the gaze plot strategy and connects related parameters.
+
+        Args:
+            parameters: The parameter collection for configuration.
+        """
         super().__init__(parameters)
         self._fix_labels = []
         self._connection_lines = []
@@ -38,10 +56,21 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
     def setup_plot(
         self, graphics: GraphicsLayoutWidget, recording: GazeRecording
     ) -> None:
+        """Adds the scatter plot item to the main plot.
+
+        Args:
+            graphics: The layout widget to draw into.
+            recording: The gaze data to visualize.
+        """
         super().setup_plot(graphics, recording)
         self._plot.addItem(self._scatter)
 
     def _opacity_updated(self, _, value) -> None:
+        """Updates the transparency of all gaze plot elements.
+
+        Args:
+            value: New opacity value (0.0 to 1.0).
+        """
         self._scatter.setOpacity(value)
         for line in self._connection_lines:
             line.setOpacity(value)
@@ -49,19 +78,35 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
             label.setOpacity(value)
 
     def _update_hover_color(self, _, value):
+        """Updates the color used when a fixation is hovered.
+
+        Args:
+            value: New hover color.
+        """
         # maniuplating the `opts` dictionary directly when there is no setter
         self._scatter.opts["hoverBrush"] = mkColor(value)
 
     def _update_fix_color(self, _, value):
+        """Updates the fill color of all fixation circles.
+
+        Args:
+            value: New fixation color.
+        """
         self._scatter.setBrush(value)
         for spot in self._scatter.points():
             spot.setBrush(value)
 
     def _update_connection_color(self, _, value):
+        """Updates the color of the saccade lines.
+
+        Args:
+            value: New connection line color.
+        """
         for line in self._connection_lines:
             line.setPen(color=value, width=2)
 
     def update(self) -> None:
+        """Recalculates the gaze plot and refreshes the display."""
         super().update()
         rec = self._recording
         if not rec:
@@ -146,6 +191,12 @@ class GazePlotVisualizationStrategy(VisualizationStrategy):
         )
 
     def _on_hover(self, scatter: ScatterPlotItem, hovered: np.ndarray):
+        """Handles hover signals from the scatter plot and updates visual feedback.
+
+        Args:
+            scatter: The scatter plot item being hovered.
+            hovered: Array of indices for currently hovered spots.
+        """
         params = self._parameters
         fix_color = params.get_value(GazePlotParameterEnum.FIX_COLOR)
         adj_color = params.get_value(GazePlotParameterEnum.ADJ_COLOR)

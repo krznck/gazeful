@@ -1,16 +1,20 @@
-from numpy.typing import NDArray
-from editor.ParameterCollection import ParameterCollection
-from editor.visualization.BaseHeatmapVisualizationStrategy import (
-    BaseHeatmapVisualizationStrategy,
-)
-from processing.GazeStream import GazeStream
+"""Heatmap strategy based on the total time spent fixating at each location."""
 import numpy as np
+from numpy.typing import NDArray
+from processing.GazeStream import GazeStream
+
+from editor.ParameterCollection import ParameterCollection
+from editor.visualization.BaseHeatmapVisualizationStrategy import \
+    BaseHeatmapVisualizationStrategy
 
 
 class AbsoluteGazeDurationHeatmapVisualizationStrategy(
     BaseHeatmapVisualizationStrategy
 ):
+    """Generates a heatmap where intensity represents fixation duration in seconds."""
+
     def __init__(self, parameters: ParameterCollection) -> None:
+        """Initializes the absolute duration heatmap strategy."""
         super().__init__(parameters, "Seconds of fixation duration")
 
     def _apply_fixation(
@@ -20,4 +24,12 @@ class AbsoluteGazeDurationHeatmapVisualizationStrategy(
         column_indices: np.ndarray,
         fixation: GazeStream,
     ) -> None:
+        """Increments heatmap values by the fixation's duration in seconds.
+
+        Args:
+            heatmap: The accumulation grid.
+            row_indices: Row coordinates for the fixation area.
+            column_indices: Column coordinates for the fixation area.
+            fixation: The fixation data stream.
+        """
         heatmap[row_indices, column_indices] += fixation.duration()

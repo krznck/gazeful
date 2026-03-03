@@ -1,3 +1,4 @@
+"""Management of hierarchical parameters for the editor's visualization settings."""
 from enum import Enum
 from typing import Any
 
@@ -11,21 +12,45 @@ class ParameterError(Exception):
 
 
 class ParameterCollection:
-    # NOTE: Despite the name, `Parameter` can be a group of parameters
-    # NOTE: The root parameter should be a group of groups.
-    # This is important for the getter behavior.
-    _parameters = Parameter
+    """A wrapper for pyqtgraph's Parameter objects to simplify access and signal binding.
+
+    This class provides a flat interface for accessing parameters nested within a
+    hierarchical group structure.
+
+    Attributes:
+        _parameters: The root Parameter group containing all settings.
+    """
+
+    _parameters: Parameter
 
     def __init__(self, parameters: Parameter) -> None:
+        """Initializes the collection.
+
+        Args:
+            parameters: The root Parameter group.
+        """
         self._parameters = parameters
 
     def connect_tree(self, tree: ParameterTree) -> None:
+        """Attaches the parameter collection to a UI tree view.
+
+        Args:
+            tree: The ParameterTree widget to display these parameters.
+        """
         tree.setParameters(param=self._parameters, showTop=False)
 
-    # NOTE: Feels dirty to accept just any Enums here.
-    # But well, this makes it easier, and it's fine to utilize Python's dynamic typing
-    # sometimes.
     def get_param(self, target: Enum) -> Parameter:
+        """Retrieves a specific Parameter object by its Enum key.
+
+        Args:
+            target: The Enum member representing the parameter.
+
+        Returns:
+            The corresponding pyqtgraph Parameter object.
+
+        Raises:
+            ParameterError: If the parameter key is not found in any child group.
+        """
         key = target.value
         for group in self._parameters.children():  # type: ignore
             if key in group.names:
@@ -34,10 +59,26 @@ class ParameterCollection:
         raise ParameterError(f"Could not find parameter {target.name}.")
 
     def get_value(self, target: Enum) -> Any:
+        """Retrieves the current value of a parameter.
+
+        Args:
+            target: The Enum member representing the parameter.
+
+        Returns:
+            The current value stored in the parameter.
+        """
         param = self.get_param(target)
         return param.value()
 
     def connect(self, target: Enum, slot) -> None:
+        """Connects a parameter's change or activation signal to a slot.
+
+        Handles both standard value changes and 'action' type triggers.
+
+        Args:
+            target: The Enum member representing the parameter.
+            slot: The callable to trigger when the parameter changes.
+        """
         param = self.get_param(target)
 
         if param.opts["type"] == "action":

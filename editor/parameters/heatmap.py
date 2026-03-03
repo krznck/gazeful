@@ -1,8 +1,11 @@
+"""Parameters specific to heatmap visualizations."""
 from enum import Enum
 from typing import Any
 
 
 class HeatmapParameterEnum(Enum):
+    """Enums representing the unique names of heatmap-specific parameters."""
+
     BLUR = "Blur"
     C_MAP = "Color Map"
 

@@ -1,23 +1,38 @@
-from pathlib import Path
+"""Presenter for the Editor page, coordinating UI settings and visualizations."""
 import re
-from pyqtgraph.exporters import ImageExporter
+from pathlib import Path
+
+from AppContext import AppContext
+from processing.ingester import ingest_csv
 from PyQt6.QtWidgets import QFileDialog, QMessageBox
+from pyqtgraph.exporters import ImageExporter
 from pyqtgraph.exporters.SVGExporter import SVGExporter
 from pyqtgraph.parametertree.Parameter import Parameter
-from AppContext import AppContext
-from editor.EditorPage import EditorPage
-from editor.ParameterCollection import ParameterCollection
-from editor.visualization.VisualizationStrategy import VisualizationStrategy
-from editor.visualization.generator import make_param, make_strategy
-from processing.ingester import ingest_csv
 from visuals.pages.presenters.PagePresenter import PagePresenter
 
+from editor.EditorPage import EditorPage
+from editor.ParameterCollection import ParameterCollection
 from editor.parameters.base import PARAMS, ParameterEnum
+from editor.visualization.generator import make_param, make_strategy
+from editor.visualization.VisualizationStrategy import VisualizationStrategy
 
 IMAGE_WIDTH = 2000
 
 
 class EditorPresenter(PagePresenter[EditorPage]):
+    """Presenter managing the Editor view and visualization lifecycle.
+
+    This class coordinates the parameter tree, handles file importing/exporting,
+    and manages the active visualization strategy.
+
+    Attributes:
+        _vis_strat: Current strategy for generating the visualization.
+        _params: Collection of parameters for UI and strategy control.
+        _root_param: The top-level parameter group for the tree view.
+        _common_params: Long-lived parameters (e.g., global settings).
+        _specific_params: Parameters specific to the active visualization strategy.
+    """
+
     _vis_strat: VisualizationStrategy
     _params: ParameterCollection
     _root_param: Parameter  # container for the tree view
@@ -29,6 +44,12 @@ class EditorPresenter(PagePresenter[EditorPage]):
         view: EditorPage,
         context: AppContext,
     ) -> None:
+        """Initializes the presenter and creates initial parameter groups.
+
+        Args:
+            view: The EditorPage view.
+            context: Global application context.
+        """
         super().__init__(view, context)
 
         self._common_params = cp = Parameter.create(
@@ -47,10 +68,12 @@ class EditorPresenter(PagePresenter[EditorPage]):
         self._on_visualization_type_selected(None, initial_vis_type)
 
     def _init_view_state(self) -> None:
+        """Initializes the view's component states."""
         v, p = self._view, self._params
         p.connect_tree(v.parameter_tree)
 
     def _connect_signals(self) -> None:
+        """Connects signals from parameters and context to presenter slots."""
         p, c = self._params, self._context
         p.connect(ParameterEnum.GAZE_FILE, self._on_gaze_csv_selected)
         p.connect(ParameterEnum.VISUALIZATION, self._on_visualization_type_selected)
@@ -58,6 +81,7 @@ class EditorPresenter(PagePresenter[EditorPage]):
         p.connect(ParameterEnum.SAVE, self._on_export_clicked)
 
         def import_recording():
+            """Slot for importing a new recording into the current visualization."""
             if not c.main_data:
                 return
             vs, v = self._vis_strat, self._view
@@ -67,6 +91,7 @@ class EditorPresenter(PagePresenter[EditorPage]):
         c.main_data_changed.connect(import_recording)
 
     def _on_export_clicked(self, _) -> None:
+        """Handles the export of the current visualization to an image file."""
         v, c = self._view, self._context
 
         if not c.main_data:
@@ -98,6 +123,7 @@ class EditorPresenter(PagePresenter[EditorPage]):
         exporter.export(str(path))
 
     def _on_gaze_csv_selected(self, _, value) -> None:
+        """Slot triggered when a new CSV file is chosen from the parameter tree."""
         v, c = self._view, self._context
 
         if value == "":
@@ -110,6 +136,10 @@ class EditorPresenter(PagePresenter[EditorPage]):
         c.main_data = recording
 
     def _on_visualization_type_selected(self, _, value) -> None:
+        """Slot triggered when the visualization type parameter is changed.
+
+        Updates the visualization strategy and refreshes specific parameters.
+        """
         if self._specific_params is not None:
             self._root_param.removeChild(self._specific_params)
             self._specific_params = None

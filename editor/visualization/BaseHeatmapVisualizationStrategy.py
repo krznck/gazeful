@@ -1,27 +1,46 @@
+"""Base strategy for heatmap-style visualizations."""
 from abc import abstractmethod
-from PyQt6.QtCore import QRectF, QTimer
+
 import numpy as np
 from numpy.typing import NDArray
+from processing.GazeRecording import GazeRecording
+from processing.GazeStream import GazeStream
+from PyQt6.QtCore import QRectF, QTimer
 from pyqtgraph import GraphicsLayoutWidget, colormap
 from pyqtgraph.graphicsItems.ColorBarItem import ColorBarItem
+from scipy.ndimage import gaussian_filter
+from skimage.draw import disk
+
 from editor.HoverableImageItem import HoverableImageItem
 from editor.ParameterCollection import ParameterCollection
 from editor.parameters.base import ParameterEnum
 from editor.parameters.heatmap import HeatmapParameterEnum
 from editor.visualization.VisualizationStrategy import VisualizationStrategy
-from processing.GazeRecording import GazeRecording
-from scipy.ndimage import gaussian_filter
-from skimage.draw import disk
-
-from processing.GazeStream import GazeStream
 
 
 class BaseHeatmapVisualizationStrategy(VisualizationStrategy):
+    """Abstract base class for all heatmap-based gaze visualizations.
+
+    This class handles the creation of the heatmap overlay, colormapping,
+    blurring/smoothing, and debounced parameter updates.
+
+    Attributes:
+        _heatmap_item: The interactive image item displaying the heatmap.
+        _colorbar: UI component showing the color scale.
+        _heatmap: The raw numerical data for the heatmap.
+    """
+
     _heatmap_item: HoverableImageItem
     _colorbar: ColorBarItem
     _heatmap: NDArray | None
 
     def __init__(self, parameters: ParameterCollection, cbar_label: str) -> None:
+        """Initializes the heatmap strategy.
+
+        Args:
+            parameters: The parameter collection for configuration.
+            cbar_label: Label to display on the color bar.
+        """
         self._heatmap = None
         self._heatmap_item = HoverableImageItem()
         cmap = colormap.get(name=parameters.get_value(HeatmapParameterEnum.C_MAP))
@@ -45,6 +64,12 @@ class BaseHeatmapVisualizationStrategy(VisualizationStrategy):
     def setup_plot(
         self, graphics: GraphicsLayoutWidget, recording: GazeRecording
     ) -> None:
+        """Sets up the heatmap plot with an overlay and color bar.
+
+        Args:
+            graphics: The layout widget to draw into.
+            recording: The gaze data to visualize.
+        """
         super().setup_plot(graphics, recording)
         params = self._parameters
         opacity = params.get_value(ParameterEnum.OPACITY)
@@ -59,10 +84,16 @@ class BaseHeatmapVisualizationStrategy(VisualizationStrategy):
         graphics.addItem(color, row=2, col=0)  # type: ignore
 
     def _update_colormap(self, _, value):
+        """Updates the color map used by the heatmap and color bar.
+
+        Args:
+            value: The name of the new color map.
+        """
         cmap = colormap.get(name=value)
         self._colorbar.setColorMap(cmap)
 
     def _apply_blur_update(self):
+        """Applies the current blur setting to the heatmap data."""
         v = self._pending_blur_value
         if v is None:
             return
@@ -72,11 +103,17 @@ class BaseHeatmapVisualizationStrategy(VisualizationStrategy):
         self._colorbar.setLevels(values=(np.nanmin(heatmap), np.nanmax(heatmap)))
 
     def _update_blur(self, _, value):
+        """Starts the debouncer for blur updates.
+
+        Args:
+            value: The new blur sigma value.
+        """
         self._pending_blur_value = value
         self._blur_debouncer.start()  # NOTE: this resets the timer on each call
         # making it work as a proper debouncer
 
     def update(self):
+        """Recalculates the heatmap numerical data and refreshes the display."""
         rec = self._recording
         if not rec:
             return
@@ -112,9 +149,15 @@ class BaseHeatmapVisualizationStrategy(VisualizationStrategy):
         column_indices: np.ndarray,
         fixation: GazeStream,
     ) -> None:
+        """Abstract method to apply a single fixation's data to the heatmap grid."""
         pass
 
     def _opacity_updated(self, _, value) -> None:
+        """Updates the transparency of the heatmap overlay.
+
+        Args:
+            value: New opacity value (0.0 to 1.0).
+        """
         heat_i = self._heatmap_item
         if not heat_i:
             return
@@ -122,6 +165,11 @@ class BaseHeatmapVisualizationStrategy(VisualizationStrategy):
         heat_i.setOpacity(value)
 
     def _on_hover(self, pos):
+        """Handles hover events over the heatmap and emits description signals.
+
+        Args:
+            pos: Local coordinates of the hover event.
+        """
         rec = self._recording
         if not rec:
             return

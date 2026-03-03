@@ -1,17 +1,16 @@
+"""Factory functions for creating visualization strategies and parameters."""
 from typing import Any
-from editor.visualization.AbsoluteGazeDurationHeatmapVisualizationStrategy import (
-    AbsoluteGazeDurationHeatmapVisualizationStrategy,
-)
-from editor.visualization.FixationCountHeatmapVisualizationStrategy import (
-    FixationCountHeatmapVisualizationStrategy,
-)
-from editor.visualization.GazePlotVisualizationStrategy import (
-    GazePlotVisualizationStrategy,
-)
+
+import editor.parameters.gaze_plot as gaze_plot
+import editor.parameters.heatmap as heatmap
+from editor.visualization.AbsoluteGazeDurationHeatmapVisualizationStrategy import \
+    AbsoluteGazeDurationHeatmapVisualizationStrategy
+from editor.visualization.FixationCountHeatmapVisualizationStrategy import \
+    FixationCountHeatmapVisualizationStrategy
+from editor.visualization.GazePlotVisualizationStrategy import \
+    GazePlotVisualizationStrategy
 from editor.visualization.VisualizationKind import VisualizationKind
 from editor.visualization.VisualizationStrategy import VisualizationStrategy
-import editor.parameters.heatmap as heatmap
-import editor.parameters.gaze_plot as gaze_plot
 
 STRAT_BY_KIND = {
     VisualizationKind.GAZE_PLOT: GazePlotVisualizationStrategy,
@@ -27,6 +26,17 @@ PARAM_BY_KIND = {
 
 
 def make_strategy(kind: str | VisualizationKind) -> type[VisualizationStrategy]:
+    """Factory to retrieve a strategy class based on a VisualizationKind.
+
+    Args:
+        kind: The kind of visualization requested.
+
+    Returns:
+        The class (not an instance) of the requested VisualizationStrategy.
+
+    Raises:
+        RuntimeError: If the kind cannot be parsed or matched.
+    """
     match kind:
         case VisualizationKind():
             return STRAT_BY_KIND[kind]
@@ -39,6 +49,17 @@ def make_strategy(kind: str | VisualizationKind) -> type[VisualizationStrategy]:
 
 
 def make_param(kind: str | VisualizationKind) -> list[dict[str, Any]]:
+    """Factory to retrieve parameter definitions for a VisualizationKind.
+
+    Args:
+        kind: The kind of visualization requested.
+
+    Returns:
+        A list of parameter configuration dictionaries.
+
+    Raises:
+        RuntimeError: If the kind cannot be parsed or matched.
+    """
     match kind:
         case VisualizationKind():
             return PARAM_BY_KIND[kind]

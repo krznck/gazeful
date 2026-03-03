@@ -1,14 +1,14 @@
-"""
-Dictionary representing common parameters - parameters that every visualization should
-be able to utilize.
-"""
+"""Common parameters shared by all visualization types."""
 
 from enum import Enum
 from typing import Any
+
 from editor.visualization.VisualizationKind import VisualizationKind
 
 
 class ParameterEnum(Enum):
+    """Enums representing the unique names of common parameters."""
+
     VISUALIZATION = "Visualization"
     FIX_MIN_DURATION = "Fixation Min Duration (ms)"
     FIX_MAX_DISPERSION = "Fixation Max Dispersion (px)"
