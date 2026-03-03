@@ -2,7 +2,7 @@ from enum import Enum
 
 from PyQt6.QtGui import QIcon
 
-PATH = "assets/fluentui-system-icons/"
+PATH = "assets/icons/"
 
 
 class IconsEnum(Enum):
