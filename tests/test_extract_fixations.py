@@ -1,12 +1,10 @@
+"""Integration tests for fixation extraction using oculomotor analyzers."""
 import pytest
-from pytest import approx
-
-from debug import debug_time
-from debug import ingest_sample
-from debug import Samples
+from debug import Samples, debug_time, ingest_sample
 from processing.algorithms.OculomotorAnalyzer import OculomotorAnalyzer
 from processing.GazeRecording import GazeRecording
 from processing.GazeStream import GazeStream
+from pytest import approx
 from trackers.GazePoint import GazePoint
 
 screen = (1920, 1200)
@@ -61,6 +59,14 @@ def test_dispersion_breakup():
 
 
 def prepare_sample(sample: str) -> OculomotorAnalyzer:
+    """Helper to ingest a sample CSV and wrap it in an analyzer.
+
+    Args:
+        sample: Name of the sample file.
+
+    Returns:
+        An OculomotorAnalyzer initialized with default thresholds.
+    """
     recording = ingest_sample(sample)
     assert not len(recording) == 0
 

@@ -1,8 +1,6 @@
-from pytest import approx
-from pytest import raises
-
-from processing.GazeStream import GazeStream
-from processing.GazeStream import NonMonotonicTimesstampError
+"""Unit tests for the GazeStream collection and its statistical calculations."""
+from processing.GazeStream import GazeStream, NonMonotonicTimesstampError
+from pytest import approx, raises
 from trackers.GazePoint import GazePoint
 
 

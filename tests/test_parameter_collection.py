@@ -1,22 +1,20 @@
+"""Unit tests for the ParameterCollection wrapper."""
 from enum import Enum
 from types import SimpleNamespace
 from typing import cast
 
-from pyqtgraph.parametertree.Parameter import Parameter
 import pytest
-from editor.ParameterCollection import (
-    ParameterCollection,
-    ParameterError,
-)
-
-from enum import Enum
+from editor.ParameterCollection import ParameterCollection, ParameterError
+from pyqtgraph.parametertree.Parameter import Parameter
 
 
 class MockEnum(Enum):
+    """Simple enum for mocking parameter keys."""
     MOCK = "Mock"
 
 
 def setup():
+    """Sets up a nested pyqtgraph parameter structure for testing."""
     leaf = {"name": "Mock", "type": "bool", "value": True}
     group = Parameter.create(name="Group", type="group", children=[leaf])
     root = Parameter.create(name="Root", type="group", children=[group])

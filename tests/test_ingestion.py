@@ -1,8 +1,6 @@
+"""Integration tests for CSV data ingestion."""
 import pytest
-
-from debug import debug_time
-from debug import ingest_sample
-from debug import Samples
+from debug import Samples, debug_time, ingest_sample
 
 
 def test_ars_technica_sample():
