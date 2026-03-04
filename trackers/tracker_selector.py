@@ -1,4 +1,9 @@
-"""Utilities for selecting and instantiating different tracker implementations."""
+"""Utilities for selecting and instantiating different tracker implementations.
+
+This module provides factory functions for creating tracker instances
+and selecting the first connected hardware tracker.
+"""
+
 from enum import Enum
 
 from recording.Recorder import Recorder
@@ -46,7 +51,9 @@ def create_tracker(
             return TobiiTracker(visualizer, recorder)
 
 
-def default_to_first_connected(visualizer: GazeVisualizer, recorder: Recorder):
+def default_to_first_connected(
+    visualizer: GazeVisualizer, recorder: Recorder
+) -> Tracker:
     """Selects and creates the first physically connected tracker.
 
     If no hardware trackers are found, it defaults to the DUMMY (mouse) tracker.

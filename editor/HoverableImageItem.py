@@ -1,6 +1,8 @@
 """A subclass of the pyqtgraph ImageItem that reports hover positions."""
+
 from PyQt6.QtCore import pyqtSignal
 from pyqtgraph import ImageItem
+from pyqtgraph.GraphicsScene.mouseEvents import HoverEvent
 from pyqtgraph.Point import Point
 
 
@@ -21,7 +23,7 @@ class HoverableImageItem(ImageItem):
         # We are not signaling when the hover event exits (ev.isExit()), which means
         # we can't stop displaying the information. Might be fine with what is planned
 
-    def hoverEvent(self, ev):
+    def hoverEvent(self, ev: HoverEvent):
         """Handles the pyqtgraph hover event and emits the 'hovered' signal.
 
         Args:

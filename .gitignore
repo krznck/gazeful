@@ -167,3 +167,6 @@ cython_debug/
 
 # shim script for running the app
 gazeful
+
+# mkdocs site
+site/

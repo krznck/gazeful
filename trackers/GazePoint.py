@@ -1,4 +1,5 @@
 """Defines the GazePoint dataclass and related exceptions for gaze data."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, fields
@@ -40,7 +41,7 @@ class GazePoint:
                 "Attempted to generate a gaze point with an invalid timestamp"
             )
 
-    def are_eyes_closed(self):
+    def are_eyes_closed(self) -> bool:
         """Checks if both eye coordinates are missing.
 
         Returns:
@@ -48,7 +49,7 @@ class GazePoint:
         """
         return self.x is None or self.y is None
 
-    def are_eyes_open(self):
+    def are_eyes_open(self) -> bool:
         """Checks if both eye coordinates are present.
 
         Returns:
@@ -95,7 +96,7 @@ class GazePoint:
         return (self.y > other.y) - (self.y < other.y)
 
 
-def list_fields():
+def list_fields() -> list[str]:
     """Lists the field names of the GazePoint dataclass.
 
     Returns:

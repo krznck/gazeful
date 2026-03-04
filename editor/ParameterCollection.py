@@ -1,18 +1,19 @@
-"""Management of hierarchical parameters for the editor's visualization settings."""
+"""Management of hierarchical parameters for visualization settings."""
+
 from enum import Enum
-from typing import Any
+from typing import Any, Callable
 
 from pyqtgraph.parametertree import Parameter, ParameterTree
 
 
 class ParameterError(Exception):
-    """Raised when an attempt to access or manipulate a parameter is invalid."""
+    """Raised on invalid access or manipulation of a parameter."""
 
     pass
 
 
 class ParameterCollection:
-    """A wrapper for pyqtgraph's Parameter objects to simplify access and signal binding.
+    """Wrapper for pyqtgraph's Parameter to simplify access and signal binding.
 
     This class provides a flat interface for accessing parameters nested within a
     hierarchical group structure.
@@ -70,7 +71,7 @@ class ParameterCollection:
         param = self.get_param(target)
         return param.value()
 
-    def connect(self, target: Enum, slot) -> None:
+    def connect(self, target: Enum, slot: Callable[..., None]) -> None:
         """Connects a parameter's change or activation signal to a slot.
 
         Handles both standard value changes and 'action' type triggers.

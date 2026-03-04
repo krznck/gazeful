@@ -1,0 +1,71 @@
+site_name: Gazeful
+repo_name: krznck/gazeful
+repo_url: https://github.com/krznck/gazeful
+
+theme:
+  name: material
+  icon:
+    logo: material/eye
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  features:
+    - navigation.top
+    - navigation.tracking
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_category_heading: true
+            docstring_section_style: table
+
+nav:
+  - Home: index.md
+  - Features & Compatibility: features.md
+  - Getting Started: getting_started.md
+  - Data Format: data_format.md
+  - Development Guide:
+    - Setup & Tooling: development/environment.md
+    - Architecture: development/architecture.md
+    - Extending Gazeful: development/extending.md
+    - Coding Standards: development/standards.md
+  - API Reference:
+    - Main: reference/main.md
+    - Processing: reference/processing.md
+    - Trackers: reference/trackers.md
+    - Recording: reference/recording.md
+    - Editor:
+      - reference/editor/index.md
+      - Parameters: reference/editor/parameters.md
+      - Visualization: reference/editor/visualization.md
+    - Visuals:
+      - reference/visuals/index.md
+      - Gaze Visualizer: reference/visuals/gaze_visualizer.md
+      - Pages: reference/visuals/pages.md
+      - Presenters: reference/visuals/presenters.md

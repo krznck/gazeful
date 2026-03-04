@@ -23,10 +23,10 @@ workflow for integrated eye-tracking data acquisition and interactive gaze
 visualization.
 
 A screenshot of the analysis view:
-![Gazeful editor view](./assets/images/editor-w-window-decorations.png)
+![Gazeful editor view](./docs/images/editor-w-window-decorations.png)
 
 A figure presenting the Gazeful workflow:
-![Gazeful workflow](./assets/images/workflow.svg)
+![Gazeful workflow](./docs/images/workflow.svg)
 
 ## Hardware Support
 

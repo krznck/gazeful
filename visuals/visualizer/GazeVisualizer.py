@@ -1,15 +1,17 @@
 """Real-time gaze visualizer overlay widget."""
-from PyQt6.QtCore import QPropertyAnimation, QRect
-from PyQt6.QtGui import QColor, QPainter, QPen, QScreen, QShowEvent
-from PyQt6.QtWidgets import QGraphicsOpacityEffect, QWidget
-from trackers.GazePoint import GazePoint
 
+from PyQt6.QtCore import QPropertyAnimation, QRect
+from PyQt6.QtGui import (QColor, QPainter, QPaintEvent, QPen, QScreen,
+                         QShowEvent)
+from PyQt6.QtWidgets import QGraphicsOpacityEffect, QWidget
+
+from trackers.GazePoint import GazePoint
 from visuals.visualizer import constants
 from visuals.visualizer.VelocityCalculator import VelocityCalculator
 
 
 class GazeVisualizer(QWidget):
-    """A translucent overlay widget that displays the user's gaze position in real-time.
+    """A translucent overlay displayin user's gaze position in real-time.
 
     Supports smooth movement animations, entrance/exit fades, and dynamic opacity
     control.
@@ -93,7 +95,7 @@ class GazeVisualizer(QWidget):
             self.hide()
 
     def showEvent(self, a0: QShowEvent | None) -> None:
-        """Handles the show event, triggering the entrance animation if enabled.
+        """Triggers the entrance animation if enabled.
 
         Args:
             a0: The show event.
@@ -113,7 +115,7 @@ class GazeVisualizer(QWidget):
             return
         self.exit_animation.start()
 
-    def paintEvent(self, a0) -> None:
+    def paintEvent(self, a0: QPaintEvent | None) -> None:
         """Paints the visualizer ring onto the widget.
 
         Args:
