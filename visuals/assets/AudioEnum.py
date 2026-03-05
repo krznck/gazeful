@@ -4,7 +4,9 @@ from pathlib import Path
 
 from simpleaudio import WaveObject
 
-PATH = Path(__file__).parent
+from assets.resources import get_resource_path
+
+AUDIO_DIR = Path("assets/audio")
 
 
 def _createPath(name: str) -> str:
@@ -16,12 +18,11 @@ def _createPath(name: str) -> str:
     Returns:
         Absolute path as a string.
     """
-    parent = Path(__file__).parent.parent.parent
-    return str(parent / "assets" / "audio" / f"{name}.wav")
+    path = get_resource_path(AUDIO_DIR / f"{name}.wav")
+    return str(path)
 
 
 class AudioEnum(Enum):
     """Available audio cues in the application."""
 
     PIP = WaveObject.from_wave_file(_createPath("pip"))
-    pass

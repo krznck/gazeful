@@ -4,12 +4,16 @@ from pathlib import Path
 from time import perf_counter
 from typing import Callable
 
+from assets.resources import get_resource_path
 from processing.GazeRecording import GazeRecording
 from processing.ingester import ingest_csv
+
+SAMPLES_DIR = Path("tests/samples")
 
 
 class Samples(Enum):
     """Enumeration of available sample gaze data files."""
+
     ONE = "one_fix"
     ARS = "ars_technica"
     BALATRO = "balatro"
@@ -42,8 +46,7 @@ def ingest_sample(name: str) -> GazeRecording:
     Returns:
         A GazeRecording instance of the sample data.
     """
-    current_dir = Path(__file__).parent
-    csv_file = current_dir / "tests" / "samples" / f"{name}.csv"
+    csv_file = get_resource_path(SAMPLES_DIR / f"{name}.csv")
     return ingest_csv(csv_file)
 
 
@@ -56,6 +59,5 @@ def get_sample_image(name: str) -> Path:
     Returns:
         A Path object pointing to the image.
     """
-    current_dir = Path(__file__).parent
-    image_file = current_dir / "tests" / "samples" / "images" / f"{name}.png"
+    image_file = get_resource_path(SAMPLES_DIR / "images" / f"{name}.png")
     return image_file

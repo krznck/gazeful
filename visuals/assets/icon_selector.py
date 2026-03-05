@@ -1,9 +1,12 @@
 """Utilities for selecting and creating application icons."""
 from enum import Enum
+from pathlib import Path
 
 from PyQt6.QtGui import QIcon
 
-PATH = "assets/icons/"
+from assets.resources import get_resource_path
+
+ICONS_DIR = Path("assets/icons")
 
 
 class IconsEnum(Enum):
@@ -25,4 +28,5 @@ def create_icon(choice: IconsEnum) -> QIcon:
     Returns:
         The initialized QIcon object.
     """
-    return QIcon(PATH + choice.value)
+    path = get_resource_path(ICONS_DIR / choice.value)
+    return QIcon(str(path))
