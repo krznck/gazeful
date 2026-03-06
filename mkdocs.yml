@@ -29,6 +29,8 @@ theme:
     - search.highlight
 
 markdown_extensions:
+  - pymdownx.snippets:
+      base_path: ["."]
   - pymdownx.tabbed:
       alternate_style: true
 
@@ -55,7 +57,7 @@ nav:
     - Architecture: development/architecture.md
     - Extending Gazeful: development/extending.md
     - Coding Standards: development/standards.md
-  - API Reference:
+  - Technical Reference:
     - Main: reference/main.md
     - Processing: reference/processing.md
     - Trackers: reference/trackers.md
@@ -69,3 +71,4 @@ nav:
       - Gaze Visualizer: reference/visuals/gaze_visualizer.md
       - Pages: reference/visuals/pages.md
       - Presenters: reference/visuals/presenters.md
+  - License: license.md
