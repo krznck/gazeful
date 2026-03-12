@@ -1,66 +1,37 @@
 # Getting Started
 
-The following page outlines how to set up Gazeful.
+Gazeful provides pre-packaged executables for Linux and Windows, bundled using
+PyInstaller. This is the recommended way to use the application without setting
+up a Python environment.
 
-- Python 3.10 is required.
-- Dependencies are listed in [requirements.txt](https://github.com/krznck/gazeful/blob/main/requirements.txt).
-- Using a virtual environment is recommended.
+## Downloads
 
-## 1. Clone the Repository
+You can find the latest stable releases on our
+[GitHub Releases](https://github.com/krznck/gazeful/releases/latest) page.
 
-The code can be found at our [GitHub repository](https://github.com/krznck/gazeful).
+<!-- markdownlint-disable MD013 -->
+[Download for Windows](https://github.com/krznck/gazeful/releases/download/v1.0.0/gazeful-win.exe){ .md-button .md-button--primary }
+[Download for Linux](https://github.com/krznck/gazeful/releases/download/v1.0.0/gazeful-linux){ .md-button }
+<!-- markdownlint-enable MD013 -->
 
-```bash
-git clone git@github.com:krznck/gazeful.git
-cd gazeful
-```
+### Instructions
 
-### 2. Create a Virtual Environment
+=== "Windows"
+    1. Download `gazeful-win.exe`.
+    1. Locate and run `gazeful-win.exe`.
 
-All platforms:
+=== "Linux"
+    1. Download the `gazeful-linux` binary file.
+    1. Ensure the binary is executable with `chmod +x gazeful-linux`.
+    1. Locate and run the binary with `./gazeful-linux`.
 
-```bash
-python -m venv .venv
-```
+=== "macOS"
+    A pre-packaged executable is not provided for macOS.
+    Refer to our [Development Guide](./development/environment.md) to run from
+    source.
 
-## 3. Activate the Virtual Environment
+## Running from Source
 
-=== "Linux / macOS (BASH or Zsh)"
-
-    ```bash
-    source .venv/bin/activate
-    ```
-
-=== "Windows (PowerShell)"
-
-    ```powershell
-    .venv\Scripts\Activate.ps1
-    ```
-
-    > If PowerShell blocks activation, you may need to run:
-    >
-    > ```powershell
-    > Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-    > ```
-
-=== "Windows (Command Prompt)"
-
-    ```cmd
-    .venv\Scripts\activate.bat
-    ```
-
-## 4. Install Dependencies
-
-All platforms:
-
-```bash
-pip install --requirement requirements.txt
-```
-
-## Usage
-
-Run the application:
-
-```bash
-python main.py
-```
+If you prefer to run Gazeful from its source code or wish to contribute to the
+project, please refer to our [Development Guide](./development/environment.md)
+for environment setup and installation instructions.
