@@ -6,14 +6,6 @@
   - [Supported Platforms](#supported-platforms)
   - [Features](#features)
   - [Getting Started](#getting-started)
-    - [1. Clone the Repository](#1-clone-the-repository)
-    - [2. Create a Virtual Environment](#2-create-a-virtual-environment)
-    - [3. Activate the Virtual Environment](#3-activate-the-virtual-environment)
-      - [Linux / macOS (BASH or Zsh)](#linux-macos-bash-or-zsh)
-      - [Windows (PowerShell)](#windows-powershell)
-      - [Windows (Command Prompt)](#windows-command-prompt)
-    - [4. Install Dependencies](#4-install-dependencies)
-  - [Usage](#usage)
   - [Data Format](#data-format)
   - [Development and Contributing](#development-and-contributing)
 <!--toc:end-->
@@ -21,6 +13,9 @@
 Gazeful is an open-source desktop graphical environment, acting as an end-to-end
 workflow for integrated eye-tracking data acquisition and interactive gaze
 visualization.
+
+> 👁️ Explore Gazeful in more detail in our
+> [dedicated documentation website](https://krznck.github.io/gazeful/).
 
 A screenshot of the analysis view:
 ![Gazeful editor view](./docs/images/editor-w-window-decorations.png)
@@ -98,80 +93,23 @@ coverage varies.
 
 ## Getting Started
 
-The following section outlines how to set up Gazeful.
+For instructions for running Gazeful from a pre-packaged executable, refer to
+our [Getting Started guide](https://krznck.github.io/gazeful/getting_started/).
 
-- Python 3.10 is required.
-- Dependencies are listed in [requirements.txt](./requirements.txt).
-- Using a virtual environment is recommended.
-
-### 1. Clone the Repository
-
-```bash
-git clone git@github.com:krznck/gazeful.git
-cd gazeful
-```
-
-### 2. Create a Virtual Environment
-
-All platforms:
-
-```bash
-python -m venv .venv
-```
-
-### 3. Activate the Virtual Environment
-
-#### Linux / macOS (BASH or Zsh)
-
-```bash
-source .venv/bin/activate
-```
-
-#### Windows (PowerShell)
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-> If PowerShell blocks activation, you may need to run:
->
-> ```powershell
-> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-> ```
-
-#### Windows (Command Prompt)
-
-```cmd
-.venv\Scripts\activate.bat
-```
-
-### 4. Install Dependencies
-
-All platforms:
-
-```bash
-pip install --requirement requirements.txt
-```
-
-## Usage
-
-Run the application:
-
-```bash
-python main.py
-```
+For instructions for running Gazeful from its Python source code, refer to our
+[Development Guide](https://krznck.github.io/gazeful/development/environment/).
 
 ## Data Format
 
 Gazeful uses a standardized CSV format for gaze data acquisition and processing.
 For technical details on the format (useful for integrating eye trackers or
 converting existing recordings), see the
-[Development Guide](./DEVELOPMENT.md#data-interchange).
+[Data Format guide](https://krznck.github.io/gazeful/data_format/).
 
 ## Development and Contributing
 
 For detailed information on the project's internals, please refer to the
-[Development Guide](./DEVELOPMENT.md).
+[Development Guide](https://krznck.github.io/gazeful/development/environment/).
 
 It covers:
 
