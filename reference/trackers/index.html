@@ -1,0 +1,5551 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../processing/">
+      
+      
+        <link rel="next" href="../recording/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Trackers - Gazeful</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#trackers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Gazeful" class="md-header__button md-logo" aria-label="Gazeful" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gazeful
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Trackers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/krznck/gazeful" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    krznck/gazeful
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Gazeful" class="md-nav__button md-logo" aria-label="Gazeful" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+
+    </a>
+    Gazeful
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/krznck/gazeful" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    krznck/gazeful
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features & Compatibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup & Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/extending/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending Gazeful
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trackers
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trackers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.GazePoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GazePoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GazePoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GazePoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GazePoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.__post_init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __post_init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.are_eyes_closed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        are_eyes_closed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.are_eyes_open" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        are_eyes_open
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.compare_x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_x
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.compare_y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_y
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.InvalidTimestampError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InvalidTimestampError
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.list_fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        list_fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.Tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker.connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connected
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker.track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        track
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.TrackerNotConnectedError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TrackerNotConnectedError
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.MouseTracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MouseTracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MouseTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MouseTracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MouseTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker.connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connected
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker.run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.add_tremor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_tremor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TobiiTracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TobiiTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TobiiTracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TobiiTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker.connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connected
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.coordinates_valid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        coordinates_valid
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.tracker_selector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tracker_selector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tracker_selector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector.TrackersEnum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TrackersEnum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector.create_tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_tracker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector.default_to_first_connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        default_to_first_connected
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recording/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recording
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Editor
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editor/parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editor/visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visuals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visuals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visuals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visuals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visuals/gaze_visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gaze Visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visuals/pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visuals/presenters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presenters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.GazePoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GazePoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GazePoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GazePoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GazePoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.__post_init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __post_init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.are_eyes_closed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        are_eyes_closed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.are_eyes_open" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        are_eyes_open
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.compare_x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_x
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.GazePoint.compare_y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_y
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.InvalidTimestampError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InvalidTimestampError
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.GazePoint.list_fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        list_fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.Tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker.connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connected
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.Tracker.track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        track
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.Tracker.TrackerNotConnectedError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TrackerNotConnectedError
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.MouseTracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MouseTracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MouseTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MouseTracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MouseTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker.connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connected
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker.run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.MouseTracker.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.MouseTracker.add_tremor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_tremor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TobiiTracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TobiiTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TobiiTracker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TobiiTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker.connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connected
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.TobiiTracker.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.TobiiTracker.coordinates_valid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        coordinates_valid
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trackers.tracker_selector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tracker_selector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tracker_selector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector.TrackersEnum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TrackersEnum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector.create_tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_tracker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trackers.tracker_selector.default_to_first_connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        default_to_first_connected
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="trackers">Trackers</h1>
+<p>This module handles communication with eye-tracking hardware.</p>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="trackers.GazePoint" class="doc doc-heading">
+            <code>trackers.GazePoint</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Defines the GazePoint dataclass and related exceptions for gaze data.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="trackers.GazePoint-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="trackers.GazePoint.GazePoint" class="doc doc-heading">
+            <code>GazePoint</code>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Represents a basic unit of gaze.</p>
+<p>NOTE: Unrelated to Gazepoint brand eye trackers.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.GazePoint.GazePoint.x">x</span></code></td>
+            <td>
+                  <code><span title="float">float</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Normalized x coordinate (0.0 to 1.0) or None if eyes are closed.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.GazePoint.GazePoint.y">y</span></code></td>
+            <td>
+                  <code><span title="float">float</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Normalized y coordinate (0.0 to 1.0) or None if eyes are closed.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.GazePoint.GazePoint.timestamp">timestamp</span></code></td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Monotonic timestamp of the gaze capture.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>trackers/GazePoint.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GazePoint</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a basic unit of gaze.</span>
+
+<span class="sd">    NOTE: Unrelated to Gazepoint brand eye trackers.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        x: Normalized x coordinate (0.0 to 1.0) or None if eyes are closed.</span>
+<span class="sd">        y: Normalized y coordinate (0.0 to 1.0) or None if eyes are closed.</span>
+<span class="sd">        timestamp: Monotonic timestamp of the gaze capture.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validates the timestamp after initialization.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidTimestampError: If the timestamp is negative.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidTimestampError</span><span class="p">(</span>
+                <span class="s2">&quot;Attempted to generate a gaze point with an invalid timestamp&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">are_eyes_closed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if both eye coordinates are missing.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if either x or y is None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">are_eyes_open</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if both eye coordinates are present.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if both x and y are not None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">are_eyes_closed</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compare_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">GazePoint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compares the x coordinate with another GazePoint.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other: The other GazePoint to compare against.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An integer indicating comparison result (-1, 0, 1).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compare_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">GazePoint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compares the y coordinate with another GazePoint.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other: The other GazePoint to compare against.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An integer indicating comparison result (-1, 0, 1).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="trackers.GazePoint.GazePoint-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.GazePoint.GazePoint.__post_init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">__post_init__</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Validates the timestamp after initialization.</p>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="InvalidTimestampError (trackers.GazePoint.InvalidTimestampError)" href="#trackers.GazePoint.InvalidTimestampError">InvalidTimestampError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the timestamp is negative.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/GazePoint.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validates the timestamp after initialization.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidTimestampError: If the timestamp is negative.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidTimestampError</span><span class="p">(</span>
+            <span class="s2">&quot;Attempted to generate a gaze point with an invalid timestamp&quot;</span>
+        <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.GazePoint.GazePoint.are_eyes_closed" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">are_eyes_closed</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Checks if both eye coordinates are missing.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>True if either x or y is None.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/GazePoint.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">are_eyes_closed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if both eye coordinates are missing.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if either x or y is None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.GazePoint.GazePoint.are_eyes_open" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">are_eyes_open</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Checks if both eye coordinates are present.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>True if both x and y are not None.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/GazePoint.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">are_eyes_open</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if both eye coordinates are present.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if both x and y are not None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">are_eyes_closed</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.GazePoint.GazePoint.compare_x" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">compare_x</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Compares the x coordinate with another GazePoint.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>other</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="GazePoint
+
+
+  
+      dataclass
+   (trackers.GazePoint.GazePoint)" href="#trackers.GazePoint.GazePoint">GazePoint</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The other GazePoint to compare against.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An integer indicating comparison result (-1, 0, 1).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/GazePoint.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compare_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">GazePoint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compares the x coordinate with another GazePoint.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        other: The other GazePoint to compare against.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An integer indicating comparison result (-1, 0, 1).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.GazePoint.GazePoint.compare_y" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">compare_y</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Compares the y coordinate with another GazePoint.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>other</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="GazePoint
+
+
+  
+      dataclass
+   (trackers.GazePoint.GazePoint)" href="#trackers.GazePoint.GazePoint">GazePoint</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The other GazePoint to compare against.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An integer indicating comparison result (-1, 0, 1).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/GazePoint.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compare_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">GazePoint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compares the y coordinate with another GazePoint.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        other: The other GazePoint to compare against.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An integer indicating comparison result (-1, 0, 1).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="trackers.GazePoint.InvalidTimestampError" class="doc doc-heading">
+            <code>InvalidTimestampError</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="Exception">Exception</span></code></p>
+
+
+
+        <p>Raised when the GazePoint timestamp is not a valid time.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>trackers/GazePoint.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">InvalidTimestampError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when the GazePoint timestamp is not a valid time.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+    </div>
+
+</div>
+<h3 id="trackers.GazePoint-functions">Functions</h3>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="trackers.GazePoint.list_fields" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">list_fields</span><span class="p">()</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Lists the field names of the GazePoint dataclass.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="list">list</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A list of strings representing the field names.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/GazePoint.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">list_fields</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lists the field names of the GazePoint dataclass.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of strings representing the field names.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">(</span><span class="n">GazePoint</span><span class="p">)]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="trackers.Tracker" class="doc doc-heading">
+            <code>trackers.Tracker</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Base abstract classes and interfaces for all eyetracker implementations.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="trackers.Tracker-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="trackers.Tracker.Tracker" class="doc doc-heading">
+            <code>Tracker</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="abc.ABC">ABC</span></code>, <code><span title="PyQt6.QtCore.QThread">QThread</span></code></p>
+
+
+
+        <p>Base eyetracker class that all concrete eyetrackers should inherit from.</p>
+<p>This class provides threading capabilities by inheriting from QThread,
+and contains an optional gaze visualizer. It emits a signal whenever new
+gaze data is received from the physical tracker device.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.Tracker.Tracker.eyes_position_changed">eyes_position_changed</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtCore.pyqtSignal">pyqtSignal</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Signal emitted when new gaze data is received.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.Tracker.Tracker.visualizer">visualizer</span></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="GazeVisualizer (visuals.visualizer.GazeVisualizer.GazeVisualizer)" href="../visuals/gaze_visualizer/#visuals.visualizer.GazeVisualizer.GazeVisualizer">GazeVisualizer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Visualizer that follows eye movement.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.Tracker.Tracker.recorder">recorder</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Recorder that writes gaze data to a file.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>trackers/Tracker.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Tracker</span><span class="p">(</span><span class="n">ABC</span><span class="p">,</span> <span class="n">QThread</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">_TrackerMeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base eyetracker class that all concrete eyetrackers should inherit from.</span>
+
+<span class="sd">    This class provides threading capabilities by inheriting from QThread,</span>
+<span class="sd">    and contains an optional gaze visualizer. It emits a signal whenever new</span>
+<span class="sd">    gaze data is received from the physical tracker device.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        eyes_position_changed: Signal emitted when new gaze data is received.</span>
+<span class="sd">        visualizer: Visualizer that follows eye movement.</span>
+<span class="sd">        recorder: Recorder that writes gaze data to a file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">eyes_position_changed</span><span class="p">:</span> <span class="n">pyqtSignal</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">(</span><span class="n">GazePoint</span><span class="p">)</span>
+    <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">:</span> <span class="n">Recorder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the base tracker.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            visualizer: Visualizer that follows eye movement.</span>
+<span class="sd">            recorder: Recorder that writes gaze data to a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">visualizer</span> <span class="o">=</span> <span class="n">visualizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recorder</span> <span class="o">=</span> <span class="n">recorder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eyes_position_changed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">visualizer</span><span class="o">.</span><span class="n">set_position</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eyes_position_changed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recorder</span><span class="o">.</span><span class="n">write</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">track</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Starts the tracking thread.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stops the tracking thread and hides the visualizer.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">visualizer</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>  <span class="c1"># hide it before dying</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if the physical tracker device is connected.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the tracker is connected, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="trackers.Tracker.Tracker-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.Tracker.Tracker.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the base tracker.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>visualizer</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="GazeVisualizer (visuals.visualizer.GazeVisualizer.GazeVisualizer)" href="../visuals/gaze_visualizer/#visuals.visualizer.GazeVisualizer.GazeVisualizer">GazeVisualizer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Visualizer that follows eye movement.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>recorder</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="Recorder (recording.Recorder.Recorder)" href="../recording/#recording.Recorder.Recorder">Recorder</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Recorder that writes gaze data to a file.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/Tracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">:</span> <span class="n">Recorder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the base tracker.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        visualizer: Visualizer that follows eye movement.</span>
+<span class="sd">        recorder: Recorder that writes gaze data to a file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">visualizer</span> <span class="o">=</span> <span class="n">visualizer</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">recorder</span> <span class="o">=</span> <span class="n">recorder</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">eyes_position_changed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">visualizer</span><span class="o">.</span><span class="n">set_position</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">eyes_position_changed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recorder</span><span class="o">.</span><span class="n">write</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.Tracker.Tracker.connected" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">connected</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Checks if the physical tracker device is connected.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>True if the tracker is connected, False otherwise.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/Tracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="nd">@abstractmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">connected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if the physical tracker device is connected.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if the tracker is connected, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.Tracker.Tracker.stop" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">stop</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Stops the tracking thread and hides the visualizer.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/Tracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stops the tracking thread and hides the visualizer.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">visualizer</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>  <span class="c1"># hide it before dying</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.Tracker.Tracker.track" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">track</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Starts the tracking thread.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/Tracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">track</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Starts the tracking thread.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="trackers.Tracker.TrackerNotConnectedError" class="doc doc-heading">
+            <code>TrackerNotConnectedError</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="Exception">Exception</span></code></p>
+
+
+
+        <p>Raised when the physical tracker device is not connected to the computer.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>trackers/Tracker.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TrackerNotConnectedError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when the physical tracker device is not connected to the computer.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="trackers.MouseTracker" class="doc doc-heading">
+            <code>trackers.MouseTracker</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Implementation of a simulated eyetracker using the system mouse cursor.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="trackers.MouseTracker-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="trackers.MouseTracker.MouseTracker" class="doc doc-heading">
+            <code>MouseTracker</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Tracker (trackers.Tracker.Tracker)" href="#trackers.Tracker.Tracker">Tracker</a></code></p>
+
+
+
+        <p>Tracker implementation that simulates eye movement using the system cursor.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.MouseTracker.MouseTracker.left_held">left_held</span></code></td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether the left mouse button is currently toggled.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.MouseTracker.MouseTracker.right_held">right_held</span></code></td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether the right mouse button is currently toggled.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.MouseTracker.MouseTracker.last_update_time">last_update_time</span></code></td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Timestamp of the last polling event.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.MouseTracker.MouseTracker.simulated_frequency">simulated_frequency</span></code></td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Frequency at which the mouse is polled (in Hz).</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.MouseTracker.MouseTracker.timer">timer</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtCore.QTimer">QTimer</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>QTimer driving the polling loop.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.MouseTracker.MouseTracker.listener">listener</span></code></td>
+            <td>
+                  <code><span title="pynput.mouse.Listener">Listener</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>pynput mouse listener for capturing clicks.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>trackers/MouseTracker.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MouseTracker</span><span class="p">(</span><span class="n">Tracker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tracker implementation that simulates eye movement using the system cursor.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        left_held: Whether the left mouse button is currently toggled.</span>
+<span class="sd">        right_held: Whether the right mouse button is currently toggled.</span>
+<span class="sd">        last_update_time: Timestamp of the last polling event.</span>
+<span class="sd">        simulated_frequency: Frequency at which the mouse is polled (in Hz).</span>
+<span class="sd">        timer: QTimer driving the polling loop.</span>
+<span class="sd">        listener: pynput mouse listener for capturing clicks.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">left_held</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">right_held</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">last_update_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">simulated_frequency</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_FREQUENCY</span>  <span class="c1"># hertz</span>
+    <span class="n">timer</span><span class="p">:</span> <span class="n">QTimer</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">listener</span><span class="p">:</span> <span class="n">mouse</span><span class="o">.</span><span class="n">Listener</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">:</span> <span class="n">Recorder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the mouse tracker and click listener.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            visualizer: The visualizer that follows eye movement.</span>
+<span class="sd">            recorder: The recorder that writes gaze data to a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">listener</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_click</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_click</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if the tracker is available for use.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Always True for MouseTracker as a pointing device is assumed to exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># NOTE: I just assume that any given computer has a pointing device of some sort</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Starts the mouse polling loop and input listener.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Inherited from QThread.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">listener</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="n">QTimer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_poll_mouse</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">setInterval</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1000</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulated_frequency</span><span class="p">))</span>  <span class="c1"># milliseconds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cleans up timers and stops the mouse listener.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_timer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">listener</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_on_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">:</span> <span class="n">mouse</span><span class="o">.</span><span class="n">Button</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Callback for mouse click events.</span>
+
+<span class="sd">        Toggles left_held or right_held status when respective buttons are clicked.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: Mouse x coordinate.</span>
+<span class="sd">            y: Mouse y coordinate.</span>
+<span class="sd">            button: The button that was clicked.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># NOTE: method needs x and y in order to pass button correctly,</span>
+        <span class="c1"># but we&#39;re not using it anyway</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+        <span class="k">if</span> <span class="n">button</span> <span class="ow">is</span> <span class="n">mouse</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left_held</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_held</span>
+        <span class="k">if</span> <span class="n">button</span> <span class="ow">is</span> <span class="n">mouse</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right_held</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_held</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_are_eyes_closed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if both mouse buttons are toggled &#39;held&#39;.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_held</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_held</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_poll_mouse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Captures the current mouse position and emits a GazePoint signal.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">visualizer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">gaze</span> <span class="o">=</span> <span class="n">GazePoint</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_are_eyes_closed</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">eyes_position_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">gaze</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">position</span> <span class="o">=</span> <span class="n">QCursor</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">position</span><span class="o">.</span><span class="n">y</span><span class="p">()</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">add_tremor</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">add_tremor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="c1"># NOTE: This is a little trick.</span>
+        <span class="c1"># A real eyetracker is already bound to a physical screen,</span>
+        <span class="c1"># but your cursor can be anywhere, so the dummy needs to be told which screen</span>
+        <span class="c1"># to simulate tracking on. Hence we secretely use the visualizer&#39;s bound screen.</span>
+        <span class="n">scr_x</span><span class="p">,</span> <span class="n">scr_y</span><span class="p">,</span> <span class="n">scr_width</span><span class="p">,</span> <span class="n">scr_height</span> <span class="o">=</span> <span class="n">screens</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">visualizer</span><span class="o">.</span><span class="n">bound_screen</span>
+        <span class="p">)</span>  <span class="c1"># scr == screen, if it wasn&#39;t obvious</span>
+
+        <span class="c1"># when you&#39;re not looking within the constraints of the eyetracking region,</span>
+        <span class="c1"># that would be analogous to the eyetracker thinking your eyes are closed</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">scr_x</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">scr_x</span> <span class="o">+</span> <span class="n">scr_width</span> <span class="ow">and</span> <span class="n">scr_y</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">scr_y</span> <span class="o">+</span> <span class="n">scr_height</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">eyes_position_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">gaze</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">relative_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">scr_x</span>
+        <span class="n">relative_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">scr_y</span>
+        <span class="n">gaze</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">relative_x</span> <span class="o">/</span> <span class="n">scr_width</span>
+        <span class="n">gaze</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">relative_y</span> <span class="o">/</span> <span class="n">scr_height</span>
+
+        <span class="c1"># print(&quot;Gaze: &quot; + str(gaze))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eyes_position_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">gaze</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_cleanup_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stops and deallocates the polling timer.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">QMetaObject</span><span class="o">.</span><span class="n">invokeMethod</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">,</span> <span class="s2">&quot;stop&quot;</span><span class="p">,</span> <span class="n">Qt</span><span class="o">.</span><span class="n">ConnectionType</span><span class="o">.</span><span class="n">QueuedConnection</span>
+            <span class="p">)</span>
+            <span class="n">QMetaObject</span><span class="o">.</span><span class="n">invokeMethod</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">,</span> <span class="s2">&quot;deleteLater&quot;</span><span class="p">,</span> <span class="n">Qt</span><span class="o">.</span><span class="n">ConnectionType</span><span class="o">.</span><span class="n">QueuedConnection</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="trackers.MouseTracker.MouseTracker-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.MouseTracker.MouseTracker.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the mouse tracker and click listener.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>visualizer</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="GazeVisualizer (visuals.visualizer.GazeVisualizer.GazeVisualizer)" href="../visuals/gaze_visualizer/#visuals.visualizer.GazeVisualizer.GazeVisualizer">GazeVisualizer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The visualizer that follows eye movement.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>recorder</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="Recorder (recording.Recorder.Recorder)" href="../recording/#recording.Recorder.Recorder">Recorder</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The recorder that writes gaze data to a file.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/MouseTracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">:</span> <span class="n">Recorder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the mouse tracker and click listener.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        visualizer: The visualizer that follows eye movement.</span>
+<span class="sd">        recorder: The recorder that writes gaze data to a file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">listener</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_click</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_click</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.MouseTracker.MouseTracker.connected" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">connected</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Checks if the tracker is available for use.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Always True for MouseTracker as a pointing device is assumed to exist.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/MouseTracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">connected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if the tracker is available for use.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Always True for MouseTracker as a pointing device is assumed to exist.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># NOTE: I just assume that any given computer has a pointing device of some sort</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.MouseTracker.MouseTracker.run" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">run</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Starts the mouse polling loop and input listener.</p>
+
+
+<details class="note" open>
+  <summary>Note</summary>
+  <p>Inherited from QThread.</p>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/MouseTracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Starts the mouse polling loop and input listener.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Inherited from QThread.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">listener</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="n">QTimer</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_poll_mouse</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">setInterval</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1000</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulated_frequency</span><span class="p">))</span>  <span class="c1"># milliseconds</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.MouseTracker.MouseTracker.stop" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">stop</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Cleans up timers and stops the mouse listener.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/MouseTracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cleans up timers and stops the mouse listener.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_timer</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">listener</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+<h3 id="trackers.MouseTracker-functions">Functions</h3>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="trackers.MouseTracker.add_tremor" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_tremor</span><span class="p">(</span><span class="n">position</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds random noise to a coordinate to simulate eye jitter.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>position</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The original coordinate value.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The position with added Gaussian noise.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/MouseTracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_tremor</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds random noise to a coordinate to simulate eye jitter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        position: The original coordinate value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The position with added Gaussian noise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">treshhold</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">MIN_TREMOR_TRESHHOLD</span><span class="p">,</span> <span class="n">MAX_TREMOR_TRESHHOLD</span><span class="p">)</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="n">position</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">treshhold</span><span class="p">)</span>
+
+    <span class="c1"># print(&quot;Tremor value: &quot; + str(offset))</span>
+    <span class="k">return</span> <span class="n">new</span> <span class="o">+</span> <span class="n">offset</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="trackers.TobiiTracker" class="doc doc-heading">
+            <code>trackers.TobiiTracker</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Implementation of an eyetracker interface for Tobii hardware devices.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="trackers.TobiiTracker-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="trackers.TobiiTracker.TobiiTracker" class="doc doc-heading">
+            <code>TobiiTracker</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Tracker (trackers.Tracker.Tracker)" href="#trackers.Tracker.Tracker">Tracker</a></code></p>
+
+
+
+        <p>Hardware tracker implementation for Tobii eyetrackers.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.TobiiTracker.TobiiTracker.TOBII_LEFT">TOBII_LEFT</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Key for left eye data in Tobii SDK.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.TobiiTracker.TobiiTracker.TOBII_RIGHT">TOBII_RIGHT</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Key for right eye data in Tobii SDK.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="trackers.TobiiTracker.TobiiTracker.real_tracker">real_tracker</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The underlying Tobii SDK tracker object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>trackers/TobiiTracker.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TobiiTracker</span><span class="p">(</span><span class="n">Tracker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Hardware tracker implementation for Tobii eyetrackers.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        TOBII_LEFT: Key for left eye data in Tobii SDK.</span>
+<span class="sd">        TOBII_RIGHT: Key for right eye data in Tobii SDK.</span>
+<span class="sd">        real_tracker: The underlying Tobii SDK tracker object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">TOBII_LEFT</span> <span class="o">=</span> <span class="s2">&quot;left_gaze_point_on_display_area&quot;</span>
+    <span class="n">TOBII_RIGHT</span> <span class="o">=</span> <span class="s2">&quot;right_gaze_point_on_display_area&quot;</span>
+
+    <span class="n">real_tracker</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">:</span> <span class="n">Recorder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the Tobii tracker and starts data subscription.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            visualizer: The visualizer that follows eye movement.</span>
+<span class="sd">            recorder: The recorder that writes gaze data to a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_begin</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_begin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Finds the connected Tobii tracker and subscribes to gaze data.&quot;&quot;&quot;</span>
+        <span class="n">trackers</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">find_all_eyetrackers</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">trackers</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TrackerNotConnectedError</span><span class="p">(</span><span class="s2">&quot;The Tobii SDK could not find any tracker.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">real_tracker</span> <span class="o">=</span> <span class="n">trackers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">real_tracker</span><span class="o">.</span><span class="n">subscribe_to</span><span class="p">(</span>
+            <span class="n">tr</span><span class="o">.</span><span class="n">EYETRACKER_GAZE_DATA</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_gaze_callback</span><span class="p">,</span>
+            <span class="n">as_dictionary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_gaze_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaze_data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal callback for Tobii gaze data events.</span>
+
+<span class="sd">        Processes the dictionary from Tobii SDK, calculates averages for binocular</span>
+<span class="sd">        tracking, and emits a GazePoint signal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gaze_data: The dictionary containing gaze coordinates from the SDK.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">visualizer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># no need to do anything</span>
+
+        <span class="n">gaze</span> <span class="o">=</span> <span class="n">GazePoint</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">())</span>
+
+        <span class="n">left_x</span><span class="p">,</span> <span class="n">left_y</span> <span class="o">=</span> <span class="n">gaze_data</span><span class="p">[</span><span class="n">TobiiTracker</span><span class="o">.</span><span class="n">TOBII_LEFT</span><span class="p">]</span>
+        <span class="n">right_x</span><span class="p">,</span> <span class="n">right_y</span> <span class="o">=</span> <span class="n">gaze_data</span><span class="p">[</span><span class="n">TobiiTracker</span><span class="o">.</span><span class="n">TOBII_RIGHT</span><span class="p">]</span>
+
+        <span class="n">left_open</span> <span class="o">=</span> <span class="n">coordinates_valid</span><span class="p">(</span><span class="n">left_x</span><span class="p">,</span> <span class="n">left_y</span><span class="p">)</span>
+        <span class="n">right_open</span> <span class="o">=</span> <span class="n">coordinates_valid</span><span class="p">(</span><span class="n">right_x</span><span class="p">,</span> <span class="n">right_y</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">left_open</span> <span class="ow">and</span> <span class="n">right_open</span><span class="p">:</span>
+            <span class="n">gaze</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">left_x</span> <span class="o">+</span> <span class="n">right_x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">gaze</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">left_y</span> <span class="o">+</span> <span class="n">right_y</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">left_open</span><span class="p">:</span>
+            <span class="n">gaze</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">gaze</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">left_x</span><span class="p">,</span> <span class="n">left_y</span>
+        <span class="k">elif</span> <span class="n">right_open</span><span class="p">:</span>
+            <span class="n">gaze</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">gaze</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">right_x</span><span class="p">,</span> <span class="n">right_y</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">eyes_position_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">gaze</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Unsubscribes from the Tobii SDK and stops the tracking thread.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">real_tracker</span><span class="o">.</span><span class="n">unsubscribe_from</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">EYETRACKER_GAZE_DATA</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if any Tobii tracker is currently connected to the machine.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if one or more trackers are found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">find_all_eyetrackers</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span>  <span class="c1"># type: ignore</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="trackers.TobiiTracker.TobiiTracker-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.TobiiTracker.TobiiTracker.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the Tobii tracker and starts data subscription.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>visualizer</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="GazeVisualizer (visuals.visualizer.GazeVisualizer.GazeVisualizer)" href="../visuals/gaze_visualizer/#visuals.visualizer.GazeVisualizer.GazeVisualizer">GazeVisualizer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The visualizer that follows eye movement.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>recorder</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="Recorder (recording.Recorder.Recorder)" href="../recording/#recording.Recorder.Recorder">Recorder</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The recorder that writes gaze data to a file.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/TobiiTracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">:</span> <span class="n">Recorder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the Tobii tracker and starts data subscription.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        visualizer: The visualizer that follows eye movement.</span>
+<span class="sd">        recorder: The recorder that writes gaze data to a file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_begin</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.TobiiTracker.TobiiTracker.connected" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">connected</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Checks if any Tobii tracker is currently connected to the machine.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>True if one or more trackers are found.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/TobiiTracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">connected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if any Tobii tracker is currently connected to the machine.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if one or more trackers are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">find_all_eyetrackers</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span>  <span class="c1"># type: ignore</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="trackers.TobiiTracker.TobiiTracker.stop" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">stop</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Unsubscribes from the Tobii SDK and stops the tracking thread.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/TobiiTracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unsubscribes from the Tobii SDK and stops the tracking thread.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">real_tracker</span><span class="o">.</span><span class="n">unsubscribe_from</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">EYETRACKER_GAZE_DATA</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+<h3 id="trackers.TobiiTracker-functions">Functions</h3>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="trackers.TobiiTracker.coordinates_valid" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">coordinates_valid</span><span class="p">(</span><span class="n">cord1</span><span class="p">,</span> <span class="n">cord2</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Checks if a pair of coordinates are valid (not NaN).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>cord1</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The x-coordinate to check.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>cord2</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The y-coordinate to check.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>True if neither coordinate is NaN.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/TobiiTracker.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">coordinates_valid</span><span class="p">(</span><span class="n">cord1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cord2</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if a pair of coordinates are valid (not NaN).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cord1: The x-coordinate to check.</span>
+<span class="sd">        cord2: The y-coordinate to check.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if neither coordinate is NaN.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">cord1</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">cord2</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="trackers.tracker_selector" class="doc doc-heading">
+            <code>trackers.tracker_selector</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Utilities for selecting and instantiating different tracker implementations.</p>
+<p>This module provides factory functions for creating tracker instances
+and selecting the first connected hardware tracker.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="trackers.tracker_selector-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="trackers.tracker_selector.TrackersEnum" class="doc doc-heading">
+            <code>TrackersEnum</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="enum.Enum">Enum</span></code></p>
+
+
+
+        <p>Enumeration of available tracker implementations.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>trackers/tracker_selector.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TrackersEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumeration of available tracker implementations.&quot;&quot;&quot;</span>
+
+    <span class="n">TOBII</span> <span class="o">=</span> <span class="n">TobiiTracker</span>
+    <span class="n">DUMMY</span> <span class="o">=</span> <span class="n">MouseTracker</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+<h3 id="trackers.tracker_selector-functions">Functions</h3>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="trackers.tracker_selector.create_tracker" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">create_tracker</span><span class="p">(</span><span class="n">tracker_type</span><span class="p">,</span> <span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Factory function for creating tracker instances.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>tracker_type</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="TrackersEnum (trackers.tracker_selector.TrackersEnum)" href="#trackers.tracker_selector.TrackersEnum">TrackersEnum</a> | <span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The type of tracker to create.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>visualizer</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="GazeVisualizer (visuals.visualizer.GazeVisualizer.GazeVisualizer)" href="../visuals/gaze_visualizer/#visuals.visualizer.GazeVisualizer.GazeVisualizer">GazeVisualizer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The gaze visualizer to attach to the tracker.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>recorder</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="Recorder (recording.Recorder.Recorder)" href="../recording/#recording.Recorder.Recorder">Recorder</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The recorder to attach to the tracker.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="Tracker (trackers.Tracker.Tracker)" href="#trackers.Tracker.Tracker">Tracker</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An initialized Tracker instance of the requested type.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/tracker_selector.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_tracker</span><span class="p">(</span>
+    <span class="n">tracker_type</span><span class="p">:</span> <span class="n">TrackersEnum</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span><span class="p">,</span>
+    <span class="n">recorder</span><span class="p">:</span> <span class="n">Recorder</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tracker</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Factory function for creating tracker instances.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tracker_type: The type of tracker to create.</span>
+<span class="sd">        visualizer: The gaze visualizer to attach to the tracker.</span>
+<span class="sd">        recorder: The recorder to attach to the tracker.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An initialized Tracker instance of the requested type.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">tracker_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tracker_type</span> <span class="o">=</span> <span class="n">DEFAULT</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tracker_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">tracker_type</span> <span class="o">=</span> <span class="n">TrackersEnum</span><span class="p">[</span><span class="n">tracker_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+
+    <span class="k">match</span> <span class="n">tracker_type</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">TrackersEnum</span><span class="o">.</span><span class="n">DUMMY</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">MouseTracker</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span>
+        <span class="k">case</span> <span class="n">TrackersEnum</span><span class="o">.</span><span class="n">TOBII</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">TobiiTracker</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="trackers.tracker_selector.default_to_first_connected" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">default_to_first_connected</span><span class="p">(</span><span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Selects and creates the first physically connected tracker.</p>
+<p>If no hardware trackers are found, it defaults to the DUMMY (mouse) tracker.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>visualizer</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="GazeVisualizer (visuals.visualizer.GazeVisualizer.GazeVisualizer)" href="../visuals/gaze_visualizer/#visuals.visualizer.GazeVisualizer.GazeVisualizer">GazeVisualizer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The gaze visualizer to attach to the tracker.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>recorder</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="Recorder (recording.Recorder.Recorder)" href="../recording/#recording.Recorder.Recorder">Recorder</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The recorder to attach to the tracker.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="Tracker (trackers.Tracker.Tracker)" href="#trackers.Tracker.Tracker">Tracker</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The first connected Tracker instance, or the default dummy tracker.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>trackers/tracker_selector.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">default_to_first_connected</span><span class="p">(</span>
+    <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">:</span> <span class="n">Recorder</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tracker</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Selects and creates the first physically connected tracker.</span>
+
+<span class="sd">    If no hardware trackers are found, it defaults to the DUMMY (mouse) tracker.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        visualizer: The gaze visualizer to attach to the tracker.</span>
+<span class="sd">        recorder: The recorder to attach to the tracker.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The first connected Tracker instance, or the default dummy tracker.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">selected</span> <span class="o">=</span> <span class="n">DEFAULT</span>
+    <span class="k">for</span> <span class="n">tracker</span> <span class="ow">in</span> <span class="n">TrackersEnum</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tracker</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">connected</span><span class="p">():</span>
+            <span class="n">selected</span> <span class="o">=</span> <span class="n">tracker</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">create_tracker</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="n">visualizer</span><span class="p">,</span> <span class="n">recorder</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3908 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../recording/">
+      
+      
+        <link rel="next" href="parameters/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Editor - Gazeful</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#editor" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Gazeful" class="md-header__button md-logo" aria-label="Gazeful" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gazeful
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Editor
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/krznck/gazeful" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    krznck/gazeful
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Gazeful" class="md-nav__button md-logo" aria-label="Gazeful" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+
+    </a>
+    Gazeful
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/krznck/gazeful" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    krznck/gazeful
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features & Compatibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup & Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/extending/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending Gazeful
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trackers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trackers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recording/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recording
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Editor
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#editor.EditorPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EditorPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EditorPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage.EditorPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EditorPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EditorPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage.EditorPage-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage.EditorPage.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage.EditorPage.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editor.EditorPresenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EditorPresenter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EditorPresenter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter.EditorPresenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EditorPresenter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EditorPresenter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter.EditorPresenter-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter.EditorPresenter.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HoverableImageItem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HoverableImageItem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem.HoverableImageItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HoverableImageItem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HoverableImageItem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem.HoverableImageItem-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem.HoverableImageItem.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem.HoverableImageItem.hoverEvent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hoverEvent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editor.ParameterCollection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ParameterCollection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ParameterCollection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ParameterCollection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ParameterCollection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.connect_tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connect_tree
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.get_param" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_param
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.get_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_value
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ParameterError
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visuals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visuals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visuals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visuals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visuals/gaze_visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gaze Visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visuals/pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visuals/presenters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presenters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#editor.EditorPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EditorPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EditorPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage.EditorPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EditorPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EditorPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage.EditorPage-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage.EditorPage.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPage.EditorPage.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editor.EditorPresenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EditorPresenter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EditorPresenter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter.EditorPresenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EditorPresenter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EditorPresenter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter.EditorPresenter-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter.EditorPresenter.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.EditorPresenter-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HoverableImageItem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HoverableImageItem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem.HoverableImageItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HoverableImageItem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HoverableImageItem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem.HoverableImageItem-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem.HoverableImageItem.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.HoverableImageItem.HoverableImageItem.hoverEvent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hoverEvent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editor.ParameterCollection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ParameterCollection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ParameterCollection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ParameterCollection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ParameterCollection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.connect_tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        connect_tree
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.get_param" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_param
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterCollection.get_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_value
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor.ParameterCollection.ParameterError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ParameterError
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="editor">Editor</h1>
+<p>This module handles the code related to the visual analytics view of the
+application.</p>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="editor.EditorPage" class="doc doc-heading">
+            <code>editor.EditorPage</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>View component for the Editor page.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="editor.EditorPage-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="editor.EditorPage.EditorPage" class="doc doc-heading">
+            <code>EditorPage</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Page (visuals.pages.Page.Page)" href="../visuals/pages/#visuals.pages.Page.Page">Page</a></code></p>
+
+
+
+        <p>The UI page for the visualization editor.</p>
+<p>Displays a parameter tree for settings on the left and a large graphics
+preview on the right.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.EditorPage.EditorPage.graphics">graphics</span></code></td>
+            <td>
+                  <code><span title="pyqtgraph.widgets.GraphicsLayoutWidget.GraphicsLayoutWidget">GraphicsLayoutWidget</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The main visualization display area.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.EditorPage.EditorPage.hover_label">hover_label</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QLabel">QLabel</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Label for displaying information about hovered elements.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.EditorPage.EditorPage.parameter_tree">parameter_tree</span></code></td>
+            <td>
+                  <code><span title="pyqtgraph.parametertree.ParameterTree">ParameterTree</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The settings pane for visual configuration.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>editor/EditorPage.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">EditorPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The UI page for the visualization editor.</span>
+
+<span class="sd">    Displays a parameter tree for settings on the left and a large graphics</span>
+<span class="sd">    preview on the right.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        graphics: The main visualization display area.</span>
+<span class="sd">        hover_label: Label for displaying information about hovered elements.</span>
+<span class="sd">        parameter_tree: The settings pane for visual configuration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">graphics</span><span class="p">:</span> <span class="n">GraphicsLayoutWidget</span>
+    <span class="n">hover_label</span><span class="p">:</span> <span class="n">QLabel</span>
+    <span class="n">parameter_tree</span><span class="p">:</span> <span class="n">ParameterTree</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the editor page view.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hover_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Editor&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="n">IconsEnum</span><span class="o">.</span><span class="n">MICROSCOPE</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds the layout and widgets to the page.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_layout</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets up the split layout between parameters and preview.&quot;&quot;&quot;</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameter_tree</span> <span class="o">=</span> <span class="n">pt</span> <span class="o">=</span> <span class="n">ParameterTree</span><span class="p">()</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">()</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+        <span class="n">hl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hover_label</span>
+        <span class="n">hl</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+
+        <span class="n">preview</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graphics</span> <span class="o">=</span> <span class="n">g</span> <span class="o">=</span> <span class="n">GraphicsLayoutWidget</span><span class="p">()</span>
+        <span class="n">preview</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+        <span class="n">preview</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">hl</span><span class="p">)</span>
+
+        <span class="n">layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">preview</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="editor.EditorPage.EditorPage-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.EditorPage.EditorPage.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the editor page view.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/EditorPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the editor page view.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">hover_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Editor&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="n">IconsEnum</span><span class="o">.</span><span class="n">MICROSCOPE</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.EditorPage.EditorPage.add_content" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_content</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds the layout and widgets to the page.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/EditorPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds the layout and widgets to the page.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_init_layout</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="editor.EditorPresenter" class="doc doc-heading">
+            <code>editor.EditorPresenter</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Presenter for the Editor page, coordinating UI settings and visualizations.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="editor.EditorPresenter-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="editor.EditorPresenter.EditorPresenter" class="doc doc-heading">
+            <code>EditorPresenter</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="PagePresenter (visuals.pages.presenters.PagePresenter.PagePresenter)" href="../visuals/presenters/#visuals.pages.presenters.PagePresenter.PagePresenter">PagePresenter</a>[<a class="autorefs autorefs-internal" title="EditorPage (editor.EditorPage.EditorPage)" href="#editor.EditorPage.EditorPage">EditorPage</a>]</code></p>
+
+
+
+        <p>Presenter managing the Editor view and visualization lifecycle.</p>
+<p>This class coordinates the parameter tree, handles file importing/exporting,
+and manages the active visualization strategy.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.EditorPresenter.EditorPresenter._vis_strat">_vis_strat</span></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="VisualizationStrategy (editor.visualization.VisualizationStrategy.VisualizationStrategy)" href="visualization/#editor.visualization.VisualizationStrategy.VisualizationStrategy">VisualizationStrategy</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Current strategy for generating the visualization.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.EditorPresenter.EditorPresenter._params">_params</span></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="ParameterCollection (editor.ParameterCollection.ParameterCollection)" href="#editor.ParameterCollection.ParameterCollection">ParameterCollection</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Collection of parameters for UI and strategy control.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.EditorPresenter.EditorPresenter._root_param">_root_param</span></code></td>
+            <td>
+                  <code><span title="pyqtgraph.parametertree.Parameter.Parameter">Parameter</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The top-level parameter group for the tree view.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.EditorPresenter.EditorPresenter._common_params">_common_params</span></code></td>
+            <td>
+                  <code><span title="pyqtgraph.parametertree.Parameter.Parameter">Parameter</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Long-lived parameters (e.g., global settings).</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.EditorPresenter.EditorPresenter._specific_params">_specific_params</span></code></td>
+            <td>
+                  <code><span title="pyqtgraph.parametertree.Parameter.Parameter">Parameter</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Parameters specific to the active visualization strategy.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>editor/EditorPresenter.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">EditorPresenter</span><span class="p">(</span><span class="n">PagePresenter</span><span class="p">[</span><span class="n">EditorPage</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Presenter managing the Editor view and visualization lifecycle.</span>
+
+<span class="sd">    This class coordinates the parameter tree, handles file importing/exporting,</span>
+<span class="sd">    and manages the active visualization strategy.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        _vis_strat: Current strategy for generating the visualization.</span>
+<span class="sd">        _params: Collection of parameters for UI and strategy control.</span>
+<span class="sd">        _root_param: The top-level parameter group for the tree view.</span>
+<span class="sd">        _common_params: Long-lived parameters (e.g., global settings).</span>
+<span class="sd">        _specific_params: Parameters specific to the active visualization strategy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_vis_strat</span><span class="p">:</span> <span class="n">VisualizationStrategy</span>
+    <span class="n">_params</span><span class="p">:</span> <span class="n">ParameterCollection</span>
+    <span class="n">_root_param</span><span class="p">:</span> <span class="n">Parameter</span>  <span class="c1"># container for the tree view</span>
+    <span class="n">_common_params</span><span class="p">:</span> <span class="n">Parameter</span>  <span class="c1"># long-lived params</span>
+    <span class="n">_specific_params</span><span class="p">:</span> <span class="n">Parameter</span> <span class="o">|</span> <span class="kc">None</span>  <span class="c1"># disposable, specific params</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">view</span><span class="p">:</span> <span class="n">EditorPage</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">AppContext</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the presenter and creates initial parameter groups.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            view: The EditorPage view.</span>
+<span class="sd">            context: Global application context.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_common_params</span> <span class="o">=</span> <span class="n">cp</span> <span class="o">=</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Common&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="n">PARAMS</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_specific_params</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_root_param</span> <span class="o">=</span> <span class="n">rp</span> <span class="o">=</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;params&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">cp</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="n">ParameterCollection</span><span class="p">(</span><span class="n">rp</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_view_state</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connect_signals</span><span class="p">()</span>
+
+        <span class="n">initial_vis_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">ParameterEnum</span><span class="o">.</span><span class="n">VISUALIZATION</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_on_visualization_type_selected</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_vis_type</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_view_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the view&#39;s component states.&quot;&quot;&quot;</span>
+        <span class="n">v</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_view</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">connect_tree</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">parameter_tree</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_connect_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Connects signals from parameters and context to presenter slots.&quot;&quot;&quot;</span>
+        <span class="n">p</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ParameterEnum</span><span class="o">.</span><span class="n">GAZE_FILE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_gaze_csv_selected</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ParameterEnum</span><span class="o">.</span><span class="n">VISUALIZATION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_visualization_type_selected</span><span class="p">)</span>
+
+        <span class="n">p</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ParameterEnum</span><span class="o">.</span><span class="n">SAVE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_export_clicked</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">import_recording</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Slot for importing a new recording into the current visualization.&quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">main_data</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="n">vs</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vis_strat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_view</span>
+            <span class="n">vs</span><span class="o">.</span><span class="n">setup_plot</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">graphics</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">main_data</span><span class="p">)</span>
+            <span class="n">vs</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="n">c</span><span class="o">.</span><span class="n">main_data_changed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">import_recording</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_on_export_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handles the export of the current visualization to an image file.&quot;&quot;&quot;</span>
+        <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_view</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">main_data</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">file_path</span><span class="p">,</span> <span class="n">selected_filter</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span>
+            <span class="n">v</span><span class="p">,</span>
+            <span class="s2">&quot;Save Figure As...&quot;</span><span class="p">,</span>
+            <span class="nb">filter</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;PNG Image (*.png);;&quot;</span> <span class="s2">&quot;JPEG Image (*.jpg);;&quot;</span> <span class="s2">&quot;SVG Image (*.svg);;&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">file_path</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\*\.(\w+)&quot;</span><span class="p">,</span> <span class="n">selected_filter</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.png&quot;</span><span class="p">)</span>  <span class="c1"># fallback</span>
+
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.svg&quot;</span><span class="p">:</span>
+            <span class="n">exporter</span> <span class="o">=</span> <span class="n">SVGExporter</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">scene</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">exporter</span> <span class="o">=</span> <span class="n">ImageExporter</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">scene</span><span class="p">())</span>
+            <span class="n">exporter</span><span class="o">.</span><span class="n">parameters</span><span class="p">()[</span><span class="s2">&quot;width&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">IMAGE_WIDTH</span>
+
+        <span class="n">exporter</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_on_gaze_csv_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Slot triggered when a new CSV file is chosen from the parameter tree.&quot;&quot;&quot;</span>
+        <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_view</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">QMessageBox</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s2">&quot;Import warning&quot;</span><span class="p">,</span> <span class="s2">&quot;Empty selection&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">image</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">main_data</span><span class="o">.</span><span class="n">screenshot</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">main_data</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">recording</span> <span class="o">=</span> <span class="n">ingest_csv</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="n">recording</span><span class="o">.</span><span class="n">screenshot</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">main_data</span> <span class="o">=</span> <span class="n">recording</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_on_visualization_type_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Slot triggered when the visualization type parameter is changed.</span>
+
+<span class="sd">        Updates the visualization strategy and refreshes specific parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_specific_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_root_param</span><span class="o">.</span><span class="n">removeChild</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_specific_params</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_specific_params</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">strat_type</span> <span class="o">=</span> <span class="n">make_strategy</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_specific_params</span> <span class="o">=</span> <span class="n">sp</span> <span class="o">=</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Specific&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="n">make_param</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_root_param</span><span class="o">.</span><span class="n">addChild</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vis_strat</span> <span class="o">=</span> <span class="n">strat_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vis_strat</span><span class="o">.</span><span class="n">hovered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_view</span><span class="o">.</span><span class="n">hover_label</span><span class="o">.</span><span class="n">setText</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">recording</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">main_data</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vis_strat</span><span class="o">.</span><span class="n">setup_plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_view</span><span class="o">.</span><span class="n">graphics</span><span class="p">,</span> <span class="n">recording</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vis_strat</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="editor.EditorPresenter.EditorPresenter-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.EditorPresenter.EditorPresenter.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the presenter and creates initial parameter groups.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>view</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="EditorPage (editor.EditorPage.EditorPage)" href="#editor.EditorPage.EditorPage">EditorPage</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The EditorPage view.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>context</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="AppContext (AppContext.AppContext)" href="../main/#AppContext.AppContext">AppContext</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Global application context.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/EditorPresenter.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">view</span><span class="p">:</span> <span class="n">EditorPage</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">AppContext</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the presenter and creates initial parameter groups.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        view: The EditorPage view.</span>
+<span class="sd">        context: Global application context.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_common_params</span> <span class="o">=</span> <span class="n">cp</span> <span class="o">=</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Common&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="n">PARAMS</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_specific_params</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_root_param</span> <span class="o">=</span> <span class="n">rp</span> <span class="o">=</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;params&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">cp</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="n">ParameterCollection</span><span class="p">(</span><span class="n">rp</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_init_view_state</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_connect_signals</span><span class="p">()</span>
+
+    <span class="n">initial_vis_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">ParameterEnum</span><span class="o">.</span><span class="n">VISUALIZATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_on_visualization_type_selected</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_vis_type</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+<h3 id="editor.EditorPresenter-functions">Functions</h3>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="editor.HoverableImageItem" class="doc doc-heading">
+            <code>editor.HoverableImageItem</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>A subclass of the pyqtgraph ImageItem that reports hover positions.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="editor.HoverableImageItem-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="editor.HoverableImageItem.HoverableImageItem" class="doc doc-heading">
+            <code>HoverableImageItem</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pyqtgraph.ImageItem">ImageItem</span></code></p>
+
+
+
+        <p>An ImageItem that emits a signal when the mouse hovers over it.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.HoverableImageItem.HoverableImageItem.hovered">hovered</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Signal emitted with the local coordinates of the hover event.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>editor/HoverableImageItem.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">HoverableImageItem</span><span class="p">(</span><span class="n">ImageItem</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An ImageItem that emits a signal when the mouse hovers over it.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        hovered: Signal emitted with the local coordinates of the hover event.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">hovered</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">(</span><span class="n">Point</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the hoverable image item and enables hover events.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setAcceptHoverEvents</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># WARNING:</span>
+        <span class="c1"># We are not signaling when the hover event exits (ev.isExit()), which means</span>
+        <span class="c1"># we can&#39;t stop displaying the information. Might be fine with what is planned</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">hoverEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">:</span> <span class="n">HoverEvent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handles the pyqtgraph hover event and emits the &#39;hovered&#39; signal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ev: The hover event.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ev</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ev</span><span class="o">.</span><span class="n">isExit</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hovered</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="editor.HoverableImageItem.HoverableImageItem-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.HoverableImageItem.HoverableImageItem.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the hoverable image item and enables hover events.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/HoverableImageItem.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the hoverable image item and enables hover events.&quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setAcceptHoverEvents</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.HoverableImageItem.HoverableImageItem.hoverEvent" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">hoverEvent</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Handles the pyqtgraph hover event and emits the 'hovered' signal.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>ev</code>
+            </td>
+            <td>
+                  <code><span title="pyqtgraph.GraphicsScene.mouseEvents.HoverEvent">HoverEvent</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The hover event.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/HoverableImageItem.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hoverEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">:</span> <span class="n">HoverEvent</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles the pyqtgraph hover event and emits the &#39;hovered&#39; signal.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ev: The hover event.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ev</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ev</span><span class="o">.</span><span class="n">isExit</span><span class="p">():</span>
+        <span class="k">return</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">hovered</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="editor.ParameterCollection" class="doc doc-heading">
+            <code>editor.ParameterCollection</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Management of hierarchical parameters for visualization settings.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="editor.ParameterCollection-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="editor.ParameterCollection.ParameterCollection" class="doc doc-heading">
+            <code>ParameterCollection</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Wrapper for pyqtgraph's Parameter to simplify access and signal binding.</p>
+<p>This class provides a flat interface for accessing parameters nested within a
+hierarchical group structure.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="editor.ParameterCollection.ParameterCollection._parameters">_parameters</span></code></td>
+            <td>
+                  <code><span title="pyqtgraph.parametertree.Parameter">Parameter</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The root Parameter group containing all settings.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>editor/ParameterCollection.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ParameterCollection</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for pyqtgraph&#39;s Parameter to simplify access and signal binding.</span>
+
+<span class="sd">    This class provides a flat interface for accessing parameters nested within a</span>
+<span class="sd">    hierarchical group structure.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        _parameters: The root Parameter group containing all settings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_parameters</span><span class="p">:</span> <span class="n">Parameter</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the collection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parameters: The root Parameter group.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span> <span class="o">=</span> <span class="n">parameters</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">connect_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ParameterTree</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Attaches the parameter collection to a UI tree view.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tree: The ParameterTree widget to display these parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">setParameters</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">,</span> <span class="n">showTop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_param</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Enum</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Parameter</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves a specific Parameter object by its Enum key.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            target: The Enum member representing the parameter.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The corresponding pyqtgraph Parameter object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ParameterError: If the parameter key is not found in any child group.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">.</span><span class="n">children</span><span class="p">():</span>  <span class="c1"># type: ignore</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find parameter </span><span class="si">{</span><span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Enum</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves the current value of a parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            target: The Enum member representing the parameter.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The current value stored in the parameter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">slot</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Connects a parameter&#39;s change or activation signal to a slot.</span>
+
+<span class="sd">        Handles both standard value changes and &#39;action&#39; type triggers.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            target: The Enum member representing the parameter.</span>
+<span class="sd">            slot: The callable to trigger when the parameter changes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">opts</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">sigActivated</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+            <span class="k">return</span>
+
+        <span class="n">param</span><span class="o">.</span><span class="n">sigValueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="editor.ParameterCollection.ParameterCollection-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.ParameterCollection.ParameterCollection.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the collection.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>parameters</code>
+            </td>
+            <td>
+                  <code><span title="pyqtgraph.parametertree.Parameter">Parameter</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The root Parameter group.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/ParameterCollection.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the collection.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        parameters: The root Parameter group.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span> <span class="o">=</span> <span class="n">parameters</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.ParameterCollection.ParameterCollection.connect" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">connect</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">slot</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Connects a parameter's change or activation signal to a slot.</p>
+<p>Handles both standard value changes and 'action' type triggers.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>target</code>
+            </td>
+            <td>
+                  <code><span title="enum.Enum">Enum</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The Enum member representing the parameter.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>slot</code>
+            </td>
+            <td>
+                  <code><span title="typing.Callable">Callable</span>[..., None]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The callable to trigger when the parameter changes.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/ParameterCollection.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">slot</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connects a parameter&#39;s change or activation signal to a slot.</span>
+
+<span class="sd">    Handles both standard value changes and &#39;action&#39; type triggers.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target: The Enum member representing the parameter.</span>
+<span class="sd">        slot: The callable to trigger when the parameter changes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">opts</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span>
+        <span class="n">param</span><span class="o">.</span><span class="n">sigActivated</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span>
+
+    <span class="n">param</span><span class="o">.</span><span class="n">sigValueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.ParameterCollection.ParameterCollection.connect_tree" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">connect_tree</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Attaches the parameter collection to a UI tree view.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>tree</code>
+            </td>
+            <td>
+                  <code><span title="pyqtgraph.parametertree.ParameterTree">ParameterTree</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The ParameterTree widget to display these parameters.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/ParameterCollection.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">connect_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">ParameterTree</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Attaches the parameter collection to a UI tree view.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tree: The ParameterTree widget to display these parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">setParameters</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">,</span> <span class="n">showTop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.ParameterCollection.ParameterCollection.get_param" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_param</span><span class="p">(</span><span class="n">target</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieves a specific Parameter object by its Enum key.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>target</code>
+            </td>
+            <td>
+                  <code><span title="enum.Enum">Enum</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The Enum member representing the parameter.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="pyqtgraph.parametertree.Parameter">Parameter</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The corresponding pyqtgraph Parameter object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="ParameterError (editor.ParameterCollection.ParameterError)" href="#editor.ParameterCollection.ParameterError">ParameterError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the parameter key is not found in any child group.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/ParameterCollection.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_param</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Enum</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Parameter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieves a specific Parameter object by its Enum key.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target: The Enum member representing the parameter.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The corresponding pyqtgraph Parameter object.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ParameterError: If the parameter key is not found in any child group.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">value</span>
+    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">.</span><span class="n">children</span><span class="p">():</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find parameter </span><span class="si">{</span><span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="editor.ParameterCollection.ParameterCollection.get_value" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_value</span><span class="p">(</span><span class="n">target</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieves the current value of a parameter.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>target</code>
+            </td>
+            <td>
+                  <code><span title="enum.Enum">Enum</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The Enum member representing the parameter.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The current value stored in the parameter.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>editor/ParameterCollection.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Enum</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieves the current value of a parameter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target: The Enum member representing the parameter.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The current value stored in the parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="editor.ParameterCollection.ParameterError" class="doc doc-heading">
+            <code>ParameterError</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="Exception">Exception</span></code></p>
+
+
+
+        <p>Raised on invalid access or manipulation of a parameter.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>editor/ParameterCollection.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ParameterError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised on invalid access or manipulation of a parameter.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

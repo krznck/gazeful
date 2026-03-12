@@ -1,0 +1,4371 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../editor/visualization/">
+      
+      
+        <link rel="next" href="gaze_visualizer/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Visuals - Gazeful</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#visuals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Gazeful" class="md-header__button md-logo" aria-label="Gazeful" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gazeful
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Visuals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/krznck/gazeful" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    krznck/gazeful
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Gazeful" class="md-nav__button md-logo" aria-label="Gazeful" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+
+    </a>
+    Gazeful
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/krznck/gazeful" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    krznck/gazeful
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features & Compatibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup & Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/extending/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending Gazeful
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trackers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trackers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recording/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recording
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Editor
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editor/parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editor/visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visuals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visuals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visuals
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visuals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.MainWindow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainWindow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainWindow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainWindow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainWindow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow.closeEvent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        closeEvent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow.inspect_widget_at_cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        inspect_widget_at_cursor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow.keyPressEvent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        keyPressEvent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.assets.AudioEnum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AudioEnum
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AudioEnum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.AudioEnum-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.AudioEnum.AudioEnum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AudioEnum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        icon_selector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="icon_selector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector.IconsEnum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IconsEnum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector.create_icon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_icon
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomComboBox
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomComboBox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox.CustomComboBox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomComboBox
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomComboBox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox.CustomComboBox-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox.CustomComboBox.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomPushButton
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomPushButton">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton.CustomPushButton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomPushButton
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomPushButton">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton.CustomPushButton-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton.CustomPushButton.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomSidebar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomSidebar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomSidebar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomSidebar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar.__add_styling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __add_styling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar.__adjust_width" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __adjust_width
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar.addItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        addItem
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Header
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Header">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header.Header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Header
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Header">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header.Header-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header.Header.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gaze_visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gaze Visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="presenters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presenters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.MainWindow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainWindow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainWindow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainWindow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainWindow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow.closeEvent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        closeEvent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow.inspect_widget_at_cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        inspect_widget_at_cursor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow.MainWindow.keyPressEvent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        keyPressEvent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.MainWindow-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.assets.AudioEnum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AudioEnum
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AudioEnum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.AudioEnum-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.AudioEnum.AudioEnum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AudioEnum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        icon_selector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="icon_selector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector.IconsEnum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IconsEnum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.assets.icon_selector.create_icon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_icon
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomComboBox
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomComboBox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox.CustomComboBox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomComboBox
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomComboBox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox.CustomComboBox-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomComboBox.CustomComboBox.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomPushButton
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomPushButton">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton.CustomPushButton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomPushButton
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomPushButton">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton.CustomPushButton-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomPushButton.CustomPushButton.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomSidebar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomSidebar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CustomSidebar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CustomSidebar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar.__add_styling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __add_styling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar.__adjust_width" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __adjust_width
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.CustomSidebar.CustomSidebar.addItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        addItem
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Header
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Header">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header.Header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Header
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Header">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header.Header-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.customized_widgets.Header.Header.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="visuals">Visuals</h1>
+<p>This module handles the majority of the UI of the application, with the
+exception of UI related to the <a href="../editor/"><code>Editor</code></a>.</p>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.MainWindow" class="doc doc-heading">
+            <code>visuals.MainWindow</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Main window implementation for the nnetp application.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.MainWindow-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.MainWindow.MainWindow" class="doc doc-heading">
+            <code>MainWindow</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="PyQt6.QtWidgets.QMainWindow">QMainWindow</span></code></p>
+
+
+
+        <p>The primary application window coordinating navigation and page display.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.MainWindow.MainWindow.sidebar">sidebar</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QListWidget">QListWidget</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The sidebar widget for navigation.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.MainWindow.MainWindow.pages">pages</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QStackedWidget">QStackedWidget</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The stacked widget containing all application pages.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.MainWindow.MainWindow.context">context</span></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="AppContext (AppContext.AppContext)" href="../main/#AppContext.AppContext">AppContext</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The global application context.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/MainWindow.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MainWindow</span><span class="p">(</span><span class="n">QMainWindow</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The primary application window coordinating navigation and page display.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        sidebar: The sidebar widget for navigation.</span>
+<span class="sd">        pages: The stacked widget containing all application pages.</span>
+<span class="sd">        context: The global application context.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sidebar</span><span class="p">:</span> <span class="n">QListWidget</span>
+    <span class="n">pages</span><span class="p">:</span> <span class="n">QStackedWidget</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">AppContext</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">AppContext</span><span class="p">,</span> <span class="n">inspection</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the main window and its layout.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            context: The application context.</span>
+<span class="sd">            inspection: Whether to enable the widget inspector tool.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="n">APP_NAME</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">DEF_WIDTH</span><span class="p">,</span> <span class="n">DEF_HEIGHT</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar</span> <span class="o">=</span> <span class="n">QListWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">=</span> <span class="n">QStackedWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">=</span> <span class="n">generate_navigation</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+        <span class="n">main_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">main_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidebar</span><span class="p">)</span>
+        <span class="n">main_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>
+
+        <span class="n">container</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">container</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">main_layout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCentralWidget</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inspection</span> <span class="o">=</span> <span class="n">inspection</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a0</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCloseEvent</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handles the window close event by disconnecting the tracker.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            a0: The close event.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">disconnect_tracker</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">closeEvent</span><span class="p">(</span><span class="n">a0</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a0</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QKeyEvent</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handles global key shortcuts, including the inspector toggle.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            a0: The key event.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">a0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># pressing Control Shift I</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inspection</span>
+            <span class="ow">and</span> <span class="n">a0</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_I</span>
+            <span class="ow">and</span> <span class="n">a0</span><span class="o">.</span><span class="n">modifiers</span><span class="p">()</span>
+            <span class="o">==</span> <span class="p">(</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeyboardModifier</span><span class="o">.</span><span class="n">ControlModifier</span>
+                <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeyboardModifier</span><span class="o">.</span><span class="n">ShiftModifier</span>
+            <span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspect_widget_at_cursor</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">a0</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">inspect_widget_at_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prints diagnostic information about the widget currently under the cursor.&quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCursor</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+        <span class="n">widget</span> <span class="o">=</span> <span class="n">QApplication</span><span class="o">.</span><span class="n">widgetAt</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">widget</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No wdiget found under the cursor&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-- Widget Inspector ---&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inspecting widget at screen position </span><span class="si">{</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">pos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">current</span> <span class="o">=</span> <span class="n">widget</span>
+        <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">current</span><span class="p">:</span>
+            <span class="n">class_name</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">obj_name</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">objectName</span><span class="p">()</span>
+
+            <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">indent</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> -&gt; Class: </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">, Name: &#39;</span><span class="si">{</span><span class="n">obj_name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;Not Set&#39;</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+            <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span>
+            <span class="n">indent</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="visuals.MainWindow.MainWindow-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.MainWindow.MainWindow.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">inspection</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the main window and its layout.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>context</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="AppContext (AppContext.AppContext)" href="../main/#AppContext.AppContext">AppContext</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The application context.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>inspection</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to enable the widget inspector tool.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/MainWindow.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">AppContext</span><span class="p">,</span> <span class="n">inspection</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the main window and its layout.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context: The application context.</span>
+<span class="sd">        inspection: Whether to enable the widget inspector tool.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="n">APP_NAME</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">DEF_WIDTH</span><span class="p">,</span> <span class="n">DEF_HEIGHT</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">sidebar</span> <span class="o">=</span> <span class="n">QListWidget</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">=</span> <span class="n">QStackedWidget</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sidebar</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">=</span> <span class="n">generate_navigation</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+    <span class="n">main_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+    <span class="n">main_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidebar</span><span class="p">)</span>
+    <span class="n">main_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>
+
+    <span class="n">container</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+    <span class="n">container</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">main_layout</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCentralWidget</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_inspection</span> <span class="o">=</span> <span class="n">inspection</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.MainWindow.MainWindow.closeEvent" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">closeEvent</span><span class="p">(</span><span class="n">a0</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Handles the window close event by disconnecting the tracker.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>a0</code>
+            </td>
+            <td>
+                  <code><span title="PyQt6.QtGui.QCloseEvent">QCloseEvent</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The close event.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/MainWindow.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a0</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCloseEvent</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles the window close event by disconnecting the tracker.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a0: The close event.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">disconnect_tracker</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">closeEvent</span><span class="p">(</span><span class="n">a0</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.MainWindow.MainWindow.inspect_widget_at_cursor" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">inspect_widget_at_cursor</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Prints diagnostic information about the widget currently under the cursor.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/MainWindow.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">inspect_widget_at_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints diagnostic information about the widget currently under the cursor.&quot;&quot;&quot;</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCursor</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+    <span class="n">widget</span> <span class="o">=</span> <span class="n">QApplication</span><span class="o">.</span><span class="n">widgetAt</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">widget</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No wdiget found under the cursor&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-- Widget Inspector ---&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inspecting widget at screen position </span><span class="si">{</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">pos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">current</span> <span class="o">=</span> <span class="n">widget</span>
+    <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">current</span><span class="p">:</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">obj_name</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">objectName</span><span class="p">()</span>
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">indent</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> -&gt; Class: </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">, Name: &#39;</span><span class="si">{</span><span class="n">obj_name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;Not Set&#39;</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span>
+        <span class="n">indent</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.MainWindow.MainWindow.keyPressEvent" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">a0</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Handles global key shortcuts, including the inspector toggle.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>a0</code>
+            </td>
+            <td>
+                  <code><span title="PyQt6.QtGui.QKeyEvent">QKeyEvent</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The key event.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/MainWindow.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a0</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QKeyEvent</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles global key shortcuts, including the inspector toggle.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a0: The key event.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c1"># pressing Control Shift I</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inspection</span>
+        <span class="ow">and</span> <span class="n">a0</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_I</span>
+        <span class="ow">and</span> <span class="n">a0</span><span class="o">.</span><span class="n">modifiers</span><span class="p">()</span>
+        <span class="o">==</span> <span class="p">(</span>
+            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeyboardModifier</span><span class="o">.</span><span class="n">ControlModifier</span>
+            <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeyboardModifier</span><span class="o">.</span><span class="n">ShiftModifier</span>
+        <span class="p">)</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspect_widget_at_cursor</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">a0</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+<h3 id="visuals.MainWindow-functions">Functions</h3>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.assets.AudioEnum" class="doc doc-heading">
+            <code>visuals.assets.AudioEnum</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Enumeration for application audio resources.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.assets.AudioEnum-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.assets.AudioEnum.AudioEnum" class="doc doc-heading">
+            <code>AudioEnum</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="enum.Enum">Enum</span></code></p>
+
+
+
+        <p>Available audio cues in the application.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/assets/AudioEnum.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AudioEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Available audio cues in the application.&quot;&quot;&quot;</span>
+
+    <span class="n">PIP</span> <span class="o">=</span> <span class="n">WaveObject</span><span class="o">.</span><span class="n">from_wave_file</span><span class="p">(</span><span class="n">_createPath</span><span class="p">(</span><span class="s2">&quot;pip&quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.assets.icon_selector" class="doc doc-heading">
+            <code>visuals.assets.icon_selector</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Utilities for selecting and creating application icons.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.assets.icon_selector-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.assets.icon_selector.IconsEnum" class="doc doc-heading">
+            <code>IconsEnum</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="enum.Enum">Enum</span></code></p>
+
+
+
+        <p>Enumeration of available SVG icons for navigation and UI.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/assets/icon_selector.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">IconsEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumeration of available SVG icons for navigation and UI.&quot;&quot;&quot;</span>
+
+    <span class="n">HOME</span> <span class="o">=</span> <span class="s2">&quot;ic_fluent_home_24_regular.svg&quot;</span>
+    <span class="n">CIRCLE</span> <span class="o">=</span> <span class="s2">&quot;ic_fluent_circle_24_regular.svg&quot;</span>
+    <span class="n">RECORD</span> <span class="o">=</span> <span class="s2">&quot;ic_fluent_record_24_regular.svg&quot;</span>
+    <span class="n">MICROSCOPE</span> <span class="o">=</span> <span class="s2">&quot;ic_fluent_microscope_24_regular.svg&quot;</span>
+    <span class="n">BOOK_INFO</span> <span class="o">=</span> <span class="s2">&quot;ic_fluent_book_information_24_regular.svg&quot;</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+<h3 id="visuals.assets.icon_selector-functions">Functions</h3>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="visuals.assets.icon_selector.create_icon" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">create_icon</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Creates a QIcon object from an IconsEnum selection.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>choice</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="IconsEnum (visuals.assets.icon_selector.IconsEnum)" href="#visuals.assets.icon_selector.IconsEnum">IconsEnum</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The enum member for the desired icon.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="PyQt6.QtGui.QIcon">QIcon</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The initialized QIcon object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/assets/icon_selector.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_icon</span><span class="p">(</span><span class="n">choice</span><span class="p">:</span> <span class="n">IconsEnum</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QIcon</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a QIcon object from an IconsEnum selection.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        choice: The enum member for the desired icon.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The initialized QIcon object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">get_resource_path</span><span class="p">(</span><span class="n">ICONS_DIR</span> <span class="o">/</span> <span class="n">choice</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">QIcon</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.customized_widgets.CustomComboBox" class="doc doc-heading">
+            <code>visuals.customized_widgets.CustomComboBox</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Custom QComboBox with a standardized minimum height.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.customized_widgets.CustomComboBox-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.customized_widgets.CustomComboBox.CustomComboBox" class="doc doc-heading">
+            <code>CustomComboBox</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="PyQt6.QtWidgets.QComboBox">QComboBox</span></code></p>
+
+
+
+        <p>QComboBox subclass with a consistent minimum height for application UI.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/customized_widgets/CustomComboBox.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CustomComboBox</span><span class="p">(</span><span class="n">QComboBox</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;QComboBox subclass with a consistent minimum height for application UI.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the custom combo box and sets its height.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="n">_MIN_HEIGHT</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="visuals.customized_widgets.CustomComboBox.CustomComboBox-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.customized_widgets.CustomComboBox.CustomComboBox.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the custom combo box and sets its height.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/customized_widgets/CustomComboBox.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the custom combo box and sets its height.&quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="n">_MIN_HEIGHT</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.customized_widgets.CustomPushButton" class="doc doc-heading">
+            <code>visuals.customized_widgets.CustomPushButton</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Custom QPushButton with a standardized minimum height.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.customized_widgets.CustomPushButton-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.customized_widgets.CustomPushButton.CustomPushButton" class="doc doc-heading">
+            <code>CustomPushButton</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="PyQt6.QtWidgets.QPushButton">QPushButton</span></code></p>
+
+
+
+        <p>QPushButton subclass with a consistent minimum height for application UI.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/customized_widgets/CustomPushButton.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CustomPushButton</span><span class="p">(</span><span class="n">QPushButton</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;QPushButton subclass with a consistent minimum height for application UI.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the custom push button.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text: Optional text to display on the button.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="n">_MIN_HEIGHT</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="visuals.customized_widgets.CustomPushButton.CustomPushButton-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.customized_widgets.CustomPushButton.CustomPushButton.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the custom push button.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>text</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional text to display on the button.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/customized_widgets/CustomPushButton.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the custom push button.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: Optional text to display on the button.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="n">_MIN_HEIGHT</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.customized_widgets.CustomSidebar" class="doc doc-heading">
+            <code>visuals.customized_widgets.CustomSidebar</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>A styled navigation sidebar that dynamically adjusts its width.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.customized_widgets.CustomSidebar-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.customized_widgets.CustomSidebar.CustomSidebar" class="doc doc-heading">
+            <code>CustomSidebar</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="PyQt6.QtWidgets.QListWidget">QListWidget</span></code></p>
+
+
+
+        <p>QListWidget subclass representing the main application navigation bar.</p>
+<p>The sidebar automatically adjusts its width to accommodate the longest
+navigation item label.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.customized_widgets.CustomSidebar.CustomSidebar.longest_text">longest_text</span></code></td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Current maximum width encountered among items.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/customized_widgets/CustomSidebar.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CustomSidebar</span><span class="p">(</span><span class="n">QListWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;QListWidget subclass representing the main application navigation bar.</span>
+
+<span class="sd">    The sidebar automatically adjusts its width to accommodate the longest</span>
+<span class="sd">    navigation item label.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        longest_text: Current maximum width encountered among items.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">longest_text</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the sidebar and applies custom styling.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: Parent widget.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_styling</span><span class="p">()</span>
+
+    <span class="c1"># NOTE: I couldn&#39;t get PyRight to figure out that my override is fine,</span>
+    <span class="c1"># likely because PyQt6 does overloads via bindings and stuff. Hence, just ignore.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QListWidgetItem</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds an item to the sidebar and adjusts its width.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            item: The item or text label to add.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QListWidgetItem</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__adjust_width</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__add_styling</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Applies font and spacing styles to the sidebar.&quot;&quot;&quot;</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">()</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="n">FONT_SIZE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="n">SPACING</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__adjust_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QListWidgetItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recalculates and updates the sidebar width for a new item.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            item: The item whose label length is used for calculation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">QFontMetrics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
+        <span class="n">padded_length</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">text</span><span class="p">())</span> <span class="o">+</span> <span class="n">PADDING</span>
+
+        <span class="k">if</span> <span class="n">padded_length</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">longest_text</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="n">padded_length</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="n">padded_length</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">longest_text</span> <span class="o">=</span> <span class="n">padded_length</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="visuals.customized_widgets.CustomSidebar.CustomSidebar-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.customized_widgets.CustomSidebar.CustomSidebar.__add_styling" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">__add_styling</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Applies font and spacing styles to the sidebar.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/customized_widgets/CustomSidebar.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__add_styling</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Applies font and spacing styles to the sidebar.&quot;&quot;&quot;</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">()</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="n">FONT_SIZE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="n">SPACING</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.customized_widgets.CustomSidebar.CustomSidebar.__adjust_width" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">__adjust_width</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Recalculates and updates the sidebar width for a new item.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>item</code>
+            </td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QListWidgetItem">QListWidgetItem</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The item whose label length is used for calculation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/customized_widgets/CustomSidebar.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__adjust_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QListWidgetItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recalculates and updates the sidebar width for a new item.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        item: The item whose label length is used for calculation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">QFontMetrics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
+    <span class="n">padded_length</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">text</span><span class="p">())</span> <span class="o">+</span> <span class="n">PADDING</span>
+
+    <span class="k">if</span> <span class="n">padded_length</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">longest_text</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="n">padded_length</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="n">padded_length</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longest_text</span> <span class="o">=</span> <span class="n">padded_length</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.customized_widgets.CustomSidebar.CustomSidebar.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the sidebar and applies custom styling.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>parent</code>
+            </td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QWidget">QWidget</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Parent widget.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/customized_widgets/CustomSidebar.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the sidebar and applies custom styling.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        parent: Parent widget.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__add_styling</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.customized_widgets.CustomSidebar.CustomSidebar.addItem" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds an item to the sidebar and adjusts its width.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>item</code>
+            </td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QListWidgetItem">QListWidgetItem</span> | <span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The item or text label to add.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/customized_widgets/CustomSidebar.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">addItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QListWidgetItem</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds an item to the sidebar and adjusts its width.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        item: The item or text label to add.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QListWidgetItem</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__adjust_width</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.customized_widgets.Header" class="doc doc-heading">
+            <code>visuals.customized_widgets.Header</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>A standardized header label for page sections.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.customized_widgets.Header-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.customized_widgets.Header.Header" class="doc doc-heading">
+            <code>Header</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="PyQt6.QtWidgets.QLabel">QLabel</span></code></p>
+
+
+
+        <p>Standardized header label with a larger, bold font.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/customized_widgets/Header.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Header</span><span class="p">(</span><span class="n">QLabel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Standardized header label with a larger, bold font.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the header label.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text: Header text.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">()</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setBold</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="visuals.customized_widgets.Header.Header-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.customized_widgets.Header.Header.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the header label.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>text</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Header text.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/customized_widgets/Header.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the header label.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: Header text.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">()</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">setBold</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

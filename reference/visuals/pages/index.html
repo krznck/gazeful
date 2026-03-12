@@ -1,0 +1,3988 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../gaze_visualizer/">
+      
+      
+        <link rel="next" href="../presenters/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Pages - Gazeful</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pages" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Gazeful" class="md-header__button md-logo" aria-label="Gazeful" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gazeful
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Pages
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/krznck/gazeful" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    krznck/gazeful
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Gazeful" class="md-nav__button md-logo" aria-label="Gazeful" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+
+    </a>
+    Gazeful
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/krznck/gazeful" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    krznck/gazeful
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features & Compatibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data_format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../development/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup & Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../development/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../development/extending/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending Gazeful
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../development/standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../trackers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trackers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recording/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recording
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Editor
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../editor/parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../editor/visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visuals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visuals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visuals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gaze_visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gaze Visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pages
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Page
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.InvalidInteractionError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InvalidInteractionError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Page
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.Page-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.Page.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.Page.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        navigation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="navigation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.navigation-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.navigation-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.navigation.generate_navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        generate_navigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage.MainPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage.MainPage-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage.MainPage.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage.MainPage.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VisualizerPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VisualizerPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VisualizerPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VisualizerPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage.__init_animation_section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init_animation_section
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage.__init_opacity_section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init_opacity_section
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RecordingPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RecordingPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage.RecordingPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RecordingPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RecordingPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage.RecordingPage-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage.RecordingPage.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage.RecordingPage.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../presenters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presenters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Page
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.InvalidInteractionError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InvalidInteractionError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Page
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.Page-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.Page.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page.Page.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.Page-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        navigation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="navigation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.navigation-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.navigation-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.navigation.generate_navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        generate_navigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage.MainPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage.MainPage-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage.MainPage.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.MainPage.MainPage.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VisualizerPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VisualizerPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VisualizerPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VisualizerPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage.__init_animation_section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init_animation_section
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage.__init_opacity_section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init_opacity_section
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.VisualizerPage.VisualizerPage.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RecordingPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RecordingPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage.RecordingPage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RecordingPage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RecordingPage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage.RecordingPage-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage.RecordingPage.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visuals.pages.RecordingPage.RecordingPage.add_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="pages">Pages</h1>
+<p>This module represents the views of the Model-View-Presenter interface.</p>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.pages.Page" class="doc doc-heading">
+            <code>visuals.pages.Page</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Base class and common definitions for all application pages.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.pages.Page-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.pages.Page.InvalidInteractionError" class="doc doc-heading">
+            <code>InvalidInteractionError</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="Exception">Exception</span></code></p>
+
+
+
+        <p>Raised when a user interface component is interacted with unexpectedly.</p>
+<p>For example, clicking to open a directory when no path has been chosen.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/pages/Page.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">InvalidInteractionError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when a user interface component is interacted with unexpectedly.</span>
+
+<span class="sd">    For example, clicking to open a directory when no path has been chosen.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.pages.Page.Page" class="doc doc-heading">
+            <code>Page</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="PyQt6.QtWidgets.QWidget">QWidget</span></code></p>
+
+
+
+        <p>Abstract base class for all UI pages in the application.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.Page.Page.icon">icon</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtGui.QIcon">QIcon</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional icon representing the page.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.Page.Page._page_vbox">_page_vbox</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QVBoxLayout">QVBoxLayout</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Main vertical layout for page content.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/pages/Page.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Page</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for all UI pages in the application.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        icon: Optional icon representing the page.</span>
+<span class="sd">        _page_vbox: Main vertical layout for page content.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">icon</span><span class="p">:</span> <span class="n">QIcon</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_page_vbox</span><span class="p">:</span> <span class="n">QVBoxLayout</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">IconsEnum</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the page and its layout.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: Title of the page.</span>
+<span class="sd">            icon: Icon to display in the navigation sidebar.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">icon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="n">create_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_content</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">LAYOUT_ALLIGNMENT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="p">)</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract method to define and add UI components to the page.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="visuals.pages.Page.Page-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.Page.Page.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the page and its layout.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>title</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Title of the page.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>icon</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="IconsEnum (visuals.assets.icon_selector.IconsEnum)" href="../#visuals.assets.icon_selector.IconsEnum">IconsEnum</a> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Icon to display in the navigation sidebar.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/Page.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">IconsEnum</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the page and its layout.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        title: Title of the page.</span>
+<span class="sd">        icon: Icon to display in the navigation sidebar.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">icon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="n">create_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_content</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">LAYOUT_ALLIGNMENT</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.Page.Page.add_content" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_content</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+  </span>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Abstract method to define and add UI components to the page.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/Page.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abstractmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract method to define and add UI components to the page.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+<h3 id="visuals.pages.Page-functions">Functions</h3>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.pages.navigation" class="doc doc-heading">
+            <code>visuals.pages.navigation</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Logic for generating application-wide navigation components.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.pages.navigation-classes">Classes</h3>
+<h3 id="visuals.pages.navigation-functions">Functions</h3>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="visuals.pages.navigation.generate_navigation" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_navigation</span><span class="p">(</span><span class="n">context</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Factory function that creates the navigation sidebar and page stack.</p>
+<p>Instantiates all pages and their corresponding presenters, linking them
+to the sidebar for navigation.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>context</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="AppContext (AppContext.AppContext)" href="../../main/#AppContext.AppContext">AppContext</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The global application context.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="tuple">tuple</span>[<a class="autorefs autorefs-internal" title="CustomSidebar (visuals.customized_widgets.CustomSidebar.CustomSidebar)" href="../#visuals.customized_widgets.CustomSidebar.CustomSidebar">CustomSidebar</a>, <span title="PyQt6.QtWidgets.QStackedWidget">QStackedWidget</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A tuple containing the initialized (sidebar, page_stack).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/navigation.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">generate_navigation</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">AppContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">CustomSidebar</span><span class="p">,</span> <span class="n">QStackedWidget</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Factory function that creates the navigation sidebar and page stack.</span>
+
+<span class="sd">    Instantiates all pages and their corresponding presenters, linking them</span>
+<span class="sd">    to the sidebar for navigation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context: The global application context.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple containing the initialized (sidebar, page_stack).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">navbar</span> <span class="o">=</span> <span class="n">CustomSidebar</span><span class="p">()</span>
+    <span class="n">pages</span> <span class="o">=</span> <span class="n">QStackedWidget</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">PresenterClass</span><span class="p">,</span> <span class="n">PageClass</span> <span class="ow">in</span> <span class="n">PAGES</span><span class="p">:</span>
+        <span class="c1"># Wayland does not allow for anything but the compositor to change the</span>
+        <span class="c1"># positioning of an application, so the Gaze Visualizer does not work</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">PageClass</span><span class="p">())</span> <span class="o">==</span> <span class="n">VisualizerPage</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;WAYLAND_DISPLAY&quot;</span><span class="p">):</span>
+            <span class="k">continue</span>
+
+        <span class="n">page</span> <span class="o">=</span> <span class="n">PageClass</span><span class="p">()</span>
+        <span class="n">presenter</span> <span class="o">=</span> <span class="n">PresenterClass</span><span class="p">(</span><span class="n">view</span><span class="o">=</span><span class="n">page</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+
+        <span class="c1"># NOTE: The only reason to connect the presenter to the page here is to prevent</span>
+        <span class="c1"># it from being garbage collected. There is otherwise no reason for the page to</span>
+        <span class="c1"># have access to its presenter, so I don&#39;t even give it an attribute for that</span>
+        <span class="c1"># In other words, WARN: page.presenter should never be accessed</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">presenter</span> <span class="o">=</span> <span class="n">presenter</span>  <span class="c1"># type: ignore</span>
+
+        <span class="n">item</span> <span class="o">=</span> <span class="n">QListWidgetItem</span><span class="p">()</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">windowTitle</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">icon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">icon</span><span class="p">)</span>
+        <span class="n">navbar</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">pages</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+
+    <span class="n">navbar</span><span class="o">.</span><span class="n">setCurrentRow</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">navbar</span><span class="o">.</span><span class="n">currentRowChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">pages</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">navbar</span><span class="p">,</span> <span class="n">pages</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.pages.MainPage" class="doc doc-heading">
+            <code>visuals.pages.MainPage</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>The home page of the application, used for tracker and screen selection.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.pages.MainPage-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.pages.MainPage.MainPage" class="doc doc-heading">
+            <code>MainPage</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Page (visuals.pages.Page.Page)" href="#visuals.pages.Page.Page">Page</a></code></p>
+
+
+
+        <p>The home page for configuring hardware and monitoring settings.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.MainPage.MainPage.trackers_combo_box">trackers_combo_box</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QComboBox">QComboBox</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dropdown for selecting the eyetracker.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.MainPage.MainPage.screens_combo_box">screens_combo_box</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QComboBox">QComboBox</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dropdown for selecting the screen to track.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.MainPage.MainPage.connect_toggle">connect_toggle</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QPushButton">QPushButton</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Button to connect/disconnect the tracker.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.MainPage.MainPage.visualizer_toggle">visualizer_toggle</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QPushButton">QPushButton</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Button to show/hide the gaze visualizer.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/pages/MainPage.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MainPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The home page for configuring hardware and monitoring settings.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        trackers_combo_box: Dropdown for selecting the eyetracker.</span>
+<span class="sd">        screens_combo_box: Dropdown for selecting the screen to track.</span>
+<span class="sd">        connect_toggle: Button to connect/disconnect the tracker.</span>
+<span class="sd">        visualizer_toggle: Button to show/hide the gaze visualizer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">trackers_combo_box</span><span class="p">:</span> <span class="n">QComboBox</span>
+    <span class="n">screens_combo_box</span><span class="p">:</span> <span class="n">QComboBox</span>
+    <span class="n">connect_toggle</span><span class="p">:</span> <span class="n">QPushButton</span>
+    <span class="n">visualizer_toggle</span><span class="p">:</span> <span class="n">QPushButton</span> <span class="o">|</span> <span class="kc">None</span>
+
+    <span class="n">_screens_refreshing</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the main page.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">visualizer_toggle</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="n">IconsEnum</span><span class="o">.</span><span class="n">HOME</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds page content, including tracker, screen, and visualizer sections.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_tracker_section</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_screens_section</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;WAYLAND_DISPLAY&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_visualizer_section</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_tracker_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the section for selecting and connecting a tracker.&quot;&quot;&quot;</span>
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+        <span class="n">tcb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trackers_combo_box</span> <span class="o">=</span> <span class="n">CustomComboBox</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">tracker</span> <span class="ow">in</span> <span class="n">TrackersEnum</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trackers_combo_box</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">tcb</span><span class="p">)</span>
+
+        <span class="n">ct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connect_toggle</span> <span class="o">=</span> <span class="n">CustomPushButton</span><span class="p">(</span><span class="s2">&quot;Connected&quot;</span><span class="p">)</span>
+        <span class="n">ct</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># should be same size when on and off</span>
+        <span class="n">ct</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ct</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_screens_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the section for selecting and refreshing connected screens.&quot;&quot;&quot;</span>
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">screens_combo_box</span> <span class="o">=</span> <span class="n">CustomComboBox</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">screens</span><span class="o">.</span><span class="n">get_screen_names</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">screens_combo_box</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screens_combo_box</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen_refresh_button</span> <span class="o">=</span> <span class="n">CustomPushButton</span><span class="p">(</span><span class="s2">&quot;Refresh&quot;</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screen_refresh_button</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_visualizer_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the visualizer toggle button (not available on Wayland).&quot;&quot;&quot;</span>
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">visualizer_toggle</span> <span class="o">=</span> <span class="n">CustomPushButton</span><span class="p">(</span><span class="s2">&quot;Gaze visualizer: Off&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">visualizer_toggle</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">visualizer_toggle</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="visuals.pages.MainPage.MainPage-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.MainPage.MainPage.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the main page.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/MainPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the main page.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">visualizer_toggle</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="n">IconsEnum</span><span class="o">.</span><span class="n">HOME</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.MainPage.MainPage.add_content" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_content</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds page content, including tracker, screen, and visualizer sections.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/MainPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds page content, including tracker, screen, and visualizer sections.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_init_tracker_section</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_init_screens_section</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;WAYLAND_DISPLAY&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_visualizer_section</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.pages.VisualizerPage" class="doc doc-heading">
+            <code>visuals.pages.VisualizerPage</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>The page for configuring the appearance of the real-time gaze visualizer.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.pages.VisualizerPage-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.pages.VisualizerPage.VisualizerPage" class="doc doc-heading">
+            <code>VisualizerPage</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Page (visuals.pages.Page.Page)" href="#visuals.pages.Page.Page">Page</a></code></p>
+
+
+
+        <p>The page used for controlling visualizer animations and transparency.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.VisualizerPage.VisualizerPage.visualizer">visualizer</span></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="GazeVisualizer (visuals.visualizer.GazeVisualizer.GazeVisualizer)" href="../gaze_visualizer/#visuals.visualizer.GazeVisualizer.GazeVisualizer">GazeVisualizer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Reference to the visualizer widget.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.VisualizerPage.VisualizerPage.animation_toggle">animation_toggle</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QPushButton">QPushButton</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Button to enable/disable visualizer animations.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.VisualizerPage.VisualizerPage.opacity_slider">opacity_slider</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QSlider">QSlider</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Slider to adjust the visualizer's opacity.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/pages/VisualizerPage.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">VisualizerPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The page used for controlling visualizer animations and transparency.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        visualizer: Reference to the visualizer widget.</span>
+<span class="sd">        animation_toggle: Button to enable/disable visualizer animations.</span>
+<span class="sd">        opacity_slider: Slider to adjust the visualizer&#39;s opacity.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">visualizer</span><span class="p">:</span> <span class="n">GazeVisualizer</span>
+
+    <span class="n">animation_toggle</span><span class="p">:</span> <span class="n">QPushButton</span>
+    <span class="n">opacity_slider</span><span class="p">:</span> <span class="n">QSlider</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the visualizer page.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Visualizer&quot;</span><span class="p">,</span> <span class="n">IconsEnum</span><span class="o">.</span><span class="n">CIRCLE</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds page content, including animation and opacity sections.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">add_content</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_animation_section</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_opacity_section</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__init_animation_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the visualizer animation toggle button.&quot;&quot;&quot;</span>
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation_toggle</span> <span class="o">=</span> <span class="n">CustomPushButton</span><span class="p">(</span><span class="s2">&quot;Animations: On&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation_toggle</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation_toggle</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">animation_toggle</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__init_opacity_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the slider for adjusting visualizer opacity.&quot;&quot;&quot;</span>
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+        <span class="n">label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">OPACITY_LABEL_TEXT</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">opacity_slider</span> <span class="o">=</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">QSlider</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">OPACITY</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setTickInterval</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setTickPosition</span><span class="p">(</span><span class="n">QSlider</span><span class="o">.</span><span class="n">TickPosition</span><span class="o">.</span><span class="n">TicksBelow</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacity_slider</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="visuals.pages.VisualizerPage.VisualizerPage-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.VisualizerPage.VisualizerPage.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the visualizer page.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/VisualizerPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the visualizer page.&quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Visualizer&quot;</span><span class="p">,</span> <span class="n">IconsEnum</span><span class="o">.</span><span class="n">CIRCLE</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.VisualizerPage.VisualizerPage.__init_animation_section" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">__init_animation_section</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the visualizer animation toggle button.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/VisualizerPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__init_animation_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the visualizer animation toggle button.&quot;&quot;&quot;</span>
+    <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">animation_toggle</span> <span class="o">=</span> <span class="n">CustomPushButton</span><span class="p">(</span><span class="s2">&quot;Animations: On&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">animation_toggle</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">animation_toggle</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">animation_toggle</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.VisualizerPage.VisualizerPage.__init_opacity_section" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">__init_opacity_section</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the slider for adjusting visualizer opacity.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/VisualizerPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__init_opacity_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the slider for adjusting visualizer opacity.&quot;&quot;&quot;</span>
+    <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">OPACITY_LABEL_TEXT</span><span class="p">)</span>
+    <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">opacity_slider</span> <span class="o">=</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">QSlider</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+    <span class="n">slider</span><span class="o">.</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">slider</span><span class="o">.</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">OPACITY</span><span class="p">)</span>
+    <span class="n">slider</span><span class="o">.</span><span class="n">setTickInterval</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">slider</span><span class="o">.</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">slider</span><span class="o">.</span><span class="n">setTickPosition</span><span class="p">(</span><span class="n">QSlider</span><span class="o">.</span><span class="n">TickPosition</span><span class="o">.</span><span class="n">TicksBelow</span><span class="p">)</span>
+    <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacity_slider</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.VisualizerPage.VisualizerPage.add_content" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_content</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds page content, including animation and opacity sections.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/VisualizerPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds page content, including animation and opacity sections.&quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">add_content</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__init_animation_section</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__init_opacity_section</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="visuals.pages.RecordingPage" class="doc doc-heading">
+            <code>visuals.pages.RecordingPage</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>The page for configuring and executing gaze recordings.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="visuals.pages.RecordingPage-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="visuals.pages.RecordingPage.RecordingPage" class="doc doc-heading">
+            <code>RecordingPage</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Page (visuals.pages.Page.Page)" href="#visuals.pages.Page.Page">Page</a></code></p>
+
+
+
+        <p>The page used for selecting file paths and starting/stopping recordings.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.RecordingPage.RecordingPage.record_toggle">record_toggle</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QPushButton">QPushButton</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Button to start/stop the recording process.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.RecordingPage.RecordingPage.explorer_button">explorer_button</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QPushButton">QPushButton</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Button to open a directory selection dialog.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.RecordingPage.RecordingPage.open_dir_button">open_dir_button</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QPushButton">QPushButton</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Button to open the current recording directory in explorer.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.RecordingPage.RecordingPage.filename_textbox">filename_textbox</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QLineEdit">QLineEdit</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Input field for the recording's filename.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.RecordingPage.RecordingPage.screenshot_checkbox">screenshot_checkbox</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QCheckBox">QCheckBox</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Checkbox to enable/disable initial screenshots.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.RecordingPage.RecordingPage.dir_path_label">dir_path_label</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QLabel">QLabel</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Label showing the current recording directory.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.RecordingPage.RecordingPage.recording_delay_slider">recording_delay_slider</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QSlider">QSlider</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Slider to set a delay before recording begins.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.RecordingPage.RecordingPage.duration_checkbox">duration_checkbox</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QCheckBox">QCheckBox</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Checkbox to enable fixed-duration recordings.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="visuals.pages.RecordingPage.RecordingPage.duration_slider">duration_slider</span></code></td>
+            <td>
+                  <code><span title="PyQt6.QtWidgets.QSlider">QSlider</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Slider to set the fixed recording duration.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>visuals/pages/RecordingPage.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RecordingPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The page used for selecting file paths and starting/stopping recordings.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        record_toggle: Button to start/stop the recording process.</span>
+<span class="sd">        explorer_button: Button to open a directory selection dialog.</span>
+<span class="sd">        open_dir_button: Button to open the current recording directory in explorer.</span>
+<span class="sd">        filename_textbox: Input field for the recording&#39;s filename.</span>
+<span class="sd">        screenshot_checkbox: Checkbox to enable/disable initial screenshots.</span>
+<span class="sd">        dir_path_label: Label showing the current recording directory.</span>
+<span class="sd">        recording_delay_slider: Slider to set a delay before recording begins.</span>
+<span class="sd">        duration_checkbox: Checkbox to enable fixed-duration recordings.</span>
+<span class="sd">        duration_slider: Slider to set the fixed recording duration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">record_toggle</span><span class="p">:</span> <span class="n">QPushButton</span>
+    <span class="n">explorer_button</span><span class="p">:</span> <span class="n">QPushButton</span>
+    <span class="n">open_dir_button</span><span class="p">:</span> <span class="n">QPushButton</span>
+    <span class="n">filename_textbox</span><span class="p">:</span> <span class="n">QLineEdit</span>
+    <span class="n">screenshot_checkbox</span><span class="p">:</span> <span class="n">QCheckBox</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">dir_path_label</span><span class="p">:</span> <span class="n">QLabel</span>
+    <span class="n">recording_delay_slider</span><span class="p">:</span> <span class="n">QSlider</span>
+    <span class="n">recording_delay_value_label</span><span class="p">:</span> <span class="n">QLabel</span>
+    <span class="n">duration_checkbox</span><span class="p">:</span> <span class="n">QCheckBox</span>
+    <span class="n">duration_label</span><span class="p">:</span> <span class="n">QLabel</span>
+    <span class="n">duration_slider</span><span class="p">:</span> <span class="n">QSlider</span>
+    <span class="n">duration_descriptor</span><span class="p">:</span> <span class="n">QLabel</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the recording page.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screenshot_checkbox</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Recording&quot;</span><span class="p">,</span> <span class="n">IconsEnum</span><span class="o">.</span><span class="n">RECORD</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds page content, including file, delay, and duration sections.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_file_section</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_enable_section</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_delay_section</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_duration_section</span><span class="p">()</span>
+        <span class="c1"># screenshots do not work on Wayland</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;WAYLAND_DISPLAY&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_screenshot_section</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">add_content</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_file_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes UI elements for file and directory management.&quot;&quot;&quot;</span>
+        <span class="n">vbox</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">explorer_button</span> <span class="o">=</span> <span class="n">CustomPushButton</span><span class="p">(</span><span class="n">EXPLORER_DIALOG_TEXT</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">explorer_button</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dir_path_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir_path_label</span><span class="p">)</span>
+        <span class="n">vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">fl</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Filename:&quot;</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fl</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename_textbox</span> <span class="o">=</span> <span class="n">QLineEdit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename_textbox</span><span class="o">.</span><span class="n">setPlaceholderText</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename_textbox</span><span class="p">)</span>
+        <span class="n">vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">open_dir_button</span> <span class="o">=</span> <span class="n">CustomPushButton</span><span class="p">(</span><span class="s2">&quot;Open directory&quot;</span><span class="p">)</span>
+        <span class="n">vbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">open_dir_button</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">vbox</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_enable_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the main record toggle button.&quot;&quot;&quot;</span>
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">record_toggle</span> <span class="o">=</span> <span class="n">CustomPushButton</span><span class="p">(</span><span class="n">RECORD_TOGGLE_OFF_TEXT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">record_toggle</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">record_toggle</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record_toggle</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_delay_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the slider for recording delay.&quot;&quot;&quot;</span>
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Delay before recording&quot;</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">recording_delay_slider</span> <span class="o">=</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">QSlider</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">slider</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">recording_delay_value_label</span> <span class="o">=</span> <span class="n">vl</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">slider</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">vl</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_duration_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the UI for fixed-duration recordings.&quot;&quot;&quot;</span>
+        <span class="n">vbox</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration_checkbox</span> <span class="o">=</span> <span class="n">checkbox</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Limit recording duration&quot;</span><span class="p">)</span>
+        <span class="n">checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">vbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">checkbox</span><span class="p">)</span>
+
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration_label</span> <span class="o">=</span> <span class="n">label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Recording duration&quot;</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration_slider</span> <span class="o">=</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">QSlider</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">slider</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration_descriptor</span> <span class="o">=</span> <span class="n">descriptor</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">slider</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+        <span class="n">descriptor</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">descriptor</span><span class="p">)</span>
+
+        <span class="n">vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">vbox</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_screenshot_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the screenshot checkbox (not available on Wayland).&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screenshot_checkbox</span> <span class="o">=</span> <span class="n">checkbox</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span>
+            <span class="s2">&quot;Take screenshot when recording starts&quot;</span>
+        <span class="p">)</span>
+        <span class="n">checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_vbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">checkbox</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+<h5 id="visuals.pages.RecordingPage.RecordingPage-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.RecordingPage.RecordingPage.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the recording page.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/RecordingPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the recording page.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">screenshot_checkbox</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Recording&quot;</span><span class="p">,</span> <span class="n">IconsEnum</span><span class="o">.</span><span class="n">RECORD</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="visuals.pages.RecordingPage.RecordingPage.add_content" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_content</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds page content, including file, delay, and duration sections.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>visuals/pages/RecordingPage.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds page content, including file, delay, and duration sections.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_init_file_section</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_init_enable_section</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_init_delay_section</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_init_duration_section</span><span class="p">()</span>
+    <span class="c1"># screenshots do not work on Wayland</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;WAYLAND_DISPLAY&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_screenshot_section</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">add_content</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.top", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
