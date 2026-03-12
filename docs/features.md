@@ -16,10 +16,10 @@ coverage varies.
 
 | Platform | Status | Notes |
 | --- | --- | --- |
-| Windows | Fully functional | |
-| Linux (X11) | Supported | Expected to work with full functionality |
-| Linux (Wayland) | Partial | Gaze visualizer overlay and taking screenshots not supported |
-| macOS | Untested | |
+| Windows | Fully functional | Tested on Windows 11 |
+| Linux (X11) | Fully functional | Tested on Mint 22.3 |
+| Linux (Wayland) | Partial | Gaze visualizer overlay and taking screenshots not supported. Tested on Ubuntu 25.10 |
+| macOS | Fully functional | Tested on Tahoe 26.3.1 with an M4 Pro processor |
 
 ## Features
 
