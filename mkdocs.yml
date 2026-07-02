@@ -53,6 +53,8 @@ nav:
   - Features & Compatibility: features.md
   - Getting Started: getting_started.md
   - Data Format: data_format.md
+  - Calibration:
+    - Tobii Pro Spark: calibration/tobii-pro-spark.md
   - Development Guide:
     - Setup & Tooling: development/environment.md
     - Architecture: development/architecture.md

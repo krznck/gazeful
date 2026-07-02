@@ -14,6 +14,7 @@ A figure presenting the Gazeful workflow:
 
 - [How to get started](./getting_started.md)
 - [Features and compatibility](./features.md)
+- [How to calibrate](./calibration/tobii-pro-spark.md)
 
 ## Development and Contributing
 

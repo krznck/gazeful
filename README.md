@@ -96,6 +96,9 @@ coverage varies.
 For instructions for running Gazeful from a pre-packaged executable, refer to
 our [Getting Started guide](https://krznck.github.io/gazeful/getting_started/).
 
+For instructions for calibrating a tracker for use with Gazeful, refer to the
+[Calibration guide](https://krznck.github.io/gazeful/calibration/tobii-pro-spark)
+
 For instructions for running Gazeful from its Python source code, refer to our
 [Development Guide](https://krznck.github.io/gazeful/development/environment/).
 
